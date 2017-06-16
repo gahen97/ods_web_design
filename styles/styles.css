@@ -1,4 +1,4 @@
-body {
+	body {
 		background-color:#f4f4f4;
 	}
 
@@ -122,6 +122,7 @@ body {
 		height:100px;
 		font-family: courier;
 		font-size:0.8em;
+		color:#565656;
 	}
 	
 	#col1 {
