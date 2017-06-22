@@ -1,0 +1,93 @@
+body {
+  background-color: #F4F4F4;
+  font-family: courier;
+  font-size: 1em;
+  color: #565656;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+     box-sizing: border-box;
+}
+
+#heading {
+}
+
+#title {
+   display: inline-block;
+   font-family: courier;
+   width: 70px;
+}
+
+#main_menu {
+  display: inline-block;
+  margin-top: 10px;
+  float: right;
+}
+
+#sidebar {
+  width: 144px;
+  height: 80vh;
+  background-color: #BCBCBC;
+  display: inline-block;
+  float:left;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+}
+
+
+#sidebar_nav {
+  height: 5vh;
+}
+
+#sidebar_display, #sidebar_display2 {
+  height: 60vh;
+}
+
+#sidebar_display2 {
+  display: none;
+}
+
+#main {
+  min-width: 80%;
+  display: inline-block;
+}
+
+#main_top {
+  height: 5vh;
+  min-height: 5vh;
+  text-align: center;
+  width: inherit;
+  background-color: #D8D8D8;
+  padding-left: 10px;
+}
+
+#sidebar_toggle {
+  height: 4vh;
+  width: 50px;
+  margin-top: 2px;
+  vertical-align: center;
+  float: left;
+  font-size: 0.5em;
+}
+
+#video_frame {
+  padding-bottom: 20px;
+}
+
+#actual_video {
+  width: 95%;
+  background-color: grey;
+  margin: 0 auto;
+  margin-bottom: 20px:
+}
+
+#exercise {
+  height: 40vh;
+}

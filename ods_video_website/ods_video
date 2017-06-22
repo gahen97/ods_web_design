@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Open Data Structures </title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="normalize.css">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="script.js"> </script>
+
+	<style>
+		.widen_main {
+			min-width: 100%;
+		}
+	</style>
+
+</head>
+
+
+<body>
+
+
+<div style="box-sizing: border-box; max-width:960px; margin:0 auto; margin-top:10px;">
+
+	<div id="heading">
+		<div id="title"> Open Data Structures </div>
+		<div id="main_menu"> home | about | feedback | contact </div>
+	</div>
+
+	<div style="margin-top:20px;">
+		<div id="sidebar">
+
+		<!--<div id="sidebar_top" style =" box-sizing: border-box; height:5vh; border:2px solid brown;"> </div> -->
+			<div id="sidebar_nav"> nav heading </div>
+			<div id="sidebar_display"> <ul> <li>test</li> <li>test</li> <li>test</li> </ul> </div>
+			<div id="sidebar_display2"> <ul> <li>test2</li> <li>test2</li> </ul> </div>
+			 side bar
+		</div>
+
+	<div id="main">
+
+		<div id="main_top"> [Video Heading] (Skiplists: Module 1)
+			<button id="sidebar_toggle"> show/hide menu </button>
+		</div>
+
+		<div id="video_frame"> video
+			<div id="actual_video"> actual video </div>
+		</div>
+
+		<div id="exercise"> exercise </div>
+
+	</div>
+</div>
+
+</div>
+
+</body>
+
+</html>
