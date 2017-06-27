@@ -12,15 +12,15 @@ rgb(143, 205, 184)
 */
 
 var width = '72.5%';
-if ($(window).width() < 1450) {
+if ($(window).width() || $("#test").width() < 1450) {
 	width = '70%';
 }
 
-if ($(window).width() < 1290) {
+if ($(window).width() || $("#test").width() < 1290) {
 	width = '65%';
 }
 
-if ($(window).width() < 1070) {
+if ($(window).width()  || $("#test").width() < 1070) {
 	width = '60%';
 }
 
