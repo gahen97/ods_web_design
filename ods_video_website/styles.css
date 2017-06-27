@@ -18,22 +18,22 @@ body {
    display: inline-block;
    font-family: courier;
    width: 70px;
+   font-size: 1.5em;
 }
 
 #main_menu {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 5%;
   float: right;
 }
 
 #sidebar {
   width: 144px;
   height: 80vh;
-  background-color: #BCBCBC;
   display: inline-block;
-  float:left;
-  padding-top: 10px;
-  padding-left: 10px;
+  float: left;
+  -webkit-backface-visibility:hidden;
+  -webkit-transform: translateZ(0);
 }
 
 .fixed {
@@ -43,11 +43,15 @@ body {
 
 
 #sidebar_nav {
-  height: 5vh;
+  height: 7vh;
+  background-color: #8FCDB8;
+  border-radius: 3px;
 }
 
 #sidebar_display, #sidebar_display2 {
   height: 60vh;
+  background-color: #FAD60E;
+  border-radius: 3px;
 }
 
 #sidebar_display2 {
@@ -56,23 +60,26 @@ body {
 
 #main {
   min-width: 80%;
+  max-width: 80%;
   display: inline-block;
 }
 
 #main_top {
-  height: 5vh;
+  height: 7vh;
   min-height: 5vh;
   text-align: center;
   width: inherit;
-  background-color: #D8D8D8;
+  background-color: #EF8043;
   padding-left: 10px;
+  border-radius: 3px;
+  vertical-align: middle;
+  -webkit-backface-visibility:hidden;
+  -webkit-transform: translateZ(0);
 }
 
 #sidebar_toggle {
   height: 4vh;
   width: 50px;
-  margin-top: 2px;
-  vertical-align: center;
   float: left;
   font-size: 0.5em;
 }
@@ -82,7 +89,7 @@ body {
 }
 
 #actual_video {
-  width: 95%;
+  max-width: 95%;
   background-color: grey;
   margin: 0 auto;
   margin-bottom: 20px:

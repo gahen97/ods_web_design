@@ -43,6 +43,11 @@ $(document).ready(function() {
 		}, {
 			duration: 300
 		});
+		$("#title2").stop().animate({
+			'opacity': '1'
+		}, {
+			duration: 700
+		});
 	});
 
 	$(".sp").hover(function() {

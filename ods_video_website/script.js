@@ -18,6 +18,9 @@ $('document').ready(function() {
     $("#sidebar").stop().animate({'width': 'toggle'}, {duration:400, queue:false});
     $("#main").stop().animate({'min-width': toggleminwidth, 'max-width': toggleminwidth}, {duration:400, queue:false, step: function() {
       dynamic_height();
+      sidebar_width();
+      main_margin_top();
+      main_top_width();
     }});
     //dynamic_height();
   });
@@ -45,7 +48,10 @@ var set_fixed = function () {
     $stickyEl.toggleClass('fixed', $window.scrollTop() > elTop);
     $sticky.toggleClass('fixed', $window.scrollTop() > Top);
     sidebar_width();
-    main_top_width();
+    if($window.scrollTop() > Top) {
+      main_top_width();
+    }
+    main_margin_top();
   });
 
   $window.resize(function() {
@@ -58,6 +64,8 @@ var set_fixed = function () {
 var main_top_width = function() {
   var mainwidth = $('#main').width();
   $('#main_top').css('min-width', mainwidth);
+  $('#main_top').css('max-width', mainwidth);
+  console.log($('#main_top').css('min-width'));
 }
 
 var sidebar_width = function() {
@@ -73,10 +81,10 @@ var dynamic_height = function() {
   $("#actual_video").css('height', height);
 }
 
-/*var main_margin_top = function() {
+var main_margin_top = function() {
+  var margin = 0;
   if($("#main_top").hasClass('fixed')) {
-    var margin = $("#main_top").height();
-    $("#video_frame").css('margin-top', margin);
+    margin = $("#main_top").height();
   }
-  window.setTimeout(main_margin_top, 1);
-}*/
+    $("#video_frame").css('margin-top', margin);
+}
