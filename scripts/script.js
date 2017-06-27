@@ -17,11 +17,11 @@ if ($(window).width() < 1450) {
 }
 
 if ($(window).width() < 1290) {
-	width = '65%'; 
+	width = '65%';
 }
 
 if ($(window).width() < 1070) {
-	width = '60%'; 
+	width = '60%';
 }
 
 $(document).ready(function() {

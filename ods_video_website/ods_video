@@ -31,7 +31,12 @@
 	<div style="margin-top:20px;">
 		<div id="sidebar">
 		<!--<div id="sidebar_top" style =" box-sizing: border-box; height:5vh; border:2px solid brown;"> </div> -->
-			<div id="sidebar_nav"> nav heading </div>
+			<div id="sidebar_nav"> nav heading
+				<div id="sidebar_tabs">
+					<div id="modules_tab">	<strong> M	</strong></div>
+					<div id="questions_tab"> <strong> Q </strong>	</div>
+				</div>
+			</div>
 			<div id="sidebar_display"> </br> <ul> <li>test</li> <li>test</li> <li>test</li> </ul> </div>
 			<div id="sidebar_display2"> </br> <ul> <li>test2</li> <li>test2</li> </ul> </div>
 			 side bar
@@ -40,8 +45,9 @@
 	<div id="main">
 
 		<div id="main_top"> [Video Heading] (Skiplists: Module 1)
-			<button id="sidebar_toggle"> show/hide menu </button>
+			<img id="sidebar_toggle" src="menubutton.png" onmouseover="this.src='menubuttonhover.png';" onmouseout="this.src='menubutton.png';">
 		</div>
+
 
 		<div id="video_frame"> video
 			<div id="actual_video"> actual video </div>

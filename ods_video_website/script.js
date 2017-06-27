@@ -12,8 +12,7 @@ $('document').ready(function() {
   $("#sidebar_toggle").click(function() {
 
     var toggleminwidth = $("#main").css('min-width');
-    toggleminwidth = (toggleminwidth == '80%')  ? '100%' : '80%';
-    console.log("main width", toggleminwidth);
+    toggleminwidth = (toggleminwidth == '80%')  ? '95%' : '80%';
 
     $("#sidebar").stop().animate({'width': 'toggle'}, {duration:400, queue:false});
     $("#main").stop().animate({'min-width': toggleminwidth, 'max-width': toggleminwidth}, {duration:400, queue:false, step: function() {
@@ -25,9 +24,18 @@ $('document').ready(function() {
     //dynamic_height();
   });
 
-  $("#sidebar_nav").click(function() {
-    $("#sidebar_display").toggle();
-    $("#sidebar_display2").toggle();
+  $("#modules_tab").click(function() {
+    $("#sidebar_display").show();
+    $("#sidebar_display2").hide();
+    $("#modules_tab").css('color','white');
+    $("#questions_tab").css('color','#565656');
+  });
+
+  $("#questions_tab").click(function() {
+    $("#sidebar_display2").show();
+    $("#sidebar_display").hide();
+    $("#questions_tab").css('color','white');
+    $("#modules_tab").css('color','#565656');
   });
 
 });
@@ -65,7 +73,6 @@ var main_top_width = function() {
   var mainwidth = $('#main').width();
   $('#main_top').css('min-width', mainwidth);
   $('#main_top').css('max-width', mainwidth);
-  console.log($('#main_top').css('min-width'));
 }
 
 var sidebar_width = function() {

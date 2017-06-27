@@ -43,9 +43,28 @@ body {
 
 
 #sidebar_nav {
-  height: 7vh;
+  height: 8vh;
   background-color: #8FCDB8;
   border-radius: 3px;
+  padding: 1.5vh;
+}
+
+#sidebar_tabs {
+}
+
+#modules_tab, #questions_tab {
+  width: 38%;
+  height: 3vh;
+  margin:0 auto;
+  background-color: #cdf2e5;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+#modules_tab {
+  color: white;
 }
 
 #sidebar_display, #sidebar_display2 {
@@ -65,23 +84,23 @@ body {
 }
 
 #main_top {
-  height: 7vh;
+  height: 8vh;
   min-height: 5vh;
   text-align: center;
   width: inherit;
   background-color: #EF8043;
   padding-left: 10px;
   border-radius: 3px;
-  vertical-align: middle;
   -webkit-backface-visibility:hidden;
   -webkit-transform: translateZ(0);
+  padding-top: 2.5vh;
 }
 
 #sidebar_toggle {
-  height: 4vh;
-  width: 50px;
+  height: 3vh;
   float: left;
   font-size: 0.5em;
+  cursor: pointer;
 }
 
 #video_frame {
