@@ -29,7 +29,7 @@ body {
 
 #sidebar {
   width: 144px;
-  height: 80vh;
+  height: 100vh;
   display: inline-block;
   float: left;
   -webkit-backface-visibility:hidden;
@@ -68,7 +68,7 @@ body {
 }
 
 #sidebar_display, #sidebar_display2 {
-  height: 60vh;
+  height: inherit;
   background-color: #FAD60E;
   border-radius: 3px;
 }
