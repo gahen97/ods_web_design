@@ -1,5 +1,7 @@
 $('document').ready(function() {
 
+  var h = $(window).height() - $('#sidebar').offset().top;
+  $('#sidebar').height(h);
 
   dynamic_height();
   //sidebar_width();
@@ -9,12 +11,25 @@ $('document').ready(function() {
 
   heading_width();
 
+  $(".drop").hover(function(){
+    $(this).children(".sub").stop().slideDown('slow');
+  }, function(){
+    $(this).children(".sub").stop().slideUp('slow');
+  });
+
+
   $("#sidebar_toggle").click(function() {
 
     var toggleminwidth = $("#main").css('min-width');
     toggleminwidth = (toggleminwidth == '80%')  ? '95%' : '80%';
 
+    //$("#modules_tab").stop().animate({'display': 'toggle'}, {duration:200, queue:false});
+    //$("#questions_tab").stop().animate({'display': 'toggle'}, {duration:200, queue:false});
+    $("#modules_tab").stop().animate({'width': 'toggle'}, {duration:400, queue:false});
+    $("#questions_tab").stop().animate({'width': 'toggle'}, {duration:400, queue:false});
     $("#sidebar").stop().animate({'width': 'toggle'}, {duration:400, queue:false});
+    //$("#sidebar").toggle();
+    //$("#sidebar").stop().toggle("slide");
     $("#main").stop().animate({'min-width': toggleminwidth, 'max-width': toggleminwidth}, {duration:400, queue:false, step: function() {
       dynamic_height();
       sidebar_width();
@@ -25,20 +40,39 @@ $('document').ready(function() {
   });
 
   $("#modules_tab").click(function() {
-    $("#sidebar_display").show();
-    $("#sidebar_display2").hide();
-    $("#modules_tab").css('color','white');
-    $("#questions_tab").css('color','#565656');
+    $("#modules_display").show();
+    $("#questions_display").hide();
+    $("#modules_tab").addClass('colorw');
+    $("#questions_tab").removeClass('colorw');
   });
 
   $("#questions_tab").click(function() {
-    $("#sidebar_display2").show();
-    $("#sidebar_display").hide();
-    $("#questions_tab").css('color','white');
-    $("#modules_tab").css('color','#565656');
+    $("#questions_display").show();
+    $("#modules_display").hide();
+    $("#questions_tab").addClass('colorw');
+    $("#modules_tab").removeClass('colorw');
   });
 
+  tab_hover();
+
 });
+
+var tab_hover = function() {
+  $("#modules_tab").hover(
+    function() {
+        $("#modules_tab").addClass('colorw2');
+    }, function() {
+        $("#modules_tab").removeClass('colorw2');
+    }
+  );
+  $("#questions_tab").hover(
+    function() {
+        $("#questions_tab").addClass('colorw2');
+    }, function() {
+        $("#questions_tab").removeClass('colorw2');
+    }
+  );
+}
 
 var heading_width = function() {
   var width = $("#sidebar").innerWidth() + $("#main").innerWidth();
@@ -46,23 +80,22 @@ var heading_width = function() {
 }
 
 var set_fixed = function () {
-  var $window = $(window);
-  var $stickyEl = $("#sidebar");
-  var $sticky = $("#main_top");
-  var elTop = $stickyEl.offset().top;
-  var Top = $sticky.offset().top;
+  var sidebar = $("#sidebar");
+  var maintop = $("#main_top");
+  var sbTop = sidebar.offset().top;
+  var mtTop = maintop.offset().top;
 
-  $window.scroll(function() {
-    $stickyEl.toggleClass('fixed', $window.scrollTop() > elTop);
-    $sticky.toggleClass('fixed', $window.scrollTop() > Top);
+  $(window).scroll(function() {
+    sidebar.toggleClass('fixed', $(window).scrollTop() >= sbTop);
+    maintop.toggleClass('fixed', $(window).scrollTop() >= mtTop);
     sidebar_width();
-    if($window.scrollTop() > Top) {
+    if($(window).scrollTop() > mtTop) {
       main_top_width();
     }
     main_margin_top();
   });
 
-  $window.resize(function() {
+  $(window).resize(function() {
     sidebar_width();
     heading_width();
     //  dynamic_height();
@@ -91,7 +124,7 @@ var dynamic_height = function() {
 var main_margin_top = function() {
   var margin = 0;
   if($("#main_top").hasClass('fixed')) {
-    margin = $("#main_top").height();
+    margin = $("#main_top").outerHeight();
   }
-    $("#video_frame").css('margin-top', margin);
+  $("#video_frame").css('margin-top', margin);
 }

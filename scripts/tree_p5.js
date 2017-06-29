@@ -14,8 +14,8 @@ var drawinblock = function(p) {
 		p.background(244);
 
 
-		if(((p.mouseX/p.width) <= 0.7) && ((p.mouseX/p.width) >= 0))
-			coef = p.mouseX/p.width;
+		if(((p.mouseY/p.width) <= 0.7) && ((p.mouseY/p.width) >= 0))
+			coef = p.mouseY/p.width;
 
 		//p.stroke(250, 214, 14); //yellow
 		p.stroke(239, 128, 67); //orange

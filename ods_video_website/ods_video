@@ -21,7 +21,7 @@
 <body>
 
 
-<div style="box-sizing: border-box; max-width:960px; margin:0 auto; margin-top:10px;">
+<div style="box-sizing: border-box; width:960px; margin:0 auto; margin-top:10px;">
 
 	<div id="heading">
 		<div id="title"> <strong> Open Data Structures </strong> </div>
@@ -37,8 +37,41 @@
 					<div id="questions_tab"> <strong> Q </strong>	</div>
 				</div>
 			</div>
-			<div id="sidebar_display"> </br> <ul> <li>test</li> <li>test</li> <li>test</li> </ul> </div>
-			<div id="sidebar_display2"> </br> <ul> <li>test2</li> <li>test2</li> </ul> </div>
+			<div id="modules_display"> </br>
+				<ul>
+
+					<li class="drop">Chapter 1
+						<ul class="sub" style="display:none;">
+							<li> mod 1 </li>
+							<li> mod 2 </li>
+						</ul>
+					</li>
+
+					<li class="drop">Chapter 2
+						<ul class="sub" style="display:none;">
+							<li> mod 1 </li>
+							<li> mod 2 </li>
+							<li> mod 3 </li>
+							<li> mod 4 </li>
+						</ul>
+					</li>
+
+					<li class="drop">Chapter 3
+						<ul class="sub" style="display:none;">
+							<li> mod 1 </li>
+							<li> mod 2 </li>
+							<li> mod 3 </li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+			<div id="questions_display"> </br>
+				<ul>
+					<li>Question 1</li>
+					<li>Question 2</li>
+				</ul>
+			</div>
 			 side bar
 		</div>
 
@@ -49,11 +82,11 @@
 		</div>
 
 
-		<div id="video_frame"> video
-			<div id="actual_video"> actual video </div>
+		<div id="video_frame">
+			<div id="actual_video"></div>
 		</div>
 
-		<div id="exercise"> exercise </div>
+		<div id="exercise"> </div>
 
 	</div>
 </div>
