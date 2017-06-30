@@ -154,12 +154,8 @@ function droppedOnTrash (element, evt, ui) {
 /* TAB EVENTS. THESE HANDLE DEALING WITH THE TABBING SYSTEM */
 function clickedTab (element, evt)
 {
-  console.log ("hello world");
-
   var data    = $(element).data ();
   var absQNum = data.absoluteQuestionNumber;
-
-  console.log (absQNum);
   
   if (!absQNum && absQNum !== 0)
   {
