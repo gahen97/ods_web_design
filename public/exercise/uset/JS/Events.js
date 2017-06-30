@@ -51,7 +51,7 @@ function onShowAnsBtnClick (elem, evt) {
 //       on other devices (touch)
 function onSubmitInput (element, evt) {
   // TODO added custom event. Check this for spiders. I'm not personally going to go over it; spiders are scary. But you go ahead
-  var input = $ (element).val ();
+  var input = $ (".modelEntry").val ();
 
   input = parseInput (input);
   if (!this.validInput (input)) return;
@@ -156,7 +156,7 @@ function clickedTab (element, evt)
 {
   var data    = $(element).data ();
   var absQNum = data.absoluteQuestionNumber;
-  
+
   if (!absQNum && absQNum !== 0)
   {
     console.error ("Why must you turn this house into a house of lies? : ", element);
