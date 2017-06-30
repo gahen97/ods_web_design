@@ -42,15 +42,19 @@ $('document').ready(function() {
   $("#modules_tab").click(function() {
     $("#modules_display").show();
     $("#questions_display").hide();
-    $("#modules_tab").addClass('colorw');
-    $("#questions_tab").removeClass('colorw');
+    //$("#modules_tab").css("background-image", "url(modulestab2.png)");
+    //$("#questions_tab").css("background-image", "url(questionstab_1.png)");
+    $("#modules_tab").addClass('colorm');
+    $("#questions_tab").removeClass('colorq');
   });
 
   $("#questions_tab").click(function() {
     $("#questions_display").show();
     $("#modules_display").hide();
-    $("#questions_tab").addClass('colorw');
-    $("#modules_tab").removeClass('colorw');
+    //$("#questions_tab").css("background-image", "url(questionstab_1a.png)");
+    //$("#modules_tab").css("background-image", "url(modulestab.png)");
+    $("#questions_tab").addClass('colorq');
+    $("#modules_tab").removeClass('colorm');
   });
 
   tab_hover();
@@ -60,16 +64,16 @@ $('document').ready(function() {
 var tab_hover = function() {
   $("#modules_tab").hover(
     function() {
-        $("#modules_tab").addClass('colorw2');
+        $("#modules_tab").addClass('colorm2');
     }, function() {
-        $("#modules_tab").removeClass('colorw2');
+        $("#modules_tab").removeClass('colorm2');
     }
   );
   $("#questions_tab").hover(
     function() {
-        $("#questions_tab").addClass('colorw2');
+        $("#questions_tab").addClass('colorq2');
     }, function() {
-        $("#questions_tab").removeClass('colorw2');
+        $("#questions_tab").removeClass('colorq2');
     }
   );
 }

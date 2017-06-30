@@ -56,25 +56,43 @@ body {
   width: 95%;
   margin:0 auto;
   font-size: 0.25em;
+  text-align:center;
 }
 
 #modules_tab, #questions_tab {
-
+  border-radius: 5px;
   font-size: 4em;
-  width: 48%;
+  width: 25px;
   height: 25px;
   margin-top: 10px;
-  background-color: #cdf2e5;
   display: inline-block;
-  text-align: center;
   cursor: pointer;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
 }
 
-.colorw {
-  color: white;
+#modules_tab {
+  background-image: url("modulestab.png");
 }
-.colorw2 {
-  color: white;
+
+#questions_tab {
+  background-image: url("questionstab_1.png");
+}
+
+.colorm {
+  background-image: url("modulestab2.png") !important;
+}
+
+.colorm2 {
+  background-image: url("modulestab2.png") !important;
+}
+
+.colorq {
+  background-image: url("questionstab_1a.png") !important;
+}
+.colorq2 {
+  background-image: url("questionstab_1a.png") !important;
 }
 
 #modules_display, #questions_display {
@@ -107,6 +125,7 @@ body {
 
 #sidebar_toggle {
   height: 30px;
+  margin-top: 10px;
   float: left;
   font-size: 0.5em;
   cursor: pointer;
