@@ -1,0 +1,212 @@
+/* framework stylesheet for 1/12 - 12/12 column width
+and row width = pagewidth.
+note that 1/12 = 8.33333 %
+
+https://storage.googleapis.com/supplemental_media/udacityu/2872198569/mock3-portfolio-1.pdf
+*/
+
+* {
+  border: 1px soalid red !important;
+
+  text-align: center;
+
+  margin: 0 auto;
+}
+
+* {
+  max-width: 960px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: grey;
+}
+
+a:hover {
+  color: silver;
+}
+
+/* additional styling that's probably useful */
+.borderized {
+  border: 1px solid lightgray;
+}
+
+.hidden{
+  display: none;
+}
+
+.flexCol{
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom{
+  margin-top: auto;
+}
+
+.verticallyCentered {
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.active {
+  background-color: #ff8401 !important;
+}
+
+.round { /* aka circular ... but then there's ovals. so its round */
+  border-radius: 50%;
+}
+
+/* element styling */
+.interactiveVideoFrame {
+  height: 630px;
+  width: 960px;
+  border: none;
+}
+
+.modelDisplay {
+  height: 65%;
+  border: 2px solid darkgray;
+  margin-left: auto;
+  margin-top: 15px;
+}
+
+
+/* using on the model body. defines the main div */
+.modelBody{
+  height: 90vh;
+  min-height: 300px;
+  width: 100%;
+}
+
+.modelMain{
+  /* Firefox */
+  height: -moz-calc(100% - 21px);
+  /* WebKit */
+  height: -webkit-calc(100% - 21px);
+  /* Opera */
+  height: -o-calc(100% - 21px);
+  /* Standard */
+  height: calc(100% - 21px);
+}
+
+.modelEntry{
+  height: 21px;
+}
+
+/* element ... TODO: should show as clickable, draggable. style? */
+.element {
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  border: 1px solid black;
+  background-color: #999;
+
+  line-height: 30px; /* needs this for vertically centered text */
+}
+
+/* trash can ........ should be a small image, top right corner */
+.trashCan {
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin-right: 15px;
+  margin-top: 15px;
+}
+
+.questionButtons {
+  display:flex;
+  align-items:center;
+}
+
+.checkAndShowDiv {
+  margin: 0px;
+}
+
+.arrow {
+  font-size: 16pt;
+}
+
+.grid {
+  margin: 0 auto;
+}
+
+.row {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*add some margin and/or padding to rows cols as needed as absolute px*/
+
+/*
+NORMALIZE CSS: LINK IN HEAD
+https://github.com/necolas/normalize.css/
+
+use npm preferably?
+*/
+
+/* overflow if necessary */
+
+/*
+do media queries for responsive design:
+@media only screen and (max-width: 500px) {
+
+}
+*/
+
+.col-1 {
+  width: 8.33%;
+}
+
+.col-2 {
+  width: 16.66%;
+}
+
+.col-3 {
+  width: 25%;
+}
+
+.col-4 {
+  width: 33.33%;
+}
+
+.col-5 {
+  width: 41.66%;
+}
+
+.col-6 {
+  width: 50.00%;
+}
+
+.col-7 {
+  width: 58.33%;
+}
+
+.col-8 {
+  width: 66.66%;
+}
+
+.col-9 {
+  width: 75%;
+}
+
+.col-10 {
+  width: 83.33%;
+}
+
+.col-11 {
+  width: 91.66%;
+}
+
+.col-12 {
+  width: 100%;
+}

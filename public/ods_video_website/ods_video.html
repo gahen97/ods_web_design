@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Open Data Structures </title>
+	<meta charset="UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="ods_video_website/normalize.css">
+	<link rel="stylesheet" type="text/css" href="ods_video_website/styles.css">
+	<script src="ods_video_website/script.js"> </script>
+
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+  <script type="text/javascript" src="/exercise/uset/JS/lib/jsplumb.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Array.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Random.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Div.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Model/Model.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Model/Uset.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/AnswerType.js"></script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/AddAnswer.js"></script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/FindAnswer.js"></script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/RemoveAnswer.js"></script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Instructions.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Question.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Add.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Find.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Remove.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/QuestionTypes/QuestionType.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/QuestionTypes/Operations.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Defs.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Exercise.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/DOMEventHandler.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/CustomEventHandler.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Element.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/View.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Events.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Control.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/main.js"> </script>
+
+  <link href="/exercise/uset/Views/css/Uset.css" rel="stylesheet" type="text/css">
+
+	<style>
+		.widen_main {
+			min-width: 100%;
+		}
+	</style>
+
+</head>
+
+
+<body>
+
+
+<div style="box-sizing: border-box; width:960px; margin:0 auto; margin-top:10px;">
+
+	<div id="heading">
+		<div id="title"> <strong> Open Data Structures </strong> </div>
+		<div id="main_menu"> home | about | feedback | contact </div>
+	</div>
+
+	<div style="margin-top:20px;">
+		<div id="sidebar">
+		<!--<div id="sidebar_top" style =" box-sizing: border-box; height:5vh; border:2px solid brown;"> </div> -->
+			<div id="sidebar_nav"> nav heading
+				<div id="sidebar_tabs">
+					<div id="modules_tab">	</div>
+					<div id="questions_tab"> 	</div>
+				</div>
+			</div>
+			<div id="modules_display"> </br>
+				<ul>
+
+					<li class="drop">Chapter 1
+						<ul class="sub" style="display:none;">
+							<li> mod 1 </li>
+							<li> mod 2 </li>
+						</ul>
+					</li>
+
+					<li class="drop">Chapter 2
+						<ul class="sub" style="display:none;">
+							<li> mod 1 </li>
+							<li> mod 2 </li>
+							<li> mod 3 </li>
+							<li> mod 4 </li>
+						</ul>
+					</li>
+
+					<li class="drop">Chapter 3
+						<ul class="sub" style="display:none;">
+							<li> mod 1 </li>
+							<li> mod 2 </li>
+							<li> mod 3 </li>
+						</ul>
+					</li>
+
+				</ul>
+			</div>
+			<div id="questions_display"> </br>
+				<ul>
+					<li>Question 1</li>
+					<li>Question 2</li>
+				</ul>
+			</div>
+			 side bar
+		</div>
+
+	<div id="main">
+
+		<div id="main_top"> [Video Heading] (Skiplists: Module 1)
+			<img id="sidebar_toggle" src="ods_video_website/menubutton.png" onmouseover="this.src='menubuttonhover.png';" onmouseout="this.src='menubutton.png';">
+		</div>
+
+
+		<div id="video_frame">
+			<div id="actual_video"></div>
+		</div>
+
+		<div id="exercise">
+			<div class="exercise grid">
+			  <div class="row">
+			    <div class="col-12 questionFrame">
+			      <div class="questionBody">
+
+			        <div class="instructionsBody">
+			          <p> instructions </p>
+			        </div>
+
+			        <div class="parametersBody">
+			          <p> params </p>
+			        </div>
+
+			        <div class="modelBody flexCol borderized">
+			          <div class="modelMain col-12 ">
+			            <img id="trash" src="exercise/uset/images/trash.jpg" class="trashCan"></img>
+			            <div id="model" class="modelDisplay col-10 round"></div>
+			          </div>
+			          <input type="text" class="modelEntry col-12 bottom" placeholder="add new element [ENTER VALUE]"></input>
+			        </div>
+			      </div>
+
+			      <div class="questionButtons"> <!-- TODO rename this class -->
+			        <div class="prevArrowDiv">
+			          <a id="prevArrow" class="arrow" href="" onclick="return false;">&larr;</a> <!-- TODO set up event handlers and probably rename this class from arrow-->
+			        </div>
+			        <div class="checkAndShowDiv">
+			          <div class="checkAnswerButton">
+			            <a id="checkBtn" class="button arrow" href="" onclick="return false;">Check Answer</a> <!-- TODO change this -->
+			          </div>
+			          <div class="showAnswerButton">
+			            <a id="showAnswerBtn" class="button arrow" href="" onclick="return false;">Show Answer</a> <!-- TODO change this -->
+			          </div>
+			        </div>
+			        <div class="nextArrowDiv">
+			          <a id="nextArrow" class="arrow" href="" onclick="return false;">&rarr;</a> <!-- TODO set up event handlers -->
+			        </div>
+			      </div>
+
+			    </div>
+
+
+			    <div id="template" class="hidden">
+			      <!-- For now, stuff inside here is a reference to the HTML that should be used ...
+			              Anything here will be copied later, inside some code, to make
+			              new HTML elements.
+
+			            TODO made these square. Looks better imo, especially for NULL
+			      -->
+			      <div class="element">
+			        <span class="verticallyCentered">
+			          TEXT
+			        </span>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+</body>
+
+</html>
