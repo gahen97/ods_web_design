@@ -21,6 +21,15 @@ class Question {
     }
   }
 
+  // name
+  get name () {
+    return this.constructor.name;
+  }
+
+  get fullName () {
+    return this.name.toLowerCase() + "(" + this.getParametersString() + ")";
+  }
+
   getInstructions()
   {
     return this.instructions;
@@ -110,9 +119,8 @@ class Question {
 
   displayParameters (div)
   {
-      var str = this.getParametersString ();
       var p   = $(".parametersBody", div);
-      p.text (this.constructor.name.toLowerCase() + "(" + str + ")");
+      p.text (this.fullName);
   }
 
   displayInstructions(div)

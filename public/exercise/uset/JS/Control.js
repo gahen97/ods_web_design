@@ -18,6 +18,11 @@ class Control {
 
     this.view.start ();
     this.exercise.start ();     //TODO rename ?? maybe
+
+    // add tabbing
+    this.tabs = new Tabbify (this, {
+      eventId: TABS_EVENTS_ID
+    });
   }
 
 

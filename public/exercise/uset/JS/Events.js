@@ -125,6 +125,8 @@ function onElementClicked (elem, ...args){
   this.setActiveElement (element);
 }
 
+/*
+  TODO This can be removed
 const ELEM_EVENTS = { //this is analogous to a triggermap
   //should we put this into eventData
   //needs some way to be found outside of the controller - so we could, but would have to find a way to get it later
@@ -132,6 +134,7 @@ const ELEM_EVENTS = { //this is analogous to a triggermap
   "dragstop": "onDragStopped",
   "click": "onElementClicked"
 };
+*/
 
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
 function droppedOnTrash (element, evt, ui) {
@@ -145,6 +148,26 @@ function droppedOnTrash (element, evt, ui) {
   if (isNullCharacter (draggable)) return false;
 
   this.removeElement (draggable);
+}
+
+
+/* TAB EVENTS. THESE HANDLE DEALING WITH THE TABBING SYSTEM */
+function clickedTab (element, evt)
+{
+  console.log ("hello world");
+
+  var data    = $(element).data ();
+  var absQNum = data.absoluteQuestionNumber;
+
+  console.log (absQNum);
+  
+  if (!absQNum && absQNum !== 0)
+  {
+    console.error ("Why must you turn this house into a house of lies? : ", element);
+    return false;
+  }
+
+  this.exercise.goToQuestion (absQNum);
 }
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
@@ -220,7 +243,7 @@ $ (()=> {
     },
 
     /* INPUT TEXT AREA */
-    {
+    /*{
         elem: $(".modelEntry"),
         evtsArr: [
           {
@@ -229,6 +252,18 @@ $ (()=> {
             domEvtName: "keyup"
           }
         ]
+    },*/
+
+    /* SUBMIT BUTTON */
+    {
+      elem: $("#submitbtn"),
+      evtsArr: [
+        {
+          handlingFunction: onSubmitInput,
+          customEvtName: "They submitted. What do you do next?",
+          domEvtName: "click"
+        }
+      ]
     },
 
     /* USET EVENTS ---- OCCUR ON THE MAIN MODEL DISPLAY */
@@ -282,6 +317,19 @@ $ (()=> {
           domEvtName: "drop"
         }
       ]
+    },
+
+    /* TAB EVENTS */
+    {
+      elem: $(".tabbedQuestion"),
+      evtsArr: [
+        {
+          handlingFunction: clickedTab,
+          customEvtName: "goToQuestionMagic",
+          domEvtName: "click"
+        }
+      ],
+      id: TABS_EVENTS_ID
     }
   ];
 

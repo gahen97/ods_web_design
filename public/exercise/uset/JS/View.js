@@ -18,7 +18,7 @@ class View {
   /* ---- START - ADD THE NULL ELEMENT ---- */
   start()
   {
-    this.addElement (NULL_CHARACTER);
+    this.addElement (NULL_CHARACTER, {withinModel: true});
   }
 
   /* ---- CLEAR THE MODEL ---- */

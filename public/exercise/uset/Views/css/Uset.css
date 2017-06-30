@@ -51,6 +51,15 @@ a:hover {
   margin-top: auto;
 }
 
+.left{
+  display: inline-block;
+  float: left;
+}
+.right{
+  display: inline-block;
+  float: right;
+}
+
 .verticallyCentered {
   vertical-align: middle;
   line-height: normal;
@@ -81,7 +90,7 @@ a:hover {
 
 /* using on the model body. defines the main div */
 .modelBody{
-  height: 90vh;
+  height: 84vh;
   min-height: 300px;
   width: 100%;
 }

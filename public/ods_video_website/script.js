@@ -1,3 +1,15 @@
+var ev;
+function updateSidebarHeadings ()
+{
+  $ (".drop").off ("hover");
+
+  $(".drop").hover(function(){
+    $(this).children(".sub").stop().slideDown('slow');
+  }, function(){
+    $(this).children(".sub").stop().slideUp('slow');
+  });
+}
+
 $('document').ready(function() {
 
   var h = $(window).height() - $('#sidebar').offset().top;
@@ -11,12 +23,7 @@ $('document').ready(function() {
 
   heading_width();
 
-  $(".drop").hover(function(){
-    $(this).children(".sub").stop().slideDown('slow');
-  }, function(){
-    $(this).children(".sub").stop().slideUp('slow');
-  });
-
+  updateSidebarHeadings ();
 
   $("#sidebar_toggle").click(function() {
 
