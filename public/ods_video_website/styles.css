@@ -1,0 +1,154 @@
+body {
+  background-color: #F4F4F4;
+  font-family: courier;
+  font-size: 1em;
+  color: #565656;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+     box-sizing: border-box;
+}
+
+#heading {
+  margin-top: 20px;
+}
+
+#title {
+   display: inline-block;
+   font-family: courier;
+   width: 70px;
+   font-size: 1.5em;
+}
+
+#main_menu {
+  display: inline-block;
+  margin-top: 5%;
+  float: right;
+}
+
+#sidebar {
+  width: 144px;
+  height: 80vh;
+  display: inline-block;
+  float: left;
+  -webkit-backface-visibility:hidden;
+  -webkit-transform: translateZ(0);
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+}
+
+
+#sidebar_nav {
+  height: 70px;
+  background-color: #8FCDB8;
+  border-radius: 5px;
+  padding: 10px;
+  white-space: nowrap;
+}
+
+#sidebar_tabs {
+  height: 50px;
+  width: 95%;
+  margin:0 auto;
+  font-size: 0.25em;
+  text-align:center;
+}
+
+#modules_tab, #questions_tab {
+  border-radius: 5px;
+  font-size: 4em;
+  width: 25px;
+  height: 25px;
+  margin-top: 10px;
+  display: inline-block;
+  cursor: pointer;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+
+#modules_tab {
+  background-image: url("modulestab.png");
+}
+
+#questions_tab {
+  background-image: url("questionstab_1.png");
+}
+
+.colorm {
+  background-image: url("modulestab2.png") !important;
+}
+
+.colorm2 {
+  background-image: url("modulestab2.png") !important;
+}
+
+.colorq {
+  background-image: url("questionstab_1a.png") !important;
+}
+.colorq2 {
+  background-image: url("questionstab_1a.png") !important;
+}
+
+#modules_display, #questions_display {
+  height: inherit;
+  background-color: #FAD60E;
+  border-radius: 5px;
+  margin-top: 2px;
+}
+
+#questions_display {
+  display: none;
+}
+
+#main {
+  min-width: 80%;
+  max-width: 80%;
+  display: inline-block;
+}
+
+#main_top {
+  height: 70px;
+  min-height: 70px;
+  text-align: center;
+  width: inherit;
+  background-color: #EF8043;
+  padding: 10px;
+  border-radius: 5px;
+  margin-left: 2px;
+}
+
+#sidebar_toggle {
+  height: 30px;
+  margin-top: 10px;
+  float: left;
+  font-size: 0.5em;
+  cursor: pointer;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#video_frame {
+  padding-top: 20px;
+}
+
+#actual_video {
+  max-width: 95%;
+  background-color: grey;
+  margin:0 auto;
+}
+
+ul {
+  list-style: none;
+  margin:0;
+  padding:10px;
+}
+
+#exercise {
+  height: 40vh;
+}
