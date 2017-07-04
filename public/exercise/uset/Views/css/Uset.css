@@ -126,6 +126,8 @@ li.tabbedQuestion:hover {
   background-color: #999;
 
   line-height: 30px; /* needs this for vertically centered text */
+
+  position: absolute;
 }
 
 /* trash can ........ should be a small image, top right corner */

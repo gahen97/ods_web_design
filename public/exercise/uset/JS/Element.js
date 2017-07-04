@@ -1,92 +1,53 @@
-/*jshint esversion: 6 */ 'use strict';
-
 /*
-  Element should have:
-    - Making a new DOM Element to represent the element
-    - Way to store value, get value, set value
-    - Event handling:
-      - dragstart
-      - dragstop
-      - click
+  Everything for Elements that'd likely change between exercises.
+
+  I've got the devil on my shoulder. Over and over.
+  And I just can't sink any lower. Lower and lower.
+  The hounds of hell are getting closer. Closer and closer.
+  I've got the devil on my shoulder. Over and over.
+  Oh!
+
+  Follow that rainbow, my lucky old man.
+  There ain't no pot of gold - just kappa tokens.
+  I found the key to life - the lock was broken.
+  All my accomplishments are best left unspoken!
+
+  I've dug a hole so deep, I'm gonna drown in my mistakes.
+  Can't even sell my soul 'cause it ain't worth shit to take.
 */
 
-class Element {
-  static nextId () {
-    return Element.currentId ++;
+class Element extends ElementBase {
+  constructor(){
+    super (...arguments);
   }
 
-  constructor (value) {
-    this.value = value;
-    this.id = Element.nextId ();
+  draw () {
+    // TODO HARDCODING IS BAD. MAYBE MOVE SELECTORS TO DEFS?
+    var elementDiv = $(ELEMENT_TEMPLATE).clone ();
+    var model      = $(MODEL_DISPLAY);
+    var span       = $("span", elementDiv);
 
-    this.graphics = new ElemGraphics (this);
-    this.element = this.graphics.draw ();    //change name to generate??
-    this.DomEvents = this.addEvents (); //will be moved into view
+    // set the text ...
+    span.text (this.value).data ("id", this.id); // TODO There's gotta be a better way to do this
 
+    // parent it to the main div, add the stuff, return
+    elementDiv.insertAfter (model).data ("id", this.id);
+
+    this.addControls (elementDiv);
+
+    return elementDiv;
   }
 
-  getElementDiv () { return this.element; }
 
-  addEvents () {
-    // TODO This is called when control is being constructed,
-    // which ends up throwing an error ...
-    // and means nothing works. so, fix this. And find a better way than this, eh?
-    /*setTimeout(() => {
-      // NOTE : accessing global 'control' object is bad TODO
-      var event = control.getDomEventHandler (ELEM_EVENTS_ID);
-      if (!event) {
-        console.error ("Could not find Element events handler .... blowing up");
-        return -1;
-      }
-
-      event.push (this.element);
-      return 0;
-    }, 10);*/
-  }
-
-  // add draggable ...
-  addControls (e) { //make draggable
-    if (!e) e = this.element;
-    $ (e).draggable ({
-      containment: "parent"
-    });
-  }
-
-  // set active ... adds/removes class
   setActive (isActive) {
-    var element = $(this.element);
-    if (isActive)
-      element.addClass ("active");
-    else
-      element.removeClass ("active");
-
+      var element = $(this.element);
+      if (isActive)
+        element.addClass ("active");
+      else
+        element.removeClass ("active");
   }
 
-  // Draw the element into the DOM
-  draw () {     //change name to generate?? also need to redo
-    this.graphics.draw ();
-  }
-
-  moveTo (os) {
-    $ (this.element).offset (os);
-  }
-
-  // Remove the element from the DOM
-  remove () {
-    $(this.element).remove ();
-  }
-
-  // getters
-  getId () { return this.id; }
-  getValue () { return this.value; }
-
-  // note: 'true' value is basically an object version. parses null to null ; empty to undefined; else to itself
-  getTrueValue () {
-    var val = this.getValue ();
-    if (!val) return;
-    if (val === NULL_CHARACTER) return null;
-    return val;
+  moveTo (offset) {
+    $ (this.element).offset (offset);
   }
 }
-
-Element.currentId = 1000;
