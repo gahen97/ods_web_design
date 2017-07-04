@@ -32,12 +32,26 @@ class Tabbify {
       options = { };
 
     this.headers = [ ];
-    this.items   = [ ];
+    this.items   = { };
 
     this.addQuestionTypes (control.exercise, options);
     this.addEventHandling (control, options.eventId);
 
     updateSidebarHeadings ();
+  }
+
+  setActiveQuestion (question) {
+    var id = question.getId ();
+    var tab = this.items [id];
+    if (!tab) return false;
+
+    if (this.activeTab)
+      this.activeTab.removeClass ("active-tab");
+
+    this.activeTab = $(tab);
+    this.activeTab.addClass ("active-tab");
+
+    return this;
   }
 
   addQuestionTypes (exercise, opts) {
@@ -60,6 +74,8 @@ class Tabbify {
 
       this.headers.push ($ (curHeader) [0]); // DOM, not jQuery
     }
+
+    return this;
   }
 
   addQuestions (questionType, mainHeader, data, opts) {
@@ -83,12 +99,14 @@ class Tabbify {
       data.questionId = key;
 
       var newElement = Tabbify.addToHeader (q.fullName, header, data);
-      this.items.push ($ (newElement) [0]); // DOM element, not jQuery
+      this.items[q.getId ()] = $ (newElement) [0]; // DOM element, not jQuery
 
       // increase question number
       if (data.absoluteQuestionNumber || data.absoluteQuestionNumber === 0)
         data.absoluteQuestionNumber ++;
     }
+
+    return this;
   }
 
   addEventHandling (control, evtId) {
@@ -96,5 +114,7 @@ class Tabbify {
     if (!e) return false;
 
     e.pushArray (this.items);
+
+    return this;
   }
 }

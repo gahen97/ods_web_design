@@ -72,6 +72,10 @@ li.tabbedQuestion:hover {
   background-color: #ff8401 !important;
 }
 
+.active-tab {
+  color: #008638;
+}
+
 .round { /* aka circular ... but then there's ovals. so its round */
   border-radius: 50%;
 }

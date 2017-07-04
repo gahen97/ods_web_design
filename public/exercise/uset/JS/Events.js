@@ -19,6 +19,7 @@ function onNextBtnClick (elem, evt) {
 
   // set active to null
   this.setActiveElement (null);
+  this.updateActiveQuestion ();
 }
 
 function onPrevBtnClick (elem, evt) {
@@ -26,6 +27,7 @@ function onPrevBtnClick (elem, evt) {
 
   // set active to null
   this.setActiveElement (null);
+  this.updateActiveQuestion ();
 }
 
 //TODO

@@ -9,6 +9,7 @@ class Exercise {
     this.absQNum = 0;       //this is the question number from the user's side. For example if you have three question types, each with 10 questions, 26 would be stored here for the 26th question, not [2][6]
   }
 
+  getCurrQuestion () { return this.getCurrQuestionType ().getCurrentQuestion (); }
   getCurrQuestionType () { return this.questionTypes [this.currQTypeIndex]; }
 
   setCurrQuestionType(param)

@@ -2,6 +2,18 @@
 
 class Question {
 
+      static getNextId()
+      {
+        return Question.nextId;
+      }
+
+      static setNextId(i)
+      {
+        var temp = Question.nextId;
+        Question.nextId = i;
+        return temp;
+      }
+      
   constructor(questionData, answerTypesClassName)
   {
     questionData = questionData || { };
@@ -20,6 +32,7 @@ class Question {
       this.model = new __MODULENAME__();
     }
   }
+
 
   // name
   get name () {
@@ -47,26 +60,15 @@ class Question {
     return temp;
   }
 
-  getId() { return this.id; }
-
-  static getNextId()
-  {
-    return Question.nextId;
-  }
-
-  static setNextId(i)
-  {
-    var temp = Question.nextId;
-    Question.nextId = i;
-    return temp;
-  }
-
   setId(i)
   {
     var temp = this.id;
     this.id = i;
     return temp;
   }
+
+  getId() { return this.id; }
+
 
   getDiv() { return this.div; }
 

@@ -23,8 +23,14 @@ class Control {
     this.tabs = new Tabbify (this, {
       eventId: TABS_EVENTS_ID
     });
+    this.updateActiveQuestion();
   }
 
+  // tabs
+  updateActiveQuestion () {
+    var active = this.exercise.getCurrQuestion ();
+    this.tabs.setActiveQuestion (active);
+  }
 
   // input
   validInput (input)
