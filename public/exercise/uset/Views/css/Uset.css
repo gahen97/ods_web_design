@@ -30,9 +30,12 @@ a {
 }
 
 a:hover {
-  color: silver;
+  color: grey;
 }
 
+li.tabbedQuestion:hover {
+  color: silver;
+}
 /* additional styling that's probably useful */
 .borderized {
   border: 1px solid lightgray;
