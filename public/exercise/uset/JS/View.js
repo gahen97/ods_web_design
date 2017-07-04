@@ -174,4 +174,10 @@ class View {
       this.addElement (element, {withinModel: true});
     });
   }
+
+
+  resizeModel ()
+  {
+    this.modelDivHelper.fixHeight ();
+  }
 }

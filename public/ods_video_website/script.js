@@ -43,6 +43,8 @@ $('document').ready(function() {
       main_margin_top();
       main_top_width();
     }});
+
+
     //dynamic_height();
   });
 

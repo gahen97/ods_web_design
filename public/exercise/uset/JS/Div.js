@@ -77,6 +77,10 @@ class Div {
   constructor (div) {
     this.myDiv = div;
     this.$div  = $(div);
+
+    this.originalData = Div.dimensionsOf (this.$div);
+    this.proportionRatio = parseInt (this.originalData.height) /
+                           parseInt (this.originalData.width);
   }
 
   getDimensions () {
@@ -100,5 +104,16 @@ class Div {
   elementOver (element) {
     var pos = $(element).offset ();
     return this.intersects (pos.left, pos.top);
+  }
+
+  calcHeight (newWidth) {
+    if (!newWidth && newWidth !== 0)
+      newWidth = parseInt (Div.dimensionsOf (this.$div).width);
+    var newHeight = newWidth * this.proportionRatio;
+
+    return newHeight;
+  }
+  fixHeight () {
+    this.$div.css ("height", this.calcHeight ());
   }
 }
