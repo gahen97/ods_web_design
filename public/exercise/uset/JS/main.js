@@ -17,7 +17,7 @@ var control;
 function start ()
 {
 	// TODO: Find a convenient place for this
-	$("#trash").droppable ({
+	$(TRASH).droppable ({
 		tolerance: "touch"
 	});
 

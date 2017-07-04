@@ -19,7 +19,8 @@ class Element {
     this.value = value;
     this.id = Element.nextId ();
 
-    this.element = this.draw ();    //change name to generate??
+    this.graphics = new ElemGraphics (this);
+    this.element = this.graphics.draw ();    //change name to generate??
     this.DomEvents = this.addEvents (); //will be moved into view
 
   }
@@ -63,20 +64,7 @@ class Element {
 
   // Draw the element into the DOM
   draw () {     //change name to generate?? also need to redo
-    // TODO HARDCODING IS BAD. MAYBE MOVE SELECTORS TO DEFS?
-    var elementDiv = $("#template > .element").clone ();
-    var model      = $(".modelDisplay");
-    var span       = $("span", elementDiv);
-
-    // set the text ...
-    span.text (this.value).data ("id", this.id); // TODO There's gotta be a better way to do this
-
-    // parent it to the main div, add the stuff, return
-    elementDiv.insertAfter (model).data ("id", this.id);
-
-    this.addControls (elementDiv);
-
-    return elementDiv;
+    this.graphics.draw ();
   }
 
   moveTo (os) {
