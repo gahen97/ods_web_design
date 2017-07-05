@@ -38,6 +38,11 @@ class Control {
     return this.exercise.isInputValid (input);
   }
 
+  get validInputStr ()
+  {
+    return this.exercise.validInputStr;
+  }
+
   // event handling
   addCustomEvent (name, handling)
   {

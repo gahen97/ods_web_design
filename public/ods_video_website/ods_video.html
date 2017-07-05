@@ -11,16 +11,20 @@
 	<title> Open Data Structures </title>
 	<meta charset="UTF-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery-ui/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="ods_video_website/normalize.css">
 	<link rel="stylesheet" type="text/css" href="ods_video_website/styles.css">
 	<script src="ods_video_website/script.js"> </script>
 
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-	<script src="libs/jquery.ui.touch-punch.min.js"></script> <!-- mobile support -->
+		<script src="jquery-ui/jquery-ui.min.js"></script>
+		<script src="libs/jquery.ui.touch-punch.min.js"></script> <!-- mobile support -->
 
   <script type="text/javascript" src="/exercise/uset/JS/lib/jsplumb.js"> </script>
   <script type="text/javascript" src="/exercise/uset/JS/Array.js"> </script>
   <script type="text/javascript" src="/exercise/uset/JS/Random.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Dialog/Popup.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Dialog/ErrorDialog.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Dialog/HighlightDialog.js"> </script>
   <script type="text/javascript" src="/exercise/uset/JS/Div.js"> </script>
   <script type="text/javascript" src="/exercise/uset/JS/Model/Model.js"> </script>
   <script type="text/javascript" src="/exercise/uset/JS/Model/Uset.js"> </script>
@@ -184,6 +188,13 @@
 			          TEXT
 			        </span>
 			      </div>
+
+						<div id="dialog" title="ghosts, boo!">
+						  <p>
+						    <span class="ui-icon ui-icon-circle-check" style="float:left; margin:0 7px 50px 0;"></span>
+						    <span id="innerText">You appear to like waffles.</span>
+						  </p>
+						</div>
 			    </div>
 			  </div>
 			</div>

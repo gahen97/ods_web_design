@@ -13,7 +13,7 @@ class Question {
         Question.nextId = i;
         return temp;
       }
-      
+
   constructor(questionData, answerTypesClassName)
   {
     questionData = questionData || { };
@@ -171,6 +171,11 @@ class Question {
   isValidInput (input)
   {
     return false;
+  }
+
+  get validInputStr ()
+  {
+    return "";
   }
 
   // setting active

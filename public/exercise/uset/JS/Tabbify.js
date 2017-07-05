@@ -8,21 +8,24 @@
 
 class Tabbify {
   static addHeader (text, parent) {
-    var newLi = $("<li class='drop'>" + text +
-                  "<ul class='sub' style='display: none;'></ul>" +
-                  "</li>")
+    var newLi = $("<div class='drops'>" + text +
+                  "<div class='subs' style='display: none;'></div>" +
+                  "</div>")
                   .appendTo (parent);
 
+    console.log(newLi);
     return newLi;
   }
 
   static subFrom (header) {
-    return $("> ul", header);
+    var ul = $("> ul", header);
+    if (!ul.length) return $ ("> div", header);
+    return ul;
   }
 
   static addToHeader (text, header, data) {
     var parent = Tabbify.subFrom (header);
-    var newLi  = $("<li class='tabbedQuestion'>" + text + "</li>")
+    var newLi  = $("<div class='tabbedQuestion'>" + text + "</div>")
                    .appendTo (parent);
 
     for (var e in data)
@@ -40,6 +43,8 @@ class Tabbify {
 
     this.addQuestionTypes (control.exercise, options);
     this.addEventHandling (control, options.eventId);
+
+    $(this.headers[0]).accordion({collapsible: true});
 
     updateSidebarHeadings ();
   }

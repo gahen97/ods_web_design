@@ -12,6 +12,16 @@ function isNullCharacter (element) {
   return $(element).text ().trim () === NULL_CHARACTER;
 }
 
+function inputError ()
+{
+  var validStr = control.validInputStr;
+
+  if (validStr === "")
+    return new ErrorDialog ("Invalid input ::: cannot add new elements ...", {title: "INVALID INPUT"});
+
+  return new ErrorDialog ("Invalid input ::: Please enter a number between " + validStr, {title: "INVALID INPUT"});
+}
+
 /* Main Events .... These are the buttons independent of the exercise */
 function onNextBtnClick (elem, evt) {
   // move to the next exercise ...
@@ -36,9 +46,10 @@ function onCheckBtnClick (elem, evt) {
   if (this.exercise.check (this.userModel, this.activeElement)) {
     //TODO
     //Maybe make custom event that checks?
-    console.log ("yep :/");
+    new Popup ("You is good!", {title: "Correct"});
     onNextBtnClick.apply(this, arguments);
   } else {
+    new Popup ("Ha, loser! You suck!", {title: "WRONG"});
     console.log ("lozzzzzer"); //TODO
   }
 }
@@ -56,8 +67,12 @@ function onSubmitInput (element, evt) {
   var input = $ (".modelEntry").val ();
 
   input = parseInput (input);
-  if (!this.validInput (input)) return;
-  if (this.view.findByValue (input)) return; // IF THERE'S ALREADY ONE, WE BROK
+  if (!this.validInput (input))
+    return inputError ();
+
+  if (this.view.findByValue (input))
+    return new ErrorDialog ("Element " + input + " already exists in the list.\nCannot add.",
+                             {title: "Element Exists"}); // IF THERE'S ALREADY ONE, WE BROK
 
   this.view.addElement (input);
 };
@@ -147,7 +162,10 @@ function droppedOnTrash (element, evt, ui) {
    return false;
   }
 
-  if (isNullCharacter (draggable)) return false;
+  if (isNullCharacter (draggable)) {
+    new ErrorDialog ("Null element cannot be deleted! :::", {title: "INVALID DRAG"}); // TODO
+    return false;
+  }
 
   this.removeElement (draggable);
 }

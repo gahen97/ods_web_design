@@ -163,6 +163,11 @@ li.tabbedQuestion:hover {
   flex-wrap: wrap;
 }
 
+/* jquery ui stuff */
+.ui-error-dialog {
+  background-color: #b00 !important;
+}
+
 /*add some margin and/or padding to rows cols as needed as absolute px*/
 
 /*

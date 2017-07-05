@@ -147,6 +147,11 @@ class Exercise {
       return this.getCurrQuestionType ().isInputValid (input);
   }
 
+  get validInputStr ()
+  {
+    return this.getCurrQuestion ().validInputStr;
+  }
+  
   // active check
   canSetActive(){
     return this.getCurrQuestionType ().canSetActive ();
