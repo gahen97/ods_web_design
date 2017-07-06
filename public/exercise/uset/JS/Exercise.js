@@ -10,6 +10,7 @@ class Exercise {
   }
 
   getCurrQuestion () { return this.getCurrQuestionType ().getCurrentQuestion (); }
+  getCurrQuestionId () { return this.getCurrQuestion ().getId (); }
   getCurrQuestionType () { return this.questionTypes [this.currQTypeIndex]; }
 
   setCurrQuestionType(param)
@@ -138,6 +139,9 @@ class Exercise {
     }
 
     //if desired, scramble
+
+
+    this.setAbsQNum (0);
   }
 
 
@@ -151,7 +155,7 @@ class Exercise {
   {
     return this.getCurrQuestion ().validInputStr;
   }
-  
+
   // active check
   canSetActive(){
     return this.getCurrQuestionType ().canSetActive ();

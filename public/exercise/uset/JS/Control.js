@@ -33,12 +33,14 @@ class Control {
 
     this.view.start ();
     this.exercise.start ();
+
     this.tabs.regenerate (this);
+    this.updateActiveQuestion ();
   }
 
   // tabs
   updateActiveQuestion () {
-    var active = this.exercise.getAbsQNum ();
+    var active = this.exercise.getCurrQuestionId ();
     this.tabs.setActiveQuestion (active);
   }
 
