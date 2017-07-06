@@ -8,30 +8,25 @@
 
 class Tabbify {
   static addHeader (text, parent) {
-    var newLi = $("<div class='drops'>" + text +
-                  "<div class='subs' style='display: none;'></div>" +
-                  "</div>")
-                  .appendTo (parent);
-
-    console.log(newLi);
-    return newLi;
+    return $("<h3>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
   }
 
   static subFrom (header) {
-    var ul = $("> ul", header);
-    if (!ul.length) return $ ("> div", header);
-    return ul;
+    return $(header).next();
+  }
+
+  static mainFrom (main) {
+    return $("div", main);
   }
 
   static addToHeader (text, header, data) {
-    var parent = Tabbify.subFrom (header);
-    var newLi  = $("<div class='tabbedQuestion'>" + text + "</div>")
-                   .appendTo (parent);
+    var parent     = Tabbify.subFrom (header);
+    var newElement = $("<p class='question-tab'>" + text + "</p>").appendTo (parent);
 
     for (var e in data)
-      newLi.data (e, data[e]);
+      newElement.data (e, data [e]);
 
-    return newLi;
+    return newElement;
   }
 
   constructor (control, options) {
@@ -41,17 +36,25 @@ class Tabbify {
     this.headers = [ ];
     this.items   = { };
 
-    this.addQuestionTypes (control.exercise, options);
+    var main = Tabbify.mainFrom ($("#questions_display"));
+    this.addQuestionTypes (control.exercise, options, main);
     this.addEventHandling (control, options.eventId);
 
-    $(this.headers[0]).accordion({collapsible: true});
+    $ (main).accordion ({
+      collapsible: true,
+      heightStyle: "content",
+      classes: {
+        "ui-accordion-header": "accordionHeader",
+        "ui-accordion-header-collapsed": "accordionHeader",
+      }
+    });
 
-    updateSidebarHeadings ();
+    //updateSidebarHeadings ();
   }
 
-  setActiveQuestion (question) {
-    var id = question.getId ();
+  setActiveQuestion (id) {
     var tab = this.items [id];
+    console.log (id, this.items[id]);
     if (!tab) return false;
 
     if (this.activeTab)
@@ -63,11 +66,10 @@ class Tabbify {
     return this;
   }
 
-  addQuestionTypes (exercise, opts) {
+  addQuestionTypes (exercise, opts, parent) {
     // Take every question type as header
     // Take every question as text
     var qTypes = exercise.getQuestionTypes ();
-    var parent = Tabbify.subFrom ($("#questions_display"));
 
     var data   = { };
     if (!opts) opts = { };
@@ -76,12 +78,13 @@ class Tabbify {
 
     for (var key in qTypes) {
       var qType = qTypes [key];
-      var curHeader = Tabbify.addHeader (qType.name, parent);
+      //var curHeader = Tabbify.addHeader (qType.name, parent);
+      var curHeader = parent;
 
       data.questionTypeId = key;
-      this.addQuestions (qTypes [key], curHeader, data);
+      this.addQuestions (qTypes [key], curHeader, data, opts);
 
-      this.headers.push ($ (curHeader) [0]); // DOM, not jQuery
+      //this.headers.push ($ (curHeader) [0]); // DOM, not jQuery
     }
 
     return this;
@@ -102,7 +105,7 @@ class Tabbify {
       var name = q.name;
       if (name !== curName){
         curName = name;
-        header  = Tabbify.addHeader (name, Tabbify.subFrom (mainHeader));
+        header  = Tabbify.addHeader (name, mainHeader);
       }
 
       data.questionId = key;

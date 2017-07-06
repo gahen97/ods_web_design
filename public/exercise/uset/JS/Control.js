@@ -28,7 +28,7 @@ class Control {
 
   // tabs
   updateActiveQuestion () {
-    var active = this.exercise.getCurrQuestion ();
+    var active = this.exercise.getAbsQNum ();
     this.tabs.setActiveQuestion (active);
   }
 

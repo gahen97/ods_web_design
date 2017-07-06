@@ -141,6 +141,31 @@ li.tabbedQuestion:hover {
   margin-top: 15px;
 }
 
+/* accordion - remove the borders on headers */
+.ui-accordion-header,
+.accordionHeader{
+  border: 0px !important;
+  background: none !important;
+  color: #565656;
+  float: left;
+}
+
+.accordion-sub{
+  border: 0;
+  background: none;
+  color: #565656;
+  float: left;
+  margin-left: 2%;
+}
+
+.ui-accordion-content{
+  padding: 0em 2.4em !important;
+}
+
+.question-tab{
+  text-align: left;
+}
+
 .questionButtons {
   display:flex;
   align-items:center;

@@ -184,6 +184,7 @@ function clickedTab (element, evt)
   }
 
   this.exercise.goToQuestion (absQNum);
+  this.updateActiveQuestion ();
 }
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
