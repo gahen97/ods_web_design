@@ -61,10 +61,10 @@ function onSubmitInput (element, evt) {
 };
 
 function checkEnter (element, evt) {
-  if (evt.keyCode !== 13) return;
-
+  if (evt.keyCode !== 13)  return;
   // TODO remove this entirely
   onSubmitInput.call (this, element, evt);
+  $(element).val(""); // new code TODO
 }
 
 /*

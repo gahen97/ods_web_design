@@ -5,9 +5,9 @@
 	<title> Open Data Structures </title>
 	<meta charset="UTF-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="ods_video_website/normalize.css">
-	<link rel="stylesheet" type="text/css" href="ods_video_website/styles.css">
-	<script src="ods_video_website/script.js"> </script>
+	<link rel="stylesheet" type="text/css" href="ods_video_website/styles/normalize.css">
+	<link rel="stylesheet" type="text/css" href="ods_video_website/styles/styles.css">
+	<script src="ods_video_website/script/script.js"> </script>
 
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
@@ -109,7 +109,7 @@
 	<div id="main">
 
 		<div id="main_top"> [Video Heading] (Skiplists: Module 1)
-			<img id="sidebar_toggle" src="ods_video_website/menubutton.png" onmouseover="this.src='menubuttonhover.png';" onmouseout="this.src='menubutton.png';">
+			<img id="sidebar_toggle" src="ods_video_website/img/menubutton.png" onmouseover="this.src='ods_video_website/img/menubuttonhover.png';" onmouseout="this.src='ods_video_website/img/menubutton.png';">
 		</div>
 
 
@@ -118,42 +118,45 @@
 		</div>
 
 		<div id="exercise">
-			<div class="exercise grid">
+			<div class="exercise grid" style="margin: 20px; padding: 10px;"> <strong style="font-size:1.25em;"> Exercise </strong>
 			  <div class="row">
 			    <div class="col-12 questionFrame">
 			      <div class="questionBody">
 
-			        <div class="instructionsBody">
+			        <div class="instructionsBody" style="margin-top: 20px;">
 			          <p> instructions </p>
 			        </div>
 
-			        <div class="parametersBody">
+			        <div class="parametersBody" style="margin-top: 10px;">
 			          <p> params </p>
 			        </div>
 
-			        <div class="modelBody flexCol borderized">
+			        <div class="modelBody flexCol borderized" style="margin-top: 10px;">
 			          <div class="modelMain col-12 ">
-			            <img id="trash" src="exercise/uset/images/trash.jpg" class="trashCan"></img>
-			            <div id="model" class="modelDisplay col-10 round"></div>
+			            <img id="trash" src="exercise/uset/images/trashcan.png" class="trashCan"></img>
+			            <div id="model" class="modelDisplay col-6 round"></div>
 			          </div>
-			          <input type="text" class="modelEntry col-12 bottom" placeholder="add new element [ENTER VALUE]"></input>
+								<div id="input_container" class="col-8">
+			          	<input type="text" class="modelEntry bottom" placeholder="type in the value to be added here"></input>
+									<button id="button_enter"></button>
+								</div>
 			        </div>
 			      </div>
 
-			      <div class="questionButtons"> <!-- TODO rename this class -->
+			      <div class="questionButtons" style="margin-top: 10px;"> <!-- TODO rename this class -->
 			        <div class="prevArrowDiv">
-			          <a id="prevArrow" class="arrow" href="" onclick="return false;">&larr;</a> <!-- TODO set up event handlers and probably rename this class from arrow-->
+			          <img id="prevArrow" class="arrow" href="" src="exercise/uset/images/arrow_prev.png" onclick="return false;"></img> <!-- TODO set up event handlers and probably rename this class from arrow-->
 			        </div>
 			        <div class="checkAndShowDiv">
-			          <div class="checkAnswerButton">
-			            <a id="checkBtn" class="button arrow" href="" onclick="return false;">Check Answer</a> <!-- TODO change this -->
+			          <div class="checkAnswerButton"  style="display:inline-block; border-radius: 5px; background-color: #565656; padding: 10px; color: white;">
+			            <a id="checkBtn" style="color:white;" class="button arrow" href="" onclick="return false;">Check Answer</a> <!-- TODO change this -->
 			          </div>
-			          <div class="showAnswerButton">
-			            <a id="showAnswerBtn" class="button arrow" href="" onclick="return false;">Show Answer</a> <!-- TODO change this -->
+			          <div class="showAnswerButton"  style="display:inline-block; border-radius: 5px; background-color: #565656; padding: 10px; color: white;">
+			            <a id="showAnswerBtn" style="color:white;" class="button arrow" href="" onclick="return false;">Show Answer</a> <!-- TODO change this -->
 			          </div>
 			        </div>
 			        <div class="nextArrowDiv">
-			          <a id="nextArrow" class="arrow" href="" onclick="return false;">&rarr;</a> <!-- TODO set up event handlers -->
+			          <img id="nextArrow" class="arrow" href="" src="exercise/uset/images/arrow_next.png" onclick="return false;"></img> <!-- TODO set up event handlers -->
 			        </div>
 			      </div>
 

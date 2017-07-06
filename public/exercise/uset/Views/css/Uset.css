@@ -5,23 +5,15 @@ note that 1/12 = 8.33333 %
 https://storage.googleapis.com/supplemental_media/udacityu/2872198569/mock3-portfolio-1.pdf
 */
 
-* {
-  border: 1px soalid red !important;
-
-  text-align: center;
-
-  margin: 0 auto;
-}
-
-* {
+#exercise * {
   max-width: 960px;
-}
 
-* {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
+
+
 }
 
 a {
@@ -35,7 +27,7 @@ a:hover {
 
 /* additional styling that's probably useful */
 .borderized {
-  border: 1px solid lightgray;
+  margin-top:20px;
 }
 
 .hidden{
@@ -45,6 +37,8 @@ a:hover {
 .flexCol{
   display: flex;
   flex-direction: column;
+
+  margin-top:20px;
 }
 
 .bottom{
@@ -72,50 +66,72 @@ a:hover {
 }
 
 .modelDisplay {
-  height: 65%;
-  border: 2px solid darkgray;
-  margin-left: auto;
-  margin-top: 15px;
+  height: 80%;
+  min-width: 50%;
+  border: 5px solid #565656;
+  margin: auto;
+  margin-top: 20px;
 }
 
 
 /* using on the model body. defines the main div */
 .modelBody{
-  height: 90vh;
+  margin: 0 auto;
+  height: 80vh;
   min-height: 300px;
-  width: 100%;
+  max-height: 400px;
+  width: 95%;
+  margin-top:20px;
 }
 
 .modelMain{
   /* Firefox */
-  height: -moz-calc(100% - 21px);
+  height: -moz-calc(100% - 30px);
   /* WebKit */
-  height: -webkit-calc(100% - 21px);
+  height: -webkit-calc(100% - 30px);
   /* Opera */
-  height: -o-calc(100% - 21px);
+  height: -o-calc(100% - 30px);
   /* Standard */
-  height: calc(100% - 21px);
+  height: calc(100% - 30px);
 }
 
 .modelEntry{
-  height: 21px;
+  width: 100%;
+  min-height: 25px;
+  border: 0;
+}
+
+::placeholder {
+  opacity:0.5;
+  text-align: center;
 }
 
 /* element ... TODO: should show as clickable, draggable. style? */
 .element {
+  cursor: pointer;
+  text-align: center;
   width: 35px;
   height: 35px;
   display: inline-block;
-  border: 1px solid black;
-  background-color: #999;
-
+  background-color: #565656;
+  border-radius: 5px;
   line-height: 30px; /* needs this for vertically centered text */
+  color: white;
+  border: 3px solid #565656;
+  font-weight: bold;
+  font-family: courier;
+}
+
+
+.element:active {
+  background-color: white;
+  color: #565656;
 }
 
 /* trash can ........ should be a small image, top right corner */
 .trashCan {
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   float: right;
   margin-right: 15px;
   margin-top: 15px;
@@ -126,23 +142,40 @@ a:hover {
   align-items:center;
 }
 
+.questionButtons *{
+  margin:0 auto;
+}
+
 .checkAndShowDiv {
   margin: 0px;
 }
 
 .arrow {
-  font-size: 16pt;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
-.grid {
-  margin: 0 auto;
+.parametersBody {
+  font-weight: bold;
+  text-align: center;
 }
 
-.row {
-  width: 100%;
-  max-width: 960px;
-  display: flex;
-  flex-wrap: wrap;
+#input_container {
+   text-align: center;
+   margin: 0 auto;
+   position: relative;
+}
+
+#button_enter {
+  position: absolute;
+  background: url("../../images/insert.png") no-repeat;
+  background-size: 15px 15px;
+  border: 0;
+  height: 15px;
+  width: 15px;
+  right: 5px;
+  top: 5px;
 }
 
 /*add some margin and/or padding to rows cols as needed as absolute px*/
