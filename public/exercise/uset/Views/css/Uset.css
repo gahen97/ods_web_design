@@ -209,6 +209,12 @@ li.tabbedQuestion:hover {
   cursor: pointer;
 }
 
+.button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
 .parametersBody {
   font-weight: bold;
   text-align: center;
@@ -229,6 +235,11 @@ li.tabbedQuestion:hover {
   width: 15px;
   right: 5px;
   top: 5px;
+  cursor: pointer;
+}
+
+.showAnswerButton,
+.checkAnswerButton{
   cursor: pointer;
 }
 

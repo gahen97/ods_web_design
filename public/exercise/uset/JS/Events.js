@@ -242,7 +242,7 @@ $ (()=> {
       ]
     },
     {
-      elem: $("#checkBtn"),
+      elem: $(".checkAnswerButton"),
       evtsArr: [
         {
           handlingFunction: onCheckBtnClick,
@@ -252,7 +252,7 @@ $ (()=> {
       ]
     },
     {
-      elem: $("#showAnswerBtn"),
+      elem: $(".showAnswerButton"),
       evtsArr: [
         {
           handlingFunction: onShowAnsBtnClick,
