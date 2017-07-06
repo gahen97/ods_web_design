@@ -12,6 +12,16 @@ function isNullCharacter (element) {
   return $(element).text ().trim () === NULL_CHARACTER;
 }
 
+function inputError ()
+{
+  var validStr = control.validInputStr;
+
+  if (validStr === "")
+    return new ErrorDialog ("Invalid input ::: cannot add new elements ...", {title: "INVALID INPUT"});
+
+  return new ErrorDialog ("Invalid input ::: Please enter a number between " + validStr, {title: "INVALID INPUT"});
+}
+
 /* Main Events .... These are the buttons independent of the exercise */
 function onNextBtnClick (elem, evt) {
   // move to the next exercise ...
@@ -19,6 +29,7 @@ function onNextBtnClick (elem, evt) {
 
   // set active to null
   this.setActiveElement (null);
+  this.updateActiveQuestion ();
 }
 
 function onPrevBtnClick (elem, evt) {
@@ -26,6 +37,7 @@ function onPrevBtnClick (elem, evt) {
 
   // set active to null
   this.setActiveElement (null);
+  this.updateActiveQuestion ();
 }
 
 //TODO
@@ -34,9 +46,10 @@ function onCheckBtnClick (elem, evt) {
   if (this.exercise.check (this.userModel, this.activeElement)) {
     //TODO
     //Maybe make custom event that checks?
-    console.log ("yep :/");
+    new Popup ("You is good!", {title: "Correct"});
     onNextBtnClick.apply(this, arguments);
   } else {
+    new Popup ("Ha, loser! You suck!", {title: "WRONG"});
     console.log ("lozzzzzer"); //TODO
   }
 }
@@ -51,20 +64,27 @@ function onShowAnsBtnClick (elem, evt) {
 //       on other devices (touch)
 function onSubmitInput (element, evt) {
   // TODO added custom event. Check this for spiders. I'm not personally going to go over it; spiders are scary. But you go ahead
-  var input = $ (element).val ();
+  var input = $ (".modelEntry").val ();
 
   input = parseInput (input);
-  if (!this.validInput (input)) return;
-  if (this.view.findByValue (input)) return; // IF THERE'S ALREADY ONE, WE BROK
+  if (!this.validInput (input))
+    return inputError ();
+
+  if (this.view.findByValue (input))
+    return new ErrorDialog ("Element " + input + " already exists in the list.\nCannot add.",
+                             {title: "Element Exists"}); // IF THERE'S ALREADY ONE, WE BROK
 
   this.view.addElement (input);
+  $(".modelEntry").val(""); // new code TODO
 };
 
 function checkEnter (element, evt) {
   if (evt.keyCode !== 13)  return;
   // TODO remove this entirely
   onSubmitInput.call (this, element, evt);
-  $(element).val(""); // new code TODO
+
+
+
 }
 
 /*
@@ -125,6 +145,8 @@ function onElementClicked (elem, ...args){
   this.setActiveElement (element);
 }
 
+/*
+  TODO This can be removed
 const ELEM_EVENTS = { //this is analogous to a triggermap
   //should we put this into eventData
   //needs some way to be found outside of the controller - so we could, but would have to find a way to get it later
@@ -132,6 +154,7 @@ const ELEM_EVENTS = { //this is analogous to a triggermap
   "dragstop": "onDragStopped",
   "click": "onElementClicked"
 };
+*/
 
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
 function droppedOnTrash (element, evt, ui) {
@@ -142,9 +165,29 @@ function droppedOnTrash (element, evt, ui) {
    return false;
   }
 
-  if (isNullCharacter (draggable)) return false;
+  if (isNullCharacter (draggable)) {
+    new ErrorDialog ("Null element cannot be deleted! :::", {title: "INVALID DRAG"}); // TODO
+    return false;
+  }
 
   this.removeElement (draggable);
+}
+
+
+/* TAB EVENTS. THESE HANDLE DEALING WITH THE TABBING SYSTEM */
+function clickedTab (element, evt)
+{
+  var data    = $(element).data ();
+  var absQNum = data.absoluteQuestionNumber;
+
+  if (!absQNum && absQNum !== 0)
+  {
+    console.error ("Why must you turn this house into a house of lies? : ", element);
+    return false;
+  }
+
+  this.exercise.goToQuestion (absQNum);
+  this.updateActiveQuestion ();
 }
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
@@ -199,7 +242,7 @@ $ (()=> {
       ]
     },
     {
-      elem: $("#checkBtn"),
+      elem: $(".checkAnswerButton"),
       evtsArr: [
         {
           handlingFunction: onCheckBtnClick,
@@ -209,7 +252,7 @@ $ (()=> {
       ]
     },
     {
-      elem: $("#showAnswerBtn"),
+      elem: $(".showAnswerButton"),
       evtsArr: [
         {
           handlingFunction: onShowAnsBtnClick,
@@ -229,6 +272,18 @@ $ (()=> {
             domEvtName: "keyup"
           }
         ]
+    },
+
+    /* SUBMIT BUTTON */
+    {
+      elem: $("#button_enter"),
+      evtsArr: [
+        {
+          handlingFunction: onSubmitInput,
+          customEvtName: "They submitted. What do you do next?",
+          domEvtName: "click"
+        }
+      ]
     },
 
     /* USET EVENTS ---- OCCUR ON THE MAIN MODEL DISPLAY */
@@ -282,6 +337,19 @@ $ (()=> {
           domEvtName: "drop"
         }
       ]
+    },
+
+    /* TAB EVENTS */
+    {
+      elem: $(".tabbedQuestion"),
+      evtsArr: [
+        {
+          handlingFunction: clickedTab,
+          customEvtName: "goToQuestionMagic",
+          domEvtName: "click"
+        }
+      ],
+      id: TABS_EVENTS_ID
     }
   ];
 

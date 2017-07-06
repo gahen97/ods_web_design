@@ -4,48 +4,76 @@
   Note that this likely will not change and should be fine ...
 
   TODO: Should these selectors be moved into DomDefs? Probably?
+<<<<<<< HEAD
+
+
+
+    NOTE: Everything works but tab IDs are off.
+    As a result, can't setActiveQuestion after initial refresh
+=======
+>>>>>>> upstream/master
 */
 
 class Tabbify {
   static addHeader (text, parent) {
-    var newLi = $("<li class='drop'>" + text +
-                  "<ul class='sub' style='display: none;'></ul>" +
-                  "</li>")
-                  .appendTo (parent);
-
-    return newLi;
+    return $("<h3>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
   }
 
   static subFrom (header) {
-    return $("> ul", header);
+    return $(header).next();
+  }
+
+  static mainFrom (main) {
+    return $("div", main);
   }
 
   static addToHeader (text, header, data) {
-    var parent = Tabbify.subFrom (header);
-    var newLi  = $("<li class='tabbedQuestion'>" + text + "</li>")
-                   .appendTo (parent);
+    var parent     = Tabbify.subFrom (header);
+    var newElement = $("<div class='question-tab'>" + text + "</div>").appendTo (parent);
 
     for (var e in data)
-      newLi.data (e, data[e]);
+      newElement.data (e, data [e]);
 
-    return newLi;
+    return newElement;
   }
 
   constructor (control, options) {
     if (!options)
       options = { };
 
+    this.mainHeader = Tabbify.mainFrom ($("#questions_display"));
+    this.eventId    = options.eventId;
+
+    // set up the accordion
+    $ (this.mainHeader).accordion ({
+      collapsible: true,
+      heightStyle: "content",
+      classes: {
+        "ui-accordion-header": "accordionHeader",
+        "ui-accordion-header-collapsed": "accordionHeader",
+      }
+    });
+
+    // add elements
+    this.regenerate (control, options);
+
+
+    //updateSidebarHeadings ();
+  }
+
+  regenerate (control, options) {
+    this.mainHeader.empty ();
+
     this.headers = [ ];
     this.items   = { };
 
-    this.addQuestionTypes (control.exercise, options);
-    this.addEventHandling (control, options.eventId);
+    this.addQuestionTypes (control.exercise, options, this.mainHeader);
+    this.addEventHandling (control, this.eventId);
 
-    updateSidebarHeadings ();
+    this.mainHeader.accordion ("refresh");
   }
 
-  setActiveQuestion (question) {
-    var id = question.getId ();
+  setActiveQuestion (id) {
     var tab = this.items [id];
     if (!tab) return false;
 
@@ -58,11 +86,11 @@ class Tabbify {
     return this;
   }
 
-  addQuestionTypes (exercise, opts) {
+  addQuestionTypes (exercise, opts, parent) {
     // Take every question type as header
     // Take every question as text
     var qTypes = exercise.getQuestionTypes ();
-    var parent = Tabbify.subFrom ($("#questions_display"));
+    //var parent = Tabbify.subFrom ($("#questions_display"));
 
     var data   = { };
     if (!opts) opts = { };
@@ -71,12 +99,13 @@ class Tabbify {
 
     for (var key in qTypes) {
       var qType = qTypes [key];
-      var curHeader = Tabbify.addHeader (qType.name, parent);
+      //var curHeader = Tabbify.addHeader (qType.name, parent);
+      var curHeader = parent;
 
       data.questionTypeId = key;
-      this.addQuestions (qTypes [key], curHeader, data);
+      this.addQuestions (qTypes [key], curHeader, data, opts);
 
-      this.headers.push ($ (curHeader) [0]); // DOM, not jQuery
+      //this.headers.push ($ (curHeader) [0]); // DOM, not jQuery
     }
 
     return this;
@@ -97,7 +126,7 @@ class Tabbify {
       var name = q.name;
       if (name !== curName){
         curName = name;
-        header  = Tabbify.addHeader (name, Tabbify.subFrom (mainHeader));
+        header  = Tabbify.addHeader (name, mainHeader);
       }
 
       data.questionId = key;

@@ -22,9 +22,12 @@ a {
 }
 
 a:hover {
-  color: silver;
+  color: grey;
 }
 
+li.tabbedQuestion:hover {
+  color: silver;
+}
 /* additional styling that's probably useful */
 .borderized {
   margin-top:20px;
@@ -45,6 +48,15 @@ a:hover {
   margin-top: auto;
 }
 
+.left{
+  display: inline-block;
+  float: left;
+}
+.right{
+  display: inline-block;
+  float: right;
+}
+
 .verticallyCentered {
   vertical-align: middle;
   line-height: normal;
@@ -52,6 +64,10 @@ a:hover {
 
 .active {
   background-color: #ff8401 !important;
+}
+
+.active-tab {
+  color: #ef8043;
 }
 
 .round { /* aka circular ... but then there's ovals. so its round */
@@ -120,6 +136,7 @@ a:hover {
   border: 3px solid #565656;
   font-weight: bold;
   font-family: courier;
+  position: absolute;
 }
 
 
@@ -135,6 +152,42 @@ a:hover {
   float: right;
   margin-right: 15px;
   margin-top: 15px;
+}
+
+/* accordion - remove the borders on headers */
+.ui-accordion-header,
+.accordionHeader{
+  border: 0px !important;
+  background: none !important;
+  color: #565656;
+  margin: 0 !important;
+  margin-left: 10px !important;
+  cursor: pointer;
+}
+
+.accordion-sub{
+  border: 0;
+  background: none;
+  color: #565656;
+  float: left;
+  margin-left: 2%;
+
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-left: 14px !important;
+
+  width: 100%;
+}
+
+.ui-accordion-content{
+  padding-top: 0em !important;
+  margin-top: 0em !important;
+  cursor: pointer;
+}
+
+.question-tab{
+  text-align: left;
+  margin: 2px;
 }
 
 .questionButtons {
@@ -154,6 +207,12 @@ a:hover {
   width: 30px;
   height: 30px;
   cursor: pointer;
+}
+
+.button {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 
 .parametersBody {
@@ -176,6 +235,17 @@ a:hover {
   width: 15px;
   right: 5px;
   top: 5px;
+  cursor: pointer;
+}
+
+.showAnswerButton,
+.checkAnswerButton{
+  cursor: pointer;
+}
+
+/* jquery ui stuff */
+.ui-error-dialog {
+  background-color: #b00 !important;
 }
 
 /*add some margin and/or padding to rows cols as needed as absolute px*/

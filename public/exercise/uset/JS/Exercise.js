@@ -9,6 +9,8 @@ class Exercise {
     this.absQNum = 0;       //this is the question number from the user's side. For example if you have three question types, each with 10 questions, 26 would be stored here for the 26th question, not [2][6]
   }
 
+  getCurrQuestion () { return this.getCurrQuestionType ().getCurrentQuestion (); }
+  getCurrQuestionId () { return this.getCurrQuestion ().getId (); }
   getCurrQuestionType () { return this.questionTypes [this.currQTypeIndex]; }
 
   setCurrQuestionType(param)
@@ -137,6 +139,9 @@ class Exercise {
     }
 
     //if desired, scramble
+
+
+    this.setAbsQNum (0);
   }
 
 
@@ -144,6 +149,11 @@ class Exercise {
   isInputValid (input)
   {
       return this.getCurrQuestionType ().isInputValid (input);
+  }
+
+  get validInputStr ()
+  {
+    return this.getCurrQuestion ().validInputStr;
   }
 
   // active check

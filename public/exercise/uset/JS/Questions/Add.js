@@ -16,10 +16,15 @@ class Add extends Question {
   isValidInput (input)
   {
     if (!input && input !== 0) return false;
-    
+
     var int = Number (input); // NOTE: Can't use parseInt, because "3 X" is valid.
     if (!int && int !== 0) return false;
 
     return (int >= __addMinParam__ && int <= __addMaxParam__);
+  }
+
+  get validInputStr ()
+  {
+    return __addMinParam__ + " - " + __addMaxParam__;
   }
 }

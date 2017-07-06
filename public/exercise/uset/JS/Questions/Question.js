@@ -2,6 +2,18 @@
 
 class Question {
 
+      static getNextId()
+      {
+        return Question.nextId;
+      }
+
+      static setNextId(i)
+      {
+        var temp = Question.nextId;
+        Question.nextId = i;
+        return temp;
+      }
+
   constructor(questionData, answerTypesClassName)
   {
     questionData = questionData || { };
@@ -21,6 +33,16 @@ class Question {
     }
   }
 
+
+  // name
+  get name () {
+    return this.constructor.name;
+  }
+
+  get fullName () {
+    return this.name.toLowerCase() + "(" + this.getParametersString() + ")";
+  }
+
   getInstructions()
   {
     return this.instructions;
@@ -38,26 +60,15 @@ class Question {
     return temp;
   }
 
-  getId() { return this.id; }
-
-  static getNextId()
-  {
-    return Question.nextId;
-  }
-
-  static setNextId(i)
-  {
-    var temp = Question.nextId;
-    Question.nextId = i;
-    return temp;
-  }
-
   setId(i)
   {
     var temp = this.id;
     this.id = i;
     return temp;
   }
+
+  getId() { return this.id; }
+
 
   getDiv() { return this.div; }
 
@@ -110,9 +121,8 @@ class Question {
 
   displayParameters (div)
   {
-      var str = this.getParametersString ();
       var p   = $(".parametersBody", div);
-      p.text (this.constructor.name.toLowerCase() + "(" + str + ")");
+      p.text (this.fullName);
   }
 
   displayInstructions(div)
@@ -161,6 +171,11 @@ class Question {
   isValidInput (input)
   {
     return false;
+  }
+
+  get validInputStr ()
+  {
+    return "";
   }
 
   // setting active

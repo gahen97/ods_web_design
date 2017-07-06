@@ -9,6 +9,11 @@ class QuestionType {
     this.currQuestion = 0;
   }
 
+  // name
+  get name () {
+    return this.constructor.name;
+  }
+
   getQuestions() { return this.questions; }
 
   size () { return this.questions.length; }

@@ -1,21 +1,18 @@
 /*jshint esversion: 6 */ 'use strict';
 
 /*
-  This is pretty interesting. You can give events namespaces.
-  For example .... If there's a div that has three click handlers, but the three
-    should be separate - you can give them different namespaces.
-  Then if you stop one by the .off () method, the others are still there.
-  TODO We should use this.
-
-  http://api.jquery.com/off/
-    ctrl + f 'namespace'
-  Ex. click.DOMEventHandler12315
+  Updated. Now uses namespaces so we can identify the events added by different
+    DOMEventHandlers. Still, the only thing I'm certain of is that if you use
+    three unicorns to get into a fantasy land filled with bunny rabbits and little
+    kittens, you're having a good day
 */
 
 class DOMEventHandler {   //we have one instance of a domeventhandler for each dom element that has events associated with it
   static registerEventHandler (h) {
     this.customEventHandlers.push (h);
   }
+
+  static nextId () { return DOMEventHandler.id ++; }
 
   constructor (elements, triggerMap) {        //usual use case is new DOMEventHandler([], {"DOMEventSymbol" : "CustomEventSymbol"}
     // {click : "check"}
@@ -24,6 +21,9 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
     //The reason we have this structure is that we could want to have events that are not triggered by DOM.
     this.triggerMap = triggerMap;
     this.elements = elements;
+    this.id       = DOMEventHandler.nextId (); // for namespacing
+
+    this.namespace = "." + this.id;
     this.setup ();
   }
 
@@ -36,6 +36,11 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
   push (element) {
     this.elements.push (element);
     this.addTriggerElement (element);
+  }
+
+  pushArray (arr) {
+    for (var i in arr)
+      this.push (arr[i]);
   }
 
   // TODO name?
@@ -51,7 +56,7 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
   addTriggerElement (element) {
     var $e = $(element);
     for (var domEvent in this.triggerMap) {
-          $e.on (domEvent, (...args)=>{     //handling function
+          $e.on (domEvent + this.namespace, (...args)=>{     //handling function
             this.fire.apply (this, args);
           });
     }
@@ -59,10 +64,7 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
 
   // remove an element from the trigger elements.
   removeTriggerElement (element) {
-    var $e = $ (element);
-    for (var domEvent in this.triggerMap) {
-      $e.off (domEvent); // no longer fires
-    }
+    $ (element).off (this.namespace);
   }
 
   fire (event, ...args) {
@@ -82,3 +84,4 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
 }
 
 DOMEventHandler.customEventHandlers = [ ];
+DOMEventHandler.id = 9610203;

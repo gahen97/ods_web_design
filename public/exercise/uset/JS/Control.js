@@ -18,13 +18,41 @@ class Control {
 
     this.view.start ();
     this.exercise.start ();     //TODO rename ?? maybe
+
+    // add tabbing
+    this.tabs = new Tabbify (this, {
+      eventId: TABS_EVENTS_ID
+    });
+    this.updateActiveQuestion();
   }
 
+  regenerate ()
+  {
+    this.view.clear ();
+    this.exercise.setup ();
+
+    this.view.start ();
+    this.exercise.start ();
+
+    this.tabs.regenerate (this);
+    this.updateActiveQuestion ();
+  }
+
+  // tabs
+  updateActiveQuestion () {
+    var active = this.exercise.getCurrQuestionId ();
+    this.tabs.setActiveQuestion (active);
+  }
 
   // input
   validInput (input)
   {
     return this.exercise.isInputValid (input);
+  }
+
+  get validInputStr ()
+  {
+    return this.exercise.validInputStr;
   }
 
   // event handling

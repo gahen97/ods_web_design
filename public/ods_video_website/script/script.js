@@ -1,3 +1,15 @@
+var ev;
+function updateSidebarHeadings ()
+{
+  $ (".drop").off ("hover");
+
+  $(".drop").hover(function(){
+    $(this).children(".sub").stop().slideDown('slow');
+  }, function(){
+    $(this).children(".sub").stop().slideUp('slow');
+  });
+}
+
 $('document').ready(function() {
 
   var h = $(window).height() - $('#sidebar').offset().top;
@@ -35,6 +47,8 @@ $('document').ready(function() {
       main_top_width();
       model_height();
     }});
+
+
     //dynamic_height();
   });
 

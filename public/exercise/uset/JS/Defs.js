@@ -1,6 +1,8 @@
 /*jshint esversion: 6 */ 'use strict';
 const NULL_CHARACTER = "∅";
+
 const ELEM_EVENTS_ID = "elementEvents";
+const TABS_EVENTS_ID = "tabbedEvents";
 
 var DEBUG = true;
 var instructionsId = "instructions";
