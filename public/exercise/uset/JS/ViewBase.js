@@ -18,6 +18,7 @@ class ViewBase {
   /* ---- START - ADD THE NULL ELEMENT ---- */
   start()
   {
+    this.removeElementByValue (NULL_CHARACTER);
     this.addElement (NULL_CHARACTER, {withinModel: true});
   }
 
@@ -28,6 +29,7 @@ class ViewBase {
       if (this.elements [key].getValue() !== NULL_CHARACTER)
         this.removeElementById (key);
   }
+
   /* ---- EVENT HANDLERS ---- */
   register (eh)
   {
@@ -101,6 +103,13 @@ class ViewBase {
     return this.removeElementById (id);
   }
 
+  removeElementByValue (value) {
+    var element = this.elementsByValue [value];
+    if (!element) return false;
+
+    var id      = element.getId ();
+    return this.removeElementById (id);
+  }
   // get an element
   getElementById (id) {
     return this.elements [id];

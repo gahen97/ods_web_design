@@ -4,6 +4,11 @@
   Note that this likely will not change and should be fine ...
 
   TODO: Should these selectors be moved into DomDefs? Probably?
+
+
+
+    NOTE: Everything works but tab IDs are off.
+    As a result, can't setActiveQuestion after initial refresh
 */
 
 class Tabbify {
@@ -33,14 +38,11 @@ class Tabbify {
     if (!options)
       options = { };
 
-    this.headers = [ ];
-    this.items   = { };
+    this.mainHeader = Tabbify.mainFrom ($("#questions_display"));
+    this.eventId    = options.eventId;
 
-    var main = Tabbify.mainFrom ($("#questions_display"));
-    this.addQuestionTypes (control.exercise, options, main);
-    this.addEventHandling (control, options.eventId);
-
-    $ (main).accordion ({
+    // set up the accordion
+    $ (this.mainHeader).accordion ({
       collapsible: true,
       heightStyle: "content",
       classes: {
@@ -49,12 +51,27 @@ class Tabbify {
       }
     });
 
+    // add elements
+    this.regenerate (control, options);
+
+
     //updateSidebarHeadings ();
+  }
+
+  regenerate (control, options) {
+    this.mainHeader.empty ();
+
+    this.headers = [ ];
+    this.items   = { };
+
+    this.addQuestionTypes (control.exercise, options, this.mainHeader);
+    this.addEventHandling (control, this.eventId);
+
+    this.mainHeader.accordion ("refresh");
   }
 
   setActiveQuestion (id) {
     var tab = this.items [id];
-    console.log (id, this.items[id]);
     if (!tab) return false;
 
     if (this.activeTab)

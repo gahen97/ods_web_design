@@ -26,6 +26,16 @@ class Control {
     this.updateActiveQuestion();
   }
 
+  regenerate ()
+  {
+    this.view.clear ();
+    this.exercise.setup ();
+
+    this.view.start ();
+    this.exercise.start ();
+    this.tabs.regenerate (this);
+  }
+
   // tabs
   updateActiveQuestion () {
     var active = this.exercise.getAbsQNum ();
