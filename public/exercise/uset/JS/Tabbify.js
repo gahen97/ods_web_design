@@ -4,15 +4,19 @@
   Note that this likely will not change and should be fine ...
 
   TODO: Should these selectors be moved into DomDefs? Probably?
+<<<<<<< HEAD
 
 
 
     NOTE: Everything works but tab IDs are off.
     As a result, can't setActiveQuestion after initial refresh
+=======
+>>>>>>> upstream/master
 */
 
 class Tabbify {
   static addHeader (text, parent) {
+<<<<<<< HEAD
     return $("<h3>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
   }
 
@@ -32,6 +36,29 @@ class Tabbify {
       newElement.data (e, data [e]);
 
     return newElement;
+=======
+    var newLi = $("<li class='drop'>" + text +
+                  "<ul class='sub' style='display: none;'></ul>" +
+                  "</li>")
+                  .appendTo (parent);
+
+    return newLi;
+  }
+
+  static subFrom (header) {
+    return $("> ul", header);
+  }
+
+  static addToHeader (text, header, data) {
+    var parent = Tabbify.subFrom (header);
+    var newLi  = $("<li class='tabbedQuestion'>" + text + "</li>")
+                   .appendTo (parent);
+
+    for (var e in data)
+      newLi.data (e, data[e]);
+
+    return newLi;
+>>>>>>> upstream/master
   }
 
   constructor (control, options) {
@@ -83,10 +110,11 @@ class Tabbify {
     return this;
   }
 
-  addQuestionTypes (exercise, opts, parent) {
+  addQuestionTypes (exercise, opts) {
     // Take every question type as header
     // Take every question as text
     var qTypes = exercise.getQuestionTypes ();
+    var parent = Tabbify.subFrom ($("#questions_display"));
 
     var data   = { };
     if (!opts) opts = { };

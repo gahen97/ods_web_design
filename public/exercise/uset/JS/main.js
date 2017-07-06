@@ -17,8 +17,17 @@ var control;
 function start ()
 {
 	// TODO: Find a convenient place for this
-	$(TRASH).droppable ({
-		tolerance: "touch"
+	$("#trash").droppable ({
+		tolerance: "touch",
+		over: function(event, ui ){
+			$(this).attr('src', "exercise/uset/images/trashcan_open.png");
+		},
+		out: function(event, ui ){
+			$(this).attr('src', "exercise/uset/images/trashcan.png");
+		},
+		drop: function() {
+			$(this).attr('src', "exercise/uset/images/trashcan.png");
+		}
 	});
 
 	control = new Control ();
