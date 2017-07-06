@@ -67,7 +67,7 @@ li.tabbedQuestion:hover {
 }
 
 .active-tab {
-  color: #008638;
+  color: #ef8043;
 }
 
 .round { /* aka circular ... but then there's ovals. so its round */
@@ -136,6 +136,7 @@ li.tabbedQuestion:hover {
   border: 3px solid #565656;
   font-weight: bold;
   font-family: courier;
+  position: absolute;
 }
 
 
@@ -159,7 +160,8 @@ li.tabbedQuestion:hover {
   border: 0px !important;
   background: none !important;
   color: #565656;
-  float: left;
+  margin: 0 !important;
+  margin-left: 10px !important;
 }
 
 .accordion-sub{
@@ -168,14 +170,22 @@ li.tabbedQuestion:hover {
   color: #565656;
   float: left;
   margin-left: 2%;
+
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  padding-left: 14px !important;
+
+  width: 100%;
 }
 
 .ui-accordion-content{
-  padding: 0em 2.4em !important;
+  padding-top: 0em !important;
+  margin-top: 0em !important;
 }
 
 .question-tab{
   text-align: left;
+  margin: 2px;
 }
 
 .questionButtons {

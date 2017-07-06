@@ -16,7 +16,6 @@
 
 class Tabbify {
   static addHeader (text, parent) {
-<<<<<<< HEAD
     return $("<h3>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
   }
 
@@ -30,35 +29,12 @@ class Tabbify {
 
   static addToHeader (text, header, data) {
     var parent     = Tabbify.subFrom (header);
-    var newElement = $("<p class='question-tab'>" + text + "</p>").appendTo (parent);
+    var newElement = $("<div class='question-tab'>" + text + "</div>").appendTo (parent);
 
     for (var e in data)
       newElement.data (e, data [e]);
 
     return newElement;
-=======
-    var newLi = $("<li class='drop'>" + text +
-                  "<ul class='sub' style='display: none;'></ul>" +
-                  "</li>")
-                  .appendTo (parent);
-
-    return newLi;
-  }
-
-  static subFrom (header) {
-    return $("> ul", header);
-  }
-
-  static addToHeader (text, header, data) {
-    var parent = Tabbify.subFrom (header);
-    var newLi  = $("<li class='tabbedQuestion'>" + text + "</li>")
-                   .appendTo (parent);
-
-    for (var e in data)
-      newLi.data (e, data[e]);
-
-    return newLi;
->>>>>>> upstream/master
   }
 
   constructor (control, options) {
@@ -110,11 +86,11 @@ class Tabbify {
     return this;
   }
 
-  addQuestionTypes (exercise, opts) {
+  addQuestionTypes (exercise, opts, parent) {
     // Take every question type as header
     // Take every question as text
     var qTypes = exercise.getQuestionTypes ();
-    var parent = Tabbify.subFrom ($("#questions_display"));
+    //var parent = Tabbify.subFrom ($("#questions_display"));
 
     var data   = { };
     if (!opts) opts = { };

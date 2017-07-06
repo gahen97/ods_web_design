@@ -75,13 +75,16 @@ function onSubmitInput (element, evt) {
                              {title: "Element Exists"}); // IF THERE'S ALREADY ONE, WE BROK
 
   this.view.addElement (input);
+  $(".modelEntry").val(""); // new code TODO
 };
 
 function checkEnter (element, evt) {
   if (evt.keyCode !== 13)  return;
   // TODO remove this entirely
   onSubmitInput.call (this, element, evt);
-  $(element).val(""); // new code TODO
+
+
+
 }
 
 /*
@@ -260,7 +263,7 @@ $ (()=> {
     },
 
     /* INPUT TEXT AREA */
-    /*{
+    {
         elem: $(".modelEntry"),
         evtsArr: [
           {
@@ -269,11 +272,11 @@ $ (()=> {
             domEvtName: "keyup"
           }
         ]
-    },*/
+    },
 
     /* SUBMIT BUTTON */
     {
-      elem: $("#submitbtn"),
+      elem: $("#button_enter"),
       evtsArr: [
         {
           handlingFunction: onSubmitInput,
