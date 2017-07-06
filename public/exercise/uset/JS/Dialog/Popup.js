@@ -14,29 +14,28 @@ class Popup {
 
     return newPopup;
   }
-  constructor(text, options){
-    if (!options) options={ };
 
-    // freedom to rock, freedom to talk - freedom ....
-    this.$dialog = Popup.make ();
+  constructor(text, opts){
+    if (Popup.isRunning) return false;
+    Popup.isRunning = true;
 
-    if (options.title)
-      this.$dialog.attr ("title", options.title);
+    if (!opts) opts = { };
 
-    $ ("#innerText", this.$dialog).text (text);
+    var msgDiv = $ (MESSAGE_DIV);
+    var msgTxt = $ (MESSAGE_TXT, msgDiv);
 
-    this.$dialog.dialog ({
-      buttons: options.buttons,
-      close: (...args)=>{ this.onClose (...args); }
-    });
+    msgTxt.val (text);
+    msgDiv.removeClass ("hidden");
 
-    this.stylize ();
+    this.stylize (msgDiv);
+
+    setTimeout (() => {
+      msgDiv.addClass ("hidden");
+      Popup.isRunning = false;
+    }, opts.length || DEF_MSG_LENGTH);
   }
 
-  stylize () {
-    //$(".ui-button, .ui-dialog-title", this.$dialog.parent()).addClass ();
-  }
-
-  onClose () {
+  stylize ($div){
+    return false;
   }
 }

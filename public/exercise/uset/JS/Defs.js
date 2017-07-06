@@ -4,6 +4,8 @@ const NULL_CHARACTER = "∅";
 const ELEM_EVENTS_ID = "elementEvents";
 const TABS_EVENTS_ID = "tabbedEvents";
 
+const DEF_MSG_LENGTH = 2 * 1000; // 2 seconds
+
 var DEBUG = true;
 var instructionsId = "instructions";
 var questionId = "questions";
