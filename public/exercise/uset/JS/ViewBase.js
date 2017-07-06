@@ -1,6 +1,7 @@
 
 /*jshint esversion: 6 */ 'use strict';
 /* Hey I'm back */
+const VIEW_CODE_ALL = "delete them all noober";
 
 class ViewBase {
   constructor() {
@@ -18,15 +19,16 @@ class ViewBase {
   /* ---- START - ADD THE NULL ELEMENT ---- */
   start()
   {
-    this.removeElementByValue (NULL_CHARACTER);
+    this.clear ({null: false});
     this.addElement (NULL_CHARACTER, {withinModel: true});
   }
 
   /* ---- CLEAR THE MODEL ---- */
-  clear ()
+  clear (opts)
   {
+    if (!opts)opts={};
     for (var key in this.elements)
-      if (this.elements [key].getValue() !== NULL_CHARACTER)
+      if (opts.null!==false && this.elements [key].getValue() !== NULL_CHARACTER)
         this.removeElementById (key);
   }
 
@@ -68,7 +70,10 @@ class ViewBase {
     // add the element & push it into the elements object
     var newElement                                = new Element (value);
     this.elements [newElement.getId ()]           = newElement;
-    this.elementsByValue [newElement.getValue ()] = newElement;
+
+    if (!this.elementsByValue [value])
+      this.elementsByValue[value] = [ ];
+    this.elementsByValue [value].push (newElement);
 
     if (options.withinModel)
       this.drawWithinModel (newElement);
@@ -85,7 +90,7 @@ class ViewBase {
     var element = this.elements [id];
     if (!element) return false;
 
-    delete this.elementsByValue [element.getValue()];
+    //delete this.elementsByValue [element.getValue()];
     delete this.elements[id];
 
     // Remove the element from our event handler - if we remove it, it shouldn't be connected
@@ -103,13 +108,26 @@ class ViewBase {
     return this.removeElementById (id);
   }
 
-  removeElementByValue (value) {
+  removeElements (elems, checkFunc) {
+    if (!checkFunc)
+      checkFunc = function(e){
+        return e.getValue () !== NULL_CHARACTER;
+      }
+
+    $ (elems).each ((i, e)=>{
+      if (!checkFunc || checkFunc (e))
+        this.removeElementById (e.getId ());
+    });
+  }
+
+  /*removeElementByValue (value) {
     var element = this.elementsByValue [value];
     if (!element) return false;
 
     var id      = element.getId ();
     return this.removeElementById (id);
-  }
+  }*/
+
   // get an element
   getElementById (id) {
     return this.elements [id];
@@ -129,6 +147,32 @@ class ViewBase {
   findByValue (value)
   {
     return this.elementsByValue [value];
+  }
+
+  // conatins an element with given value
+  contains (value)
+  {
+    var v = this.elementsByValue[value];
+    return v && v.length>0;
+  }
+
+  // check if an element is in the set
+  checkInSet (elements) {
+    var result = false;
+
+    $ (elements).each ((i, e) => {
+      if (this.modelDivHelper.elementOver (e.getElementDiv ())){
+        result = true;
+        return false;
+      }
+    });
+
+    return result;
+  }
+
+  valueInSet (value){
+    var elements = this.findByValue (value);
+    return this.checkInSet (elements);
   }
 
   // draw an element within the model

@@ -70,10 +70,6 @@ function onSubmitInput (element, evt) {
   if (!this.validInput (input))
     return inputError ();
 
-  if (this.view.findByValue (input))
-    return new ErrorDialog ("Element " + input + " already exists in the list.\nCannot add.",
-                             {title: "Element Exists"}); // IF THERE'S ALREADY ONE, WE BROK
-
   this.view.addElement (input);
   $(".modelEntry").val(""); // new code TODO
 };
@@ -126,7 +122,7 @@ function onDragStopped (elem, evt, ui)
   //check if over ? in = true : in false;
   if (over)
     this.userModel.add (data);
-  else
+  else if (!this.view.valueInSet (data))
     this.userModel.remove (data);
 
   // this is the "check if over ? in = true : in false;". simplified

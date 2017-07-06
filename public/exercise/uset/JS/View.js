@@ -10,7 +10,7 @@ class View extends ViewBase {
   constructor(){
     super(...arguments);
   }
-
+  
   displayModel (m) {
     // TODO Remove any elements that should not be shown
     for (var k in this.elements){
@@ -26,18 +26,25 @@ class View extends ViewBase {
     }
 
     m.each ((element) => {
-      var elem = this.findByValue (element);
-
-      // if it's in the set, ignore it ....
-      if (elem && this.modelDivHelper.elementOver (elem.getElementDiv ()))
-        return;
+      var elems = this.findByValue (element);
 
       // if we have one but its not in the set, remove it ...
-      if (elem)
-        this.removeElementById (elem.getId ());
+      if (elems){
+        var found = false;
+        this.removeElements (elems, (e)=>{
+          if (found) return true;
+          var isInSet = this.modelDivHelper.elementOver (e.getElementDiv ());
+
+          if (isInSet)
+            found = true;
+
+          return !isInSet;
+        });
+      }
 
       // add it to the set
-      this.addElement (element, {withinModel: true});
+      if (!this.contains (element))
+        this.addElement (element, {withinModel: true});
     });
   }
 }
