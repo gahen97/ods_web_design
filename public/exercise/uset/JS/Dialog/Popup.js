@@ -4,15 +4,6 @@
    ANYWAY, Joe was scared of humans and ran off. I haven't seen him since.
 */
 
-var buttons = {
-  No: function () {
-    console.log ("LOL NO");
-  },
-  Yes: function () {
-    $ (this).dialog ( "close" );
-  }
-}
-
 class Popup {
   static make () {
     if (Popup.prevPop)
@@ -47,6 +38,5 @@ class Popup {
   }
 
   onClose () {
-    console.log(arguments);
   }
 }

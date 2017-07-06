@@ -46,10 +46,11 @@ class ElementBase {
   }
 
   // add draggable ...
-  addControls (e) { //make draggable
+  addControls (e, stack) { //make draggable
     if (!e) e = this.element;
     $ (e).draggable ({
-      containment: "parent"
+      containment: "parent",
+      stack: stack
     });
   }
 

@@ -114,7 +114,7 @@ li.tabbedQuestion:hover {
 }
 
 .modelEntry{
-  height: 21px;
+  height: 24px;
 }
 
 /* element ... TODO: should show as clickable, draggable. style? */
@@ -124,6 +124,8 @@ li.tabbedQuestion:hover {
   display: inline-block;
   border: 1px solid black;
   background-color: #999;
+
+  cursor: move;
 
   line-height: 30px; /* needs this for vertically centered text */
 

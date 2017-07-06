@@ -33,7 +33,7 @@ class Element extends ElementBase {
     // parent it to the main div, add the stuff, return
     elementDiv.insertAfter (model).data ("id", this.id);
 
-    this.addControls (elementDiv);
+    this.addControls (elementDiv, MODEL_BODY + " div");
 
     return elementDiv;
   }

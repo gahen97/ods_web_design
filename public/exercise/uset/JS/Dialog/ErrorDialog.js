@@ -1,3 +1,7 @@
+/*
+  ERROR: She's my best friend's girl... but she used to be mine
+*/
+
 const DEF_ERROR_BUTTONS = {
   Ok: function(){ $(this).dialog ("close"); }
 }
