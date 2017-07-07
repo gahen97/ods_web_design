@@ -105,7 +105,7 @@ class Control {
 
   // find an element
   find (value) {
-    return this.view.findWithValue (value);
+    return this.view.findOneWithValue (value);
   }
 
   canSetActive () { return this.exercise.canSetActive (); }

@@ -149,6 +149,12 @@ class ViewBase {
     return this.elementsByValue [value];
   }
 
+  findOneWithValue (value)
+  {
+    var e = this.findByValue (value);
+    return e && e[0];
+  }
+
   // conatins an element with given value
   contains (value)
   {
