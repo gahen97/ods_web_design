@@ -225,7 +225,12 @@ class ViewBase {
   {
     this.modelBodHelper.storePositions (this.elements);
   }
-  
+
+  storePositionOf (e)
+  {
+    this.modelBodHelper.storePosition (e);
+  }
+
   fixPositions ()
   {
     this.modelBodHelper.fixPositions (this.elements);

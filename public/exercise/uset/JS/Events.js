@@ -111,6 +111,9 @@ function onDragStarted(...args)
 
 function onDragStopped (elem, evt, ui)
 {
+  console.log ("STORING NEW POSITION ");
+  this.view.storePositionOf ($(elem));
+
   if (isNullCharacter (elem)) return;
 
   var over = this.view.isElementOverModel (elem); // TODO WAFFLES
@@ -131,6 +134,8 @@ function onDragStopped (elem, evt, ui)
 
   // this is the "check if over ? in = true : in false;". simplified
   $ (elem).data ("in", over);
+
+  // and store the new position of the element
 }
 
 function onElementClicked (elem, ...args){
@@ -199,7 +204,6 @@ function onModelResize (element, evt)
   // Magic.
 
   // how do you like me now
-  console.log ("Hey, the model resized.");
   this.view.fixPositions();
 }
 
@@ -383,6 +387,18 @@ $ (()=> {
           handlingFunction: startModelResize,
           customEvtName: "Every little store I make is magic",
           domEvtName: "model-resize-start"
+        }
+      ]
+    },
+
+    /* WINDOW / MAIN EVENTS */
+    {
+      elem: $(window),
+      evtsArr: [
+        {
+          handlingFunction: onModelResize,
+          customEvtName: "WINDOW resize",
+          domEvtName: "resize"
         }
       ]
     }

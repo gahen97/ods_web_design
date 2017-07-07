@@ -58,7 +58,6 @@ class Tabbify {
     // add elements
     this.regenerate (control, options);
 
-
     //updateSidebarHeadings ();
   }
 
