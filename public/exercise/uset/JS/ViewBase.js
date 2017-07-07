@@ -84,6 +84,8 @@ class ViewBase {
       var e = this.getEventHandler (ELEM_EVENTS_ID);
       if (e) e.push (newElement.getElementDiv ());
     }
+
+    this.storePositionOf (newElement);
   }
 
   // remove an element

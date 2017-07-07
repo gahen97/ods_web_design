@@ -111,7 +111,6 @@ function onDragStarted(...args)
 
 function onDragStopped (elem, evt, ui)
 {
-  console.log ("STORING NEW POSITION ");
   this.view.storePositionOf ($(elem));
 
   if (isNullCharacter (elem)) return;
