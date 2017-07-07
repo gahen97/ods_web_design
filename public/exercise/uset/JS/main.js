@@ -9,6 +9,14 @@
 		(WiiU WiiU WiiU WiiU WiiU)
 	*/
 
+// SHOULD HAVE A BETTER PLACE FOR THIS EHHHH
+function contextualize (t, f)
+{
+	return (function () {
+		return f.apply (t, arguments);
+	});
+}
+
 /*
 	Code to start up the stuff ....
 */

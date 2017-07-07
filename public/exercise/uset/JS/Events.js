@@ -190,6 +190,24 @@ function clickedTab (element, evt)
   this.updateActiveQuestion ();
 }
 
+
+/* MODEL */
+function onModelResize (element, evt)
+{
+  // Fires off every step of the animation for resizing model ..
+  // Move elements with the model, so they seem to look the same. How do I do that?
+  // Magic.
+
+  // how do you like me now
+  console.log ("Hey, the model resized.");
+  this.view.fixPositions();
+}
+
+function startModelResize (element, evt)
+{
+  this.view.storePositions();
+}
+
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
 //[{elem: , customEventName: , handlingFunction: },{},{}]
 
@@ -350,6 +368,23 @@ $ (()=> {
         }
       ],
       id: TABS_EVENTS_ID
+    },
+
+    /* MODEL EVENTS */
+    {
+      elem: $(".modelBody"),
+      evtsArr: [
+        {
+          handlingFunction: onModelResize,
+          customEvtName: "Wanna talk about me, wanna talk about I, wanna talk about #1 on the west side",
+          domEvtName: "model-resize" // FYI this is custom
+        },
+        {
+          handlingFunction: startModelResize,
+          customEvtName: "Every little store I make is magic",
+          domEvtName: "model-resize-start"
+        }
+      ]
     }
   ];
 

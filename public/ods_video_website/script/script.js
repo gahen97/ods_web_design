@@ -29,6 +29,7 @@ $('document').ready(function() {
 
 
   $("#sidebar_toggle").click(function() {
+    model_store_height ();
 
     var toggleminwidth = $("#main").css('min-width');
     toggleminwidth = (toggleminwidth == '80%')  ? '95%' : '80%';
@@ -74,9 +75,14 @@ $('document').ready(function() {
 
 });
 
-var model_height = function() {
-  $(".modelBody").css('width', $(".modelBody").height()*1.5);
+var model_store_height = function () {
+  $(".modelBody").trigger ('model-resize-start');
+}
 
+var model_height = function() {
+  $(".modelBody").css('width', $(".modelBody").height()*1.5)
+                 .trigger ('model-resize');
+        // Fires a custom event which Events.js can listen for
 }
 
 var tab_hover = function() {

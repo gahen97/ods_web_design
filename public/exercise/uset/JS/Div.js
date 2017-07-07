@@ -10,8 +10,8 @@
 class Div {
   // static helper functions
   // rectangular
-  static dimensionsOf (div) {
-    var $div = $(div);
+  static dimensionsOf ($div) {
+    // note ... expects a JQuery object, if it's not, this'll error
     return {
       xP     : $div.offset ().left,
       yP     : $div.offset ().top,
@@ -113,7 +113,43 @@ class Div {
 
     return newHeight;
   }
+
   fixHeight () {
     this.$div.css ("height", this.calcHeight ());
+  }
+
+  storePosition (element) {
+    var divPos = Div.dimensionsOf (element);
+    var myDims = Div.dimensionsOf (this.$div);
+
+    // store %width, %height
+    var pWidth  = (divPos.xP - myDims.xP) / myDims.width;
+    var pHeight = (divPos.yP - myDims.yP) / myDims.height;
+
+    element.data ("%width", pWidth);
+    element.data ("%height", pHeight);
+  }
+
+  fixPosition (element) {
+    var pX = element.data ("%width");
+    var pY = element.data ("%height");
+
+    var myDimensions = Div.dimensionsOf (this.$div);
+
+    var newX = pX * myDimensions.width + myDimensions.xP;
+    var newY = pY * myDimensions.height + myDimensions.yP;
+
+    element.css ({top: newY, left: newX});
+  }
+
+  storePositions (elements) {
+    for (var e in elements)
+      this.storePosition (elements [e]);
+  }
+
+  fixPositions (elements) {
+    // If we store % of width, % of height ... then we can reset that ...
+    for (var e in elements)
+      this.fixPosition (elements [e]);
   }
 }

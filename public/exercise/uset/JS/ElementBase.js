@@ -22,8 +22,10 @@ class ElementBase {
     this.id = ElementBase.nextId ();
 
     this.element = this.draw ();    //change name to generate??
+    this.$elem   = $(this.element);
     this.DomEvents = this.addEvents (); //will be moved into view
 
+    return new Proxy (this, ElementBase.proxy);
   }
 
   getElementDiv () { return this.element; }
@@ -87,3 +89,15 @@ class ElementBase {
 }
 
 ElementBase.currentId = 1000;
+
+// This is hottttt. The JS equivalent to Lua's setmetatable. Seems to be browser compatible
+ElementBase.proxy = {
+  get: function (target, name) {
+    // basically - If you call a method here that doesn't exist, it's probably because
+    //             its for elements. Something like Element.data (), which should be valid.
+    //             This fixes that.
+    if (name in target) return target [name];
+
+    return contextualize (target.getElementDiv(), target.getElementDiv () [name]);
+  }
+}

@@ -14,6 +14,7 @@ class ViewBase {
     this.elementsByValue = { };
 
     this.modelDivHelper = new Div ($ (MODEL_MAIN)); // #TODO
+    this.modelBodHelper = new Div ($ (MODEL_BODY)); // #TODO
   }
 
   /* ---- START - ADD THE NULL ELEMENT ---- */
@@ -218,5 +219,15 @@ class ViewBase {
   resizeModel ()
   {
     this.modelDivHelper.fixHeight ();
+  }
+
+  storePositions ()
+  {
+    this.modelBodHelper.storePositions (this.elements);
+  }
+  
+  fixPositions ()
+  {
+    this.modelBodHelper.fixPositions (this.elements);
   }
 }
