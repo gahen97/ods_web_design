@@ -2,13 +2,9 @@ class HighlightDialog extends Popup {
   constructor (text, opts, ...rest) {
     if (!opts) opts = { };
 
+    if (!opts.classes) opts.classes = "";
+    opts.classes += " border-color-highlight";
+
     super (text, opts, ...rest);
-  }
-
-  stylize ($div) {
-    //this.$dialog.parent ().addClass ("ui-state-highlight");
-    //$ (".ui-dialog-buttonpane", this.$dialog.parent ()).addClass ("ui-state-highlight");
-
-    $(MESSAGE_TXT, $div).addClass ("border-color-highlight");
   }
 }

@@ -28,7 +28,7 @@ class ViewBase {
   {
     if (!opts)opts={};
     for (var key in this.elements)
-      if (opts.null!==false && this.elements [key].getValue() !== NULL_CHARACTER)
+      if (opts.null===false || this.elements [key].getValue() !== NULL_CHARACTER)
         this.removeElementById (key);
   }
 
@@ -92,6 +92,12 @@ class ViewBase {
 
     //delete this.elementsByValue [element.getValue()];
     delete this.elements[id];
+
+    // remove the element from the by value array
+    var eles = this.elementsByValue [element.getValue ()];
+    var indx = eles && eles.indexOf (element);
+    if (indx !== -1)
+      eles.splice (indx, 1);
 
     // Remove the element from our event handler - if we remove it, it shouldn't be connected
     //   to our event handling

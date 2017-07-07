@@ -21,6 +21,8 @@ class Popup {
 
     if (!opts) opts = { };
 
+    this.classes = opts.classes || "";
+
     var msgDiv = $ (MESSAGE_DIV);
     var msgTxt = $ (MESSAGE_TXT, msgDiv);
 
@@ -31,11 +33,17 @@ class Popup {
 
     setTimeout (() => {
       msgDiv.addClass ("hidden");
+      this.removeStyling (msgDiv);
+
       Popup.isRunning = false;
     }, opts.length || DEF_MSG_LENGTH);
   }
 
   stylize ($div){
-    return false;
+      $(MESSAGE_TXT, $div).addClass (this.classes);
+  }
+
+  removeStyling ($div) {
+      $(MESSAGE_TXT, $div).removeClass (this.classes);
   }
 }
