@@ -53,6 +53,11 @@ li.tabbedQuestion:hover {
   border-color: #e6ac00;
 }
 
+.border-colour-success,
+.border-color-success{
+  border-color: #1fa000;
+}
+
 .hidden{
   display: none;
 }

@@ -25,19 +25,23 @@ function inputError ()
 /* Main Events .... These are the buttons independent of the exercise */
 function onNextBtnClick (elem, evt) {
   // move to the next exercise ...
-  this.exercise.next();
-
-  // set active to null
-  this.setActiveElement (null);
-  this.updateActiveQuestion ();
+  if (this.exercise.next() === false)
+    new SuccessDialog ("That's all, folks!");
+  else{
+    // set active to null
+    this.setActiveElement (null);
+    this.updateActiveQuestion ();
+  }
 }
 
 function onPrevBtnClick (elem, evt) {
-  this.exercise.prev ();
-
-  // set active to null
-  this.setActiveElement (null);
-  this.updateActiveQuestion ();
+  if (this.exercise.prev () === false)
+    new ErrorDialog ("I will go this far, and no further!"); // 10 points if you can tell me the reference, eh?
+  else{
+    // set active to null
+    this.setActiveElement (null);
+    this.updateActiveQuestion ();
+  }
 }
 
 //TODO

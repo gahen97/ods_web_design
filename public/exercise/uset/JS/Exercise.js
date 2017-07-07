@@ -111,12 +111,12 @@ class Exercise {
 
   next ()
   {
-    this.goToQuestion(this.getAbsQNum() + 1);
+    return this.goToQuestion(this.getAbsQNum() + 1);
   }
 
   prev ()
   {
-    this.goToQuestion(this.getAbsQNum() - 1);
+    return this.goToQuestion(this.getAbsQNum() - 1);
   }
 
 
