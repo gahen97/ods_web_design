@@ -47,6 +47,7 @@ class Tabbify {
     // set up the accordion
     $ (this.mainHeader).accordion ({
       collapsible: true,
+      active: false,
       heightStyle: "content",
       classes: {
         "ui-accordion-header": "accordionHeader",
@@ -70,6 +71,7 @@ class Tabbify {
     this.addQuestionTypes (control.exercise, options, this.mainHeader);
     this.addEventHandling (control, this.eventId);
 
+    this.mainHeader.accordion ("option", "active", false);
     this.mainHeader.accordion ("refresh");
   }
 
