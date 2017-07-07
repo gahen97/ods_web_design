@@ -16,8 +16,8 @@ class Popup {
   }
 
   constructor(text, opts){
-    if (Popup.isRunning) return false;
-    Popup.isRunning = true;
+    if (Popup.lastTimeout)
+      clearTimeout (Popup.lastTimeout);
 
     if (!opts) opts = { };
 
@@ -31,11 +31,9 @@ class Popup {
 
     this.stylize (msgDiv);
 
-    setTimeout (() => {
+    Popup.lastTimeout = setTimeout (() => {
       msgDiv.addClass ("hidden");
       this.removeStyling (msgDiv);
-
-      Popup.isRunning = false;
     }, opts.length || DEF_MSG_LENGTH);
   }
 
