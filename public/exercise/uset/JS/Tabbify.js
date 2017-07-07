@@ -4,14 +4,6 @@
   Note that this likely will not change and should be fine ...
 
   TODO: Should these selectors be moved into DomDefs? Probably?
-<<<<<<< HEAD
-
-
-
-    NOTE: Everything works but tab IDs are off.
-    As a result, can't setActiveQuestion after initial refresh
-=======
->>>>>>> upstream/master
 */
 
 class Tabbify {
