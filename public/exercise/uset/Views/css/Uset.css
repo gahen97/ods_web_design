@@ -61,6 +61,9 @@ li.tabbedQuestion:hover {
 .hidden{
   display: none;
 }
+.no-visibility{
+  visibility: hidden;
+}
 
 .flexCol{
   display: flex;
@@ -170,11 +173,14 @@ li.tabbedQuestion:hover {
   font-family: courier;
   position: absolute;
 }
-
-
+.element:hover{
+    background-color: white;
+    color: #565656;
+}
 .element:active {
   background-color: white;
   color: #565656;
+  box-shadow: 2px 2px 0px 0px #aaa;
 }
 
 /* trash can ........ should be a small image, top right corner */

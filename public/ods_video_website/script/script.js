@@ -16,12 +16,6 @@ $('document').ready(function() {
   $('#sidebar').height(h);
 
   dynamic_height();
-  //sidebar_width();
-  //main_top_width();
-  set_fixed();
-//  main_margin_top();
-  heading_width();
-  model_height();
 
   $(".drop").click(function(){
     $(this).children(".sub").stop().slideToggle('slow');
@@ -121,6 +115,7 @@ var set_fixed = function () {
       main_top_width();
     }
     main_margin_top();
+    
   });
 
   $(window).resize(function() {

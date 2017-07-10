@@ -5,19 +5,13 @@
 */
 
 class Popup {
-  static make () {
-    if (Popup.prevPop)
-      $(Popup.prevPop).dialog ("close");
-
-    var newPopup = $ (DIALOG_TEMPLATE).clone ();
-    Popup.prevPop = newPopup;
-
-    return newPopup;
-  }
-
   constructor(text, opts){
-    if (Popup.lastTimeout)
+    if (Popup.lastTimeout){
       clearTimeout (Popup.lastTimeout);
+
+      if (Popup.reset)
+        Popup.reset ();
+    }
 
     if (!opts) opts = { };
 
@@ -27,13 +21,17 @@ class Popup {
     var msgTxt = $ (MESSAGE_TXT, msgDiv);
 
     msgTxt.val (text);
-    msgDiv.removeClass ("hidden");
+    msgDiv.removeClass ("no-visibility");
 
     this.stylize (msgDiv);
 
+    Popup.reset = () => {
+        msgDiv.addClass ("no-visibility");
+        this.removeStyling (msgDiv);
+    };
+
     Popup.lastTimeout = setTimeout (() => {
-      msgDiv.addClass ("hidden");
-      this.removeStyling (msgDiv);
+      Popup.reset ();
     }, opts.length || DEF_MSG_LENGTH);
   }
 
