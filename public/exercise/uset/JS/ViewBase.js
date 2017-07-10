@@ -20,8 +20,7 @@ class ViewBase {
   /* ---- START - ADD THE NULL ELEMENT ---- */
   start()
   {
-    this.clear ({null: false});
-    this.addElement (NULL_CHARACTER, {withinModel: true});
+    this.clear ();
   }
 
   /* ---- CLEAR THE MODEL ---- */
@@ -29,7 +28,7 @@ class ViewBase {
   {
     if (!opts)opts={};
     for (var key in this.elements)
-      if (opts.null===false || this.elements [key].getValue() !== NULL_CHARACTER)
+      if (!opts.checkFunc || opts.checkFunc (this.elements [key]))
         this.removeElementById (key);
   }
 
@@ -118,11 +117,6 @@ class ViewBase {
   }
 
   removeElements (elems, checkFunc) {
-    if (!checkFunc)
-      checkFunc = function(e){
-        return e.getValue () !== NULL_CHARACTER;
-      }
-
     $ (elems).each ((i, e)=>{
       if (!checkFunc || checkFunc (e))
         this.removeElementById (e.getId ());

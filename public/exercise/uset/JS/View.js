@@ -1,9 +1,6 @@
 /*
-  Mainly for parts of the View that'll change between exercises,
-  so this can be stored outside of the main View stuff
-
-  cry, agony.
-  cry, agony.
+  This has to be changed for different exercises.
+  Mainly the DOM Related parts - dealing with the model display
 */
 
 class View extends ViewBase {
@@ -11,6 +8,33 @@ class View extends ViewBase {
     super(...arguments);
   }
 
+  // start up a new view
+  start () {
+    super.start.apply (this, arguments);
+    this.addElement (NULL_CHARACTER, {withinModel: true});
+  }
+
+  // clear the view
+  clear (opts) {
+    if (!opts) opts = { };
+    if (!opts.checkFunc && opts.checkFunc !== false)
+      opts.checkFunc = (e) => {
+        return (e.getValue () !== NULL_CHARACTER);
+      }
+
+    super.clear (opts);
+  }
+
+  // remove an element from the view
+  removeElements (elems, checkFunc) {
+    if (!checkFunc && checkFunc !== false)
+      checkFunc = function(e){
+        return e.getValue () !== NULL_CHARACTER;
+      }
+
+    super.removeElements (elems, checkFunc);
+  }
+  
   // Is an element in the model
   isElementOverModel (element) {
     // NTS: Element here is the div

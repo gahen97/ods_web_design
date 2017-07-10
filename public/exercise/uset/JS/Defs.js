@@ -1,3 +1,7 @@
+/*
+  Main definitions
+*/
+
 /*jshint esversion: 6 */ 'use strict';
 const NULL_CHARACTER = "∅";
 

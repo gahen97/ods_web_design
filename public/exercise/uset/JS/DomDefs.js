@@ -1,5 +1,5 @@
 /*
-  Handles the DOM selectors.
+  Definitons that are specific to dealing with the DOM
 */
 
 const ELEMENT_TEMPLATE = "#template > .element";
