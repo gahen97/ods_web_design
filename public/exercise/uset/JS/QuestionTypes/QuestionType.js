@@ -45,7 +45,6 @@ class QuestionType {
     return temp;
   }
 
-  //TODO
   moveToNext ()
   {
     this.setCurrQuestion (this.currQuestion + 1);

@@ -8,8 +8,7 @@ class Element extends ElementBase {
     super (...arguments);
   }
 
-  draw () {
-    // TODO HARDCODING IS BAD. MAYBE MOVE SELECTORS TO DEFS?
+  generate () {
     var elementDiv = $(ELEMENT_TEMPLATE).clone ();
     var model      = $(MODEL_DISPLAY);
     var span       = $("span", elementDiv);

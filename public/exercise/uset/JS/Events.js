@@ -17,9 +17,9 @@ function inputError ()
   var validStr = control.validInputStr;
 
   if (validStr === "")
-    return new ErrorDialog ("Invalid input ::: cannot add new elements ...", {title: "INVALID INPUT"});
+    return new ErrorDialog ("Invalid input ::: cannot add new elements ...");
 
-  return new ErrorDialog ("Invalid input ::: Please enter a number between " + validStr, {title: "INVALID INPUT"});
+  return new ErrorDialog ("Invalid input ::: Please enter a number between " + validStr);
 }
 
 /* Main Events .... These are the buttons independent of the exercise */
@@ -46,28 +46,24 @@ function onPrevBtnClick (elem, evt) {
 
 //TODO
 function onCheckBtnClick (elem, evt) {
-  console.log ("Checking your answer .... ");
   if (this.exercise.check (this.userModel, this.activeElement)) {
     //TODO
     //Maybe make custom event that checks?
-    new Popup ("You is good!", {title: "Correct"});
+    new Popup ("Correct!");
     onNextBtnClick.apply(this, arguments);
   } else {
-    new Popup ("Ha, loser! You suck!", {title: "WRONG"});
-    console.log ("lozzzzzer"); //TODO
+    new Popup ("That's wrong."); //TODO
   }
 }
 
 function onShowAnsBtnClick (elem, evt) {
-  // TODO
   this.exercise.showAnswer ();
 }
 
 /* INPUT BOX EVENTS */
-// TODO: This only works with keyboards. Find a way to make this usable
-//       on other devices (touch)
 function onSubmitInput (element, evt) {
-  // TODO added custom event. Check this for spiders. I'm not personally going to go over it; spiders are scary. But you go ahead
+  console.log ("Sensing some input")
+  
   var input = $ (".modelEntry").val ();
 
   input = parseInput (input);
@@ -75,31 +71,14 @@ function onSubmitInput (element, evt) {
     return inputError ();
 
   this.view.addElement (input);
-  $(".modelEntry").val(""); // new code TODO
+  $(".modelEntry").val("");
 };
 
 function checkEnter (element, evt) {
   if (evt.keyCode !== 13)  return;
-  // TODO remove this entirely
+  // UPDATE - Keeping this as an alternate method
   onSubmitInput.call (this, element, evt);
-
-
-
 }
-
-/*
-  USET EVENTS. THESE OCCUR WHEN AN ELEMENT IS DROPPED ONTO / OFF OF THE USET DIV
-*/
-/*
-// TODO These two can be removed:
-function elementOver (element, evt, ui) {
-  $(ui.draggable).data ("over", true);
-}
-
-function elementOff (element, evt, ui) {
-  $(ui.draggable).data ("over", false);
-}
-*/
 
 /*
   ELEMENT EVENTS. These are specific to Element.js and will be added separately
@@ -115,13 +94,9 @@ function onDragStopped (elem, evt, ui)
 
   if (isNullCharacter (elem)) return;
 
-  var over = this.view.isElementOverModel (elem); // TODO WAFFLES
+  var over = this.view.isElementOverModel (elem);
   var data = this.view.getValueFromElementDiv (elem);
   if (!data) return;
-
-  // TODO: If an element is added several times,
-  //       Display will show multiple, Uset will have one.
-  //       This will cause issues. Fix this.
 
   //everytime an element is added or removed, clear uset, add everything that's currently in there.
   //on drag stop
@@ -143,22 +118,11 @@ function onElementClicked (elem, ...args){
   if (!this.canSetActive ())
   {
     if (DEBUG) console.log("From inside onElementClicked element cannot be set as active.");
-    return; // TODO: ???
+    return;
   }
 
   this.setActiveElement (element);
 }
-
-/*
-  TODO This can be removed
-const ELEM_EVENTS = { //this is analogous to a triggermap
-  //should we put this into eventData
-  //needs some way to be found outside of the controller - so we could, but would have to find a way to get it later
-  "dragstart": "onDragStarted",
-  "dragstop": "onDragStopped",
-  "click": "onElementClicked"
-};
-*/
 
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
 function droppedOnTrash (element, evt, ui) {
@@ -186,7 +150,7 @@ function clickedTab (element, evt)
 
   if (!absQNum && absQNum !== 0)
   {
-    console.error ("Why must you turn this house into a house of lies? : ", element);
+    console.error ("Was not given a question number. Throwing an error. ", element);
     return false;
   }
 
@@ -301,32 +265,15 @@ $ (()=> {
       evtsArr: [
         {
           handlingFunction: onSubmitInput,
-          customEvtName: "They submitted. What do you do next?",
+          customEvtName: "inputSubmitted",
           domEvtName: "click"
         }
       ]
     },
 
-    /* USET EVENTS ---- OCCUR ON THE MAIN MODEL DISPLAY */
-  /*  { // TODO remove
-      elem: $("#model"),
-      evtsArr: [
-        {
-          handlingFunction: elementOver,
-          customEvtName: "overTopOfTheSpatula", //TODO
-          domEvtName: "dropover"
-        },
-        {
-          handlingFunction: elementOff,
-          customEvtName: "goodbyeMrSpatula", //TODO
-          domEvtName: "dropout" // aww, poor guy. was a college dropout.
-        }
-      ]
-    },*/
-
     /* ELEMENT EVENTS --- OCCUR ON SPECIFIC ELEMENTS, ADDED LATER */
     {
-      elem: [ ], // TODO: Make this better? For now, handles connecting for elements
+      elem: [ ],
       evtsArr: [
         {
           handlingFunction: onDragStopped,
@@ -354,7 +301,7 @@ $ (()=> {
       evtsArr: [
         {
           handlingFunction: droppedOnTrash,
-          customEvtName: "trashyMcTrashTrash", //TODO although I like this name
+          customEvtName: "deleteElement", //TODO although I like this name
           domEvtName: "drop"
         }
       ]
@@ -366,7 +313,7 @@ $ (()=> {
       evtsArr: [
         {
           handlingFunction: clickedTab,
-          customEvtName: "goToQuestionMagic",
+          customEvtName: "goToQuestion",
           domEvtName: "click"
         }
       ],
@@ -379,12 +326,12 @@ $ (()=> {
       evtsArr: [
         {
           handlingFunction: onModelResize,
-          customEvtName: "Wanna talk about me, wanna talk about I, wanna talk about #1 on the west side",
+          customEvtName: "Resized",
           domEvtName: "model-resize" // FYI this is custom
         },
         {
           handlingFunction: startModelResize,
-          customEvtName: "Every little store I make is magic",
+          customEvtName: "Resized[2]",
           domEvtName: "model-resize-start"
         }
       ]
@@ -396,7 +343,7 @@ $ (()=> {
       evtsArr: [
         {
           handlingFunction: onModelResize,
-          customEvtName: "WINDOW resize",
+          customEvtName: "Resize[3]",
           domEvtName: "resize"
         }
       ]

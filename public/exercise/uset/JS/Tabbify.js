@@ -2,8 +2,6 @@
   This file will basically handle converting QuestionTypes & Questions into tabs.
 
   Note that this likely will not change and should be fine ...
-
-  TODO: Should these selectors be moved into DomDefs? Probably?
 */
 
 class Tabbify {

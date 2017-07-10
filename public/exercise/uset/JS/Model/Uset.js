@@ -105,31 +105,4 @@ class Uset extends Model {
   {
     return this.find (el) !== null; // note: null is allowed but ....... TODO
   }
-
-
-  // TODO After refactor, this should probably be gonezo
-  // moved directly into model
-  /*draw (div)
-  {
-    control.setModel (this);
-
-    //// TODO bad code
-    //for (var i in this.set)
-    //  control.view.addElement (this.set [i], {withinModel: true});
-  }*/
-
-/*  // TODO: Remove this. This is bad.
-  static fromUserInput (div)
-  {
-    var newSet = new Uset ();
-    var input  = $(".modelEntry", div);
-    var user   = input.val ();
-
-    var values = user.match (/[^ ]+/g);
-    for (var i in values){
-      newSet.add (values[i]);
-    }
-
-    return newSet;
-  }*/
 }

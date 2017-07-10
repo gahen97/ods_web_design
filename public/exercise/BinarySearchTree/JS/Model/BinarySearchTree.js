@@ -9,11 +9,45 @@ class BinarySearchTree extends Model {
     this.n    = 0;
   }
 
-  size()
-  {
-    return this.n;
+  /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
+  _size (u) {
+    if (!u) return 0;
+    return 1 + this._size (u.left) + this._size (u.right);
   }
 
+  _height (u) {
+    if (!u) return -1;
+    return Math.max (this._height (u.left), this._height (u.right)) + 1;
+  }
+
+  /* ---- TERMINOLOGY ----- */
+  size(x)
+  {
+    var u = (x || x === 0) ? this.find (x) : this.root;
+    return this._size (u);
+  }
+
+  depth (x) {
+    var node = this.find (x);
+    if (!node) return -1;
+
+    var depth = 0;
+    while (node !== this.root) {
+      node = node.parent;
+      depth ++;
+    }
+
+    return depth;
+  }
+
+  height (x) {
+    var node = this.find (x);
+    if (!node) return -1;
+
+    return this._height (node);
+  }
+
+  /* ---- OPERATIONS ----- */
   findPrev (x) {
     // if =, return the node;
     // if >, go to right;
@@ -98,6 +132,8 @@ class BinarySearchTree extends Model {
     return null;
   }
 
+
+  /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
     var result = true;

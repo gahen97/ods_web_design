@@ -17,9 +17,6 @@ class Find extends Question {
   }
 
   // check answer ...
-  //TODO I don't think this should be here, but I probably don't fully understand it.
-  // You're right ... belongs inside Element, probably. I'm moving it.
-
   check (userModel, activeElem)
   {
     // for find, two things must be the same:
@@ -30,7 +27,7 @@ class Find extends Question {
     if (!this.answer.getModel ().equals (userModel))
       return false;
 
-    return (this.answer.getData () === activeElem.getTrueValue ()); // TODO better name for this?
+    return (this.answer.getData () === activeElem.getObjValue ());
   }
 
   // setting active

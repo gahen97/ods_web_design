@@ -21,31 +21,13 @@ class ElementBase {
     this.value = value;
     this.id = ElementBase.nextId ();
 
-    this.element = this.draw ();    //change name to generate??
+    this.element = this.generate ();
     this.$elem   = $(this.element);
-    this.DomEvents = this.addEvents (); //will be moved into view
 
     return new Proxy (this, ElementBase.proxy);
   }
 
   getElementDiv () { return this.element; }
-
-  addEvents () {
-    // TODO This is called when control is being constructed,
-    // which ends up throwing an error ...
-    // and means nothing works. so, fix this. And find a better way than this, eh?
-    /*setTimeout(() => {
-      // NOTE : accessing global 'control' object is bad TODO
-      var event = control.getDomEventHandler (ELEM_EVENTS_ID);
-      if (!event) {
-        console.error ("Could not find Element events handler .... blowing up");
-        return -1;
-      }
-
-      event.push (this.element);
-      return 0;
-    }, 10);*/
-  }
 
   // default - do nothing
   addControls (e, s) {
@@ -58,7 +40,7 @@ class ElementBase {
   }
 
   // Draw the element into the DOM
-  draw () {     //change name to generate?? also need to redo
+  generate () {     //change name to generate?? also need to redo
     return null;
   }
 
@@ -75,8 +57,8 @@ class ElementBase {
   getId () { return this.id; }
   getValue () { return this.value; }
 
-  // note: 'true' value is basically an object version. parses null to null ; empty to undefined; else to itself
-  getTrueValue () {
+  // Converts to the object version of the value => NULL is null, UNDEFINED undefined, otherwise itself
+  getObjValue () {
     var val = this.getValue ();
     if (!val) return;
     if (val === NULL_CHARACTER) return null;
@@ -86,7 +68,10 @@ class ElementBase {
 
 ElementBase.currentId = 1000;
 
-// This is hottttt. The JS equivalent to Lua's setmetatable. Seems to be browser compatible
+// Proxies. These work similar to Metatables in Lua;
+// Basically, if a property is looked for that doesn't exist, you can send it
+//   something else instead - in this case, we're sending the same property from the
+//   DOM element
 ElementBase.proxy = {
   get: function (target, name) {
     // basically - If you call a method here that doesn't exist, it's probably because

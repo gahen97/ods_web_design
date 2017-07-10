@@ -50,9 +50,6 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
     else { console.error ("could not find : ", e); }
   }
 
-  // TODO - not really todo but anyway.
-  // Changed the name here. It's not adding triggers, it's adding
-  //   elements that will be recorded for the trigger.
   addTriggerElement (element) {
     var $e = $(element);
     for (var domEvent in this.triggerMap) {
@@ -72,10 +69,7 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
     var type   = this.triggerMap [event.type];
     var elem   = event.target;
 
-    // TODO: better way to do this?
-    args.unshift (event);
-    args.unshift (elem);
-    args.unshift (type);
+        args   = [type, elem, event].concat (args);
 
     for (var i in events)
       events[i].trigger.apply (events[i], args);

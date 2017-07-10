@@ -13,8 +13,8 @@ class ViewBase {
     this.elements = { };
     this.elementsByValue = { };
 
-    this.modelDivHelper = new Div ($ (MODEL_MAIN)); // #TODO
-    this.modelBodHelper = new Div ($ (MODEL_BODY)); // #TODO
+    this.modelDivHelper = new Div ($ (MODEL_MAIN));
+    this.modelBodHelper = new Div ($ (MODEL_BODY));
   }
 
   /* ---- START - ADD THE NULL ELEMENT ---- */

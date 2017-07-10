@@ -107,8 +107,6 @@ class Exercise {
     this.refresh();
   }
 
-  //TODO refactor to goToQuestion(number? id?)
-
   next ()
   {
     return this.goToQuestion(this.getAbsQNum() + 1);
@@ -176,7 +174,7 @@ class Exercise {
     return this.getCurrQuestionType ().check (user, active);
   }
 
-  start ()
+  load ()
   {
     // NOTE: start for now just starts the first question .....
     this.refresh ();
