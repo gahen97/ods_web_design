@@ -101,8 +101,8 @@ class ViewBase {
     if (indx !== -1)
       eles.splice (indx, 1);
 
-    // Remove the element from our event handler - if we remove it, it shouldn't be connected
-    //   to our event handling
+    // Remove the element from our event handler - if we remove it, it
+    //   shouldn't be connected to our event handling
     var e = this.getEventHandler (ELEM_EVENTS_ID);
     if (e) e.remove (element.getElementDiv ());
 
