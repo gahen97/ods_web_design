@@ -198,7 +198,8 @@ class ViewBase {
   // is element over top of the model?
   isElementOverModel (element) {
     // NTS: Element here is the div
-    return this.modelDivHelper.elementOver (element);
+    console.error ("isElementOverModel should be overloaded");
+    return false;
   }
 
   // set active element

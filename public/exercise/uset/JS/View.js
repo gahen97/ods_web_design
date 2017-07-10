@@ -11,6 +11,12 @@ class View extends ViewBase {
     super(...arguments);
   }
 
+  // Is an element in the model
+  isElementOverModel (element) {
+    // NTS: Element here is the div
+    return this.modelDivHelper.elementOver (element);
+  }
+
   // draw an element within the model
   drawWithinModel (element) {
     var pos = this.modelDivHelper.randomPosition ();
@@ -38,8 +44,8 @@ class View extends ViewBase {
       if (elems){
         var found = false;
         this.removeElements (elems, (e)=>{
-          if (found) return true;
-          var isInSet = this.modelDivHelper.elementOver (e.getElementDiv ());
+          if (found) return this.isElementOverModel (e.getElementDiv ());
+          var isInSet = this.isElementOverModel (e.getElementDiv ());
 
           if (isInSet)
             found = true;
