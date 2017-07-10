@@ -118,13 +118,6 @@ class Uset extends Model {
     //  control.view.addElement (this.set [i], {withinModel: true});
   }*/
 
-
-  // TODO - This is bad
-  getObject ()
-  {
-      return this.set;
-  };
-
 /*  // TODO: Remove this. This is bad.
   static fromUserInput (div)
   {

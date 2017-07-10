@@ -190,10 +190,9 @@ class ViewBase {
     return this.checkInSet (elements);
   }
 
-  // draw an element within the model
   drawWithinModel (element) {
-    var pos = this.modelDivHelper.randomPosition ();
-    element.moveTo (pos);
+    console.error ("drawWithinModel using ViewBase implementation. This should be overloaded");
+    return false;
   }
 
   // is element over top of the model?

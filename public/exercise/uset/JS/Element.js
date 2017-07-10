@@ -38,7 +38,6 @@ class Element extends ElementBase {
     return elementDiv;
   }
 
-
   setActive (isActive) {
       var element = $(this.element);
       if (isActive)
@@ -49,5 +48,15 @@ class Element extends ElementBase {
 
   moveTo (offset) {
     $ (this.element).offset (offset);
+  }
+
+
+  // add draggable ...
+  addControls (e, stack) { //make draggable
+    if (!e) e = this.element;
+    $ (e).draggable ({
+      containment: "parent",
+      stack: stack
+    });
   }
 }

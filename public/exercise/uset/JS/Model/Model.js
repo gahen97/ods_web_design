@@ -14,6 +14,11 @@ class Model {
 
     control.setModel (this); //TODO
   }
+
+  //ANY MODEL NEEDS THE FOLLOWING -
   //equals = null;
   //draw = null;
+  //each = null;
+  //contains = null;
+  //copy     = null;
 }

@@ -10,7 +10,13 @@ class View extends ViewBase {
   constructor(){
     super(...arguments);
   }
-  
+
+  // draw an element within the model
+  drawWithinModel (element) {
+    var pos = this.modelDivHelper.randomPosition ();
+    element.moveTo (pos);
+  }
+
   displayModel (m) {
     // TODO Remove any elements that should not be shown
     for (var k in this.elements){

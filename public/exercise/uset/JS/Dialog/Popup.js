@@ -3,6 +3,7 @@
    There was a fox. Named the little guy Joe. What? That's a good name for a fox.
    ANYWAY, Joe was scared of humans and ran off. I haven't seen him since.
 */
+const HID_CLASS = 'no-visibility'; /// whatever the class is for hidden ..
 
 class Popup {
   constructor(text, opts){
@@ -21,12 +22,12 @@ class Popup {
     var msgTxt = $ (MESSAGE_TXT, msgDiv);
 
     msgTxt.val (text);
-    msgDiv.removeClass ("no-visibility");
+    msgDiv.removeClass (HID_CLASS);
 
     this.stylize (msgDiv);
 
     Popup.reset = () => {
-        msgDiv.addClass ("no-visibility");
+        msgDiv.addClass (HID_CLASS);
         this.removeStyling (msgDiv);
     };
 

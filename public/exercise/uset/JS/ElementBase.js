@@ -47,13 +47,9 @@ class ElementBase {
     }, 10);*/
   }
 
-  // add draggable ...
-  addControls (e, stack) { //make draggable
-    if (!e) e = this.element;
-    $ (e).draggable ({
-      containment: "parent",
-      stack: stack
-    });
+  // default - do nothing
+  addControls (e, s) {
+    return false;
   }
 
   // set active ... adds/removes class
