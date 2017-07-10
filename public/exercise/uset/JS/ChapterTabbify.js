@@ -15,7 +15,8 @@
 */
 
 var chapters = {
-  "Chapter 1": ["mod 1", "mod 2"]
+  "Chapter 1": ["mod 1", "mod 2"],
+  "Chapter 2": ["mod 3", "mod 4"]
 }
 
 class ChapterTabbify {
@@ -47,8 +48,6 @@ class ChapterTabbify {
 
     this.mainHeader = Tabbify.mainFrom ($("#modules_display"));
     this.eventId    = options.eventId;
-
-    console.log (this.mainHeader);
 
     // set up the accordion
     $ (this.mainHeader).accordion ({
@@ -105,8 +104,7 @@ class ChapterTabbify {
 
     for (var key in qTypes) {
       var qType = key;
-      //var curHeader = Tabbify.addHeader (qType.name, parent);
-      var curHeader = parent;
+      var curHeader = Tabbify.addHeader (qType, parent);
 
       data.chapterId = key;
       this.addQuestions (qTypes [key], curHeader, data, opts);
@@ -129,18 +127,10 @@ class ChapterTabbify {
       var q = questions [key];
 
       var name = q;
-      if (name !== curName){
-        curName = name;
-        header  = Tabbify.addHeader (name, mainHeader);
-      }
-
-      console.log (header);
 
       data.questionId = key;
 
       var newElement = Tabbify.addToHeader (q, header, data);
-      console.log (newElement);
-      console.log (q);
 
       this.items.push($ (newElement) [0]); // DOM element, not jQuery
 
