@@ -48,12 +48,46 @@ class BinarySearchTree extends Model {
       else
         prevNode.right = newNode;
     }
+
+    this.n ++;
+  }
+
+  splice (u)
+  {
+    var child, parent;
+
+    child = u.left || u.right;
+
+    if (u === this.root){
+      this.root    = child;
+      child.parent = null;
+    } else {
+      parent = u.parent;
+      if (parent.left === u)
+        parent.left = child;
+      else
+        parent.right = child;
+    }
+
+    this.n --;
   }
 
   remove(x)
   {
     var node = this.find (x);
     if (!node) return false;
+
+    if (!node.left || !node.right)
+      this.splice (node);
+    else {
+      var cur = node.right;
+
+      while (cur.left)
+        cur = cur.left;
+
+      node.data = cur.data;
+      this.splice (cur);
+    }
   }
 
   find(x)
@@ -66,37 +100,27 @@ class BinarySearchTree extends Model {
 
   equals(other)
   {
-    // given another model, check if the two are equal.
-    // returns true if equal, false if not.
+    var result = true;
+    this.each ((data) => {
+      if (!other.contains (data))
+        result = false;
+    });
+
+    return result;
   }
 
   copy()
   {
-    // copy this model into a new model, returning the new model.
+    var newTree = new BinarySearchTree ();
+    Traversal.preorder (this, (data)=>{
+      newTree.add (data);
+    });
+    return newTree;
   }
 
   each (f)
   {
-    var cur  = this.root;
-    var prev = null;
-
-    while (cur !== null){
-      if (prev === cur.parent && cur.left){
-        prev = cur;
-        cur  = cur.left;
-      } else {
-        if (prev === cur.left || prev === cur.parent)
-          f (cur);
-
-        if (cur.right){
-          prev = cur;
-          cur  = cur.right;
-        } else {
-          prev = cur;
-          cur  = cur.parent;
-        }
-      }
-    }
+    Traversal.inorder (this, f);
   }
 
   contains (el)
