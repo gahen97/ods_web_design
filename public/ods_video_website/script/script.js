@@ -16,12 +16,6 @@ $('document').ready(function() {
   $('#sidebar').height(h);
 
   dynamic_height();
-  //sidebar_width();
-  //main_top_width();
-  set_fixed();
-//  main_margin_top();
-  heading_width();
-  model_height();
 
   $(".drop").click(function(){
     $(this).children(".sub").stop().slideToggle('slow');
@@ -29,6 +23,7 @@ $('document').ready(function() {
 
 
   $("#sidebar_toggle").click(function() {
+    model_store_height ();
 
     var toggleminwidth = $("#main").css('min-width');
     toggleminwidth = (toggleminwidth == '80%')  ? '95%' : '80%';
@@ -74,9 +69,14 @@ $('document').ready(function() {
 
 });
 
-var model_height = function() {
-  $(".modelBody").css('width', $(".modelBody").height()*1.5);
+var model_store_height = function () {
+  $(".modelBody").trigger ('model-resize-start');
+}
 
+var model_height = function() {
+  $(".modelBody").css('width', $(".modelBody").height()*1.5)
+                 .trigger ('model-resize');
+        // Fires a custom event which Events.js can listen for
 }
 
 var tab_hover = function() {
@@ -115,6 +115,7 @@ var set_fixed = function () {
       main_top_width();
     }
     main_margin_top();
+    
   });
 
   $(window).resize(function() {

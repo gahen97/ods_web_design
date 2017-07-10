@@ -1,6 +1,7 @@
 
 /*jshint esversion: 6 */ 'use strict';
 /* Hey I'm back */
+const VIEW_CODE_ALL = "delete them all noober";
 
 class ViewBase {
   constructor() {
@@ -13,20 +14,21 @@ class ViewBase {
     this.elementsByValue = { };
 
     this.modelDivHelper = new Div ($ (MODEL_MAIN)); // #TODO
+    this.modelBodHelper = new Div ($ (MODEL_BODY)); // #TODO
   }
 
   /* ---- START - ADD THE NULL ELEMENT ---- */
   start()
   {
-    this.removeElementByValue (NULL_CHARACTER);
-    this.addElement (NULL_CHARACTER, {withinModel: true});
+    this.clear ();
   }
 
   /* ---- CLEAR THE MODEL ---- */
-  clear ()
+  clear (opts)
   {
+    if (!opts)opts={};
     for (var key in this.elements)
-      if (this.elements [key].getValue() !== NULL_CHARACTER)
+      if (!opts.checkFunc || opts.checkFunc (this.elements [key]))
         this.removeElementById (key);
   }
 
@@ -68,7 +70,10 @@ class ViewBase {
     // add the element & push it into the elements object
     var newElement                                = new Element (value);
     this.elements [newElement.getId ()]           = newElement;
-    this.elementsByValue [newElement.getValue ()] = newElement;
+
+    if (!this.elementsByValue [value])
+      this.elementsByValue[value] = [ ];
+    this.elementsByValue [value].push (newElement);
 
     if (options.withinModel)
       this.drawWithinModel (newElement);
@@ -78,6 +83,8 @@ class ViewBase {
       var e = this.getEventHandler (ELEM_EVENTS_ID);
       if (e) e.push (newElement.getElementDiv ());
     }
+
+    this.storePositionOf (newElement);
   }
 
   // remove an element
@@ -85,8 +92,14 @@ class ViewBase {
     var element = this.elements [id];
     if (!element) return false;
 
-    delete this.elementsByValue [element.getValue()];
+    //delete this.elementsByValue [element.getValue()];
     delete this.elements[id];
+
+    // remove the element from the by value array
+    var eles = this.elementsByValue [element.getValue ()];
+    var indx = eles && eles.indexOf (element);
+    if (indx !== -1)
+      eles.splice (indx, 1);
 
     // Remove the element from our event handler - if we remove it, it shouldn't be connected
     //   to our event handling
@@ -103,13 +116,21 @@ class ViewBase {
     return this.removeElementById (id);
   }
 
-  removeElementByValue (value) {
+  removeElements (elems, checkFunc) {
+    $ (elems).each ((i, e)=>{
+      if (!checkFunc || checkFunc (e))
+        this.removeElementById (e.getId ());
+    });
+  }
+
+  /*removeElementByValue (value) {
     var element = this.elementsByValue [value];
     if (!element) return false;
 
     var id      = element.getId ();
     return this.removeElementById (id);
-  }
+  }*/
+
   // get an element
   getElementById (id) {
     return this.elements [id];
@@ -131,16 +152,48 @@ class ViewBase {
     return this.elementsByValue [value];
   }
 
-  // draw an element within the model
+  findOneWithValue (value)
+  {
+    var e = this.findByValue (value);
+    return e && e[0];
+  }
+
+  // conatins an element with given value
+  contains (value)
+  {
+    var v = this.elementsByValue[value];
+    return v && v.length>0;
+  }
+
+  // check if an element is in the set
+  checkInSet (elements) {
+    var result = false;
+
+    $ (elements).each ((i, e) => {
+      if (this.modelDivHelper.elementOver (e.getElementDiv ())){
+        result = true;
+        return false;
+      }
+    });
+
+    return result;
+  }
+
+  valueInSet (value){
+    var elements = this.findByValue (value);
+    return this.checkInSet (elements);
+  }
+
   drawWithinModel (element) {
-    var pos = this.modelDivHelper.randomPosition ();
-    element.moveTo (pos);
+    console.error ("drawWithinModel using ViewBase implementation. This should be overloaded");
+    return false;
   }
 
   // is element over top of the model?
   isElementOverModel (element) {
     // NTS: Element here is the div
-    return this.modelDivHelper.elementOver (element);
+    console.error ("isElementOverModel should be overloaded");
+    return false;
   }
 
   // set active element
@@ -162,5 +215,20 @@ class ViewBase {
   resizeModel ()
   {
     this.modelDivHelper.fixHeight ();
+  }
+
+  storePositions ()
+  {
+    this.modelBodHelper.storePositions (this.elements);
+  }
+
+  storePositionOf (e)
+  {
+    this.modelBodHelper.storePosition (e);
+  }
+
+  fixPositions ()
+  {
+    this.modelBodHelper.fixPositions (this.elements);
   }
 }
