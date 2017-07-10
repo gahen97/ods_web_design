@@ -23,44 +23,22 @@ var __MODULENAME__questionTypesClassNames = [];
 var __MODULENAME__numberOfQuestionsRequired = [ ];
 */
 
-var __MODULENAME__ = Template; // MODEL NAME HERE
+var __MODULENAME__ = BinarySearchTree;
 
-var questionTypesClassNames = []; // INSERT EVERY QUESTION TYPE, [QType1, QType2, QType3]
+var questionTypesClassNames = [Operations];
 
-/*
-  Answer types are based on QTypes:
-    First dimension relates to the Question Type
-    Second dimension relates to each question of the QType
-      Ex. If QTypes are [Operations], Questions are Add, Find, Remove, then this would be
-        [
-          [AddAnswer, FindAnswer, RemoveAnswer]
-      ]
-*/
-var answerTypesClassNames = [ ];
+var answerTypesClassNames = [[AddAnswer]];
 
+var numAddQuestions = 10;
 
-/* Number of questions required for each question */
-// This is the same as above, for answerTypesClassNames
-var numberOfQuestionsRequired = [];
+var numberOfQuestionsRequired = [[numAddQuestions]];
 
-/*
-  questionData looks like:
-    [
-    [
-     {class: SOME_CLASS_NAME, instructionsText: "Instructions for the question"},
-     {class: SOME_CLASS_NAME, instructionsText: "Instructions for the question"}
-   ],
-   [
-    {class: SOME_CLASS_NAME, instructionsText: "Instructions"}
-   ]
-  ]
+  var questionData = [
+    [{class : Add, instructionsText : "Illustrate the evolution of the BST given the following add method:"}]
+                      ];
 
-  Where first dimension is QType, second is Question.
-*/
-
-  var questionData = [];
-
-/* Other constants & data to be used */
+var __addMinParam__ = 1;
+var __addMaxParam__ = 69;
 
 /*load order:
 MUST BE LOADED AFTER QUESTIONS AND QUESTIONTYPES AND RANDOM

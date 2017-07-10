@@ -8,10 +8,9 @@ class AnswerTemplate extends AnswerType {
     this.model = new __MODULENAME__();
   }
 
-  check (userAnswer)
+  check (userModel)
   {
     // Returns true if answer is correct, false if incorrect.
-    // Given an AnswerType
-    //return this.model.equals (userAnswer);
+    // Given a Model
   }
 }

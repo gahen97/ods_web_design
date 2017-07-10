@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */ 'use strict';
 
-class AnswerTemplate extends AnswerType {
+class AddAnswer extends AnswerType {
   constructor()
   {
     super();
@@ -10,7 +10,6 @@ class AnswerTemplate extends AnswerType {
 
   check (userModel)
   {
-    // Returns true if answer is correct, false if incorrect.
-    // Given a Model
+    return this.model.equals (userModel);
   }
 }
