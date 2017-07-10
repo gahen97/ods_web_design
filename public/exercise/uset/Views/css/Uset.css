@@ -183,6 +183,8 @@ li.tabbedQuestion:hover {
   box-shadow: 2px 2px 0px 0px #aaa;
 }
 
+/* We've been trying too hard... why do we do that? Why do I do that? Why do I do that. */
+
 /* trash can ........ should be a small image, top right corner */
 .trashCan {
   width: 40px;
