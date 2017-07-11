@@ -7,6 +7,7 @@ app.get ("/uset", function (req, res){
 });
 
 app.use (express.static ("./public"));
+app.use (express.static ("./jquery-ui"));
 
 var PORT = 2402;
 

@@ -1,76 +1,98 @@
-body {
-  background-color: #F4F4F4;
-  font-family: courier;
-  font-size: 1em;
-  color: #565656;
-}
+rem = 1em;
 
 * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-     box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  max-width: 960px;
 }
 
+body {
+  background-color: #F4F4F4;
+  color: #565656;
+  font-size: 1rem;
+  font-family: courier;
+}
+
+ul {
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+}
+
+a {
+  color: #565656;
+  text-decoration: none;
+}
+
+#total_content {
+  box-sizing: border-box;
+  width: 960px;
+  margin: 0 auto;
+  margin-top: 10px;
+}
 
 #heading {
+  color: #565656;
   margin-top: 20px;
 }
 
 #title {
-   display: inline-block;
-   font-family: courier;
    width: 70px;
-   font-size: 1.5em;
+   font-size: 1.5rem;
+   font-family: courier;
+   display: inline-block;
 }
 
 #main_menu {
-  display: inline-block;
+  font-family: inherit;
   margin-top: 5%;
+  display: inline-block;
   float: right;
 }
 
+#content {
+  margin-top: 20px;
+}
+
 #sidebar {
+  color: #565656;
   width: 144px;
   height: 80vh;
   display: inline-block;
   float: left;
-  -webkit-backface-visibility:hidden;
+  -webkit-backface-visibility: hidden;
   -webkit-transform: translateZ(0);
 }
 
-.fixed {
-  position: fixed;
-  top: 0;
-}
-
-
 #sidebar_nav {
-  height: 70px;
   background-color: #8FCDB8;
   border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+  height: 70px;
   padding: 10px;
   white-space: nowrap;
 }
 
 #sidebar_tabs {
-  height: 50px;
+  font-size: 0.25rem;
+  text-align: center;
   width: 95%;
-  margin:0 auto;
-  font-size: 0.25em;
-  text-align:center;
+  height: 50px;
+  margin: 0 auto;
 }
 
 #modules_tab, #questions_tab {
-  border-radius: 5px;
-  font-size: 4em;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
   width: 25px;
   height: 25px;
   margin-top: 10px;
   display: inline-block;
   cursor: pointer;
-  background-size: 20px 20px;
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
 }
 
 #modules_tab {
@@ -81,25 +103,10 @@ body {
   background-image: url("../img/questionmark.png");
 }
 
-.colorm {
-  background-image: url("../img/chapters2.png") !important;
-}
-
-.colorm2 {
-  background-image: url("../img/chapters2.png") !important;
-}
-
-.colorq {
-  background-image: url("../img/questionmark2.png") !important;
-}
-.colorq2 {
-  background-image: url("../img/questionmark2.png") !important;
-}
-
 #modules_display, #questions_display {
-  height: inherit;
   background-color: #FAD60E;
   border-radius: 5px;
+  height: inherit;
   margin-top: 2px;
 }
 
@@ -114,24 +121,27 @@ body {
 }
 
 #main_top {
-  height: 70px;
-  min-height: 70px;
+  background-color: #EF8043;
+  color: #565656;
+  border-radius: 5px;
+  font-size: 1.25rem;
+  font-weight: bold;
   text-align: center;
   width: inherit;
-  background-color: #EF8043;
-  padding: 10px;
-  border-radius: 5px;
+  height: 70px;
+  min-height: 70px;
   margin-left: 2px;
+  padding: 10px;
+  z-index: 1;
 }
 
 #sidebar_toggle {
   height: 30px;
   margin-top: 10px;
-  float: left;
-  font-size: 0.5em;
-  cursor: pointer;
   display: table-cell;
   vertical-align: middle;
+  float: left;
+  cursor: pointer;
 }
 
 #video_frame {
@@ -139,21 +149,41 @@ body {
 }
 
 #actual_video {
-  max-width: 95%;
   background-color: grey;
-  margin:0 auto;
-}
-
-ul {
-  list-style: none;
-  margin:0;
-  padding:10px;
+  max-width: 95%;
+  margin: 0 auto;
 }
 
 #exercise {
+  color: #565656;
   margin-top: 20px;
+}
+
+.widen_main {
+  min-width: 100%;
 }
 
 .drop {
   cursor: pointer;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+}
+
+.modules_click {
+  background-image: url("../img/chapters2.png") !important;
+}
+
+.modules_hover {
+  background-image: url("../img/chapters2.png") !important;
+}
+
+.questions_click {
+  background-image: url("../img/questionmark2.png") !important;
+}
+
+.questions_hover {
+  background-image: url("../img/questionmark2.png") !important;
 }
