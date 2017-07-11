@@ -109,6 +109,7 @@ var set_fixed = function () {
       main_top_width();
     }
     main_margin_top();
+
   });
 
   $(window).resize(function() {

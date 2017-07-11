@@ -72,22 +72,15 @@ li.tabbedQuestion:hover {
 .border-light {
   border: 1px solid darkgray;
 }
-<<<<<<< HEAD
 
 .border-mid {
   border: 3px solid darkgray;
 }
 
-=======
-.border-mid {
-  border: 3px solid darkgray;
-}
->>>>>>> 5fde1e2f65ba861d26712347e03e3b03061248bf
 .border-strong {
   border: 5px solid darkgray;
 }
 
-<<<<<<< HEAD
 .border-colour-error, .border-color-error {
   color: red;
 }
@@ -101,28 +94,7 @@ li.tabbedQuestion:hover {
 }
 
 .hidden {
-=======
-.border-colour-error,
-.border-color-error {
-  border-color: red;
-}
-
-.border-colour-highlight,
-.border-color-highlight{
-  border-color: #e6ac00;
-}
-
-.border-colour-success,
-.border-color-success{
-  border-color: #1fa000;
-}
-
-.hidden{
->>>>>>> 5fde1e2f65ba861d26712347e03e3b03061248bf
   display: none;
-}
-.no-visibility{
-  visibility: hidden;
 }
 
 .no-visibility {
@@ -147,13 +119,6 @@ li.tabbedQuestion:hover {
 .right {
   display: inline-block;
   float: right;
-}
-.center{
-  margin: 0 auto;
-}
-
-.textCentered{
-  text-align: center;
 }
 
 .center{
@@ -249,6 +214,7 @@ li.tabbedQuestion:hover {
   height: 37px;
   box-shadow: 1px 1px 1px 1px #aaa;
   cursor: -webkit-grabbing;
+}
 /* We've been trying too hard... why do we do that? Why do I do that? Why do I do that. */
 
 /* trash can ........ should be a small image, top right corner */
