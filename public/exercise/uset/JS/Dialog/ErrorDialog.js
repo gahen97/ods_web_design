@@ -1,6 +1,7 @@
 /*
-  ERROR: She's my best friend's girl... but she used to be mine
+  ERROR: Adds a border-color-error border.
 */
+
 class ErrorDialog extends Popup {
   constructor (text, opts, ...rest) {
     if (!opts) opts = { };

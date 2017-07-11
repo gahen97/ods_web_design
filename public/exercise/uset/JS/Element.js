@@ -14,7 +14,7 @@ class Element extends ElementBase {
     var span       = $("span", elementDiv);
 
     // set the text ...
-    span.text (this.value).data ("id", this.id); // TODO There's gotta be a better way to do this
+    span.text (this.value).data ("id", this.id);
 
     // parent it to the main div, add the stuff, return
     elementDiv.insertAfter (model).data ("id", this.id);

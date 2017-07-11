@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */ 'use strict';
 
-// SHOULD HAVE A BETTER PLACE FOR THIS EHHHH TODO
+// TODO find a better place for this?
 function contextualize (t, f)
 {
 	return (function () {

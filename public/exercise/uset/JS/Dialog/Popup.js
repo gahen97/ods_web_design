@@ -1,7 +1,7 @@
 /*
-  Let me tell you a story. Back in the day, say, maybe 10 years ago?
-   There was a fox. Named the little guy Joe. What? That's a good name for a fox.
-   ANYWAY, Joe was scared of humans and ran off. I haven't seen him since.
+  This basically deals with sending out little messages to users.
+    When a new Popup is created, it sets the text of the little dialog box,
+    shows the popup (optionally adding classes), and hides it after a few seconds.
 */
 const HID_CLASS = 'no-visibility'; /// whatever the class is for hidden ..
 

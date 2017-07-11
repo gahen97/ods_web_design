@@ -1,8 +1,5 @@
 /*jshint esversion: 6 */ 'use strict';
 
-// TODO Clicking show answer button multiple times is immensely fun.
-//      For the end user, having fun is bad. We should probably fix this.
-
 /* helpers ... TODO global functions are bad */
 function parseInput (input) {
   return input.trim ();
@@ -26,7 +23,7 @@ function inputError ()
 function onNextBtnClick (elem, evt) {
   // move to the next exercise ...
   if (this.exercise.next() === false)
-    new SuccessDialog ("That's all, folks!");
+    new SuccessDialog ("That's all, folks!"); // TODO
   else{
     // set active to null
     this.setActiveElement (null);
@@ -36,7 +33,7 @@ function onNextBtnClick (elem, evt) {
 
 function onPrevBtnClick (elem, evt) {
   if (this.exercise.prev () === false)
-    new ErrorDialog ("I will go this far, and no further!"); // 10 points if you can tell me the reference, eh?
+    new ErrorDialog ("I will go this far, and no further!"); // 10 points if you can tell me the reference, eh? TODO
   else{
     // set active to null
     this.setActiveElement (null);
@@ -62,8 +59,6 @@ function onShowAnsBtnClick (elem, evt) {
 
 /* INPUT BOX EVENTS */
 function onSubmitInput (element, evt) {
-  console.log ("Sensing some input")
-  
   var input = $ (".modelEntry").val ();
 
   input = parseInput (input);
@@ -100,16 +95,13 @@ function onDragStopped (elem, evt, ui)
 
   //everytime an element is added or removed, clear uset, add everything that's currently in there.
   //on drag stop
-  //check if over ? in = true : in false;
   if (over)
     this.userModel.add (data);
   else if (!this.view.valueInSet (data))
     this.userModel.remove (data);
 
-  // this is the "check if over ? in = true : in false;". simplified
+  // store this as a data-in
   $ (elem).data ("in", over);
-
-  // and store the new position of the element
 }
 
 function onElementClicked (elem, ...args){
@@ -134,7 +126,7 @@ function droppedOnTrash (element, evt, ui) {
   }
 
   if (isNullCharacter (draggable)) {
-    new ErrorDialog ("Null element cannot be deleted! :::", {title: "INVALID DRAG"}); // TODO
+    new ErrorDialog ("Null element cannot be deleted!"); // TODO
     return false;
   }
 
@@ -165,8 +157,6 @@ function onModelResize (element, evt)
   // Fires off every step of the animation for resizing model ..
   // Move elements with the model, so they seem to look the same. How do I do that?
   // Magic.
-
-  // how do you like me now
   this.view.fixPositions();
 }
 

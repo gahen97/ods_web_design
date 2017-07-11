@@ -17,7 +17,7 @@ class Control {
     this.view.register (this.customEventHandler);
 
     this.view.start ();
-    this.exercise.load ();     //TODO rename ?? maybe
+    this.exercise.load ();
 
     // add tabbing
     this.tabs = new QuestionTabbify (this, {

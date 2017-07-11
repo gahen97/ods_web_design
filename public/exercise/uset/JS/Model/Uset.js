@@ -21,7 +21,7 @@ class Uset extends Model {
     }
     this.set[x] = x.toString();       //we want everything the same type, so strings.
     //REQUIRES OVERLOADED TOSTRING FOR OBJECTS
-    this.n = this.n + 1;
+    this.n ++;
     return true;
   }
 
@@ -31,10 +31,10 @@ class Uset extends Model {
     {
       return null;
     }
-    var toReturn = this.set[x];
 
-    delete this.set [x];    // NOTE: delete actually deletes it. setting to undefined causes issues later
-    this.n = this.n - 1;
+    var toReturn = this.set[x];
+    delete this.set [x];
+    this.n --;
 
     return toReturn;
   }

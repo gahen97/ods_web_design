@@ -78,4 +78,4 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
 }
 
 DOMEventHandler.customEventHandlers = [ ];
-DOMEventHandler.id = 9610203;
+DOMEventHandler.id = 1729;

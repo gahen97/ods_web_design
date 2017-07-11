@@ -74,10 +74,7 @@ class ODSRandom {
   }
 
   static scramble (array) {
-    // should we clone the array, then randomize? or randomize same array?
-    // since we're returning, let's clone first.
-    // NOTE: https://stackoverflow.com/questions/3978492/javascript-fastest-way-to-duplicate-an-array-slice-vs-for-loop
-    // Different speeds based on method chosen, which then depends on browser ... blahblahblah. Using slice for now.
+    // Clones the array first to make changes to a new one
     array = array.slice (0);
 
     // loop over & randomize each position

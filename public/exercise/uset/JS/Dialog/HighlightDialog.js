@@ -1,3 +1,7 @@
+/*
+  HIGHLIGHT: Adds a border-color-highlight border.
+*/
+
 class HighlightDialog extends Popup {
   constructor (text, opts, ...rest) {
     if (!opts) opts = { };

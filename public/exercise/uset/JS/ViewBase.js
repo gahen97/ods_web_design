@@ -1,7 +1,6 @@
 
 /*jshint esversion: 6 */ 'use strict';
-/* Hey I'm back */
-const VIEW_CODE_ALL = "delete them all noober";
+const VIEW_CODE_ALL = "View.Code.All";
 
 class ViewBase {
   constructor() {

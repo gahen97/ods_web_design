@@ -24,6 +24,8 @@ class ElementBase {
     this.element = this.generate ();
     this.$elem   = $(this.element);
 
+    // NOTE: This sets up the Proxy that points any DOM methods called on the element
+    //       to the DOM object
     return new Proxy (this, ElementBase.proxy);
   }
 
@@ -40,7 +42,7 @@ class ElementBase {
   }
 
   // Draw the element into the DOM
-  generate () {     //change name to generate?? also need to redo
+  generate () {
     return null;
   }
 

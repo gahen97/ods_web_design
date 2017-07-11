@@ -1,18 +1,17 @@
 /*jshint esversion: 6 */ 'use strict';
 
 class Question {
+    static getNextId()
+    {
+      return Question.nextId;
+    }
 
-      static getNextId()
-      {
-        return Question.nextId;
-      }
-
-      static setNextId(i)
-      {
-        var temp = Question.nextId;
-        Question.nextId = i;
-        return temp;
-      }
+    static setNextId(i)
+    {
+      var temp = Question.nextId;
+      Question.nextId = i;
+      return temp;
+    }
 
   constructor(questionData, answerTypesClassName)
   {
@@ -91,7 +90,6 @@ class Question {
   generateParameters()
   {
     console.error("From inside question's generateParameters, generate parameters was not overloaded from this question subclass.");
-    console.log(this);
     return false;
   }
 
@@ -133,7 +131,6 @@ class Question {
 
   generateAnswer(prevAnswer)
   {
-    // NOTE: I'm sitting on this bar stool, talkin' like a dang fool...
     var answer = this.answer;
     if (prevAnswer)
       answer.setModel (prevAnswer.getModel ().copy ());
@@ -145,7 +142,6 @@ class Question {
 
   generateModel (prevAnswer)
   {
-    // Is it any wonder I'm not crazy?
     if (!prevAnswer) return;
 
     // just set to the previous answer's model
