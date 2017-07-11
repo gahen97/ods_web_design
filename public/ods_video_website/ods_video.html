@@ -20,63 +20,110 @@
 
 	<link href="/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
 
-	<style>
-		.widen_main {
-			min-width: 100%;
-		}
-	</style>
-
 </head>
-
 
 <body>
 
-
-<div style="box-sizing: border-box; width:960px; margin:0 auto; margin-top:10px;">
+<div id="total_content">
 
 	<div id="heading">
 		<div id="title"> <strong> Open Data Structures </strong> </div>
-		<div id="main_menu"> home | about | feedback | contact </div>
+		<div id="main_menu"> <a href=""> home </a> | <a href=""> about </a> | <a href=""> feedback </a> | <a href=""> contact </a> </div>
 	</div>
 
-	<div style="margin-top:20px;">
+	<div id="content">
 		<div id="sidebar">
-		<!--<div id="sidebar_top" style =" box-sizing: border-box; height:5vh; border:2px solid brown;"> </div> -->
-			<div id="sidebar_nav"> nav heading
+			<div id="sidebar_nav"> Navigation
 				<div id="sidebar_tabs">
-					<div id="modules_tab">	</div>
-					<div id="questions_tab"> 	</div>
+					<div id="modules_tab"></div>
+					<div id="questions_tab"></div>
 				</div>
 			</div>
+
 			<div id="modules_display"> </br>
-					<div>
-					</div>
+					<div></div>
 			</div>
+
 			<div id="questions_display"> </br>
-				<div>
+				<div></div>
+			</div>
+		</div>
+
+
+		<div id="main">
+			<div id="main_top"> The USet Interface: Unordered Sets
+				<img id="sidebar_toggle" src="ods_video_website/img/menubutton.png" onmouseover="this.src='ods_video_website/img/menubuttonhover.png';" onmouseout="this.src='ods_video_website/img/menubutton.png';">
+			</div>
+
+			<div id="video_frame">
+				<div id="actual_video"></div>
+			</div>
+
+			<div id="exercise">
+				<div class="exercise grid" style="margin: 20px; padding: 10px;">
+					<strong style="font-size:1.25em;"> Exercise </strong>
+				  <div class="row">
+				    <div class="col-12 questionFrame">
+				      <div class="questionBody">
+
+				        <div class="instructionsBody" style="margin-top: 20px;">
+				          <p> instructions </p>
+				        </div>
+
+								<div id="input_container" class="col-8">
+									<input type="text" class="modelEntry bottom" placeholder="type in the value to be added here"></input>
+									<div id="button_enter"></div>
+								</div>
+
+				        <div class="parametersBody">
+				          <p> params </p>
+				        </div>
+
+				        <div class="modelBody flexCol borderized" style="margin-top: 10px;">
+				          <div class="modelMain col-12 ">
+				            <img id="trash" src="exercise/uset/images/trashcan.png" class="trashCan"></img>
+				            <div id="model" class="modelDisplay col-6 round"></div>
+				          </div>
+				        </div>
+				      </div>
+
+							<div id="messageDiv" class="col-8 no-visibility center textCentered">
+								<input id="message" type="text" class="col-12 bottom border-mid" value="I heard you like Mudkipz" readonly="">
+							</div>
+
+				      <div class="questionButtons" > <!-- TODO rename this class -->
+				        <div class="prevArrowDiv">
+				          <div id="prevArrow" class="button" onclick="return false;"></div> <!-- TODO set up event handlers and probably rename this class from arrow-->
+				        </div>
+				        <div class="checkAndShowDiv">
+				          <div class="checkAnswerButton" class="button" onclick="return false;"> Check Answer </div> <!-- TODO change this -->
+				          <div class="showAnswerButton" class="button" onclick="return false;"> Show Answer </div> <!-- TODO change this -->
+				        </div>
+				        <div class="nextArrowDiv">
+				          <div id="nextArrow" class="button" onclick="return false;"> </div> <!-- TODO set up event handlers -->
+				        </div>
+				      </div>
+
+				    </div>
+
+
+				    <div id="template" class="hidden">
+				      <!-- For now, stuff inside here is a reference to the HTML that should be used ...
+				              Anything here will be copied later, inside some code, to make
+				              new HTML elements.
+
+				            TODO made these square. Looks better imo, especially for NULL
+				      -->
+				      <div class="element">
+				        <span class="verticallyCentered"> TEXT </span>
+				      </div>
+
+				    </div>
+				  </div>
 				</div>
 			</div>
-			 side bar
-		</div>
-
-	<div id="main">
-
-		<div id="main_top"> [Video Heading] (Skiplists: Module 1)
-			<img id="sidebar_toggle" src="ods_video_website/img/menubutton.png" onmouseover="this.src='ods_video_website/img/menubuttonhover.png';" onmouseout="this.src='ods_video_website/img/menubutton.png';">
-		</div>
-
-
-		<div id="video_frame">
-			<div id="actual_video">
-
-			</div>
-		</div>
-
-		<div id="exercise">
-
 		</div>
 	</div>
-</div>
 
 </div>
 
