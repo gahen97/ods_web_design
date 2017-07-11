@@ -1,12 +1,12 @@
 /*jshint esversion: 6 */ 'use strict';
 
 class BinarySearchTree extends Model {
-  constructor()
+  constructor(r)
   {
     super();
 
-    this.root = null;
-    this.n    = 0;
+    this.root = r || null;
+    this.n    = r ? this._size (r) : 0;
   }
 
   /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
@@ -18,6 +18,27 @@ class BinarySearchTree extends Model {
   _height (u) {
     if (!u) return -1;
     return Math.max (this._height (u.left), this._height (u.right)) + 1;
+  }
+
+  _subtree (u) {
+    if (!u) return false;
+    return new BinarySearchTree (u);
+  }
+
+  _add (x, newNode) {
+    if (!this.root) this.root = newNode;
+    else {
+      var prevNode = this.findPrev (x);
+      if (!prevNode || prevNode.data === x)
+        return false;
+      else if (prevNode.data > x)
+        prevNode.left = newNode;
+      else
+        prevNode.right = newNode;
+    }
+
+    this.n ++;
+    return true;
   }
 
   /* ---- TERMINOLOGY ----- */
@@ -47,6 +68,12 @@ class BinarySearchTree extends Model {
     return this._height (node);
   }
 
+  subtree (x) {
+    var u = this.find (x);
+    if (!u) return null;
+    return this._subtree (u);
+  }
+
   /* ---- OPERATIONS ----- */
   findPrev (x) {
     // if =, return the node;
@@ -72,18 +99,7 @@ class BinarySearchTree extends Model {
   add(x)
   {
     var newNode = new Node (x);
-    if (!this.root) this.root = newNode;
-    else {
-      var prevNode = this.findPrev (x);
-      if (!prevNode || prevNode.data === x)
-        return false;
-      else if (prevNode.data > x)
-        prevNode.left = newNode;
-      else
-        prevNode.right = newNode;
-    }
-
-    this.n ++;
+    this._add (x, newNode);
   }
 
   splice (u)

@@ -1,12 +1,12 @@
 /*jshint esversion: 6 */ 'use strict';
 
 class BinarySearchTree extends Model {
-  constructor()
+  constructor(r)
   {
     super();
 
-    this.root = null;
-    this.n    = 0;
+    this.root = r || null;
+    this.n    = r ? this._size (r) : 0;
   }
 
   /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
@@ -18,6 +18,11 @@ class BinarySearchTree extends Model {
   _height (u) {
     if (!u) return -1;
     return Math.max (this._height (u.left), this._height (u.right)) + 1;
+  }
+
+  _subtree (u) {
+    if (!u) return false;
+    return new BinarySearchTree (u);
   }
 
   _add (x, newNode) {
@@ -61,6 +66,12 @@ class BinarySearchTree extends Model {
     if (!node) return -1;
 
     return this._height (node);
+  }
+
+  subtree (x) {
+    var u = this.find (x);
+    if (!u) return null;
+    return this._subtree (u);
   }
 
   /* ---- OPERATIONS ----- */
