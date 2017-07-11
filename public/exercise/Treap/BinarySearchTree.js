@@ -1,12 +1,13 @@
+
 /*jshint esversion: 6 */ 'use strict';
 
 class BinarySearchTree extends Model {
-  constructor(r)
+  constructor(root)
   {
     super();
 
-    this.root = r || null;
-    this.n    = r ? this._size (r) : 0;
+    this.root = root || null;
+    this.n    = this.root ? this._size (this.root) : 0;
   }
 
   /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
@@ -18,11 +19,6 @@ class BinarySearchTree extends Model {
   _height (u) {
     if (!u) return -1;
     return Math.max (this._height (u.left), this._height (u.right)) + 1;
-  }
-
-  _subtree (u) {
-    if (!u) return false;
-    return new BinarySearchTree (u);
   }
 
   _add (x, newNode) {
@@ -39,6 +35,10 @@ class BinarySearchTree extends Model {
 
     this.n ++;
     return true;
+  }
+
+  _subtreeFrom (u) {
+    return new BinarySearchTree (u);
   }
 
   /* ---- TERMINOLOGY ----- */
@@ -69,11 +69,11 @@ class BinarySearchTree extends Model {
   }
 
   subtree (x) {
-    var u = this.find (x);
-    if (!u) return null;
-    return this._subtree (u);
-  }
+    var node = this.find (x);
+    if (!node) return null;
 
+    return this._subtreeFrom (node);
+  }
   /* ---- OPERATIONS ----- */
   findPrev (x) {
     // if =, return the node;
@@ -185,5 +185,15 @@ class BinarySearchTree extends Model {
     var s = "";
     this.each ((d)=>{s += d + " "; });
     return s;
+  }
+
+  toArray(){
+    var array = [ ];
+
+    this.each ((data)=>{
+      array.push (data);
+    });
+
+    return array;
   }
 }
