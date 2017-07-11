@@ -17,7 +17,7 @@ class ViewBase {
     this.modelBodHelper = new Div ($ (MODEL_BODY));
   }
 
-  /* ---- START - ADD THE NULL ELEMENT ---- */
+  /* ---- START ---- */
   start()
   {
     this.clear ();
@@ -185,13 +185,15 @@ class ViewBase {
   }
 
   drawWithinModel (element) {
+    // Think of this as being abstract
     console.error ("drawWithinModel using ViewBase implementation. This should be overloaded");
     return false;
   }
 
   // is element over top of the model?
-  isElementOverModel (element) {
-    // NTS: Element here is the div
+  isElementOverModel (elementDiv) {
+    // This should be overloaded in any View subclass.
+    // Think of this as being abstract
     console.error ("isElementOverModel should be overloaded");
     return false;
   }
