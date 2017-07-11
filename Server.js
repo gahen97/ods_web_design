@@ -2,13 +2,11 @@ var path    = require ("path");
 var express = require ("express");
 var app     = express ();
 
-app.get ("/exercise/:exerName", function (req, res) {
-	res.sendFile (path.join (__dirname, "/public/exercise/" + req.params.exerName +
-                             "/Views/Exercise.html"));
-});
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
 
-app.get ("/uset", function (req, res){
-	res.sendFile (path.join (__dirname, "/public/ods_video_website/ods_video.html"));
+app.get ("/:exerciseName", function (req, res){
+	res.render (req.params.exerciseName + "/Exercise");
 });
 
 app.use (express.static ("./public"));
