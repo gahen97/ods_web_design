@@ -20,7 +20,7 @@ class Control {
     this.exercise.load ();     //TODO rename ?? maybe
 
     // add tabbing
-    this.tabs = new Tabbify (this, {
+    this.tabs = new QuestionTabbify (this, {
       eventId: TABS_EVENTS_ID
     });
     this.updateActiveQuestion();

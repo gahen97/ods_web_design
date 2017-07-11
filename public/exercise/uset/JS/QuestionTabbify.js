@@ -4,7 +4,7 @@
   Note that this likely will not change and should be fine ...
 */
 
-class Tabbify {
+class QuestionTabbify {
   static addHeader (text, parent) {
     return $("<h3>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
   }
@@ -18,7 +18,7 @@ class Tabbify {
   }
 
   static addToHeader (text, header, data) {
-    var parent     = Tabbify.subFrom (header);
+    var parent     = QuestionTabbify.subFrom (header);
     var newElement = $("<div class='question-tab'>" + text + "</div>").appendTo (parent);
 
     for (var e in data)
@@ -31,7 +31,7 @@ class Tabbify {
     if (!options)
       options = { };
 
-    this.mainHeader = Tabbify.mainFrom ($("#questions_display"));
+    this.mainHeader = QuestionTabbify.mainFrom ($("#questions_display"));
     this.eventId    = options.eventId;
 
     // set up the accordion
@@ -117,12 +117,12 @@ class Tabbify {
       var name = q.name;
       if (name !== curName){
         curName = name;
-        header  = Tabbify.addHeader (name, mainHeader);
+        header  = QuestionTabbify.addHeader (name, mainHeader);
       }
 
       data.questionId = key;
 
-      var newElement = Tabbify.addToHeader (q.fullName, header, data);
+      var newElement = QuestionTabbify.addToHeader (q.fullName, header, data);
       this.items[q.getId ()] = $ (newElement) [0]; // DOM element, not jQuery
 
       // increase question number
