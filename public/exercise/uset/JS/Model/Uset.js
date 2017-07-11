@@ -21,7 +21,7 @@ class Uset extends Model {
     }
     this.set[x] = x.toString();       //we want everything the same type, so strings.
     //REQUIRES OVERLOADED TOSTRING FOR OBJECTS
-    this.n = this.n + 1;
+    this.n ++;
     return true;
   }
 
@@ -31,10 +31,10 @@ class Uset extends Model {
     {
       return null;
     }
-    var toReturn = this.set[x];
 
-    delete this.set [x];    // NOTE: delete actually deletes it. setting to undefined causes issues later
-    this.n = this.n - 1;
+    var toReturn = this.set[x];
+    delete this.set [x];
+    this.n --;
 
     return toReturn;
   }
@@ -105,31 +105,4 @@ class Uset extends Model {
   {
     return this.find (el) !== null; // note: null is allowed but ....... TODO
   }
-
-
-  // TODO After refactor, this should probably be gonezo
-  // moved directly into model
-  /*draw (div)
-  {
-    control.setModel (this);
-
-    //// TODO bad code
-    //for (var i in this.set)
-    //  control.view.addElement (this.set [i], {withinModel: true});
-  }*/
-
-/*  // TODO: Remove this. This is bad.
-  static fromUserInput (div)
-  {
-    var newSet = new Uset ();
-    var input  = $(".modelEntry", div);
-    var user   = input.val ();
-
-    var values = user.match (/[^ ]+/g);
-    for (var i in values){
-      newSet.add (values[i]);
-    }
-
-    return newSet;
-  }*/
 }
