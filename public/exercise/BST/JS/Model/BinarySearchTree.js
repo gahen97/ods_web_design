@@ -1,4 +1,11 @@
+/*
+  NOTE:
 
+    Currently, the equals() method checks if two trees are equal by the elements
+      within the trees, but not by an in order analysis.
+    Could probably change this to create two arrays of every element, in order,
+      then check the two arrays are identical. If they're not, its an issue.
+*/
 /*jshint esversion: 6 */ 'use strict';
 
 class BinarySearchTree extends Model {
@@ -9,7 +16,6 @@ class BinarySearchTree extends Model {
     this.root = root || null;
     this.n    = this.root ? this._size (this.root) : 0;
   }
-
 
   /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
   _size (u) {
@@ -42,14 +48,41 @@ class BinarySearchTree extends Model {
     return new BinarySearchTree (u);
   }
 
+  /* ---- TERMINOLOGY ----- */
+  size(x)
+  {
+    var u = (x || x === 0) ? this.find (x) : this.root;
+    return this._size (u);
+  }
+
+  depth (x) {
+    var node = this.find (x);
+    if (!node) return -1;
+
+    var depth = 0;
+    while (node !== this.root) {
+      node = node.parent;
+      depth ++;
+    }
+
+    return depth;
+  }
+
+  height (x) {
+    var node = this.find (x);
+    if (!node) return -1;
+
+    return this._height (node);
+  }
+
   subtree (x) {
     var node = this.find (x);
     if (!node) return null;
 
     return this._subtreeFrom (node);
   }
-  /* ---- OPERATIONS ----- */
 
+  /* ---- OPERATIONS ----- */
   findPrev (x) {
     // if =, return the node;
     // if >, go to right;
@@ -74,7 +107,7 @@ class BinarySearchTree extends Model {
   add(x)
   {
     var newNode = new Node (x);
-    return this._add (x, newNode);
+    this._add (x, newNode);
   }
 
   splice (u)
@@ -101,6 +134,18 @@ class BinarySearchTree extends Model {
   {
     var node = this.find (x);
     if (!node) return false;
+
+    if (!node.left || !node.right)
+      this.splice (node);
+    else {
+      var cur = node.right;
+
+      while (cur.left)
+        cur = cur.left;
+
+      node.data = cur.data;
+      this.splice (cur);
+    }
   }
 
   find(x)
@@ -111,10 +156,17 @@ class BinarySearchTree extends Model {
     return null;
   }
 
+
+  /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
-    // given another model, check if the two are equal.
-    // returns true if equal, false if not.
+    var result = true;
+    this.each ((data) => {
+      if (!other.contains (data))
+        result = false;
+    });
+
+    return result;
   }
 
   copy()

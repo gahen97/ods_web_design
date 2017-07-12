@@ -75,7 +75,7 @@ class ViewBase {
     this.elementsByValue [value].push (newElement);
 
     if (options.withinModel)
-      this.drawWithinModel (newElement);
+      this.drawWithinModel (newElement, options.data);
 
     if (options.events !== false) {
       // Moved this into here. Now Element doesn't need to access Control, which it shouldn't
@@ -116,10 +116,11 @@ class ViewBase {
   }
 
   removeElements (elems, checkFunc) {
-    $ (elems).each ((i, e)=>{
+    for (var i in elems) {
+      var e = elems [i];
       if (!checkFunc || checkFunc (e))
         this.removeElementById (e.getId ());
-    });
+    }
   }
 
   /*removeElementByValue (value) {

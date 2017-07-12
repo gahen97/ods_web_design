@@ -1,7 +1,6 @@
 
 /*jshint esversion: 6 */ 'use strict';
-/* Hey I'm back */
-const VIEW_CODE_ALL = "delete them all noober";
+const VIEW_CODE_ALL = "View.Code.All";
 
 class ViewBase {
   constructor() {
@@ -13,11 +12,11 @@ class ViewBase {
     this.elements = { };
     this.elementsByValue = { };
 
-    this.modelDivHelper = new Div ($ (MODEL_MAIN)); // #TODO
-    this.modelBodHelper = new Div ($ (MODEL_BODY)); // #TODO
+    this.modelDivHelper = new Div ($ (MODEL_MAIN));
+    this.modelBodHelper = new Div ($ (MODEL_BODY));
   }
 
-  /* ---- START - ADD THE NULL ELEMENT ---- */
+  /* ---- START ---- */
   start()
   {
     this.clear ();
@@ -76,7 +75,7 @@ class ViewBase {
     this.elementsByValue [value].push (newElement);
 
     if (options.withinModel)
-      this.drawWithinModel (newElement);
+      this.drawWithinModel (newElement, options.data);
 
     if (options.events !== false) {
       // Moved this into here. Now Element doesn't need to access Control, which it shouldn't
@@ -185,13 +184,15 @@ class ViewBase {
   }
 
   drawWithinModel (element) {
+    // Think of this as being abstract
     console.error ("drawWithinModel using ViewBase implementation. This should be overloaded");
     return false;
   }
 
   // is element over top of the model?
-  isElementOverModel (element) {
-    // NTS: Element here is the div
+  isElementOverModel (elementDiv) {
+    // This should be overloaded in any View subclass.
+    // Think of this as being abstract
     console.error ("isElementOverModel should be overloaded");
     return false;
   }

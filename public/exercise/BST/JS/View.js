@@ -40,13 +40,36 @@ class View extends ViewBase {
   }
 
   // draw an element within the model
-  drawWithinModel (element) {
-    var pos = this.modelDivHelper.randomPosition ();
+  drawWithinModel (element, data) {
+    if (!data) return false;
+
+    var x = data.x;
+    var y = data.y;
+
+    var pos = this.modelDivHelper.fromOffset ({
+      top: y,
+      left: x
+    })
     element.moveTo (pos);
   }
 
   displayModel (m) {
-    // This draws out the model to the screen,
-    //   replacing the old one.
+    var x = 0;
+    var numNodes = m.size ();
+
+    this.clear ();
+
+    Traversal.inorder (m, (data, node)=>{
+      var depth = m.depth (data);
+      var index = x++;
+
+      this.addElement (data, {
+        withinModel: true,
+        data: {
+          x: index * 70,
+          y: depth * 70
+        }
+      });
+    });
   }
 }

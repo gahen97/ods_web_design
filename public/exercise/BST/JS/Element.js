@@ -11,8 +11,19 @@ class Element extends ElementBase {
   }
 
   generate () {
-    // Create a new div to represent the element,
-    //   returning the new div
+    var elementDiv = $(ELEMENT_TEMPLATE).clone ();
+    var model      = $(MODEL_DISPLAY);
+    var span       = $("span", elementDiv);
+
+    // set the text ...
+    span.text (this.value).data ("id", this.id);
+
+    // parent it to the main div, add the stuff, return
+    elementDiv.insertAfter (model).data ("id", this.id);
+
+    this.addControls (elementDiv, MODEL_BODY + " div");
+
+    return elementDiv;
   }
 
   setActive (isActive) {

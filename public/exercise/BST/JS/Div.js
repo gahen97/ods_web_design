@@ -72,6 +72,24 @@ class Div {
     };
   }
 
+  static positionFromPercentage (div, percentage) {
+    var dimensions = this.dimensionsOf (div);
+    var xOs        = dimensions.width * percentage.x;
+    var yOs        = dimensions.height * percentage.y;
+
+    return {
+      top : yOs + dimensions.yP,
+      left : xOs + dimensions.xP
+    }
+  };
+
+  static fromOffset (div, offset){
+    var dimensions = this.dimensionsOf (div);
+    return {
+      top: dimensions.yP + offset.top,
+      left: dimensions.xP + offset.left
+    }
+  }
 
   /* methods */
   constructor (div) {
@@ -100,6 +118,15 @@ class Div {
       return Div.randomPositionWithinRound (this.myDiv);
     return Div.randomPositionWithin (this.myDiv);
   }
+
+  fromPercentage (p) {
+    return Div.positionFromPercentage (this.$div, p);
+  }
+
+  fromOffset (os) {
+    return Div.fromOffset(this.$div, os);
+  }
+
 
   elementOver (element) {
     var pos = $(element).offset ();
