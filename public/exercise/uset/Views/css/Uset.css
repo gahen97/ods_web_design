@@ -4,30 +4,66 @@ note that 1/12 = 8.33333 %
 
 https://storage.googleapis.com/supplemental_media/udacityu/2872198569/mock3-portfolio-1.pdf
 */
-
-#exercise * {
-  max-width: 960px;
-
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-
-
-}
-
-a {
-  text-decoration: none;
-  color: grey;
-}
-
-a:hover {
-  color: grey;
-}
+rem = 1em;
 
 li.tabbedQuestion:hover {
   color: silver;
 }
+
+#message {
+  background-color: #F4F4F4;
+  color: #565656;
+  border: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+#input_container {
+  text-align: center;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
+}
+
+#button_enter {
+  background-image: url("../../images/insert.png");
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  border: 0;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+  outline: none;
+}
+
+#button_enter:hover {
+  background-image: url("../../images/insert2.png");
+}
+
+#prevArrow, #nextArrow {
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+#prevArrow {
+  background-image: url("../../images/arrow_prev.png");
+}
+
+#nextArrow {
+  background-image: url("../../images/arrow_next.png");
+}
+
+#prevArrow:hover {
+  background-image: url("../../images/arrow_prev2.png");
+}
+
+#nextArrow:hover {
+  background-image: url("../../images/arrow_next2.png");
+}
+
 /* additional styling that's probably useful */
 .borderized {
   margin-top:20px;
@@ -36,54 +72,55 @@ li.tabbedQuestion:hover {
 .border-light {
   border: 1px solid darkgray;
 }
+
 .border-mid {
   border: 3px solid darkgray;
 }
+
 .border-strong {
   border: 5px solid darkgray;
 }
 
-.border-colour-error,
-.border-color-error {
-  border-color: red;
+.border-colour-error, .border-color-error {
+  color: red;
 }
 
-.border-colour-highlight,
-.border-color-highlight{
+.border-colour-highlight, .border-color-highlight {
   border-color: #e6ac00;
 }
 
-.border-colour-success,
-.border-color-success{
-  border-color: #1fa000;
+.border-colour-success, .border-color-success {
+  color: #1fa000;
 }
 
-.hidden{
+.hidden {
   display: none;
 }
-.no-visibility{
+
+.no-visibility {
   visibility: hidden;
 }
 
-.flexCol{
+.flexCol {
   display: flex;
   flex-direction: column;
-
-  margin-top:20px;
+  margin-top: 20px;
 }
 
-.bottom{
+.bottom {
   margin-top: auto;
 }
 
-.left{
+.left {
   display: inline-block;
   float: left;
 }
-.right{
+
+.right {
   display: inline-block;
   float: right;
 }
+
 .center{
   margin: 0 auto;
 }
@@ -102,7 +139,7 @@ li.tabbedQuestion:hover {
 }
 
 .active-tab {
-  color: #ef8043;
+  font-weight: bold;
 }
 
 .round { /* aka circular ... but then there's ovals. so its round */
@@ -110,99 +147,99 @@ li.tabbedQuestion:hover {
 }
 
 /* element styling */
-.interactiveVideoFrame {
-  height: 630px;
-  width: 960px;
-  border: none;
-}
-
 .modelDisplay {
-  height: 80%;
-  min-width: 50%;
   border: 5px solid #565656;
+  min-width: 50%;
+  height: 90%;
   margin: auto;
   margin-top: 20px;
 }
 
-
 /* using on the model body. defines the main div */
-.modelBody{
-  margin: 0 auto;
-  height: 80vh;
+.modelBody {
+  width: 95%;
+  height: 60vh;
   min-height: 300px;
   max-height: 400px;
-  width: 95%;
-  margin-top:20px;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
 }
 
 .modelMain{
-  /* Firefox */
-  height: -moz-calc(100% - 30px);
-  /* WebKit */
-  height: -webkit-calc(100% - 30px);
-  /* Opera */
-  height: -o-calc(100% - 30px);
-  /* Standard */
-  height: calc(100% - 30px);
+  height: -moz-calc(100% - 30px); /* Firefox */
+  height: -webkit-calc(100% - 30px);  /* WebKit */
+  height: -o-calc(100% - 30px);  /* Opera */
+  height: calc(100% - 30px);  /* Standard */
 }
 
 .modelEntry{
+  border: 0;
+  text-align: center;
   width: 100%;
   min-height: 25px;
-  border: 0;
 }
 
 ::placeholder {
-  opacity:0.5;
   text-align: center;
+  opacity: 0.5;
 }
 
 /* element ... TODO: should show as clickable, draggable. style? */
 .element {
-  cursor: pointer;
+  background-color: #565656;
+  color: white;
+  border: 3px solid #565656;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: courier;
   text-align: center;
   width: 35px;
   height: 35px;
   display: inline-block;
-  background-color: #565656;
-  border-radius: 5px;
-  line-height: 30px; /* needs this for vertically centered text */
-  color: white;
-  border: 3px solid #565656;
-  font-weight: bold;
-  font-family: courier;
   position: absolute;
+  cursor: -webkit-grab;
+  line-height: 30px;  /* needs this for vertically centered text */
 }
+
 .element:hover{
-    background-color: white;
-    color: #565656;
+  background-color: white;
+  color: #565656;
 }
+
 .element:active {
   background-color: white;
   color: #565656;
-  box-shadow: 2px 2px 0px 0px #aaa;
+  width: 37px;
+  height: 37px;
+  box-shadow: 1px 1px 1px 1px #aaa;
+  cursor: -webkit-grabbing;
 }
-
 /* We've been trying too hard... why do we do that? Why do I do that? Why do I do that. */
 
 /* trash can ........ should be a small image, top right corner */
 .trashCan {
   width: 40px;
   height: 40px;
-  float: right;
   margin-right: 15px;
   margin-top: 15px;
+  float: right;
 }
 
 /* accordion - remove the borders on headers */
-.ui-accordion-header,
-.accordionHeader{
-  border: 0px !important;
+.ui-accordion-header, .accordionHeader{
   background: none !important;
   color: #565656 !important;
+  border: 0px !important;
+  font-family: courier;
+  font-size: 1rem !important;
   margin: 0 !important;
-  margin-left: 10px !important;
+  margin-left: 20px !important;
+  padding-left: 0px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
   cursor: pointer;
+  outline: none;
 }
 
 .ui-accordion-header-icon{
@@ -212,87 +249,80 @@ li.tabbedQuestion:hover {
 }
 
 .accordion-sub{
-  border: 0 !important;
   background: none !important;
   color: #565656 !important;
-  margin-left: 2% !important;
-
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
-  padding-left: 14px !important;
-
+  border: 0 !important;
   width: 100% !important;
   height: contents !important;
+  margin-left: 2% !important;
+  padding-top: 5px !important;
+  padding-bottom: 10px !important;
+  padding-left: 20px !important;
 }
 
-.ui-accordion-content{
-  padding-top: 0em !important;
+.ui-accordion-content {
+  font-family: courier;
+  font-size: 0.8em !important;
   margin-top: 0em !important;
-  cursor: pointer;
+  padding-top: 0em !important;
 }
 
 .question-tab{
   text-align: left;
   margin: 2px;
+  cursor: pointer;
+}
+
+.question-tab:hover {
+  font-weight: bold;
 }
 
 .questionButtons {
-  display:flex;
-  align-items:center;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
 }
 
-.questionButtons *{
-  margin:0 auto;
+.questionButtons * {
+  margin: 0 auto;
 }
 
 .checkAndShowDiv {
   margin: 0px;
 }
 
-.arrow {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
 .button {
-  cursor: pointer;
   width: 30px;
   height: 30px;
+  cursor: pointer;
 }
 
 .parametersBody {
   font-weight: bold;
   text-align: center;
+  margin-top: 20px;
 }
 
-#input_container {
-   text-align: center;
-   margin: 0 auto;
-   position: relative;
-}
-
-#button_enter {
-  position: absolute;
-  background: url("../../images/insert.png") no-repeat;
-  background-size: 15px 15px;
-  border: 0;
-  height: 15px;
-  width: 15px;
-  right: 5px;
-  top: 5px;
+.showAnswerButton, .checkAnswerButton{
+  background-color: #565656;
+  color: white;
+  border: 3px solid #565656;
+  border-radius: 5px;
+  padding: 10px;
   cursor: pointer;
+  display: inline-block;
 }
 
-.showAnswerButton,
-.checkAnswerButton{
-  cursor: pointer;
+.showAnswerButton:hover, .checkAnswerButton:hover {
+  background-color: white;
+  color: #565656;
 }
 
 /* jquery ui stuff */
 .ui-error-dialog {
   background-color: #b00 !important;
 }
+
 
 /*add some margin and/or padding to rows cols as needed as absolute px*/
 
