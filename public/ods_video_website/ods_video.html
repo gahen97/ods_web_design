@@ -2,50 +2,87 @@
 <html>
 
 <!---
-	NOTE: This isn't used anymore. It's now inside views/ods_video.pug
-					Also note that with any changes, the block EXERCISE_HEAD and
-					block EXERCISE_CONTENT have to stay the same for exercises to work
+	TODO: Inject HTML code into <div id='exercise'> programmatically.
+	  Can then develop Exercise.html, keep this the same, and inject the given
+		exercise into here.
 -->
 
 <head>
 	<title> Open Data Structures </title>
 	<meta charset="UTF-8">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"> </script>
 	<link rel="stylesheet" type="text/css" href="ods_video_website/styles/normalize.css">
 	<link rel="stylesheet" type="text/css" href="ods_video_website/styles/styles.css">
 	<script src="ods_video_website/script/script.js"> </script>
 
-		<script src="jquery-ui/jquery-ui.min.js"></script>
-		<script src="libs/jquery.ui.touch-punch.min.js"></script> <!-- mobile support -->
+	<script src="jquery-ui/jquery-ui.min.js"> </script>
+	<script src="libs/jquery.ui.touch-punch.min.js"> </script> <!-- mobile support -->
 
+  <script type="text/javascript" src="/exercise/uset/JS/lib/jsplumb.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Array.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Random.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Dialog/Popup.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Dialog/ErrorDialog.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Dialog/SuccessDialog.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Dialog/HighlightDialog.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Div.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Model/Model.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Model/Uset.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/AnswerType.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/AddAnswer.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/FindAnswer.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/AnswerTypes/RemoveAnswer.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Instructions.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Question.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Add.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Find.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Questions/Remove.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/QuestionTypes/QuestionType.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/QuestionTypes/Operations.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Defs.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/DomDefs.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Exercise.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/DOMEventHandler.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/CustomEventHandler.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/ElementBase.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Element.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/ViewBase.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/View.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Events.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Tabbify.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/ChapterTabbify.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/Control.js"> </script>
+  <script type="text/javascript" src="/exercise/uset/JS/main.js"> </script>
+
+  <link href="/exercise/uset/Views/css/Uset.css" rel="stylesheet" type="text/css">
 	<link href="/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css">
 
 </head>
 
 <body>
 
-<div id="total_content">
+<div id="total_content">  <!-- eveything inside the page -->
 
-	<div id="heading">
+	<div id="heading"> <!-- heading -->
 		<div id="title"> <strong> Open Data Structures </strong> </div>
 		<div id="main_menu"> <a href=""> home </a> | <a href=""> about </a> | <a href=""> feedback </a> | <a href=""> contact </a> </div>
 	</div>
 
 	<div id="content">
 		<div id="sidebar">
-			<div id="sidebar_nav"> Navigation
+			<div id="sidebar_nav"> <span> Navigation </span>
 				<div id="sidebar_tabs">
-					<div id="modules_tab"></div>
-					<div id="questions_tab"></div>
+					<div id="modules_tab"> </div>
+					<div id="questions_tab"> </div>
 				</div>
 			</div>
 
 			<div id="modules_display"> </br>
-					<div></div>
+					<div> </div>
 			</div>
 
 			<div id="questions_display"> </br>
-				<div></div>
+				<div> </div>
 			</div>
 		</div>
 
@@ -56,7 +93,7 @@
 			</div>
 
 			<div id="video_frame">
-				<div id="actual_video"></div>
+				<div id="actual_video"> </div>
 			</div>
 
 			<div id="exercise">
@@ -69,10 +106,9 @@
 				        <div class="instructionsBody" style="margin-top: 20px;">
 				          <p> instructions </p>
 				        </div>
-
 								<div id="input_container" class="col-8">
-									<input type="text" class="modelEntry bottom" placeholder="type in the value to be added here"></input>
-									<div id="button_enter"></div>
+									<input type="text" class="modelEntry bottom" placeholder="type in the value to be added here"> </input>
+									<div id="button_enter"> </div>
 								</div>
 
 				        <div class="parametersBody">
@@ -81,8 +117,8 @@
 
 				        <div class="modelBody flexCol borderized" style="margin-top: 10px;">
 				          <div class="modelMain col-12 ">
-				            <img id="trash" src="exercise/uset/images/trashcan.png" class="trashCan"></img>
-				            <div id="model" class="modelDisplay col-6 round"></div>
+				            <img id="trash" src="exercise/uset/images/trashcan.png" class="trashCan"> </img>
+				            <div id="model" class="modelDisplay col-6 round"> </div>
 				          </div>
 				        </div>
 				      </div>
@@ -93,7 +129,7 @@
 
 				      <div class="questionButtons" > <!-- TODO rename this class -->
 				        <div class="prevArrowDiv">
-				          <div id="prevArrow" class="button" onclick="return false;"></div> <!-- TODO set up event handlers and probably rename this class from arrow-->
+				          <div id="prevArrow" class="button" onclick="return false;"> </div> <!-- TODO set up event handlers and probably rename this class from arrow-->
 				        </div>
 				        <div class="checkAndShowDiv">
 				          <div class="checkAnswerButton" class="button" onclick="return false;"> Check Answer </div> <!-- TODO change this -->
@@ -121,6 +157,7 @@
 				    </div>
 				  </div>
 				</div>
+
 			</div>
 		</div>
 	</div>
