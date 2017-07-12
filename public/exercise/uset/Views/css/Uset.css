@@ -271,7 +271,7 @@ li.tabbedQuestion:hover {
   text-align: left;
   margin: 2px;
   cursor: pointer;
-  
+
 }
 
 .question-tab:hover {
@@ -312,6 +312,7 @@ li.tabbedQuestion:hover {
   padding: 10px;
   cursor: pointer;
   display: inline-block;
+  margin: 2px;
 }
 
 .showAnswerButton:hover, .checkAnswerButton:hover {
