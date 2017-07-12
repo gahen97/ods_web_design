@@ -2,8 +2,6 @@
   NOTE: I'm not super sure this is working. It seems to be.
 */
 
-function log(b, n){ return Math.log(n) / Math.log (b); }
-
 class ScapegoatTree extends BinarySearchTree {
   constructor(){
     super();
@@ -18,7 +16,7 @@ class ScapegoatTree extends BinarySearchTree {
     this.q++;
 
     var depth = this.depth (x)
-    if (depth > log (3/2, this.q)){
+    if (depth > log32 (this.q)){
       var w = u.parent;
 
       while (3 * this._size (w) <= 2 * this._size (w.parent))
@@ -72,4 +70,10 @@ class ScapegoatTree extends BinarySearchTree {
 
     return a [i + m];
   }
+
+  /* ---- log of 3/2 q --- */
+	log32(q) {
+		var log23 = 2.4663034623764317;
+		return Math.ceil(log23*Math.log(q));
+	}
 }
