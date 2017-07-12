@@ -5,6 +5,8 @@
 /*jshint esversion: 6 */ 'use strict';
 
 /* Constants go here */
+const NULL_CHARACTER = "∅";
+
 const DEF_PLUMB_CLASS = "plumba-wumba";
 
 const ELEM_EVENTS_ID = "elementEvents";
@@ -36,14 +38,16 @@ var questionTypesClassNames = [Operations];
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[AddAnswer]];
+var answerTypesClassNames = [[AddAnswer, FindAnswer]];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[10]];
+var numberOfQuestionsRequired = [[10, 5]];
 var __addMinParam__ = 1;
-var __addMaxParam__ = 99;
+var __addMaxParam__ = 9;
+var __findMinParam__ = 1;
+var __findMaxParam__ = 9;
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
@@ -53,8 +57,12 @@ var __addMaxParam__ = 99;
 //     instructionsText: Some instructions to be shown for the question
 
   var questionData = [
-    [{class : Add, instructionsText: "Add an element to the binary search tree."}]
-                      ];
+    [
+     {class : Add, instructionsText: "Add an element to the binary search tree."},
+     {class : Find, instructionsText: "Find an element by clicking on it."}
+    ],
+];
+
 
 // Min and max values to be used as parameters for different questions
 /*

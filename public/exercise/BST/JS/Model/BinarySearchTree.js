@@ -44,6 +44,15 @@ class BinarySearchTree extends Model {
     return true;
   }
 
+
+  _find(x)
+  {
+    var node = this.findPrev (x);
+    if (node && node.data === x)
+      return node;
+    return null;
+  }
+
   _subtreeFrom (u) {
     return new BinarySearchTree (u);
   }
@@ -51,12 +60,12 @@ class BinarySearchTree extends Model {
   /* ---- TERMINOLOGY ----- */
   size(x)
   {
-    var u = (x || x === 0) ? this.find (x) : this.root;
+    var u = (x || x === 0) ? this._find (x) : this.root;
     return this._size (u);
   }
 
   depth (x) {
-    var node = this.find (x);
+    var node = this._find (x);
     if (!node) return -1;
 
     var depth = 0;
@@ -69,14 +78,14 @@ class BinarySearchTree extends Model {
   }
 
   height (x) {
-    var node = this.find (x);
+    var node = this._find (x);
     if (!node) return -1;
 
     return this._height (node);
   }
 
   subtree (x) {
-    var node = this.find (x);
+    var node = this._find (x);
     if (!node) return null;
 
     return this._subtreeFrom (node);
@@ -102,6 +111,11 @@ class BinarySearchTree extends Model {
     }
 
     return prevNode;
+  }
+
+  find (x) {
+    var node = this._find (x);
+    return node && node.data;
   }
 
   add(x)
@@ -132,7 +146,7 @@ class BinarySearchTree extends Model {
 
   remove(x)
   {
-    var node = this.find (x);
+    var node = this._find (x);
     if (!node) return false;
 
     if (!node.left || !node.right)
@@ -148,13 +162,6 @@ class BinarySearchTree extends Model {
     }
   }
 
-  find(x)
-  {
-    var node = this.findPrev (x);
-    if (node && node.data === x)
-      return node;
-    return null;
-  }
 
 
   /* ------ EXERCISE STUFF ------ */
@@ -186,7 +193,7 @@ class BinarySearchTree extends Model {
   contains (el)
   {
     // check if the model contains given element
-    return this.find (el) !== null;
+    return this._find (el) !== null;
   }
 
   toString(){
