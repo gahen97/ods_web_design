@@ -39,43 +39,42 @@ block EXERCISE_HEAD
     link(href='/exercise/uset/Views/css/Uset.css', rel='stylesheet', type='text/css')
 
 block EXERCISE_CONTENT
-    .exercise.grid(style='margin: 20px; padding: 10px;')
-      strong(style='font-size:1.25em;')  Exercise
-      .row
-        .col-12.questionFrame
-          .questionBody
-            .instructionsBody(style='margin-top: 20px;')
-              p  instructions
-            #input_container.col-8
-              input.modelEntry.bottom(type='text', placeholder='Enter value to add')
-              button#button_enter
-            .parametersBody(style='margin-top: 10px;')
-              p  params
-            .modelBody.flexCol.borderized(style='margin-top: 10px;')
-              .modelMain.col-12
-                img#trash.trashCan(src='exercise/uset/images/trashcan.png')
-                #model.modelDisplay.col-6.round
-          #messageDiv.col-8.no-visibility.center.textCentered
-            input#message.col-12.bottom.border-mid(type='text', value='', readonly='')
-          .questionButtons(style='margin-top: 10px;')
-            // TODO rename this class
-            .prevArrowDiv
-              img#prevArrow.arrow(href='', src='exercise/uset/images/arrow_prev.png', onclick='return false;')
-              // TODO set up event handlers and probably rename this class from arrow
-            .checkAndShowDiv
-              .checkAnswerButton(style='display:inline-block; border-radius: 5px; background-color: #565656; padding: 10px; color: white;')
-                a#checkBtn.button(style='color:white;', href='', onclick='return false;') Check Answer
-                // TODO change this
-              .showAnswerButton(style='display:inline-block; border-radius: 5px; background-color: #565656; padding: 10px; color: white;')
-                a#showAnswerBtn.button(style='color:white;', href='', onclick='return false;') Show Answer
-                // TODO change this
-            .nextArrowDiv
-              img#nextArrow.arrow(href='', src='exercise/uset/images/arrow_next.png', onclick='return false;')
-        #template.hidden
-          //
-            For now, stuff inside here is a reference to the HTML that should be used ...
-            Anything here will be copied later, inside some code, to make
-            new HTML elements.
-            TODO made these square. Looks better imo, especially for NULL
-          .element
-            span.verticallyCentered
+  .exercise.grid(style='margin: 20px; padding: 10px;')
+    strong(style='font-size:1.25em;')  Exercise
+    .row
+      .col-12.questionFrame
+        .questionBody
+          .instructionsBody(style='margin-top: 20px;')
+            p  instructions
+          #input_container.col-8
+            input.modelEntry.bottom(type='text', placeholder='type in the value to be added here')
+            #button_enter
+          .parametersBody
+            p  params
+          .modelBody.flexCol.borderized(style='margin-top: 10px;')
+            .modelMain.col-12
+              img#trash.trashCan(src='exercise/uset/images/trashcan.png')
+              #model.modelDisplay.col-6.round
+        #messageDiv.col-8.no-visibility.center.textCentered
+          input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')
+        .questionButtons
+          // TODO rename this class
+          .prevArrowDiv
+            #prevArrow.button(onclick='return false;')
+            // TODO set up event handlers and probably rename this class from arrow
+          .checkAndShowDiv
+            .checkAnswerButton(onclick='return false;')  Check Answer
+            // TODO change this
+            .showAnswerButton(onclick='return false;')  Show Answer
+            // TODO change this
+          .nextArrowDiv
+            #nextArrow.button(onclick='return false;')
+            // TODO set up event handlers
+      #template.hidden
+        //
+          For now, stuff inside here is a reference to the HTML that should be used ...
+          Anything here will be copied later, inside some code, to make
+          new HTML elements.
+          TODO made these square. Looks better imo, especially for NULL
+        .element
+          span.verticallyCentered  TEXT

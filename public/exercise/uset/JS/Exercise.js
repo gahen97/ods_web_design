@@ -107,8 +107,6 @@ class Exercise {
     this.refresh();
   }
 
-  //TODO refactor to goToQuestion(number? id?)
-
   next ()
   {
     return this.goToQuestion(this.getAbsQNum() + 1);
