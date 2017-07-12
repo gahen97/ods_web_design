@@ -11,27 +11,32 @@ html
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     link(rel='stylesheet', type='text/css', href='ods_video_website/styles/normalize.css')
     link(rel='stylesheet', type='text/css', href='ods_video_website/styles/styles.css')
+    script(src='ods_video_website/script/ChapterTabbify.js')
     script(src='ods_video_website/script/script.js')
     script(src='jquery-ui/jquery-ui.min.js')
     script(src='libs/jquery.ui.touch-punch.min.js')
     // mobile support
     link(href='/jquery-ui/jquery-ui.min.css', rel='stylesheet', type='text/css')
-    style.
-      .widen_main {
-      min-width: 100%;
-      }
     block EXERCISE_HEAD
   body
-    div(style='box-sizing: border-box; width:960px; margin:0 auto; margin-top:10px;')
+    #total_content
+      // eveything inside the page
       #heading
+        // heading
         #title
           strong  Open Data Structures
-        #main_menu  home | about | feedback | contact
-      div(style='margin-top:20px;')
+        #main_menu
+          a(href='')  home
+          span   |
+          a(href='')  about
+          span   |
+          a(href='')  feedback
+          span   |  
+          a(href='')  contact
+      #content
         #sidebar
-          // <div id="sidebar_top" style =" box-sizing: border-box; height:5vh; border:2px solid brown;"> </div>
           #sidebar_nav
-            | nav heading
+            span  Navigation
             #sidebar_tabs
               #modules_tab
               #questions_tab
@@ -41,10 +46,9 @@ html
           #questions_display
             br
             div
-          | 			 side bar
         #main
           #main_top
-            | [Video Heading] (Skiplists: Module 1)
+            | The USet Interface: Unordered Sets
             img#sidebar_toggle(src='ods_video_website/img/menubutton.png', onmouseover="this.src='ods_video_website/img/menubuttonhover.png';", onmouseout="this.src='ods_video_website/img/menubutton.png';")
           #video_frame
             #actual_video

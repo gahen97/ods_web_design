@@ -17,10 +17,10 @@ class Control {
     this.view.register (this.customEventHandler);
 
     this.view.start ();
-    this.exercise.start ();     //TODO rename ?? maybe
+    this.exercise.start ();
 
     // add tabbing
-    this.tabs = new Tabbify (this, {
+    this.tabs = new QuestionTabbify (this, {
       eventId: TABS_EVENTS_ID
     });
     this.updateActiveQuestion();
@@ -95,8 +95,6 @@ class Control {
     this.view.removeElement (e);
   }
 
-    //TODO test multiple active elements, feature or bug
-    // UPDATE: Tested this. It takes whichever div is on top, so this won't cause any issues.
   // set active element
   setActiveElement (element) {
     this.activeElement = element;

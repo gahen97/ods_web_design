@@ -33,7 +33,7 @@ class ChapterTabbify {
   }
 
   static addToHeader (text, header, data) {
-    var parent     = Tabbify.subFrom (header);
+    var parent     = ChapterTabbify.subFrom (header);
     var newElement = $("<div class='question-tab'>" + text + "</div>").appendTo (parent);
 
     for (var e in data)
@@ -46,7 +46,7 @@ class ChapterTabbify {
     if (!options)
       options = { };
 
-    this.mainHeader = Tabbify.mainFrom ($("#modules_display"));
+    this.mainHeader = ChapterTabbify.mainFrom ($("#modules_display"));
     this.eventId    = options.eventId;
 
     // set up the accordion
@@ -95,7 +95,7 @@ class ChapterTabbify {
   addQuestionTypes (qTypes, opts, parent) {
     // Take every question type as header
     // Take every question as text
-    //var parent = Tabbify.subFrom ($("#questions_display"));
+    //var parent = ChapterTabbify.subFrom ($("#questions_display"));
 
     var data   = { };
     if (!opts) opts = { };
@@ -104,7 +104,7 @@ class ChapterTabbify {
 
     for (var key in qTypes) {
       var qType = key;
-      var curHeader = Tabbify.addHeader (qType, parent);
+      var curHeader = ChapterTabbify.addHeader (qType, parent);
 
       data.chapterId = key;
       this.addQuestions (qTypes [key], curHeader, data, opts);
@@ -130,7 +130,7 @@ class ChapterTabbify {
 
       data.questionId = key;
 
-      var newElement = Tabbify.addToHeader (q, header, data);
+      var newElement = ChapterTabbify.addToHeader (q, header, data);
 
       this.items.push($ (newElement) [0]); // DOM element, not jQuery
 
