@@ -12,6 +12,9 @@ function updateSidebarHeadings ()
 
 $('document').ready(function() {
 
+  $("#sidebar_nav span").html("Modules");
+  $("#modules_tab").addClass('modules_click');
+
   new ChapterTabbify();
 
   model_height();
@@ -44,6 +47,7 @@ $('document').ready(function() {
   $("#modules_tab").click(function() {
     $("#modules_display").show();
     $("#questions_display").hide();
+    $("#sidebar_nav span").html("Modules");
     $("#modules_tab").addClass('modules_click');
     $("#questions_tab").removeClass('questions_click');
   });
@@ -51,6 +55,7 @@ $('document').ready(function() {
   $("#questions_tab").click(function() {
     $("#questions_display").show();
     $("#modules_display").hide();
+    $("#sidebar_nav span").html("Questions");
     $("#questions_tab").addClass('questions_click');
     $("#modules_tab").removeClass('modules_click');
   });
@@ -109,7 +114,6 @@ var set_fixed = function () {
       main_top_width();
     }
     main_margin_top();
-
   });
 
   $(window).resize(function() {

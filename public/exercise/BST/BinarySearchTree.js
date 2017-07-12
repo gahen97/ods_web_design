@@ -10,6 +10,7 @@ class BinarySearchTree extends Model {
     this.n    = this.root ? this._size (this.root) : 0;
   }
 
+
   /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
   _size (u) {
     if (!u) return 0;
@@ -41,33 +42,6 @@ class BinarySearchTree extends Model {
     return new BinarySearchTree (u);
   }
 
-  /* ---- TERMINOLOGY ----- */
-  size(x)
-  {
-    var u = (x || x === 0) ? this.find (x) : this.root;
-    return this._size (u);
-  }
-
-  depth (x) {
-    var node = this.find (x);
-    if (!node) return -1;
-
-    var depth = 0;
-    while (node !== this.root) {
-      node = node.parent;
-      depth ++;
-    }
-
-    return depth;
-  }
-
-  height (x) {
-    var node = this.find (x);
-    if (!node) return -1;
-
-    return this._height (node);
-  }
-
   subtree (x) {
     var node = this.find (x);
     if (!node) return null;
@@ -75,6 +49,7 @@ class BinarySearchTree extends Model {
     return this._subtreeFrom (node);
   }
   /* ---- OPERATIONS ----- */
+
   findPrev (x) {
     // if =, return the node;
     // if >, go to right;
@@ -126,18 +101,6 @@ class BinarySearchTree extends Model {
   {
     var node = this.find (x);
     if (!node) return false;
-
-    if (!node.left || !node.right)
-      this.splice (node);
-    else {
-      var cur = node.right;
-
-      while (cur.left)
-        cur = cur.left;
-
-      node.data = cur.data;
-      this.splice (cur);
-    }
   }
 
   find(x)
@@ -148,31 +111,39 @@ class BinarySearchTree extends Model {
     return null;
   }
 
-
-  /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
-    var result = true;
-    this.each ((data) => {
-      if (!other.contains (data))
-        result = false;
-    });
-
-    return result;
+    // given another model, check if the two are equal.
+    // returns true if equal, false if not.
   }
 
   copy()
   {
-    var newTree = new BinarySearchTree ();
-    Traversal.preorder (this, (data)=>{
-      newTree.add (data);
-    });
-    return newTree;
+    // copy this model into a new model, returning the new model.
   }
 
   each (f)
   {
-    Traversal.inorder (this, f);
+    var cur  = this.root;
+    var prev = null;
+
+    while (cur !== null){
+      if (prev === cur.parent && cur.left){
+        prev = cur;
+        cur  = cur.left;
+      } else {
+        if (prev === cur.left || prev === cur.parent)
+          f (cur);
+
+        if (cur.right){
+          prev = cur;
+          cur  = cur.right;
+        } else {
+          prev = cur;
+          cur  = cur.parent;
+        }
+      }
+    }
   }
 
   contains (el)

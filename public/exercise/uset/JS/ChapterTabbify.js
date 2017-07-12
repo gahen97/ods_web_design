@@ -16,7 +16,7 @@
 
 var chapters = {
   "Chapter 1": ["mod 1", "mod 2"],
-  "Chapter 2": ["mod 3", "mod 4"]
+  "Chapter 2": ["<a href='https://www.google.com'> mod 2 </a>", "mod 4"],
 }
 
 class ChapterTabbify {

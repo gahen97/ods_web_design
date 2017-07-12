@@ -13,15 +13,13 @@ class Node {
 
   get left () { return this.leftNode; }
   set left (newLeft) {
-    if (newLeft)
-      newLeft.parent = this;
+    newLeft.parent = this;
     this.leftNode  = newLeft;
   }
 
   get right () { return this.rightNode; }
   set right (newRight) {
-    if (newRight)
-      newRight.parent = this;
+    newRight.parent = this;
     this.rightNode  = newRight;
   }
 }

@@ -1,6 +1,7 @@
 
 /*jshint esversion: 6 */ 'use strict';
-const VIEW_CODE_ALL = "View.Code.All";
+/* Hey I'm back */
+const VIEW_CODE_ALL = "delete them all noober";
 
 class ViewBase {
   constructor() {
@@ -12,11 +13,11 @@ class ViewBase {
     this.elements = { };
     this.elementsByValue = { };
 
-    this.modelDivHelper = new Div ($ (MODEL_MAIN));
-    this.modelBodHelper = new Div ($ (MODEL_BODY));
+    this.modelDivHelper = new Div ($ (MODEL_MAIN)); // #TODO
+    this.modelBodHelper = new Div ($ (MODEL_BODY)); // #TODO
   }
 
-  /* ---- START ---- */
+  /* ---- START - ADD THE NULL ELEMENT ---- */
   start()
   {
     this.clear ();
@@ -184,15 +185,13 @@ class ViewBase {
   }
 
   drawWithinModel (element) {
-    // Think of this as being abstract
     console.error ("drawWithinModel using ViewBase implementation. This should be overloaded");
     return false;
   }
 
   // is element over top of the model?
-  isElementOverModel (elementDiv) {
-    // This should be overloaded in any View subclass.
-    // Think of this as being abstract
+  isElementOverModel (element) {
+    // NTS: Element here is the div
     console.error ("isElementOverModel should be overloaded");
     return false;
   }

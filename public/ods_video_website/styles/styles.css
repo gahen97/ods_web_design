@@ -22,7 +22,7 @@ ul {
 }
 
 a {
-  color: #565656;
+  color: #565656 !important;
   text-decoration: none;
 }
 
@@ -36,6 +36,8 @@ a {
 #heading {
   color: #565656;
   margin-top: 20px;
+  width: 100%;
+  position: relative;
 }
 
 #title {
@@ -49,7 +51,8 @@ a {
   font-family: inherit;
   margin-top: 5%;
   display: inline-block;
-  float: right;
+  position: absolute;
+  right: 46px;
 }
 
 #content {
@@ -131,7 +134,8 @@ a {
   height: 70px;
   min-height: 70px;
   margin-left: 2px;
-  padding: 10px;
+  padding-top: 20px;
+  padding-left: 20px;
   z-index: 1;
 }
 
