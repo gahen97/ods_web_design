@@ -84,6 +84,8 @@ class ViewBase {
     }
 
     this.storePositionOf (newElement);
+
+    return newElement;
   }
 
   // remove an element

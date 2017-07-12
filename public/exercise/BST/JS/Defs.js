@@ -5,6 +5,8 @@
 /*jshint esversion: 6 */ 'use strict';
 
 /* Constants go here */
+const DEF_PLUMB_CLASS = "plumba-wumba";
+
 const ELEM_EVENTS_ID = "elementEvents";
 const TABS_EVENTS_ID = "tabbedEvents";
 

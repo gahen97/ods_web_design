@@ -8,6 +8,7 @@ class View extends ViewBase {
     super(...arguments);
 
     // Anything else the view needs to do on construct
+    this.elementsFromNode = { };
   }
 
   // start up a new view
@@ -50,7 +51,13 @@ class View extends ViewBase {
       top: y,
       left: x
     })
+
     element.moveTo (pos);
+  }
+
+  connect (n1, n2) {
+    if (n1 && n2 && this.elementsFromNode [n1.id])
+      this.elementsFromNode [n1.id].connectTo (this.elementsFromNode [n2.id]);
   }
 
   displayModel (m) {
@@ -63,13 +70,22 @@ class View extends ViewBase {
       var depth = m.depth (data);
       var index = x++;
 
-      this.addElement (data, {
+      var newElem = this.addElement (data, {
         withinModel: true,
         data: {
           x: index * 70,
           y: depth * 70
         }
       });
+
+      this.elementsFromNode [node.id] = newElem;
     });
+
+    // go through again, getting every element and connecting it
+    // to it's left and right children
+    Traversal.inorder (m, (data, node)=>{
+      this.connect (node, node.left);
+      this.connect (node, node.right);
+    })
   }
 }

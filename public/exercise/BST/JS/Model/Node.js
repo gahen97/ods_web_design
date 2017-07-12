@@ -4,11 +4,15 @@
 /*jshint esversion: 6 */
 
 class Node {
+  static getNextId () { return Node.currentId ++; }
+  
   constructor(data){
     this.data      = data;
     this.leftNode  = null;
     this.rightNode = null;
     this.parent    = null;
+
+    this.id        = Node.getNextId ();
   }
 
   get left () { return this.leftNode; }
@@ -23,3 +27,6 @@ class Node {
     this.rightNode  = newRight;
   }
 }
+
+
+Node.currentId = 17;

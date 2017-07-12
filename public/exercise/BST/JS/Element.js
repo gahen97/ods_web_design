@@ -8,6 +8,7 @@ class Element extends ElementBase {
     super (...arguments);
 
     // Anything else that needs to be done for Elements
+    this.plumbs = [ ];
   }
 
   generate () {
@@ -24,6 +25,13 @@ class Element extends ElementBase {
     this.addControls (elementDiv, MODEL_BODY + " div");
 
     return elementDiv;
+  }
+
+  remove () {
+    super.remove ();
+
+    for (var i in this.plumbs)
+      this.plumbs [i].remove ();
   }
 
   setActive (isActive) {
@@ -43,5 +51,18 @@ class Element extends ElementBase {
   addControls (e) {
     // If there are any controls needed - draggable, droppable, ... -
     //   add them here. If given, e is the element
+  }
+
+  addPlumb (p) {
+    this.plumbs.push (p);
+  }
+
+  connectTo (otherElem) {
+    if (!otherElem) return false;
+    
+    var newConnection = new PlumbConnect (this.getElementDiv (),
+                                          otherElem.getElementDiv (),
+                                          {overlays: "arrow"});
+    this.addPlumb (newConnection);
   }
 }
