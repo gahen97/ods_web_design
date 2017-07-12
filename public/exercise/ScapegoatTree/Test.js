@@ -1,3 +1,32 @@
+/*
+  Treap Node
+*/
+/*jshint esversion: 6 */
+
+class Node {
+  constructor(data, p){
+    this.data      = data;
+    this.p         = p;
+    this.leftNode  = null;
+    this.rightNode = null;
+    this.parent    = null;
+  }
+
+  get left () { return this.leftNode; }
+  set left (newLeft) {
+    if (newLeft)
+      newLeft.parent = this;
+    this.leftNode  = newLeft;
+  }
+
+  get right () { return this.rightNode; }
+  set right (newRight) {
+    if (newRight)
+      newRight.parent = this;
+    this.rightNode  = newRight;
+  }
+}
+
 
 /*jshint esversion: 6 */ 'use strict';
 
@@ -197,3 +226,126 @@ class BinarySearchTree extends Model {
     return array;
   }
 }
+
+
+function log(b, n){ return Math.log(n) / Math.log (b); }
+
+class ScapegoatTree extends BinarySearchTree {
+  constructor(){
+    super();
+    this.q = 0;
+  }
+
+  /* ----- OPERATIONS ------- */
+  add (x) {
+    var u = new Node (x);
+    if (!super._add (x, u))
+      return false;
+    this.q++;
+
+    var depth = this.depth (x)
+    if (depth > log (3/2, this.q)){
+      var w = u.parent;
+
+      while (3 * this._size (w) <= 2 * this._size (w.parent))
+        w = w.parent;
+
+      this.rebuild (w.parent);
+    }
+
+    return true;
+  }
+
+  remove (x) {
+    if (!super.remove (x)) return false;
+    if (this.n * 2 < this.q){
+      this.rebuild (this.root);
+      this.q = this.n;
+    }
+    return true;
+  }
+
+
+  /* ----- REBUILDING ----- */
+  packIntoArray (from) {
+    var arr = [ ];
+    this._subtreeFrom(from).each (function (_, node) {
+      arr.push (node);
+    })
+    return arr;
+  }
+
+  rebuild(u) {
+    if (!u) return false;
+    var p = u.parent;
+    var a = this.packIntoArray (u);
+
+    if (!p) {
+      this.root = this.buildBalanced (a, 0, a.length);
+      this.root.parent = null;
+    } else if (p.right === u)
+      p.right = this.buildBalanced (a, 0, a.length);
+    else
+      p.left = this.buildBalanced (a, 0, a.length);
+  }
+
+  buildBalanced (a, i, s) {
+    if (!s) return null;
+    var m = Math.floor (s/2);
+
+    a[i + m].left = this.buildBalanced (a, i, m);
+    a[i + m].right = this.buildBalanced (a, i + m + 1, s - m - 1);
+
+    return a [i + m];
+  }
+}
+
+
+
+
+class Traversal{
+  static inorderTraversal (root, func) {
+    if (!root) return false;
+
+    Traversal.inorderTraversal (root.left, func);
+    func (root.data, root);
+    Traversal.inorderTraversal (root.right, func);
+  }
+
+  static preorderTraversal (root, func) {
+    if (!root) return false;
+
+    func (root.data, root);
+    Traversal.preorderTraversal (root.left, func);
+    Traversal.preorderTraversal (root.right, func);
+  }
+
+  static postorderTraversal (root, func) {
+    if (!root) return false;
+
+    Traversal.postorderTraversal (root.left, func);
+    Traversal.postorderTraversal (root.right, func);
+    func (root.data, root);
+  }
+
+  static inorder (tree, func){
+    Traversal.inorderTraversal (tree.root, func);
+  }
+  static preorder (tree, func){
+    Traversal.preorderTraversal (tree.root, func);
+  }
+  static postorder (tree, func){
+    Traversal.postorderTraversal (tree.root, func);
+  }
+}
+
+
+var t = new ScapegoatTree ();
+t.add (7);
+t.add (6);
+t.add (5);
+t.add (4);
+t.add (3);
+t.add (2);
+t.add (1);
+t.add (0);

@@ -1,18 +1,54 @@
+
 /*jshint esversion: 6 */ 'use strict';
 
 class BinarySearchTree extends Model {
-  constructor()
+  constructor(root)
   {
     super();
 
-    this.root = null;
-    this.n    = 0;
+    this.root = root || null;
+    this.n    = this.root ? this._size (this.root) : 0;
   }
 
-  size()
-  {
-    return this.n;
+
+  /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
+  _size (u) {
+    if (!u) return 0;
+    return 1 + this._size (u.left) + this._size (u.right);
   }
+
+  _height (u) {
+    if (!u) return -1;
+    return Math.max (this._height (u.left), this._height (u.right)) + 1;
+  }
+
+  _add (x, newNode) {
+    if (!this.root) this.root = newNode;
+    else {
+      var prevNode = this.findPrev (x);
+      if (!prevNode || prevNode.data === x)
+        return false;
+      else if (prevNode.data > x)
+        prevNode.left = newNode;
+      else
+        prevNode.right = newNode;
+    }
+
+    this.n ++;
+    return true;
+  }
+
+  _subtreeFrom (u) {
+    return new BinarySearchTree (u);
+  }
+
+  subtree (x) {
+    var node = this.find (x);
+    if (!node) return null;
+
+    return this._subtreeFrom (node);
+  }
+  /* ---- OPERATIONS ----- */
 
   findPrev (x) {
     // if =, return the node;
@@ -38,16 +74,27 @@ class BinarySearchTree extends Model {
   add(x)
   {
     var newNode = new Node (x);
-    if (!this.root) this.root = newNode;
-    else {
-      var prevNode = this.findPrev (x);
-      if (!prevNode || prevNode.data === x)
-        return false;
-      else if (prevNode.data > x)
-        prevNode.left = newNode;
+    this._add (x, newNode);
+  }
+
+  splice (u)
+  {
+    var child, parent;
+
+    child = u.left || u.right;
+
+    if (u === this.root){
+      this.root    = child;
+      child.parent = null;
+    } else {
+      parent = u.parent;
+      if (parent.left === u)
+        parent.left = child;
       else
-        prevNode.right = newNode;
+        parent.right = child;
     }
+
+    this.n --;
   }
 
   remove(x)
@@ -109,5 +156,15 @@ class BinarySearchTree extends Model {
     var s = "";
     this.each ((d)=>{s += d + " "; });
     return s;
+  }
+
+  toArray(){
+    var array = [ ];
+
+    this.each ((data)=>{
+      array.push (data);
+    });
+
+    return array;
   }
 }

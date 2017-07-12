@@ -1,27 +1,4 @@
 class Traversal{
-  /*static inorder (tree) {
-    var cur  = this.root;
-    var prev = null;
-
-    while (cur !== null){
-      if (prev === cur.parent && cur.left){
-        prev = cur;
-        cur  = cur.left;
-      } else {
-        if (prev === cur.left || prev === cur.parent)
-          f (cur.data);
-
-        if (prev !== cur.right && cur.right){
-          prev = cur;
-          cur  = cur.right;
-        } else {
-          prev = cur;
-          cur  = cur.parent;
-        }
-      }
-    }
-  }*/
-
   static inorderTraversal (root, func) {
     if (!root) return false;
 
