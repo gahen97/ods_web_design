@@ -26,20 +26,22 @@ var __MODULENAME__numberOfQuestionsRequired = [ ];
 */
 
 /* MODULENAME represents the working Model. This'll be used to create new models. */
-var __MODULENAME__ = ModelTemplate;
+var __MODULENAME__ = BinarySearchTree;
 
 // The Question Types to be used for the exercise.
-var questionTypesClassNames = [QuestionTypeTemplate];
+var questionTypesClassNames = [Operations];
 
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[AnswerTemplate]];
+var answerTypesClassNames = [[AddAnswer]];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[0]];
+var numberOfQuestionsRequired = [[10]];
+var __addMinParam__ = 1;
+var __addMaxParam__ = 99;
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
@@ -49,7 +51,7 @@ var numberOfQuestionsRequired = [[0]];
 //     instructionsText: Some instructions to be shown for the question
 
   var questionData = [
-    [{class : QuestionTemplate, instructionsText: "Instructions"}]
+    [{class : Add, instructionsText: "Add an element to the binary search tree."}]
                       ];
 
 // Min and max values to be used as parameters for different questions

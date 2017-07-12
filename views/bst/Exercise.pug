@@ -1,0 +1,77 @@
+extends ../ods_video.pug
+
+block EXERCISE_HEAD
+    script(type='text/javascript', src='/exercise/BST/JS/lib/jsplumb.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Array.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Random.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Dialog/Popup.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Dialog/ErrorDialog.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Dialog/SuccessDialog.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Dialog/HighlightDialog.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Div.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Model/Model.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Model/Node.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Model/BinarySearchTree.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Model/Traversals.js')
+    script(type='text/javascript', src='/exercise/BST/JS/AnswerTypes/AnswerType.js')
+    script(type='text/javascript', src='/exercise/BST/JS/AnswerTypes/AddAnswer.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Questions/Instructions.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Questions/Question.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Questions/Add.js')
+    script(type='text/javascript', src='/exercise/BST/JS/QuestionTypes/QuestionType.js')
+    script(type='text/javascript', src='/exercise/BST/JS/QuestionTypes/Operations.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Defs.js')
+    script(type='text/javascript', src='/exercise/BST/JS/DomDefs.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Exercise.js')
+    script(type='text/javascript', src='/exercise/BST/JS/DOMEventHandler.js')
+    script(type='text/javascript', src='/exercise/BST/JS/CustomEventHandler.js')
+    script(type='text/javascript', src='/exercise/BST/JS/ElementBase.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Element.js')
+    script(type='text/javascript', src='/exercise/BST/JS/ViewBase.js')
+    script(type='text/javascript', src='/exercise/BST/JS/View.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Events.js')
+    script(type='text/javascript', src='/exercise/BST/JS/QuestionTabbify.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Control.js')
+    script(type='text/javascript', src='/exercise/BST/JS/main.js')
+    link(href='/exercise/BST/Views/css/BST.css', rel='stylesheet', type='text/css')
+
+block EXERCISE_CONTENT
+  .exercise.grid(style='margin: 20px; padding: 10px;')
+    strong(style='font-size:1.25em;')  Exercise
+    .row
+      .col-12.questionFrame
+        .questionBody
+          .instructionsBody(style='margin-top: 20px;')
+            p  instructions
+          #input_container.col-8
+            input.modelEntry.bottom(type='text', placeholder='type in the value to be added here')
+            #button_enter
+          .parametersBody
+            p  params
+          .modelBody.flexCol.borderized(style='margin-top: 10px;')
+            .modelMain.col-12
+              img#trash.trashCan(src='exercise/BST/images/trashcan.png')
+              #model.modelDisplay.col-6.round
+        #messageDiv.col-8.no-visibility.center.textCentered
+          input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')
+        .questionButtons
+          // TODO rename this class
+          .prevArrowDiv
+            #prevArrow.button(onclick='return false;')
+            // TODO set up event handlers and probably rename this class from arrow
+          .checkAndShowDiv
+            .checkAnswerButton(onclick='return false;')  Check Answer
+            // TODO change this
+            .showAnswerButton(onclick='return false;')  Show Answer
+            // TODO change this
+          .nextArrowDiv
+            #nextArrow.button(onclick='return false;')
+            // TODO set up event handlers
+      #template.hidden
+        //
+          For now, stuff inside here is a reference to the HTML that should be used ...
+          Anything here will be copied later, inside some code, to make
+          new HTML elements.
+          TODO made these square. Looks better imo, especially for NULL
+        .element
+          span.verticallyCentered  TEXT
