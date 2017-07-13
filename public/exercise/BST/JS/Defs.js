@@ -17,6 +17,8 @@ const DIRECTION_RIGHT = "right";
 
 const DEF_MSG_LENGTH = 2 * 1000; // 2 seconds
 
+const LEVEL_HEIGHT = 70;
+
 var DEBUG = true;
 var instructionsId = "instructions";
 var questionId = "questions";

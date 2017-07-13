@@ -141,6 +141,11 @@ class Div {
     return newHeight;
   }
 
+  setHeight (h) {
+    this.$div.height (h);
+    this.calcHeight ();
+  }
+
   fixHeight () {
     this.$div.css ("height", this.calcHeight ());
   }

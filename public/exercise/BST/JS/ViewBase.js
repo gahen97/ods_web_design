@@ -64,10 +64,13 @@ class ViewBase {
 
   // add a new element
   addElement (value, options) {
+    console.log(options);
+    
     if (!options) options={};
 
     // add the element & push it into the elements object
-    var newElement                                = new Element (value);
+    console.log(options);
+    var newElement                                = new Element (value, options.constructArgs);
     this.elements [newElement.getId ()]           = newElement;
 
     if (!this.elementsByValue [value])

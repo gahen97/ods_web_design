@@ -1,6 +1,12 @@
 /*
   This has to be changed for different exercises.
   Mainly the DOM Related parts - dealing with the model display
+
+
+  TODO: If second-to-last row has two elements, each with two children,
+  they'll probably collide. may be worth fixing. unicorns and leprechauns and fairies
+  and donkeys! and donkey riding. way hey and away i go, donkey riding, donkey riding.
+  way hey and away i go, riding on a donkey.
 */
 
 class View extends ViewBase {
@@ -66,8 +72,13 @@ class View extends ViewBase {
   }
 
   displayModel (m) {
+    if (!m) m = this.currentModel;
+    this.currentModel = m;
+
     // Clear the model so we can draw a new tree
     this.clear ();
+
+    var deepest = m.height ();
 
     // Draw the tree of life
     Traversal.preorder (m, (data, node, stats)=>{
@@ -131,12 +142,30 @@ class View extends ViewBase {
         withinModel: true,
         data: {
           x: (leftPoint + rightPoint) / 2,
-          y: depth * 70
+          y: depth * LEVEL_HEIGHT
+        },
+        constructArgs: {
+          maxDepth: deepest
         }
       });
 
       // and add it into our node->element map, so we can find it later
       this.elementsFromNode [node.id] = newElem;
+
+      // edge case
+      var p = node && node.parent;
+      if (p && p.right && p.left) {
+        var leftElem = this.elementsFromNode [p.left.id];
+        var rightElem = this.elementsFromNode [p.right.id];
+
+        if (!leftElem || !rightElem) return;
+
+        var minLeft = leftElem.offset ().left + leftElem.outerWidth () + 2;
+        if (rightElem.offset ().left < minLeft)
+          rightElem.offset ({
+            left: minLeft
+          });
+      }
     });
 
     // Now we can connect these nodes on one more scan.
@@ -146,8 +175,23 @@ class View extends ViewBase {
       this.connect (node, node.right, DIRECTION_RIGHT);
     })
 
+    // increase model height to fit depth
+    var height = (deepest + 1) * 70;
+    this.modelBodHelper.setHeight (height);
+
     // NOTE: JsPlumb doesn't do well with drawing here and produces errors.
     // Ideally, we fix the errors. For now, though, we can repaint
     jsPlumb.repaintEverything ();
+  }
+
+  resizeModel ()
+  {
+    super.resizeModel ();
+    this.displayModel ();
+  }
+
+  fixPositions ()
+  {
+    this.displayModel ();
   }
 }

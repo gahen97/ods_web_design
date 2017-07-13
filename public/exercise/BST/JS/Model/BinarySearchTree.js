@@ -78,7 +78,7 @@ class BinarySearchTree extends Model {
   }
 
   height (x) {
-    var node = this._find (x);
+    var node = x ? this._find (x) : this.root;
     if (!node) return -1;
 
     return this._height (node);

@@ -1,12 +1,22 @@
 class JsPlumbDraggable {
-  constructor (element){
-    jsPlumb.draggable (element);
-    /*this.element = element;
+  constructor (eObj, element){
+/*    jsPlumb.draggable (element, {
+      grid:[1, 99999]
+    });*/
+    this.element = element;
+    this.elemObj = eObj;
+
     $ (element).draggable ({
-      drag: function () {
+      axis: 'x',
+      containment: 'parent',
+      drag: () => {
+        //this.elemObj.repaint ();
+        jsPlumb.repaintEverything ();
+      },
+      stop: () => {
         jsPlumb.repaintEverything ();
       }
-    });*/
+    });
   }
 
   setDraggable (t) {

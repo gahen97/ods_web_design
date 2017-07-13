@@ -4,11 +4,15 @@
 */
 
 class Element extends ElementBase {
-  constructor(){
+  constructor(value, args){
     super (...arguments);
+
+    console.log(args);
 
     // Anything else that needs to be done for Elements
     this.plumbs = [ ];
+    this.level  = 0;
+    this.maxLev = args && args.maxDepth;
   }
 
   generate () {
@@ -32,6 +36,9 @@ class Element extends ElementBase {
 
     for (var i in this.plumbs)
       this.plumbs [i].remove ();
+
+    this.leftEndpoint.remove();
+    this.rightEndpoint.remove();
   }
 
   setActive (isActive) {
@@ -46,15 +53,35 @@ class Element extends ElementBase {
   moveTo (offset) {
     // Move to some given position
     // TODO this is hacky and bad
-    console.log(offset);
-
     $ (this.element).offset (offset);
+  }
+
+  moveUp () {
+    if (this.level <= 0) return false;
+    this.level --;
+    this.moveTo ({
+      top: this.offset ().top - LEVEL_HEIGHT
+    })
+  }
+
+  moveDown () {
+    if (this.level >= this.maxLev) return false;
+    this.level ++;
+    this.moveTo ({
+      top: this.offset ().top + LEVEL_HEIGHT
+    })
   }
 
   addControls (e) {
     // If there are any controls needed - draggable, droppable, ... -
     //   add them here. If given, e is the element
-    this.draggy_waggy = new JsPlumbDraggable (e);
+    this.draggy_waggy = new JsPlumbDraggable (this, e);
+    this.leftEndpoint = new JsPlumbEndpoint (e, {
+      anchor: "BottomLeft"
+    });
+    this.rightEndpoint = new JsPlumbEndpoint (e, {
+      anchor: "BottomRight"
+    })
   }
 
   setDraggable (t) {
@@ -65,12 +92,38 @@ class Element extends ElementBase {
     this.plumbs.push (p);
   }
 
+  removePlumb (p) {
+    var index = this.plumbs.indexOf (p);
+    if (index > -1) this.plumbs.splice (index, 1);
+  }
+
+  repaint () {
+    for (var p in this.plumbs)
+      this.plumbs[p].repaint ();
+  }
+
   connectTo (otherElem, direction) {
     if (!otherElem) return false;
 
-    var newConnection = new PlumbConnect (this.getElementDiv (),
-                                          otherElem.getElementDiv (),
-                                          {overlays: "arrow"}).setDirection (direction);
+    var endpoint;
+    if (direction === DIRECTION_LEFT)
+      endpoint = this.leftEndpoint;
+    else
+      endpoint = this.rightEndpoint;
+
+    if (endpoint){
+      endpoint = endpoint.canvas;
+    }
+
+
+    var newConnection = new PlumbConnect (this,
+                                          otherElem,
+                                          {
+                                           overlays: "arrow",
+                                           classes: ["jsplumb-connection", "plumba-wumba"],
+                                           endpoint: endpoint
+                                          }).setDirection (direction);
     this.addPlumb (newConnection);
+    otherElem.addPlumb (newConnection);
   }
 }

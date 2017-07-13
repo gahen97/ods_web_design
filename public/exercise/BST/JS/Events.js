@@ -69,7 +69,15 @@ function onSubmitInput (element, evt) {
   if (!this.validInput (input))
     return inputError ();
 
-  this.view.addElement (input);
+  var q = this.exercise.getCurrQuestion ();
+  var m = q && q.getModel ();
+  var d = m && m.height ();
+
+  this.view.addElement (input, {
+    constructArgs: {
+      maxDepth: d + 1
+    }
+  });
   $(".modelEntry").val("");
 };
 

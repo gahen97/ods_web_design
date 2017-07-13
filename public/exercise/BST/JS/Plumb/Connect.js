@@ -5,8 +5,13 @@ const PLUMB_OVERLAY_OPTIONS = {
 class PlumbConnect {
   constructor(e1, e2, opts){
     if (!opts) opts={};
-    this.startpoint = e1;
-    this.endpoint   = e2;
+    this.uuid       = opts.uuid;
+    this.startpoint = opts.endpoint || e1.getElementDiv ();
+    this.endpoint   = e2.getElementDiv ();
+
+    console.log(this.startpoint);
+    
+    this.elements = [e1, e2];
 
     this.overlays = [ ];
     if (opts.overlays) {
@@ -50,6 +55,7 @@ class PlumbConnect {
     var conn;
     try{
       conn = jsPlumb.connect({
+        uuids: this.uuid,
     		source: this.startpoint[0],
     		target: this.endpoint[0],
     		overlays: this.overlays,
@@ -67,7 +73,7 @@ class PlumbConnect {
     return conn;
   }
 
-  reload ()
+  repaint ()
   {
     jsPlumb.repaint (this.connection);
   }
@@ -75,6 +81,9 @@ class PlumbConnect {
   remove ()
   {
     jsPlumb.deleteConnection (this.connection);
+
+    for (var e in this.elements)
+      this.elements [e].removePlumb (this);
   }
 }
 
