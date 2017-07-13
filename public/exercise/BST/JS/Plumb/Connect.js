@@ -37,22 +37,34 @@ class PlumbConnect {
     return classes.join (" ");
   }
 
+  setDirection (dir) {
+    this.direction = dir;
+    return this;
+  }
+
+  getDirection(){ return this.direction; }
+
   /* ---- DRAWING ---- */
   drawConnect ()
   {
-    return jsPlumb.connect({
-  		source: this.startpoint,
-  		target: this.endpoint,
-  		overlays: this.overlays,
-  		cssClass: this.classes,
-  	  detachable: this.detachable,
+    var conn;
+    try{
+      conn = jsPlumb.connect({
+    		source: this.startpoint[0],
+    		target: this.endpoint[0],
+    		overlays: this.overlays,
+    		cssClass: this.classes,
+    	  detachable: this.detachable,
 
-      connector: [ "Straight" ],
-      endpoint: ["Dot", {radius: 1, cssClass: "hidden"}],
-      anchors: [
-        [ "Perimeter", { shape:"Rectangle" } ]
-      ]
-  	});
+        connector: [ "Straight" ],
+        endpoint: ["Dot", {radius: 1, cssClass: "hidden"}],
+        anchors: [
+          [ "Perimeter", { shape:"Rectangle" } ]
+        ]
+    	});
+    } catch (e) {
+    }
+    return conn;
   }
 
   reload ()

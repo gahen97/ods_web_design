@@ -99,8 +99,10 @@ function onElementClicked (elem, ...args){
     if (DEBUG) console.log("From inside onElementClicked element cannot be set as active.");
     return;
   }
-
-  this.setActiveElement (element);
+  if (this.activeElement === element)
+    this.setActiveElement (null);
+  else
+    this.setActiveElement (element);
 }
 
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */

@@ -1,26 +1,35 @@
 class Traversal{
-  static inorderTraversal (root, func) {
-    if (!root) return false;
+  static inorderTraversal (curNode, func, leftPar, rightPar) {
+    if (!curNode) return false;
 
-    Traversal.inorderTraversal (root.left, func);
-    func (root.data, root);
-    Traversal.inorderTraversal (root.right, func);
+    Traversal.inorderTraversal (curNode.left, func, leftPar, curNode);
+    func (curNode.data, curNode, {
+      leftParent: leftPar,
+      rightParent: rightPar
+    });
+    Traversal.inorderTraversal (curNode.right, func, curNode, rightPar);
   }
 
-  static preorderTraversal (root, func) {
-    if (!root) return false;
+  static preorderTraversal (curNode, func, leftPar, rightPar) {
+    if (!curNode) return false;
 
-    func (root.data, root);
-    Traversal.preorderTraversal (root.left, func);
-    Traversal.preorderTraversal (root.right, func);
+    func (curNode.data, curNode, {
+      leftParent: leftPar,
+      rightParent: rightPar
+    });
+    Traversal.preorderTraversal (curNode.left, func, leftPar, curNode);
+    Traversal.preorderTraversal (curNode.right, func, curNode, rightPar);
   }
 
-  static postorderTraversal (root, func) {
-    if (!root) return false;
+  static postorderTraversal (curNode, func, leftPar, rightPar) {
+    if (!curNode) return false;
 
-    Traversal.postorderTraversal (root.left, func);
-    Traversal.postorderTraversal (root.right, func);
-    func (root.data, root);
+    Traversal.postorderTraversal (curNode.left, func, leftPar, curNode);
+    Traversal.postorderTraversal (curNode.right, func, curNode, rightPar);
+    func (curNode.data, curNode, {
+      leftParent: leftPar,
+      rightParent: rightPar
+    });
   }
 
   static inorder (tree, func){

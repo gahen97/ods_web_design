@@ -12,6 +12,9 @@ const DEF_PLUMB_CLASS = "plumba-wumba";
 const ELEM_EVENTS_ID = "elementEvents";
 const TABS_EVENTS_ID = "tabbedEvents";
 
+const DIRECTION_LEFT = "left";
+const DIRECTION_RIGHT = "right";
+
 const DEF_MSG_LENGTH = 2 * 1000; // 2 seconds
 
 var DEBUG = true;
@@ -45,9 +48,9 @@ var answerTypesClassNames = [[AddAnswer, FindAnswer]];
 
 var numberOfQuestionsRequired = [[10, 5]];
 var __addMinParam__ = 1;
-var __addMaxParam__ = 9;
+var __addMaxParam__ = 19;
 var __findMinParam__ = 1;
-var __findMaxParam__ = 9;
+var __findMaxParam__ = 19;
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type

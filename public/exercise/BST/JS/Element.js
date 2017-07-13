@@ -45,24 +45,32 @@ class Element extends ElementBase {
 
   moveTo (offset) {
     // Move to some given position
+    // TODO this is hacky and bad
+    console.log(offset);
+
     $ (this.element).offset (offset);
   }
 
   addControls (e) {
     // If there are any controls needed - draggable, droppable, ... -
     //   add them here. If given, e is the element
+    this.draggy_waggy = new JsPlumbDraggable (e);
+  }
+
+  setDraggable (t) {
+    this.draggy_waggy.setDraggable (t);
   }
 
   addPlumb (p) {
     this.plumbs.push (p);
   }
 
-  connectTo (otherElem) {
+  connectTo (otherElem, direction) {
     if (!otherElem) return false;
-    
+
     var newConnection = new PlumbConnect (this.getElementDiv (),
                                           otherElem.getElementDiv (),
-                                          {overlays: "arrow"});
+                                          {overlays: "arrow"}).setDirection (direction);
     this.addPlumb (newConnection);
   }
 }
