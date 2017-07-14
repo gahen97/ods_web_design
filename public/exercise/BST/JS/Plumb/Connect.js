@@ -9,8 +9,6 @@ class PlumbConnect {
     this.startpoint = opts.endpoint || e1.getElementDiv ();
     this.endpoint   = e2.getElementDiv ();
 
-    console.log(this.startpoint);
-    
     this.elements = [e1, e2];
 
     this.overlays = [ ];
@@ -56,8 +54,8 @@ class PlumbConnect {
     try{
       conn = jsPlumb.connect({
         uuids: this.uuid,
-    		source: this.startpoint[0],
-    		target: this.endpoint[0],
+    		source: this.startpoint,
+    		target: this.endpoint,
     		overlays: this.overlays,
     		cssClass: this.classes,
     	  detachable: this.detachable,
