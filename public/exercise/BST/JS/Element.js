@@ -82,6 +82,7 @@ class Element extends ElementBase {
     this.rightEndpoint = new JsPlumbEndpoint (e, {
       anchor: "BottomRight"
     })
+    this.target = new JsPlumbTarget (e, this);
   }
 
   setDraggable (t) {

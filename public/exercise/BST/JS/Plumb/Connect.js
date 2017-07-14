@@ -61,7 +61,7 @@ class PlumbConnect {
     	  detachable: this.detachable,
 
         connector: [ "Straight" ],
-        endpoint: ["Dot", {radius: 1, cssClass: "hidden"}],
+        endpoint: ["Dot", {cssClass: "no-visibility"}],
         anchors: [
           [ "Perimeter", { shape:"Rectangle" } ]
         ]

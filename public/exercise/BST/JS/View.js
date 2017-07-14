@@ -181,6 +181,9 @@ class View extends ViewBase {
 
     // NOTE: JsPlumb doesn't do well with drawing here and produces errors.
     // Ideally, we fix the errors. For now, though, we can repaint
+    // jsPlumb is weird.
+    jsPlumb.repaintEverything ();
+    jsPlumb.repaintEverything ();
     jsPlumb.repaintEverything ();
   }
 
