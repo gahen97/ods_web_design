@@ -32,6 +32,8 @@ function onNextBtnClick (elem, evt) {
     // set active to null
     this.setActiveElement (null);
     this.updateActiveQuestion ();
+
+    this.userModel = this.exercise.getCurrQuestion ().getModel ();
   }
 }
 
@@ -42,11 +44,15 @@ function onPrevBtnClick (elem, evt) {
     // set active to null
     this.setActiveElement (null);
     this.updateActiveQuestion ();
+
+    this.userModel = this.exercise.getCurrQuestion ().getModel ();
   }
 }
 
 //TODO
 function onCheckBtnClick (elem, evt) {
+  // NOTE: Should check pointers (left & right) are correct,
+  //       levels are correct
   if (this.exercise.check (this.userModel, this.activeElement)) {
     //TODO
     //Maybe make custom event that checks?
@@ -113,6 +119,68 @@ function onElementClicked (elem, ...args){
     this.setActiveElement (element);
 }
 
+function elemMoveDown (active) {
+  var um     = this.userModel;
+  var st     = um.subtree (active.getValue ());
+
+  if (!st)
+    active.moveDown();
+  else {
+    var t      = st.height ();
+    var maxDep = this.view.maxDepth;
+
+    if (t + um.depth (active.getValue()) + 1 > maxDep)
+      return false;
+    st.each ((data)=>{
+      this.view.findOneWithValue (data).moveDown ();
+    });
+
+    jsPlumb.repaintEverything ();
+  }
+
+  return true;
+}
+
+function elemMoveUp (active) {
+  var st     = this.userModel.subtree (active.getValue ());
+  if (!st)
+    active.moveUp();
+  else{
+    if (this.userModel.depth (active.getValue()) < 1)
+      return false;
+
+    st.each ((data)=>{
+      this.view.findOneWithValue (data).moveUp ();
+    })
+
+    jsPlumb.repaintEverything ();
+  }
+
+  return true;
+}
+
+function elementDragged (elem, evtObj, jqEvtObj) {
+  var top = jqEvtObj.position.top / LEVEL_HEIGHT;
+  var element = this.view.getElement (elem);
+  var origTop = element.getLevel();
+
+  if (!element) return false;
+  if (origTop === top) return false;
+  if (origTop > top) {
+    for (var i = top; i < origTop; i++)
+      if (!elemMoveUp.call (this, element)){
+        console.log ("we say neigh neigh");
+        return false;
+      }
+  } else {
+    for (var i = origTop; i < top; i++)
+      if (!elemMoveDown.call (this, element)) {
+        console.log ("jibbity job");
+        return false;
+      }
+  }
+}
+
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
 function droppedOnTrash (element, evt, ui) {
   var draggable = ui.draggable;
@@ -160,6 +228,54 @@ function onModelResize (element, evt)
 function startModelResize (element, evt)
 {
   this.view.storePositions();
+}
+
+
+/* JSPLUMB */
+function connectBetween (plumbEvt, mode) {
+  if (!plumbEvt) return false;
+
+  var src = plumbEvt.source;
+  var trg = (mode === "connect") ? plumbEvt.target : null;
+  var sep = plumbEvt.sourceEndpoint;
+  var tep = (mode === "connect") ? plumbEvt.targetEndpoint : null;
+
+  var side = sep && sep.getParameter ("side")
+  if (!src || !side) return false;
+
+  var srcElem = this.view.getElement (src) || sep.getParameter ("srcElement");
+  var trgElem = this.view.getElement (trg);
+  if (!srcElem) return false;
+
+  if (trgElem && srcElem.getLevel() !== trgElem.getLevel() - 1)
+    jsPlumb.deleteConnection (plumbEvt.connection);
+
+  var srcVal = parseInt (this.view.getValueFromElementDiv (src));
+  var trgVal = trgElem ? parseInt (this.view.getValueFromElementDiv (trg)) : null;
+
+  console.log (srcVal, trgVal, side);
+
+  switch (side) {
+    case DIRECTION_LEFT:
+      this.userModel.setLeft (srcVal, trgVal);
+      break;
+    case DIRECTION_RIGHT:
+      this.userModel.setRight (srcVal, trgVal);
+      break;
+  }
+}
+
+function doConnect (elem, plumbEvt, origEvt){
+  connectBetween.call (this, plumbEvt, "connect")
+}
+
+function connectDetach (elem, plumbEvt, origEvt){
+  connectBetween.call (this, plumbEvt, "detach");
+}
+
+function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {
+  console.log (plumbEvt);
+  jsPlumb.deleteConnection(plumbEvt.connection);
 }
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
@@ -277,6 +393,11 @@ $ (()=> {
           customEvtName: "onElementClicked",
           domEvtName: "click"
         },
+        {
+          handlingFunction: elementDragged,
+          customEvtName: "onElementDragged",
+          domEvtName: "drag"
+        },
       ],
       id: ELEM_EVENTS_ID // so it can be found later. take a look at the view
     },
@@ -332,6 +453,27 @@ $ (()=> {
           handlingFunction: onModelResize,
           customEvtName: "Resize[3]",
           domEvtName: "resize"
+        }
+      ]
+    },
+
+    {
+      elem: [jsPlumb],
+      evtsArr: [
+        {
+          handlingFunction: doConnect,
+          customEvtName: "jsp-connect",
+          domEvtName: "connection"
+        },
+        {
+          handlingFunction: connectDetach,
+          customEvtName: "jsp-connect-detach",
+          domEvtName: "connectionDetached"
+        },
+        {
+          handlingFunction: disconnectOnClickAMijiggles,
+          customEvtname: "jsp-click-detach",
+          domEvtName: "beforeStartDetach"
         }
       ]
     }

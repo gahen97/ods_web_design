@@ -80,6 +80,10 @@ class View extends ViewBase {
 
     var deepest = m.height ();
 
+    // increase model height to fit depth
+    var height = (deepest + 1) * 70;
+    this.modelBodHelper.setHeight (height);
+
     // Draw the tree of life
     Traversal.preorder (m, (data, node, stats)=>{
       // The top should just be the depth of the node.
@@ -145,7 +149,8 @@ class View extends ViewBase {
           y: depth * LEVEL_HEIGHT
         },
         constructArgs: {
-          maxDepth: deepest
+          maxDepth: deepest,
+          level: depth
         }
       });
 
@@ -166,6 +171,8 @@ class View extends ViewBase {
             left: minLeft
           });
       }
+
+      this.maxDepth = deepest;
     });
 
     // Now we can connect these nodes on one more scan.
@@ -175,13 +182,11 @@ class View extends ViewBase {
       this.connect (node, node.right, DIRECTION_RIGHT);
     })
 
-    // increase model height to fit depth
-    var height = (deepest + 1) * 70;
-    this.modelBodHelper.setHeight (height);
-
     // NOTE: JsPlumb doesn't do well with drawing here and produces errors.
     // Ideally, we fix the errors. For now, though, we can repaint
-    // jsPlumb is weird.
+    // jsPlumb is weird. Repainting once doesn't work.
+    // Twice half works.
+    // Three times and it works. :/.
     jsPlumb.repaintEverything ();
     jsPlumb.repaintEverything ();
     jsPlumb.repaintEverything ();

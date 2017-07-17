@@ -5,7 +5,7 @@
 
 class Node {
   static getNextId () { return Node.currentId ++; }
-  
+
   constructor(data){
     this.data      = data;
     this.leftNode  = null;
@@ -17,13 +17,15 @@ class Node {
 
   get left () { return this.leftNode; }
   set left (newLeft) {
-    newLeft.parent = this;
+    if (newLeft)
+      newLeft.parent = this;
     this.leftNode  = newLeft;
   }
 
   get right () { return this.rightNode; }
   set right (newRight) {
-    newRight.parent = this;
+    if (newRight)
+      newRight.parent = this;
     this.rightNode  = newRight;
   }
 }

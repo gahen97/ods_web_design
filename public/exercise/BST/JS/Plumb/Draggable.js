@@ -7,7 +7,7 @@ class JsPlumbDraggable {
     this.elemObj = eObj;
 
     $ (element).draggable ({
-      axis: 'x',
+      grid: [1, LEVEL_HEIGHT],
       containment: 'parent',
       drag: () => {
         //this.elemObj.repaint ();

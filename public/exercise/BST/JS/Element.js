@@ -11,9 +11,13 @@ class Element extends ElementBase {
 
     // Anything else that needs to be done for Elements
     this.plumbs = [ ];
-    this.level  = 0;
+    this.level  = args.level || 0;
     this.maxLev = args && args.maxDepth;
   }
+
+  get targUuid () { return this.target.uuid; }
+
+  getLevel(){ return this.level; }
 
   generate () {
     var elementDiv = $(ELEMENT_TEMPLATE).clone ();
@@ -60,16 +64,20 @@ class Element extends ElementBase {
     if (this.level <= 0) return false;
     this.level --;
     this.moveTo ({
-      top: this.offset ().top - LEVEL_HEIGHT
+      top: this.level * LEVEL_HEIGHT
     })
+
+    jsPlumb.repaintEverything();
   }
 
   moveDown () {
     if (this.level >= this.maxLev) return false;
     this.level ++;
     this.moveTo ({
-      top: this.offset ().top + LEVEL_HEIGHT
+      top: this.level * LEVEL_HEIGHT
     })
+
+    jsPlumb.repaintEverything();
   }
 
   addControls (e) {
@@ -77,11 +85,17 @@ class Element extends ElementBase {
     //   add them here. If given, e is the element
     this.draggy_waggy = new JsPlumbDraggable (this, e);
     this.leftEndpoint = new JsPlumbEndpoint (e, {
-      anchor: "BottomLeft"
-    });
+      anchor: "BottomLeft",
+      parameters: {
+        side: DIRECTION_LEFT
+      }
+    }, DIRECTION_LEFT);
     this.rightEndpoint = new JsPlumbEndpoint (e, {
-      anchor: "BottomRight"
-    })
+      anchor: "BottomRight",
+      parameters: {
+        side: DIRECTION_RIGHT
+      }
+    }, DIRECTION_RIGHT)
     this.target = new JsPlumbTarget (e, this);
   }
 
@@ -112,9 +126,12 @@ class Element extends ElementBase {
     else
       endpoint = this.rightEndpoint;
 
-    if (endpoint){
-      endpoint = endpoint.canvas;
-    }
+    var myUuid  = endpoint.uuid;
+    var trgUuid = otherElem.targUuid;
+
+        if (endpoint){
+          endpoint = endpoint.canvas;
+        }
 
 
     var newConnection = new PlumbConnect (this,
@@ -122,7 +139,11 @@ class Element extends ElementBase {
                                           {
                                            overlays: "arrow",
                                            classes: ["jsplumb-connection", "plumba-wumba"],
-                                           endpoint: endpoint
+                                           parameters: {
+                                              side: direction,
+                                              srcElement: this
+                                           },
+                                           uuid: [myUuid, trgUuid]
                                           }).setDirection (direction);
     this.addPlumb (newConnection);
     otherElem.addPlumb (newConnection);

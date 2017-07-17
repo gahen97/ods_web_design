@@ -51,9 +51,11 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
   }
 
   addTriggerElement (element) {
-    var $e = $(element);
-    for (var domEvent in this.triggerMap) {
-          $e.on (domEvent + this.namespace, (...args)=>{     //handling function
+    var $e = (element && element.bind) ? element : $(element);
+
+    for (let domEvent in this.triggerMap) {
+          $e.bind (domEvent, (...args)=>{     //handling function
+            args = [domEvent].concat(args);
             this.fire.apply (this, args);
           });
     }
@@ -64,9 +66,9 @@ class DOMEventHandler {   //we have one instance of a domeventhandler for each d
     $ (element).off (this.namespace);
   }
 
-  fire (event, ...args) {
+  fire (type, event, ...args) {
     var events = DOMEventHandler.customEventHandlers;
-    var type   = this.triggerMap [event.type];
+    var type   = this.triggerMap [type];
     var elem   = event.target;
 
         args   = [type, elem, event].concat (args);

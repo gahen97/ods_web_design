@@ -48,9 +48,9 @@ var answerTypesClassNames = [[AddAnswer, FindAnswer]];
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[10, 5]];
+var numberOfQuestionsRequired = [[25, 5]];
 var __addMinParam__ = 1;
-var __addMaxParam__ = 19;
+var __addMaxParam__ = 999999;
 var __findMinParam__ = 1;
 var __findMaxParam__ = 19;
 

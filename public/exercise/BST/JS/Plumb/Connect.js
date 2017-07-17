@@ -16,7 +16,7 @@ class PlumbConnect {
       this.addOverlays (opts.overlays);
     }
 
-    this.detachable = false;
+    this.detachable = true;
     this.classes = opts.classes ? this.classesFrom (opts.classes) : DEF_PLUMB_CLASS;
     this.connection = this.drawConnect();
   }
@@ -51,6 +51,7 @@ class PlumbConnect {
   drawConnect ()
   {
     var conn;
+
     try{
       conn = jsPlumb.connect({
         uuids: this.uuid,
@@ -78,7 +79,8 @@ class PlumbConnect {
 
   remove ()
   {
-    jsPlumb.deleteConnection (this.connection);
+    if (this.connection && this.connection.connector)
+      jsPlumb.deleteConnection (this.connection);
 
     for (var e in this.elements)
       this.elements [e].removePlumb (this);

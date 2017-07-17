@@ -163,6 +163,37 @@ class BinarySearchTree extends Model {
   }
 
 
+  /* ------ USER MODEL ------ */
+  stUM (d1, d2) {
+    var n1 = this._find (d1);
+    var n2 = this._find (d2);
+
+    // If n1 doesn't exist, we can't set left.
+    if (!n1) return false;
+
+    // If d2 is non-null, make sure there's no node n2 & make new node;
+    // If d2 is null, make n2 null
+    if (d2 !== null && n2) return false;
+    if (d2 === null) n2 = null;
+    else n2 = new Node (d2);
+
+    return {
+      n1: n1,
+      n2: n2
+    };
+  }
+
+  setLeft (d1, d2) {
+    var nodes = this.stUM (d1, d2);
+    if (!nodes) return false;
+    nodes.n1.left = nodes.n2;
+  }
+
+  setRight (d1, d2) {
+    var nodes = this.stUM (d1, d2);
+    if (!nodes) return false;
+    nodes.n1.right = nodes.n2;
+  }
 
   /* ------ EXERCISE STUFF ------ */
   equals(other)
