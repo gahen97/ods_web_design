@@ -14,12 +14,24 @@ class ViewBase {
 
     this.modelDivHelper = new Div ($ (MODEL_MAIN));
     this.modelBodHelper = new Div ($ (MODEL_BODY));
+
+    this.overlay = new Overlay ($ (QUESTION_MAIN));
   }
 
   /* ---- START ---- */
   start()
   {
     this.clear ();
+  }
+
+  /* ---- DISABLE / ENABLE MOUSE EVENTS ----- */
+  disable ()
+  {
+    this.overlay.disable ();
+  }
+  enable ()
+  {
+    this.overlay.enable ();
   }
 
   /* ---- CLEAR THE MODEL ---- */

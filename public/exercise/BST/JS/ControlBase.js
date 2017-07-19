@@ -38,6 +38,10 @@ class ControlBase {
     this.updateActiveQuestion ();
   }
 
+  // disable, enable
+  disable () { this.view.disable (); }
+  enable () { this.view.enable (); }
+  
   // tabs
   updateActiveQuestion () {
     var active = this.exercise.getCurrQuestionId ();

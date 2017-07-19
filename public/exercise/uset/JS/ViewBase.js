@@ -75,7 +75,7 @@ class ViewBase {
     this.elementsByValue [value].push (newElement);
 
     if (options.withinModel)
-      this.drawWithinModel (newElement, options.data);
+      this.drawWithinModel (newElement);
 
     if (options.events !== false) {
       // Moved this into here. Now Element doesn't need to access Control, which it shouldn't
