@@ -13,11 +13,14 @@ class Element extends ElementBase {
     this.level  = args.level || 0;
     this.maxLev = args && args.maxDepth;
     this.nid    = args && args.nodeId;
+    this.node   = args && args.node;
   }
 
   get targUuid () { return this.target.uuid; }
   get nodeId () { return this.nid; } // node.nodeId
   set nodeId (d) { this.nid = d; } // node.nodeId = x; node.nodeId(x)
+  set node (n) { this._node = n; }
+  get node () { return this._node; }
 
   getLevel(){ return this.level; }
 
@@ -58,6 +61,27 @@ class Element extends ElementBase {
       $(this.element).toggleClass ("active", isActive);
       this.leftEndpoint.toggleClass ("jsplumb-endpoint-active", isActive);
       this.rightEndpoint.toggleClass ("jsplumb-endpoint-active", isActive);
+
+      // TODO BAD CODE
+      if (!this.node) return;
+      var left  = this.node.left;
+      var right = this.node.right;
+
+      var lNode = left && control.findElemFrom (left);
+      var rNode = right && control.findElemFrom (right);
+
+      if (lNode)
+        lNode.setCSA (isActive);
+      if (rNode)
+        rNode.setCSA (isActive);
+  }
+
+  canSetActive () {
+    return (this.hasClass ("can-set-active"));
+  }
+
+  setCSA (c) {
+    this.toggleClass ("can-set-active", c);
   }
 
   moveTo (offset) {

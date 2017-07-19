@@ -189,6 +189,7 @@ class BinarySearchTree extends Model {
 
     return roots;
   }
+  getRoot () { return this.root; }
 
   getTrees() {
     var roots = this.getRoots ();
@@ -272,6 +273,27 @@ class BinarySearchTree extends Model {
 
     // remove node
     this.nodesById [id] = null;
+  }
+
+  pathTo (x)
+  {
+    // Find operation ... return array of nodes on the path to given data
+    var nodes = [ ];
+    var curNode = this.root;
+
+    while (curNode) {
+      var d = curNode.data;
+      nodes.push (curNode);
+
+      if (d > x)
+        curNode = curNode.left;
+      else if (d < x)
+        curNode = curNode.right;
+      else
+        break;
+    }
+
+    return nodes;
   }
 
   /* ------ EXERCISE STUFF ------ */

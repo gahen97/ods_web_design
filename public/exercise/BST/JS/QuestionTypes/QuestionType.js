@@ -110,10 +110,10 @@ class QuestionType {
     this.getCurrentQuestion ().displayAnswer (div);
   }
 
-  check (userAnswer, active)
+  check ()
   {
     var currentQuestion = this.getCurrentQuestion ();
-    return currentQuestion.check (userAnswer, active);
+    return currentQuestion.check.apply (currentQuestion, arguments);
   }
 
 

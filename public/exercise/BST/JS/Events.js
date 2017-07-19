@@ -55,7 +55,7 @@ function onCheckBtnClick (elem, evt) {
 
   var tree = this.userModel.getTrees () [0];
 
-  if (this.exercise.check (tree, this.activeElement)) {
+  if (this.exercise.check (tree, this.activeElement, this.userDataArray)) {
     //TODO
     //Maybe make custom event that checks?
     new Popup ("Correct!");
@@ -95,7 +95,8 @@ function onSubmitInput (element, evt) {
   this.view.addElement (input, {
     constructArgs: {
       maxDepth: d + 1,
-      nodeId:   newNode.id
+      nodeId:   newNode.id,
+      node:     newNode
     }
   });
   $(".modelEntry").val("");
@@ -122,7 +123,7 @@ function onDragStopped (elem, evt, ui)
 function onElementClicked (elem, ...args){
   var element = this.view.getElement (elem);
   if (!element) return;
-  if (!this.canSetActive ())
+  if (!this.canSetActive (element))
   {
     if (DEBUG) console.log("From inside onElementClicked element cannot be set as active.");
     return;

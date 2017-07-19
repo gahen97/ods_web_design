@@ -209,8 +209,15 @@ li.tabbedQuestion:hover {
 .jsp-hover{
   color: #565656;
 }
+
 .element.jsp-hover{
   background-color: white;
+}
+.element.active.jsp-hover {
+  color: white;
+}
+.element.active{
+  color: #565656;
 }
 
 .jtk-dragging{
@@ -236,10 +243,18 @@ li.tabbedQuestion:hover {
 .jsp-endpoint circle {
   fill: white;
 }
-
 .jsp-hover circle {
   fill: #565656;
 }
+
+.jsplumb-endpoint-active circle {
+  fill: #565656;
+}
+.jsplumb-endpoint-active.jsp-hover circle{
+  fill: white;
+}
+
+
 
 /* We've been trying too hard... why do we do that? Why do I do that? Why do I do that. */
 

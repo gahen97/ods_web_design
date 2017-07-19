@@ -175,7 +175,8 @@ class Exercise {
 
   check (user, active)
   {
-    return this.getCurrQuestionType ().check (user, active);
+    var qType = this.getCurrQuestionType ();
+    return qType.check.apply (qType, arguments);
   }
 
   load ()

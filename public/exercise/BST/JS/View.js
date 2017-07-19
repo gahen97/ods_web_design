@@ -44,7 +44,7 @@ class View extends ViewBase {
       var elem = this.getElement (e);
       return elem && elem.nodeId;
   }
-  
+
   // remove an element from the view
   removeElements (elems, checkFunc) {
     // checkFunc returns true if an element is to be deleted
@@ -160,7 +160,8 @@ class View extends ViewBase {
         constructArgs: {
           maxDepth: deepest,
           level: depth,
-          nodeId: node.id
+          nodeId: node.id,
+          node: node
         }
       });
 

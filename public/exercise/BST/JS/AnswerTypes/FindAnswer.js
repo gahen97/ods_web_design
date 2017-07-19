@@ -9,7 +9,19 @@ class FindAnswer extends AnswerType {
   }
 
   check (userAnswer) {
-    return this.data === userAnswer;
+    // if not given an answer, is wrong.
+    if (!userAnswer) return false;
+    
+    // if not enough / too many nodes in answer, is wrong.
+    if (userAnswer.length !== this.data.length) return false;
+
+    // every node must match ...
+    for (var i in this.data) {
+      if (!userAnswer [i]) return false;
+      if (this.data [i].data !== userAnswer [i].data) return false;
+    }
+
+    return true;
   }
 
   display()      //TODO replace with production version

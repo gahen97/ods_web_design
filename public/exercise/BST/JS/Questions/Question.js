@@ -26,8 +26,6 @@ class Question {
       this.answer = new answerTypesClassName();
     }
 
-    console.log (this.answer);
-
     if (typeof(__MODULENAME__) !== "undefined" && __MODULENAME__)
     {
       this.model = new __MODULENAME__();
@@ -105,6 +103,8 @@ class Question {
     this.displayInstructions(div);
     this.displayParameters (div);
     this.displayModel (div);
+
+    this.start ();
   }
 
   displayAnswer(div)
@@ -180,6 +180,8 @@ class Question {
   canSetActive(){ return false; }
 
   //static generateParameters()
+
+  start(){}
 }
 
 Question.nextId = 0;

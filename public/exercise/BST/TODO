@@ -1,13 +1,6 @@
-- Hover over Target (center of element) does not activate hover.
 - Find should find from the root, proceed left or right, etc., through the tree.
   - Find answer should run the same way, taking a second (give or take) between steps.
-- We need a new duck
-- Invert colors on active element for endpoints
-  - Active would be white
-  - Not active would be #565656
 
-- Fix targets
-  - Z-Index should be below element until a connector is dragging, then go on top
 - Drag and drop
   - Endpoint should react differently than elements
 - Connector styling
