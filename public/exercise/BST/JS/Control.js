@@ -38,6 +38,12 @@ class Control {
     this.updateActiveQuestion ();
   }
 
+  restart(){
+    this.setActiveElement (null);
+    this.updateActiveQuestion ();
+
+    //this.userModel = this.exercise.getCurrQuestion ().getModel ().copy ();
+  }
   // tabs
   updateActiveQuestion () {
     var active = this.exercise.getCurrQuestionId ();
@@ -81,7 +87,7 @@ class Control {
   addToEvent (element, eventId) {
     this.view.addToEventHandler (element, eventId);
   }
-  
+
   // find by id
   getDomEventHandler (id) {
     return this.view.getEventHandler (id);

@@ -323,7 +323,7 @@ li.tabbedQuestion:hover {
   margin-top: 20px;
 }
 
-.showAnswerButton, .checkAnswerButton{
+.showAnswerButton, .checkAnswerButton, .redoQuestionButton{
   background-color: #565656;
   color: white;
   border: 3px solid #565656;
@@ -334,7 +334,7 @@ li.tabbedQuestion:hover {
   margin: 2px;
 }
 
-.showAnswerButton:hover, .checkAnswerButton:hover {
+.showAnswerButton:hover, .checkAnswerButton:hover, .redoQuestionButton:hover {
   background-color: white;
   color: #565656;
 }

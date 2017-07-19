@@ -117,6 +117,10 @@ class Exercise {
     return this.goToQuestion(this.getAbsQNum() - 1);
   }
 
+  restart ()
+  {
+    return this.goToQuestion (this.getAbsQNum ());
+  }
 
   clear()
   {
