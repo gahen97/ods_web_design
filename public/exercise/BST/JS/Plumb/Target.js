@@ -19,6 +19,7 @@ class JsPlumbTarget {
       maxConnections: 1,
       endpoint: [ "Dot", {radius:5} ],
       cssClass: "jsplumb-target no-visibility",
+      anchor: [0.5, 0.5, 0, 0],
 
       id: this.id
     })

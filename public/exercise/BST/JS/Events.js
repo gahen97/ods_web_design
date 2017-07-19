@@ -201,6 +201,9 @@ function toggleClassHover (element, isOn) {
   if (!e) e = $(element).data("element");
   if (!e) return false;
 
+  if (typeof isOn === "function")
+    isOn = isOn (e);
+
   if (!isOn && e.isHovered()) return false;
   e.toggleClass ("jsp-hover", isOn)
 }
@@ -219,6 +222,9 @@ function onElemMouseOff (element) {
 }
 
 function checkElemHover (element) {
+  toggleClassHover.call (this, element, (e)=>{
+    return e.isHovered ();
+  });
 }
 
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
@@ -331,8 +337,8 @@ function remHovOnDS (elem, conn, origEvt){
   var src = conn.source ? $(conn.source) : $("#" + conn.sourceId);
   if (!src || src.length===0) return;
 
-  onElemMouseOff.call (this, src[0]);
-//  console.log("DRAGGING STOPPED");
+  setTimeout(()=>{checkElemHover.call (this, src);}, 10);
+
   return true;
 }
 function addHovWhileDragging (elem, conn, origEvt){
@@ -342,8 +348,7 @@ function addHovWhileDragging (elem, conn, origEvt){
   var elem = this.view.getElement (src);
   if (!elem) return;
 
-//  elem.setDragging (true);
-  //console.log("DRAGGING");
+  checkElemHover.call (this, src);
 }
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)

@@ -19,21 +19,25 @@ class JsPlumbEndpoint {
   get jq () { return $(this.canvas); }
 
   drawEndpoint (element, o, s, d) {
+    // draw the endpoint
     var ep = jsPlumb.addEndpoint(element, {
       isSource: true,
       isTarget: false,
       endpoint: [ "Dot", {radius:5} ],
       maxConnections: 1,
-      connector: "Straight",
+      connector: ["Straight", {gap: 0}],
       uuid: this.id
     }, o);
 
+    // add the side (left or right) for the endpoint
     var $cv = $(ep.canvas);
     $ (ep.element).data ("side", s);
     $cv.data ("side", s).addClass("jsp-endpoint");
 
+    // add him to event handling
     control.addToEvent (ep.canvas, ENDPOINT_EVENTS_ID);
 
+    // add in additional data
     if (d){
       for (var k in d){
         $cv.data (k, d[k]);
@@ -58,16 +62,21 @@ class JsPlumbEndpoint {
   isHovered () {
     if ($(this.canvas).is(":hover")) return true;
 
+    // do we have connections? if not, we're not being hovered ...
     var conn = this.endpoint.connections;
     if (!conn || conn.length === 0) return false;
 
+    // does our connection connect to an element?
+    //   if yes => not being dragged. not hovered
+    //   if no  => draggy. waggy.
     var cn = conn [0];
     var targDiv = cn.target ? cn.target : $("#" + cn.targetId);
-    if (!targDiv) return false;
+    if (!targDiv) return true;
 
     var elements = control.view.getElement (targDiv);
     if (!elements) return true;
 
+    // no other cases, so we're not being hovered over
     return false;
   }
 }

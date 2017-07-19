@@ -97,7 +97,7 @@ class Element extends ElementBase {
     //   add them here. If given, e is the element
     this.draggy_waggy = new JsPlumbDraggable (this, e);
     this.leftEndpoint = new JsPlumbEndpoint (e, {
-      anchor: [ 0.3, 0.6, 0, 1 ],
+      anchor: [ 0.3, 0.7, 0, 1 ],
       cssClass: "jspe",
       parameters: {
         side: DIRECTION_LEFT
@@ -106,7 +106,7 @@ class Element extends ElementBase {
       element: this
     });
     this.rightEndpoint = new JsPlumbEndpoint (e, {
-      anchor: [ 0.7, 0.6, 0, 1 ],
+      anchor: [ 0.7, 0.7, 0, 1 ],
       cssClass: "jspe",
       parameters: {
         side: DIRECTION_RIGHT
