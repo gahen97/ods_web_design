@@ -217,6 +217,13 @@ li.tabbedQuestion:hover {
   z-index: 2;
 }
 
+.jsplumb-target{
+  z-index: 0;
+}
+.jsplumb-target.high-priority{
+  z-index: 3 !important;
+}
+
 .element:active {
   background-color: white;
   color: #565656;

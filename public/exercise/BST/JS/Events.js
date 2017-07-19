@@ -332,7 +332,9 @@ function connectDetach (elem, plumbEvt, origEvt){
 }
 
 function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {
-  jsPlumb.deleteConnection(plumbEvt.connection);
+  jsPlumb.deleteConnection(plumbEvt.connection, {
+    fireEvent: false
+  });
 }
 
 // The Nintendo DS was actually a very good gaming system
@@ -352,6 +354,13 @@ function addHovWhileDragging (elem, conn, origEvt){
   if (!elem) return;
 
   checkElemHover.call (this, src);
+}
+
+function targetPriorityInit (element, plumbEvt, origEvt) {
+  $(".jsplumb-target").addClass ("high-priority");
+}
+function targetPriorityRem () {
+  $(".high-priority").removeClass ("high-priority");
 }
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
@@ -585,24 +594,34 @@ $ (()=> {
         },
         {
           handlingFunction: disconnectOnClickAMijiggles,
-          customEvtname: "jsp-click-detach",
+          customEvtName: "jsp-click-detach",
           domEvtName: "beforeStartDetach"
         },
         {
           handlingFunction: remHovOnDS,
-          customEvtname: "jsp-drag-stop",
+          customEvtName: "jsp-drag-stop",
           domEvtName: "connectionAborted"
         },
         {
           handlingFunction: remHovOnDS,
-          customEvtname: "jsp-drag-stop",
+          customEvtName: "jsp-drag-stop",
           domEvtName: "connectionDragStop"
         },
         {
           handlingFunction: addHovWhileDragging,
-          customEvtname: "jsp-dragging",
+          customEvtName: "jsp-dragging",
           domEvtName: "connectionDrag"
-        }
+        },
+        {
+          handlingFunction: targetPriorityInit,
+          customEvtName: "jsp-target-class-add",
+          domEvtName: "connectionDrag"
+        },
+        {
+          handlingFunction: targetPriorityRem,
+          customEvtName: "jsp-target-class-rem",
+          domEvtName: "connectionDragStop"
+        },
       ]
     }
   ];
