@@ -5,17 +5,19 @@
 
 class Element extends ElementBase {
   constructor(value, args){
+    if (!args) args={};
     super (...arguments);
-
-    console.log(args);
 
     // Anything else that needs to be done for Elements
     this.plumbs = [ ];
     this.level  = args.level || 0;
     this.maxLev = args && args.maxDepth;
+    this.nid    = args && args.nodeId;
   }
 
   get targUuid () { return this.target.uuid; }
+  get nodeId () { return this.nid; } // node.nodeId
+  set nodeId (d) { this.nid = d; } // node.nodeId = x; node.nodeId(x)
 
   getLevel(){ return this.level; }
 
@@ -36,22 +38,26 @@ class Element extends ElementBase {
   }
 
   remove () {
-    super.remove ();
-
     for (var i in this.plumbs)
       this.plumbs [i].remove ();
 
     this.leftEndpoint.remove();
     this.rightEndpoint.remove();
+
+    jsPlumb.remove (this.element);
+  }
+
+  toggleClass (className, active) {
+    $(this.element).toggleClass (className, active);
+    this.leftEndpoint.toggleClass (className, active);
+    this.rightEndpoint.toggleClass (className, active);
   }
 
   setActive (isActive) {
     // Activate this element. Adds a class to represent being active
-      var element = $(this.element);
-      if (isActive)
-        element.addClass ("active");
-      else
-        element.removeClass ("active");
+      $(this.element).toggleClass ("active", isActive);
+      this.leftEndpoint.toggleClass ("jsplumb-endpoint-active", isActive);
+      this.rightEndpoint.toggleClass ("jsplumb-endpoint-active", isActive);
   }
 
   moveTo (offset) {
@@ -61,7 +67,7 @@ class Element extends ElementBase {
   }
 
   moveUp () {
-    if (this.level <= 0) return false;
+  //  if (this.level <= 0) return false;
     this.level --;
     this.moveTo ({
       top: this.level * LEVEL_HEIGHT
@@ -71,7 +77,7 @@ class Element extends ElementBase {
   }
 
   moveDown () {
-    if (this.level >= this.maxLev) return false;
+  //  if (this.level >= this.maxLev) return false;
     this.level ++;
     this.moveTo ({
       top: this.level * LEVEL_HEIGHT
@@ -80,22 +86,34 @@ class Element extends ElementBase {
     jsPlumb.repaintEverything();
   }
 
+  isHovered(){
+    return this.jq.is(":hover") ||
+          this.leftEndpoint.isHovered () ||
+          this.rightEndpoint.isHovered ();
+  }
+
   addControls (e) {
     // If there are any controls needed - draggable, droppable, ... -
     //   add them here. If given, e is the element
     this.draggy_waggy = new JsPlumbDraggable (this, e);
     this.leftEndpoint = new JsPlumbEndpoint (e, {
-      anchor: "BottomLeft",
+      anchor: [ 0.3, 0.6, 0, 1 ],
+      cssClass: "jspe",
       parameters: {
         side: DIRECTION_LEFT
       }
-    }, DIRECTION_LEFT);
+    }, DIRECTION_LEFT, {
+      element: this
+    });
     this.rightEndpoint = new JsPlumbEndpoint (e, {
-      anchor: "BottomRight",
+      anchor: [ 0.7, 0.6, 0, 1 ],
+      cssClass: "jspe",
       parameters: {
         side: DIRECTION_RIGHT
       }
-    }, DIRECTION_RIGHT)
+    }, DIRECTION_RIGHT, {
+      element: this
+    })
     this.target = new JsPlumbTarget (e, this);
   }
 

@@ -29,11 +29,7 @@ class Find extends Question {
     if (!activeElem) return false;
     if (!this.answer.getModel ().equals (userModel))
       return false;
-
-    console.log ("Models match.");
-    console.log ("Active element: ", activeElem);
-    console.log ("True value: ", activeElem.getObjValue ())
-    console.log ("Looking for: ", this.answer.getData ())
+      
     return (this.answer.getData () === activeElem.getObjValue ()); // TODO better name for this?
   }
 

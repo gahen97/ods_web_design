@@ -55,6 +55,7 @@ class ElementBase {
     $(this.element).remove ();
   }
 
+  get jq () { return $(this.getElementDiv()); }
   // getters
   getId () { return this.id; }
   getValue () { return this.value; }

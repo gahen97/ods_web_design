@@ -33,7 +33,7 @@ function onNextBtnClick (elem, evt) {
     this.setActiveElement (null);
     this.updateActiveQuestion ();
 
-    this.userModel = this.exercise.getCurrQuestion ().getModel ();
+    //this.userModel = this.exercise.getCurrQuestion ().getModel ().copy ();
   }
 }
 
@@ -45,7 +45,7 @@ function onPrevBtnClick (elem, evt) {
     this.setActiveElement (null);
     this.updateActiveQuestion ();
 
-    this.userModel = this.exercise.getCurrQuestion ().getModel ();
+    //this.userModel = this.exercise.getCurrQuestion ().getModel ().copy ();
   }
 }
 
@@ -53,7 +53,15 @@ function onPrevBtnClick (elem, evt) {
 function onCheckBtnClick (elem, evt) {
   // NOTE: Should check pointers (left & right) are correct,
   //       levels are correct
-  if (this.exercise.check (this.userModel, this.activeElement)) {
+  var roots = this.userModel.getRoots ();
+  if (roots.length>1){
+    new ErrorDialog ("You may only have one tree, muggle!");
+    return false;
+  }
+
+  var tree = this.userModel.getTrees () [0];
+
+  if (this.exercise.check (tree, this.activeElement)) {
     //TODO
     //Maybe make custom event that checks?
     new Popup ("Correct!");
@@ -79,9 +87,12 @@ function onSubmitInput (element, evt) {
   var m = q && q.getModel ();
   var d = m && m.height ();
 
+  var newNode = this.userModel.makeNode (parseInt (input));
+
   this.view.addElement (input, {
     constructArgs: {
-      maxDepth: d + 1
+      maxDepth: d + 1,
+      nodeId:   newNode.id
     }
   });
   $(".modelEntry").val("");
@@ -120,7 +131,9 @@ function onElementClicked (elem, ...args){
 }
 
 function elemMoveDown (active) {
-  var um     = this.userModel;
+  return active.moveDown ();
+
+  /*var um     = this.userModel;
   var st     = um.subtree (active.getValue ());
 
   if (!st)
@@ -131,17 +144,19 @@ function elemMoveDown (active) {
 
     if (t + um.depth (active.getValue()) + 1 > maxDep)
       return false;
-    st.each ((data)=>{
-      this.view.findOneWithValue (data).moveDown ();
+    st.each ((data, node)=>{
+      this.view.findFromNid (node.id).moveDown ();
     });
 
     jsPlumb.repaintEverything ();
   }
 
-  return true;
+  return true; */
 }
 
 function elemMoveUp (active) {
+  return active.moveUp ();
+  /*console.log(active);
   var st     = this.userModel.subtree (active.getValue ());
   if (!st)
     active.moveUp();
@@ -149,14 +164,14 @@ function elemMoveUp (active) {
     if (this.userModel.depth (active.getValue()) < 1)
       return false;
 
-    st.each ((data)=>{
-      this.view.findOneWithValue (data).moveUp ();
+    st.each ((data, node)=>{
+      this.view.findFromNid (node.id).moveUp ();
     })
 
     jsPlumb.repaintEverything ();
   }
 
-  return true;
+  return true;*/
 }
 
 function elementDragged (elem, evtObj, jqEvtObj) {
@@ -179,6 +194,31 @@ function elementDragged (elem, evtObj, jqEvtObj) {
         return false;
       }
   }
+}
+
+function toggleClassHover (element, isOn) {
+  var e = this.view.getElement (element);
+  if (!e) e = $(element).data("element");
+  if (!e) return false;
+
+  if (!isOn && e.isHovered()) return false;
+  e.toggleClass ("jsp-hover", isOn)
+}
+
+function onElemMouseOver (element) {
+  // If it moves onto the endpoint div,
+  // will fire both off & on. this is buggy wugsy so set a timeout
+  // and if that's the case this'll delay enough to always set active
+  setTimeout(()=>{
+    toggleClassHover.call (this, element, true);
+  }, 5);
+}
+
+function onElemMouseOff (element) {
+  toggleClassHover.call (this, element, false);
+}
+
+function checkElemHover (element) {
 }
 
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
@@ -241,28 +281,37 @@ function connectBetween (plumbEvt, mode) {
   var tep = (mode === "connect") ? plumbEvt.targetEndpoint : null;
 
   var side = sep && sep.getParameter ("side")
+  if (DEBUG)
+    console.log("Src Node: ", src, " on side: ", side);
   if (!src || !side) return false;
 
   var srcElem = this.view.getElement (src) || sep.getParameter ("srcElement");
   var trgElem = this.view.getElement (trg);
+  if (DEBUG) console.log ("SOURCE ELEMENT : ", srcElem);
   if (!srcElem) return false;
 
   if (trgElem && srcElem.getLevel() !== trgElem.getLevel() - 1)
     jsPlumb.deleteConnection (plumbEvt.connection);
 
-  var srcVal = parseInt (this.view.getValueFromElementDiv (src));
-  var trgVal = trgElem ? parseInt (this.view.getValueFromElementDiv (trg)) : null;
+  var srcId = srcElem ? srcElem.nodeId : parseInt (this.view.getIdFromElementDiv (src));
+  var trgId = trgElem ? trgElem.nodeId : parseInt (this.view.getIdFromElementDiv (trg));
 
-  console.log (srcVal, trgVal, side);
+  if (DEBUG) console.log ("IDs: ", srcId, " , ", trgId, "   . ", trgElem, " : ", trg);
 
+  var runningDownANode; // TODO new road
   switch (side) {
     case DIRECTION_LEFT:
-      this.userModel.setLeft (srcVal, trgVal);
+      runningDownANode = this.userModel.setLeft (srcId, trgId);
       break;
     case DIRECTION_RIGHT:
-      this.userModel.setRight (srcVal, trgVal);
+      runningDownANode = this.userModel.setRight (srcId, trgId);
+      break;
+    default:
+      console.error ("UNKNOWN SIDE ", side);
       break;
   }
+
+  return true;
 }
 
 function doConnect (elem, plumbEvt, origEvt){
@@ -274,8 +323,27 @@ function connectDetach (elem, plumbEvt, origEvt){
 }
 
 function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {
-  console.log (plumbEvt);
   jsPlumb.deleteConnection(plumbEvt.connection);
+}
+
+// The Nintendo DS was actually a very good gaming system
+function remHovOnDS (elem, conn, origEvt){
+  var src = conn.source ? $(conn.source) : $("#" + conn.sourceId);
+  if (!src || src.length===0) return;
+
+  onElemMouseOff.call (this, src[0]);
+//  console.log("DRAGGING STOPPED");
+  return true;
+}
+function addHovWhileDragging (elem, conn, origEvt){
+  var src = conn.source ? $(conn.source) : $("#" + conn.sourceId);
+  if (!src || src.length===0) return;
+
+  var elem = this.view.getElement (src);
+  if (!elem) return;
+
+//  elem.setDragging (true);
+  //console.log("DRAGGING");
 }
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
@@ -398,10 +466,37 @@ $ (()=> {
           customEvtName: "onElementDragged",
           domEvtName: "drag"
         },
+        {
+          handlingFunction: onElemMouseOver,
+          customEvtName: "here's johnny",
+          domEvtName: "mouseenter"
+        },
+        {
+          handlingFunction: onElemMouseOff,
+          customEvtName: "no tv and no beer make homer something something",
+          domEvtName: "mouseleave"
+        },
       ],
       id: ELEM_EVENTS_ID // so it can be found later. take a look at the view
     },
 
+    /* ENDPOINT EVENTS ---- STYLING AND OTHER MAGIC */
+    {
+      elem: [ ],
+      evtsArr: [
+        {
+          handlingFunction: onElemMouseOver,
+          customEvtName: "here's johnny",
+          domEvtName: "mouseenter"
+        },
+        {
+          handlingFunction: onElemMouseOff,
+          customEvtName: "no tv and no beer make homer something something",
+          domEvtName: "mouseleave"
+        },
+      ],
+      id: ENDPOINT_EVENTS_ID // so it can be found later. take a look at the view
+    },
 
     /* TRASH CAN EVENTS ----- OCCUR ON THE TRASH CAN. #TRASH */
     {
@@ -474,6 +569,21 @@ $ (()=> {
           handlingFunction: disconnectOnClickAMijiggles,
           customEvtname: "jsp-click-detach",
           domEvtName: "beforeStartDetach"
+        },
+        {
+          handlingFunction: remHovOnDS,
+          customEvtname: "jsp-drag-stop",
+          domEvtName: "connectionAborted"
+        },
+        {
+          handlingFunction: remHovOnDS,
+          customEvtname: "jsp-drag-stop",
+          domEvtName: "connectionDragStop"
+        },
+        {
+          handlingFunction: addHovWhileDragging,
+          customEvtname: "jsp-dragging",
+          domEvtName: "connectionDrag"
         }
       ]
     }

@@ -14,4 +14,16 @@ const MESSAGE_TXT      = "#message";
 
 $(()=>{
 	// If anything needs to be done when the exercise loads, do it here
+		$("#trash").droppable ({
+			tolerance: "touch",
+			over: function(event, ui ){
+				$(this).attr('src', "exercise/uset/images/trashcan_open.png");
+			},
+			out: function(event, ui ){
+				$(this).attr('src', "exercise/uset/images/trashcan.png");
+			},
+			drop: function() {
+				$(this).attr('src', "exercise/uset/images/trashcan.png");
+			}
+		});
 })

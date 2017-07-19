@@ -15,6 +15,8 @@ class BinarySearchTree extends Model {
 
     this.root = root || null;
     this.n    = this.root ? this._size (this.root) : 0;
+
+    this.nodesById = { };
   }
 
   /* ---- [PRIVATE] - HELPER FUNCTIONS ---- */
@@ -41,6 +43,7 @@ class BinarySearchTree extends Model {
     }
 
     this.n ++;
+    this.nodesById [newNode.id] = newNode;
     return true;
   }
 
@@ -51,6 +54,10 @@ class BinarySearchTree extends Model {
     if (node && node.data === x)
       return node;
     return null;
+  }
+
+  _findById (id) {
+    return this.nodesById [id];
   }
 
   _subtreeFrom (u) {
@@ -148,6 +155,7 @@ class BinarySearchTree extends Model {
   {
     var node = this._find (x);
     if (!node) return false;
+    this.nodesById[node.id] = null;
 
     if (!node.left || !node.right)
       this.splice (node);
@@ -164,18 +172,43 @@ class BinarySearchTree extends Model {
 
 
   /* ------ USER MODEL ------ */
-  stUM (d1, d2) {
-    var n1 = this._find (d1);
-    var n2 = this._find (d2);
+  makeNode (x) {
+    var newNode = new Node (x);
+    this.nodesById [newNode.id] = newNode;
+    return newNode;
+  }
+
+  getRoots () {
+    var roots = [ ];
+
+    for (var i in this.nodesById){
+      var n = this.nodesById [i];
+      if (n && !n.parent)
+        roots.push (n);
+    }
+
+    return roots;
+  }
+
+  getTrees() {
+    var roots = this.getRoots ();
+    var trees = [ ];
+    for (var i in roots)
+      trees.push (new BinarySearchTree (roots [i]));
+    return trees;
+  }
+
+  stEM (d1Id, d2Id) {
+    var n1 = this._findById (d1Id);
 
     // If n1 doesn't exist, we can't set left.
     if (!n1) return false;
 
-    // If d2 is non-null, make sure there's no node n2 & make new node;
-    // If d2 is null, make n2 null
-    if (d2 !== null && n2) return false;
-    if (d2 === null) n2 = null;
-    else n2 = new Node (d2);
+    // If d2Id is null, we want to set to null ;
+    // Otherwise, expect node ID exists & return it
+    var n2;
+    if (d2Id === null) n2 = null;
+    else n2 = this._findById (d2Id);
 
     return {
       n1: n1,
@@ -183,16 +216,62 @@ class BinarySearchTree extends Model {
     };
   }
 
-  setLeft (d1, d2) {
-    var nodes = this.stUM (d1, d2);
+  setLeft (d1Id, d2Id) {
+    var nodes = this.stEM (d1Id, d2Id);
     if (!nodes) return false;
-    nodes.n1.left = nodes.n2;
+
+    var n1 = nodes.n1;
+    var lc = n1 && n1.left;
+    if (lc)
+      lc.parent = null;
+
+    nodes.n1.left = nodes.n2; // TODO black magic
+    return nodes.n2;
   }
 
-  setRight (d1, d2) {
-    var nodes = this.stUM (d1, d2);
+  setRight (d1Id, d2Id) {
+    var nodes = this.stEM (d1Id, d2Id);
     if (!nodes) return false;
-    nodes.n1.right = nodes.n2;
+
+    var n1 = nodes.n1;
+    var rc = n1 && n1.right;
+    if (rc)
+      rc.parent = null;
+
+    n1.right = nodes.n2;
+    return nodes.n2;
+  }
+
+  removeById (id) {
+    var node = this.nodesById [id];
+    if (!node){
+      console.error ("node not found: ", id);
+      return false;
+    }
+
+    // if it has a left child, remove child's parent
+    if (node.left){
+      node.left.parent = null;
+      node.left = null;
+    }
+
+    // if it has a right child, remove child's parent
+    if (node.right){
+      node.right.parent = null;
+      node.right = null;
+    }
+
+    // if it has a parent, remove this child
+    if (node.parent){
+      if (node.parent.left === node)
+        node.parent.left = null;
+      else if (node.parent.right === node)
+        node.parent.right = null;
+      node.parent = null;
+    }
+
+    // remove node
+    this.nodesById [id] = null;
   }
 
   /* ------ EXERCISE STUFF ------ */

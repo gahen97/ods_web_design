@@ -189,31 +189,42 @@ li.tabbedQuestion:hover {
   background-color: #565656;
   color: white;
   border: 3px solid #565656;
-  border-radius: 5px;
+  border-radius: 100px;
   font-weight: bold;
   font-family: courier;
   text-align: center;
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   display: inline-block;
   position: absolute;
   cursor: -webkit-grab;
   line-height: 30px;  /* needs this for vertically centered text */
 }
 
-.element:hover{
-  background-color: white;
+.jsp-hover{
   color: #565656;
+}
+.element.jsp-hover{
+  background-color: white;
 }
 
 .element:active {
   background-color: white;
   color: #565656;
-  width: 37px;
-  height: 37px;
+  width: 47px;
+  height: 47px;
   box-shadow: 1px 1px 1px 1px #aaa;
   cursor: -webkit-grabbing;
 }
+
+.jsp-endpoint circle {
+  fill: white;
+}
+
+.jsp-hover circle {
+  fill: #565656;
+}
+
 /* We've been trying too hard... why do we do that? Why do I do that? Why do I do that. */
 
 /* trash can ........ should be a small image, top right corner */

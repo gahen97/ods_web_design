@@ -20,10 +20,12 @@ block EXERCISE_HEAD
     script(type='text/javascript', src='/exercise/BST/JS/AnswerTypes/AnswerType.js')
     script(type='text/javascript', src='/exercise/BST/JS/AnswerTypes/AddAnswer.js')
     script(type='text/javascript', src='/exercise/BST/JS/AnswerTypes/FindAnswer.js')
+    script(type='text/javascript', src='/exercise/BST/JS/AnswerTypes/RemoveAnswer.js')
     script(type='text/javascript', src='/exercise/BST/JS/Questions/Instructions.js')
     script(type='text/javascript', src='/exercise/BST/JS/Questions/Question.js')
     script(type='text/javascript', src='/exercise/BST/JS/Questions/Add.js')
     script(type='text/javascript', src='/exercise/BST/JS/Questions/Find.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Questions/Remove.js')
     script(type='text/javascript', src='/exercise/BST/JS/QuestionTypes/QuestionType.js')
     script(type='text/javascript', src='/exercise/BST/JS/QuestionTypes/Operations.js')
     script(type='text/javascript', src='/exercise/BST/JS/Defs.js')
@@ -56,6 +58,7 @@ block EXERCISE_CONTENT
             p  params
           .modelBody.flexCol.borderized(style='margin-top: 10px;')
             .modelMain.col-12#model
+              img#trash.trashCan(src='exercise/uset/images/trashcan.png')
         #messageDiv.col-8.no-visibility.center.textCentered
           input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')
         .questionButtons

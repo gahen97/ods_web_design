@@ -60,16 +60,17 @@ class ViewBase {
     return this.eventsById [id];
   }
 
+  addToEventHandler (element, id) {
+    var e = this.getEventHandler (id);
+    if (e) e.push (element);
+  }
   /* ---- ELEMENTS ----- */
 
   // add a new element
   addElement (value, options) {
-    console.log(options);
-    
     if (!options) options={};
 
     // add the element & push it into the elements object
-    console.log(options);
     var newElement                                = new Element (value, options.constructArgs);
     this.elements [newElement.getId ()]           = newElement;
 
@@ -82,8 +83,7 @@ class ViewBase {
 
     if (options.events !== false) {
       // Moved this into here. Now Element doesn't need to access Control, which it shouldn't
-      var e = this.getEventHandler (ELEM_EVENTS_ID);
-      if (e) e.push (newElement.getElementDiv ());
+      this.addToEventHandler (newElement.getElementDiv (), ELEM_EVENTS_ID);
     }
 
     this.storePositionOf (newElement);

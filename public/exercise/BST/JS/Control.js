@@ -78,6 +78,10 @@ class Control {
     }
   }
 
+  addToEvent (element, eventId) {
+    this.view.addToEventHandler (element, eventId);
+  }
+  
   // find by id
   getDomEventHandler (id) {
     return this.view.getEventHandler (id);
@@ -87,9 +91,10 @@ class Control {
   removeElement (e)
   {
     var value = this.view.getValueFromElementDiv (e);
+    var id    = this.view.getIdFromElementDiv (e);
 
     // remove from the user model
-    this.userModel.remove (value);
+    this.userModel.removeById (id);
 
     // remove from the dom
     this.view.removeElement (e);
@@ -110,9 +115,10 @@ class Control {
 
   /* --- MODELS ---- */
   setModel (m) {
-    this.view.displayModel (m);
-
     // add everything to the userModel
-    this.userModel = m.copy ();
+    var c = m.copy ();
+    this.userModel = c;
+
+    this.view.displayModel (c);
   }
 }
