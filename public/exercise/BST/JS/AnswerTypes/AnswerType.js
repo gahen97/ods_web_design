@@ -5,6 +5,16 @@ class AnswerType {
   {
     this.data = undefined;
     this.model = undefined;
+
+    this.misc  = { };
+  }
+
+  param (name, prop){
+    if (!prop)
+      return this.misc [name];
+
+    this.misc [name] = prop;
+    return this;
   }
 
   setData(data)

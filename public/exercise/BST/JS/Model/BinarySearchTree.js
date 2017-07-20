@@ -129,6 +129,8 @@ class BinarySearchTree extends Model {
   {
     var newNode = new Node (x);
     this._add (x, newNode);
+
+    return newNode.id;
   }
 
   splice (u)
@@ -243,8 +245,10 @@ class BinarySearchTree extends Model {
     return nodes.n2;
   }
 
+  findId (id) { return this.nodesById [id]; }
+
   removeById (id) {
-    var node = this.nodesById [id];
+    var node = this.findId (id);
     if (!node){
       console.error ("node not found: ", id);
       return false;

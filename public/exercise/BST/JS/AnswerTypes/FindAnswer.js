@@ -33,6 +33,7 @@ class FindAnswer extends AnswerType {
 
     // TODO should be something better here maybe
     control.reset ();
+
     NodeTraversalAnimation.runAnimation (elements, ()=>{
       control.enable ();
     }, (elem)=>{

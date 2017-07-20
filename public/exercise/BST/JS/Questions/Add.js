@@ -6,10 +6,14 @@ class Add extends Question {
     return ODSRandom.getRandomIntInclusive(__addMinParam__, __addMaxParam__);
   }
 
+  // Question: Why are we doing this here? This should be an Answer thing.
+  //   TODO Refactor
   computeAnswerData()
   {
     var model = this.answer.getModel ();
-    model.add (this.parameters);
+    var nodeId = model.add (this.parameters);
+
+    this.answer.param ("nodeId", nodeId);
     return model;
   }
 

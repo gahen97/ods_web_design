@@ -123,6 +123,9 @@ class Question {
   {
       var p   = $(".parametersBody", div);
       p.text (this.fullName);
+
+      /* TODO */
+      FadeIn.runAnimation (p)
   }
 
   displayInstructions(div)

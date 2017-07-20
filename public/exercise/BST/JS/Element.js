@@ -203,4 +203,25 @@ class Element extends ElementBase {
     this.addPlumb (newConnection);
     otherElem.addPlumb (newConnection);
   }
+
+  // Animations!
+  jqify(){
+    var elems = [this.jq [0]];
+    for (var i in this.plumbs)
+      elems.push (this.plumbs [i].jq [0]);
+    return $(elems);
+  }
+
+  fadeIn () {
+    var elems = this.jqify ();
+    elems.stop ();
+    elems.css({display: 'none'});
+    elems.fadeIn.apply (elems, arguments);
+  }
+
+  fadeOut () {
+    var elems = this.jqify ();
+    elems.stop ();
+    elems.fadeOut.apply (elems, arguments);
+  }
 }
