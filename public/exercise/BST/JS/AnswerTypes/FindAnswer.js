@@ -28,12 +28,15 @@ class FindAnswer extends AnswerType {
   {
     control.disable ();
 
-    var elements = control.getElementsFromNodes (this.data); // TODO implement
+    var elements = control.getElementsForRoute (this.data); // TODO implement
     if (!elements) return false;
 
     // TODO should be something better here maybe
-    NodeTraversalAnimation.runAnimation (this.data, ()=>{
+    control.resetActiveElement ();
+    NodeTraversalAnimation.runAnimation (elements, ()=>{
       control.enable ();
+    }, (elem)=>{
+      control.setActiveElement (elem);
     });
   }
 }

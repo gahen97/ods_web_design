@@ -6,7 +6,6 @@
 
 class NodeTraversalAnimation {
   static computeSlope (from, to) {
-    console.log (from, to);
     var p1 = Div.dimensionsOf (from);
     var p2 = Div.dimensionsOf (to);
 
@@ -63,20 +62,26 @@ class NodeTraversalAnimation {
     });
   }
 
-  static runAnimation (elements, cb) {
+  static runAnimation (elements, cb, eachFunc) {
     // TODO
     var d = $("<span id='animationSpan'>X</span>").appendTo ($ (QUESTION_MAIN));
 
     var step = (i) => {
-      if (i >= elements.length) callback ();
-      else{
+      if (i >= elements.length){
+        d.remove ();
+        cb ();
+      }else{
         this.animateFromTo (d, elements [i - 1], elements [i], {
           numIterations: 10,
-          callback: ()=>{ step(i+1); }
+          callback: ()=>{
+            eachFunc (elements[i]);
+            step(i+1);
+          }
         });
       }
     }
 
+    eachFunc (elements [0])
     step (1);
   }
 }
