@@ -9,8 +9,7 @@ class Control extends ControlBase {
     this.setActiveElement (null);
     this.userDataArray = [ ];
     this.view.reset ();
-
-    this.setRootActive (true);
+    this.exercise.reset();
   }
 
   restart(){
