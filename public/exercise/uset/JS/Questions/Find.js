@@ -30,7 +30,7 @@ class Find extends Question {
     if (!this.answer.getModel ().equals (userModel))
       return false;
 
-    return (this.answer.getData () === activeElem.getTrueValue ()); // TODO better name for this?
+    return (this.answer.getData () === activeElem.getObjValue ()); // TODO better name for this?
   }
 
   // setting active

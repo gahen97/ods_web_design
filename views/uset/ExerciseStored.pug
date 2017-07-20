@@ -1,19 +1,38 @@
 extends ../ods_video.pug
 
-block EXERCISE_HEAD    
+block EXERCISE_HEAD
+    script(type='text/javascript', src='/exercise/uset/JS/lib/jsplumb.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Array.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Random.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Dialog/Popup.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Dialog/ErrorDialog.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Dialog/SuccessDialog.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Dialog/HighlightDialog.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Div.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Model/Model.js')
     script(type='text/javascript', src='/exercise/uset/JS/Model/Uset.js')
+    script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/AnswerType.js')
     script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/AddAnswer.js')
     script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/FindAnswer.js')
     script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/RemoveAnswer.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Questions/Instructions.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Questions/Question.js')
     script(type='text/javascript', src='/exercise/uset/JS/Questions/Add.js')
     script(type='text/javascript', src='/exercise/uset/JS/Questions/Find.js')
     script(type='text/javascript', src='/exercise/uset/JS/Questions/Remove.js')
+    script(type='text/javascript', src='/exercise/uset/JS/QuestionTypes/QuestionType.js')
     script(type='text/javascript', src='/exercise/uset/JS/QuestionTypes/Operations.js')
     script(type='text/javascript', src='/exercise/uset/JS/Defs.js')
     script(type='text/javascript', src='/exercise/uset/JS/DomDefs.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Exercise.js')
+    script(type='text/javascript', src='/exercise/uset/JS/DOMEventHandler.js')
+    script(type='text/javascript', src='/exercise/uset/JS/CustomEventHandler.js')
+    script(type='text/javascript', src='/exercise/uset/JS/ElementBase.js')
     script(type='text/javascript', src='/exercise/uset/JS/Element.js')
+    script(type='text/javascript', src='/exercise/uset/JS/ViewBase.js')
     script(type='text/javascript', src='/exercise/uset/JS/View.js')
     script(type='text/javascript', src='/exercise/uset/JS/Events.js')
+    script(type='text/javascript', src='/exercise/uset/JS/QuestionTabbify.js')
     script(type='text/javascript', src='/exercise/uset/JS/Control.js')
     script(type='text/javascript', src='/exercise/uset/JS/main.js')
     link(href='/exercise/uset/Views/css/Uset.css', rel='stylesheet', type='text/css')
@@ -33,7 +52,7 @@ block EXERCISE_CONTENT
             p  params
           .modelBody.flexCol.borderized(style='margin-top: 10px;')
             .modelMain.col-12
-              img#trash.trashCan(src='exercise/Base/images/trashcan.png')
+              img#trash.trashCan(src='exercise/uset/images/trashcan.png')
               #model.modelDisplay.col-6.round
         #messageDiv.col-8.no-visibility.center.textCentered
           input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')
