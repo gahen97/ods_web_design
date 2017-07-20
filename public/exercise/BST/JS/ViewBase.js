@@ -14,12 +14,24 @@ class ViewBase {
 
     this.modelDivHelper = new Div ($ (MODEL_MAIN));
     this.modelBodHelper = new Div ($ (MODEL_BODY));
+
+    this.overlay = new Overlay ($ (QUESTION_MAIN));
   }
 
   /* ---- START ---- */
   start()
   {
     this.clear ();
+  }
+
+  /* ---- DISABLE / ENABLE MOUSE EVENTS ----- */
+  disable ()
+  {
+    this.overlay.disable ();
+  }
+  enable ()
+  {
+    this.overlay.enable ();
   }
 
   /* ---- CLEAR THE MODEL ---- */
@@ -60,6 +72,10 @@ class ViewBase {
     return this.eventsById [id];
   }
 
+  addToEventHandler (element, id) {
+    var e = this.getEventHandler (id);
+    if (e) e.push (element);
+  }
   /* ---- ELEMENTS ----- */
 
   // add a new element
@@ -67,7 +83,7 @@ class ViewBase {
     if (!options) options={};
 
     // add the element & push it into the elements object
-    var newElement                                = new Element (value);
+    var newElement                                = new Element (value, options.constructArgs);
     this.elements [newElement.getId ()]           = newElement;
 
     if (!this.elementsByValue [value])
@@ -75,15 +91,16 @@ class ViewBase {
     this.elementsByValue [value].push (newElement);
 
     if (options.withinModel)
-      this.drawWithinModel (newElement);
+      this.drawWithinModel (newElement, options.data);
 
     if (options.events !== false) {
       // Moved this into here. Now Element doesn't need to access Control, which it shouldn't
-      var e = this.getEventHandler (ELEM_EVENTS_ID);
-      if (e) e.push (newElement.getElementDiv ());
+      this.addToEventHandler (newElement.getElementDiv (), ELEM_EVENTS_ID);
     }
 
     this.storePositionOf (newElement);
+
+    return newElement;
   }
 
   // remove an element
@@ -116,10 +133,11 @@ class ViewBase {
   }
 
   removeElements (elems, checkFunc) {
-    $ (elems).each ((i, e)=>{
+    for (var i in elems) {
+      var e = elems [i];
       if (!checkFunc || checkFunc (e))
         this.removeElementById (e.getId ());
-    });
+    }
   }
 
   /*removeElementByValue (value) {
