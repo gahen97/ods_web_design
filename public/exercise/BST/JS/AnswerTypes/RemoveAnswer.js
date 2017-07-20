@@ -12,4 +12,23 @@ class RemoveAnswer extends AnswerType {
   {
     return this.model.equals (userAnswer);
   }
+
+  display(div){
+    var end = ()=>{
+      super.display(div);
+    }
+
+    // search for the node
+    var path = this.param ("path-to-node");
+
+    // convert path into a node from the actual model
+    // which we can then convert into an element
+    var actNod = control.findNodeFromPath (path);
+    var elem   = control.findElemFrom (actNod);
+    
+    if (!elem) return end();
+
+    // animate adding the element
+    FadeOut.runAnimation (elem, end, {duration: 600});
+  }
 }

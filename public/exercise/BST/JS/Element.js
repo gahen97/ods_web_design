@@ -48,12 +48,20 @@ class Element extends ElementBase {
     this.rightEndpoint.remove();
 
     jsPlumb.remove (this.element);
+
+    return this;
   }
 
   toggleClass (className, active) {
     $(this.element).toggleClass (className, active);
     this.leftEndpoint.toggleClass (className, active);
     this.rightEndpoint.toggleClass (className, active);
+
+    return this;
+  }
+
+  addClass (className) {
+    return this.toggleClass (className, true);
   }
 
   setActive (isActive) {
@@ -74,6 +82,8 @@ class Element extends ElementBase {
         lNode.setCSA (isActive);
       if (rNode)
         rNode.setCSA (isActive);
+
+      return this;
   }
 
   canSetActive () {
@@ -81,13 +91,14 @@ class Element extends ElementBase {
   }
 
   setCSA (c) {
-    this.toggleClass ("can-set-active", c);
+    return this.toggleClass ("can-set-active", c);
   }
 
   moveTo (offset) {
     // Move to some given position
     // TODO this is hacky and bad
     $ (this.element).offset (offset);
+    return this;
   }
 
   moveUp () {
@@ -98,6 +109,7 @@ class Element extends ElementBase {
     })
 
     jsPlumb.repaintEverything();
+    return this;
   }
 
   moveDown () {
@@ -108,6 +120,7 @@ class Element extends ElementBase {
     })
 
     jsPlumb.repaintEverything();
+    return this;
   }
 
   isHovered(){
@@ -189,5 +202,26 @@ class Element extends ElementBase {
                                           }).setDirection (direction);
     this.addPlumb (newConnection);
     otherElem.addPlumb (newConnection);
+  }
+
+  // Animations!
+  jqify(){
+    var elems = [this.jq [0]];
+    for (var i in this.plumbs)
+      elems.push (this.plumbs [i].jq [0]);
+    return $(elems);
+  }
+
+  fadeIn () {
+    var elems = this.jqify ();
+    elems.stop ();
+    elems.css({display: 'none'});
+    elems.fadeIn.apply (elems, arguments);
+  }
+
+  fadeOut () {
+    var elems = this.jqify ();
+    elems.stop ();
+    elems.fadeOut.apply (elems, arguments);
   }
 }

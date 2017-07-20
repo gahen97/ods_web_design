@@ -5,10 +5,16 @@ class Control extends ControlBase {
     this.userDataArray = [ ];
   }
 
-  restart(){
+  reset(){
     this.setActiveElement (null);
-    this.updateActiveQuestion ();
     this.userDataArray = [ ];
+    this.view.reset ();
+    this.exercise.reset();
+  }
+
+  restart(){
+    this.updateActiveQuestion ();
+    this.reset ();
 
     //this.userModel = this.exercise.getCurrQuestion ().getModel ().copy ();
   }
@@ -29,6 +35,11 @@ class Control extends ControlBase {
     elem.setCSA (arg !== false);
   }
 
+  resetActiveElement (){
+    this.setRootActive (true);
+    this.userDataArray = [ ];
+  }
+
   setActiveElement (element) {
     if (!element)
       return super.setActiveElement (element);
@@ -36,13 +47,15 @@ class Control extends ControlBase {
     if (!this.canSetActive (element)) return false;
     if (!this.activeElement)
       this.setRootActive (false);
+    else
+      this.activeElement.addClass ("path-node").addClass("path-node-plumb");
+
 
     // store the node in our user data array
     var node = this.findNodeFrom (element);
     if (!node) return false;
 
     this.userDataArray.push (node);
-    element.addClass ("path-node");
 
     // do our stuff
     super.setActiveElement (element);
@@ -60,8 +73,61 @@ class Control extends ControlBase {
     return this.userModel._findById (element.nodeId);
   }
 
+  findNextNodeFrom (prev, next) {
+    if (!prev || !next) return null;
+    if (prev.left && prev.left.data === next.data)
+      return prev.left;
+
+    if (prev.right && prev.right.data === next.data)
+      return prev.right;
+
+    return null;
+  }
+
   findElemFrom (node) {
     if (!node) return null;
     return this.view.findFromNid (node.id);
+  }
+
+  findElemsFrom (nodes) {
+    var res = [ ];
+    for (var i in nodes)
+      res.push (this.findElemFrom (nodes [i]));
+    return res;
+  }
+
+  // NOTE: Path should be an array of nodes in some model matching our own.
+  //       eachFunc is optional, will be called through every iteration of our loop
+  //         and sent each node on the path to our result (does not include result).
+  findNodeFromPath (path, eachFunc) {
+    if (!path || !path.length) return null;
+    if (!eachFunc) eachFunc = function(){};
+
+    // Walk through every node in the path, starting from our own root.
+    var prevNode = this.userModel.getRoot ();
+    for (var i = 1; i < path.length; i++){
+      eachFunc (prevNode);
+
+      // Find the next node and move to it
+      var node = this.findNextNodeFrom (prevNode, path [i]);
+      prevNode = node;
+    }
+
+    return prevNode;
+  }
+
+  getElementsForRoute (path) {
+    // The idea here is that we're given a path and we want to route it to our model,
+    //   then route that to findElemsFrom (nodes).
+    // To map to our model, we should go through, check left/right, see which matches.
+    //   Note it is entirely possible this will still break down, but it's less likely.
+    if (!path || !path.length) return [ ];
+    var usersPath = [];
+
+    usersPath.push (this.findNodeFromPath (path, (e)=>{
+      usersPath.push (e);
+    }))
+
+    return this.findElemsFrom (usersPath);
   }
 }

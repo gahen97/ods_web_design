@@ -85,6 +85,10 @@ class PlumbConnect {
     for (var e in this.elements)
       this.elements [e].removePlumb (this);
   }
+
+  get jq () {
+    return $(this.connection.canvas);
+  }
 }
 
 jsPlumb.importDefaults({

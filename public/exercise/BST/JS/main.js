@@ -17,3 +17,5 @@ function start ()
 {
 	control = new Control ();
 }
+
+model_height = function(){}
