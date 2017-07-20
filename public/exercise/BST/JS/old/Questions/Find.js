@@ -8,7 +8,7 @@ class Find extends Question {
 
   computeAnswerData()
   {
-    return this.answer.getModel().find(this.parameters);
+    return this.answer.getModel().pathTo(this.parameters);
   }
 
   getAnswer ()
@@ -20,7 +20,7 @@ class Find extends Question {
   //TODO I don't think this should be here, but I probably don't fully understand it.
   // You're right ... belongs inside Element, probably. I'm moving it.
 
-  check (userModel, activeElem)
+  check (userModel, activeElem, userData)
   {
     // for find, two things must be the same:
     //   1) The models should be the same
@@ -30,11 +30,16 @@ class Find extends Question {
     if (!this.answer.getModel ().equals (userModel))
       return false;
 
-    return (this.answer.getData () === activeElem.getObjValue ()); // TODO better name for this?
+    return this.answer.check (userData); // TODO better name for this?
   }
 
   // setting active
   canSetActive(){ return true; }
 
   // input: no input needed for find
+
+
+  start (){
+    control.setRootActive ();
+  }
 }

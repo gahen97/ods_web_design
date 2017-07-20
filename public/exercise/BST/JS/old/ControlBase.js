@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */ 'use strict';
 
-class Control {
+class ControlBase {
   constructor()
   {
     this.userModel = new __MODULENAME__ ();
@@ -38,6 +38,10 @@ class Control {
     this.updateActiveQuestion ();
   }
 
+  // disable, enable
+  disable () { this.view.disable (); }
+  enable () { this.view.enable (); }
+  
   // tabs
   updateActiveQuestion () {
     var active = this.exercise.getCurrQuestionId ();
@@ -78,6 +82,10 @@ class Control {
     }
   }
 
+  addToEvent (element, eventId) {
+    this.view.addToEventHandler (element, eventId);
+  }
+
   // find by id
   getDomEventHandler (id) {
     return this.view.getEventHandler (id);
@@ -87,9 +95,6 @@ class Control {
   removeElement (e)
   {
     var value = this.view.getValueFromElementDiv (e);
-
-    // remove from the user model
-    this.userModel.remove (value);
 
     // remove from the dom
     this.view.removeElement (e);
@@ -110,9 +115,10 @@ class Control {
 
   /* --- MODELS ---- */
   setModel (m) {
-    this.view.displayModel (m);
-
     // add everything to the userModel
-    this.userModel = m.copy ();
+    var c = m.copy ();
+    this.userModel = c;
+
+    this.view.displayModel (c);
   }
 }
