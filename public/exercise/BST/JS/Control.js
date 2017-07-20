@@ -5,10 +5,17 @@ class Control extends ControlBase {
     this.userDataArray = [ ];
   }
 
-  restart(){
+  reset(){
     this.setActiveElement (null);
-    this.updateActiveQuestion ();
     this.userDataArray = [ ];
+    this.view.reset ();
+
+    this.setRootActive (true);
+  }
+
+  restart(){
+    this.updateActiveQuestion ();
+    this.reset ();
 
     //this.userModel = this.exercise.getCurrQuestion ().getModel ().copy ();
   }
@@ -41,13 +48,15 @@ class Control extends ControlBase {
     if (!this.canSetActive (element)) return false;
     if (!this.activeElement)
       this.setRootActive (false);
+    else
+      this.activeElement.addClass ("path-node").addClass("path-node-plumb");
+
 
     // store the node in our user data array
     var node = this.findNodeFrom (element);
     if (!node) return false;
 
     this.userDataArray.push (node);
-    element.addClass ("path-node");
 
     // do our stuff
     super.setActiveElement (element);

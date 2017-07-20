@@ -213,4 +213,12 @@ class View extends ViewBase {
   {
     this.displayModel ();
   }
+
+  reset ()
+  {
+    $(".path-node").removeClass ("path-node");
+    $(".path-node-plumb").removeClass ("path-node-plumb");
+    $(".active").removeClass ("active");
+    $(".can-set-active").removeClass ("can-set-active");
+  }
 }

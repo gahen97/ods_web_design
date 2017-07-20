@@ -32,7 +32,7 @@ class FindAnswer extends AnswerType {
     if (!elements) return false;
 
     // TODO should be something better here maybe
-    control.resetActiveElement ();
+    control.reset ();
     NodeTraversalAnimation.runAnimation (elements, ()=>{
       control.enable ();
     }, (elem)=>{

@@ -149,10 +149,36 @@ li.tabbedQuestion:hover {
 
 .active {
   background-color: #ff8401 !important;
+  color: #565656 !important;
+}
+
+.path-node {
+  background-color: white !important;
+  border-color: #ff8401 !important;
+}
+.path-node span {
+  color: #ff8401;
 }
 
 .active-tab {
   font-weight: bold;
+}
+
+div .element.can-set-active {
+  border-color: #565656 !important;
+  background-color: white !important;
+  cursor: pointer;
+}
+
+div .element.can-set-active:hover {
+}
+
+.can-set-active svg circle {
+  fill: #565656;
+}
+
+.can-set-active span {
+  color: #565656;
 }
 
 .round { /* aka circular ... but then there's ovals. so its round */
@@ -224,7 +250,7 @@ li.tabbedQuestion:hover {
 }
 
 .element.jsp-hover{
-  background-color: white;
+  background-color: #ccc;
 }
 .element.active.jsp-hover {
   color: white;
@@ -264,7 +290,14 @@ li.tabbedQuestion:hover {
   fill: #565656;
 }
 .jsplumb-endpoint-active.jsp-hover circle{
-  fill: white;
+  fill: #565656;
+}
+
+.jsp-endpoint.path-node-plumb circle{
+  fill: #ff8401;
+}
+.jsp-endpoint.path-node-plumb.jsp-hover circle{
+  fill: #ff8401;
 }
 
 
