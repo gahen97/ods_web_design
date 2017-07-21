@@ -64,7 +64,7 @@ class Traverse {
 
   static runAnimation (elements, opts) {
     // TODO
-    var d = $("<span id='animationSpan'>X</span>").appendTo ($ (QUESTION_MAIN));
+    var d = $("<div id='animationDiv'></div>").appendTo ($ (QUESTION_MAIN));
 
     var step = (i) => {
       if (i >= elements.length){
@@ -84,7 +84,7 @@ class Traverse {
 
     if (opts.each)
       opts.each (elements [0]);
-    
+
     step (1);
   }
 }
