@@ -30,6 +30,6 @@ class AddAnswer extends AnswerType {
     var elem   = control.findElemFrom (actNod);
 
     // animate adding the element
-    FadeIn.runAnimation (elem, ()=>{}, {duration: 600})
+    Animation.run ("FadeIn", elem);
   }
 }

@@ -17,9 +17,13 @@ class Remove extends Question {
     var elem = control.find (this.parameters);
     if (!elem) return;
 
-    FadeOut.runAnimation (elem.jq, ()=>{
-      super.displayAnswer.apply (this, arguments);
-    })
+    Animation.run ("FadeOut", elem.jq,
+      {
+        callback: ()=>{
+          super.displayAnswer.apply (this, arguments);
+        }
+      }
+    )
   }
   // input: no input needed for remove
 }

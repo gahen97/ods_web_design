@@ -34,10 +34,13 @@ class FindAnswer extends AnswerType {
     // TODO should be something better here maybe
     control.reset ();
 
-    NodeTraversalAnimation.runAnimation (elements, ()=>{
-      control.enable ();
-    }, (elem)=>{
-      control.setActiveElement (elem);
+    Animation.run ("Traverse", elements, {
+      callback: ()=>{
+        control.enable ();
+      },
+      each: (elem)=>{
+        control.setActiveElement (elem);
+      }
     });
   }
 }

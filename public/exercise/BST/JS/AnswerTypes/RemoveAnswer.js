@@ -25,10 +25,12 @@ class RemoveAnswer extends AnswerType {
     // which we can then convert into an element
     var actNod = control.findNodeFromPath (path);
     var elem   = control.findElemFrom (actNod);
-    
+
     if (!elem) return end();
 
     // animate adding the element
-    FadeOut.runAnimation (elem, end, {duration: 600});
+    Animation.run ("FadeOut", elem, {
+      callback: end
+    });
   }
 }

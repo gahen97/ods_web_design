@@ -37,6 +37,6 @@ class Add extends Question {
 
     // otherwise show it being added
     var elem = control.find (this.parameters);
-    FadeIn.runAnimation (elem, ()=>{})
+    Animation.run ("FadeIn", elem);
   }
 }

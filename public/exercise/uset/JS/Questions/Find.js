@@ -44,15 +44,16 @@ class Find extends Question {
 
     // fade out anything else currently active
     var active = $(".active").not (elem.jq);
-    ClassFadeIn.runAnimation (active, {
+    Animation.run ("ClassFadeIn", active, {
       remClass: "active"
     });
 
     // Fade in the new active
-    ClassFadeIn.runAnimation (elem, {
-      class: "active"
-    }, ()=>{
-      super.displayAnswer(div);
+    Animation.run ("ClassFadeIn", elem, {
+      class: "active",
+      callback: ()=>{
+        super.displayAnswer(div);
+      }
     });
   }
 }
