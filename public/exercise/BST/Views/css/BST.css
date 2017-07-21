@@ -300,7 +300,18 @@ div .element.can-set-active:hover {
   fill: #ff8401;
 }
 
+.jtk-connector path{
+  stroke: #565656;
+  stroke-width: 2;
+}
 
+#animationDiv{
+  background-image: url("../../images/animation_bolt.png");
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  width: 15px;
+  height: 15px;
+}
 
 /* We've been trying too hard... why do we do that? Why do I do that? Why do I do that. */
 

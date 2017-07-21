@@ -11,8 +11,8 @@ class NodeTraversalAnimation {
 
     var x1 = p1.xP;
     var y1 = p1.yP;
-    var x2 = p2.xP + p2.width / 2;
-    var y2 = p2.yP + p2.height / 2;
+    var x2 = p2.xP + p2.width / 2 + 5;
+    var y2 = p2.yP + p2.height / 2 - 5;
 
     return {
       rise: (y2 - y1),
@@ -64,7 +64,7 @@ class NodeTraversalAnimation {
 
   static runAnimation (elements, cb, eachFunc) {
     // TODO
-    var d = $("<div id='animationDiv'></div>").appendTo ($ (QUESTION_MAIN));
+    var d = $("<span id='animationSpan'></span>").appendTo ($ (QUESTION_MAIN));
 
     var step = (i) => {
       if (i >= elements.length){

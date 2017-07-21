@@ -325,7 +325,9 @@ li.tabbedQuestion:hover {
   background-color: #b00 !important;
 }
 
-
+.instructionsBody {
+  margin-top: 20px;
+}
 /*add some margin and/or padding to rows cols as needed as absolute px*/
 
 /*
