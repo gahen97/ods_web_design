@@ -30,6 +30,12 @@ class ElementBase {
   }
 
   getElementDiv () { return this.element; }
+  get div () { return this.getElementDiv(); }
+
+  // this is used by the traverse animation. it will jump to the given div's position
+  // when the next step is to move to d2.
+  divToNext (d2){ return this.element; }
+
 
   // default - do nothing
   addControls (e, s) {

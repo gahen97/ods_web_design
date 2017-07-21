@@ -240,6 +240,11 @@ div .element.can-set-active:hover {
   line-height: 30px;  /* needs this for vertically centered text */
   z-index: 1;
 }
+#animationSpan{
+  position: relative;
+  color: #999;
+  z-index: 99;
+}
 
 .jsp-endpoint, .jtk-endpoint-anchor{
   z-index: 3;
