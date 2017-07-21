@@ -1,6 +1,6 @@
 extends ../ods_video.pug
 
-block EXERCISE_HEAD    
+block EXERCISE_HEAD
     script(type='text/javascript', src='/exercise/uset/JS/Model/Uset.js')
     script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/AddAnswer.js')
     script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/FindAnswer.js')
@@ -33,6 +33,7 @@ block EXERCISE_CONTENT
             p  params
           .modelBody.flexCol.borderized(style='margin-top: 10px;')
             .modelMain.col-12
+              img#animationDuration.animationDuration.anim3
               img#trash.trashCan(src='exercise/Base/images/trashcan.png')
               #model.modelDisplay.col-6.round
         #messageDiv.col-8.no-visibility.center.textCentered

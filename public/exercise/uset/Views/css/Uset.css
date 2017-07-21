@@ -226,6 +226,32 @@ li.tabbedQuestion:hover {
   float: right;
 }
 
+/* animation speed .... controls the speed for animations  */
+.animationDuration {
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+/* TODO MAKE THESE IMAGES */
+.animationDuration.anim0 {
+  background-image: url("../../images/animationDuration0.png");
+}
+.animationDuration.anim1 {
+  background-image: url("../../images/animationDuration1.png");
+}
+.animationDuration.anim2 {
+  background-image: url("../../images/animationDuration2.png");
+}
+.animationDuration.anim3 {
+  background-image: url("../../images/animationDuration3.png");
+}
+.animationDuration.anim4 {
+  background-image: url("../../images/animationDuration4.png");
+}
+
+
 /* accordion - remove the borders on headers */
 .ui-accordion-header, .accordionHeader{
   background: none !important;

@@ -14,6 +14,13 @@ class AnimationSettings {
       defaults [key] = this.settings [key].value;
     return defaults;
   }
+
+  static setElement (name, element) {
+    var setting = this.settings [name];
+    if (!setting) return false;
+
+    setting.element = element;
+  }
 }
 
 AnimationSettings.settings = {
@@ -22,3 +29,7 @@ AnimationSettings.settings = {
     values: [0, 300, 600, 1000, 2000]
   })
 }
+
+$(()=>{
+  AnimationSettings.setElement ("duration", $("#animationDuration"));
+});

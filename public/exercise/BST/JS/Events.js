@@ -248,6 +248,10 @@ function droppedOnTrash (element, evt, ui) {
   this.removeElement (draggable);
 }
 
+/* ANIMATION DURATION BUTTON EVENTS. HANDLE ANIMATION SETTINGS */
+function animDurClick (element, evt) {
+  AnimationSettings.nextDuration ();
+}
 
 /* TAB EVENTS. THESE HANDLE DEALING WITH THE TABBING SYSTEM */
 function clickedTab (element, evt)
@@ -534,6 +538,18 @@ $ (()=> {
           handlingFunction: droppedOnTrash,
           customEvtName: "deleteElement", //TODO although I like this name
           domEvtName: "drop"
+        }
+      ]
+    },
+
+    /* ANIMATION DURATION SETTINGS BUTTON EVENTS */
+    {
+      elem: $("#animationDuration"),
+      evtsArr: [
+        {
+          handlingFunction: animDurClick,
+          customEvtName: "nextAnimationDuration",
+          domEvtName: "click"
         }
       ]
     },
