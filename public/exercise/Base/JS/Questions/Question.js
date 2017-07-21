@@ -125,7 +125,7 @@ class Question {
       p.text (this.fullName);
 
       /* TODO */
-      FadeIn.runAnimation (p)
+      Animation.run ("FadeIn", p)
   }
 
   displayInstructions(div)
