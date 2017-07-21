@@ -5,12 +5,6 @@ const animMap = {
   "traverse": Traverse
 }
 
-var animationDefaults = {
-  duration: 600,
-  callback: ()=>{},
-  each: ()=>{}
-}
-
 class Animation {
   static run (type, e, opts, ...rest){
     var animation = this.getAnimationFrom (type);
@@ -28,6 +22,7 @@ class Animation {
   static applyDefaults (opts){
     if (!opts) opts = { };
 
+    var animationDefaults = AnimationSettings.defaults;
     for (var option in animationDefaults)
       if (!opts [option] && opts [option] !== 0)
         opts [option] = animationDefaults [option];

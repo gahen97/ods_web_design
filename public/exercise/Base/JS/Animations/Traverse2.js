@@ -23,7 +23,7 @@ class Traverse {
   //  to move between two adjacent elements.
   static determineDuration (fromDur, numElements) {
     // TODO find a better way to do this
-    return 500;
+    return fromDur * 0.75;
   }
 
   // Main controller for the animation. Directs the element through each
