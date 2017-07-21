@@ -27,4 +27,16 @@ class Add extends Question {
   {
     return __addMinParam__ + " - " + __addMaxParam__;
   }
+
+  displayAnswer (div)
+  {
+    super.displayAnswer.apply (this, arguments);
+
+    // if it's in the set, we ignore it
+    if (this.model.find (this.parameters)) return;
+
+    // otherwise show it being added
+    var elem = control.find (this.parameters);
+    Animation.run ("FadeIn", elem);
+  }
 }

@@ -1,9 +1,5 @@
 class FadeIn {
-  static runAnimation (element, callback, each, opts) {
-    if (typeof each === 'object'){
-      opts=each;
-      each=undefined;
-    }
+  static runAnimation (element, opts, callback, each) {
     if (!opts) opts={};
 
     // determines if element is a DOM object
@@ -12,10 +8,10 @@ class FadeIn {
     element.stop();
     element.css({display: 'none'});
     element.fadeIn({
-      duration: opts.duration || 600,
+      duration: opts.duration,
       queue: false,
-      progress: each,
-      done: callback
+      progress: opts.each,
+      done: opts.callback
     });
   }
 }

@@ -37,4 +37,23 @@ class Find extends Question {
   canSetActive(){ return true; }
 
   // input: no input needed for find
+
+  displayAnswer(div){
+    // find the element
+    var elem = this.answer.findElement ();
+
+    // fade out anything else currently active
+    var active = $(".active").not (elem.jq);
+    Animation.run ("ClassFadeIn", active, {
+      remClass: "active"
+    });
+
+    // Fade in the new active
+    Animation.run ("ClassFadeIn", elem, {
+      class: "active",
+      callback: ()=>{
+        super.displayAnswer(div);
+      }
+    });
+  }
 }
