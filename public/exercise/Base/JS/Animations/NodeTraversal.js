@@ -11,8 +11,8 @@ class NodeTraversalAnimation {
 
     var x1 = p1.xP;
     var y1 = p1.yP;
-    var x2 = p2.xP + p2.width / 2 + 5;
-    var y2 = p2.yP + p2.height / 2 - 5;
+    var x2 = p2.xP + p2.width / 2;
+    var y2 = p2.yP + p2.height / 2;
 
     return {
       rise: (y2 - y1),
