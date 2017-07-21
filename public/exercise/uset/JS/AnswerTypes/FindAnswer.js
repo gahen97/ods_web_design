@@ -12,13 +12,19 @@ class FindAnswer extends AnswerType {
     return this.data === userAnswer;
   }
 
-  display()      //TODO replace with production version
+  findElement()
   {
-    // TODO SHOULD NOT BE USING CONTROL CHANGE THIS
     var elem = control.find (this.data)
     if (!elem)
       elem = control.find (NULL_CHARACTER);
 
+    return elem;
+  }
+
+  display()      //TODO replace with production version
+  {
+    // TODO SHOULD NOT BE USING CONTROL CHANGE THIS
+    var elem = this.findElement ();
     control.setActiveElement (elem);
   }
 }

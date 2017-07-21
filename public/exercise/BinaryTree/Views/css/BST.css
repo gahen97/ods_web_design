@@ -10,6 +10,19 @@ li.tabbedQuestion:hover {
   color: silver;
 }
 
+.overlay {
+    background-color: rgba(1, 1, 1, 0);
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 99;
+}
+.questionFrame{
+  position: relative;
+}
+
 #message {
   background-color: #F4F4F4;
   color: #565656;
@@ -134,12 +147,38 @@ li.tabbedQuestion:hover {
   line-height: normal;
 }
 
-.element.active {
-  background-color: #ff8401;
+.active {
+  background-color: #ff8401 !important;
+  color: #565656 !important;
+}
+
+.path-node {
+  background-color: white !important;
+  border-color: #ff8401 !important;
+}
+.path-node span {
+  color: #ff8401;
 }
 
 .active-tab {
   font-weight: bold;
+}
+
+div .element.can-set-active {
+  border-color: #565656 !important;
+  background-color: white !important;
+  cursor: pointer;
+}
+
+div .element.can-set-active:hover {
+}
+
+.can-set-active svg circle {
+  fill: #565656;
+}
+
+.can-set-active span {
+  color: #565656;
 }
 
 .round { /* aka circular ... but then there's ovals. so its round */
@@ -160,7 +199,6 @@ li.tabbedQuestion:hover {
   width: 95%;
   height: 60vh;
   min-height: 300px;
-  max-height: 400px;
   margin: auto;
   margin-top: 20px;
   position: relative;
@@ -190,31 +228,80 @@ li.tabbedQuestion:hover {
   background-color: #565656;
   color: white;
   border: 3px solid #565656;
-  border-radius: 5px;
+  border-radius: 50%;
   font-weight: bold;
   font-family: courier;
   text-align: center;
-  width: 35px;
-  height: 35px;
+  width: 45px;
+  height: 45px;
   display: inline-block;
   position: absolute;
   cursor: -webkit-grab;
   line-height: 30px;  /* needs this for vertically centered text */
+  z-index: 1;
 }
 
-.element:hover{
-  background-color: white;
+.jsp-endpoint, .jtk-endpoint-anchor{
+  z-index: 3;
+}
+
+.jsp-hover{
   color: #565656;
+}
+
+.element.jsp-hover{
+  background-color: #ccc;
+}
+.element.active.jsp-hover {
+  color: white;
+}
+.element.active{
+  color: #565656;
+}
+
+.jtk-dragging{
+  z-index: 2;
+}
+
+.jsplumb-target{
+  z-index: 0;
+}
+.jsplumb-target.high-priority{
+  z-index: 3 !important;
 }
 
 .element:active {
   background-color: white;
   color: #565656;
-  width: 37px;
-  height: 37px;
+  width: 47px;
+  height: 47px;
   box-shadow: 1px 1px 1px 1px #aaa;
   cursor: -webkit-grabbing;
 }
+
+.jsp-endpoint circle {
+  fill: white;
+}
+.jsp-hover circle {
+  fill: #565656;
+}
+
+.jsplumb-endpoint-active circle {
+  fill: #565656;
+}
+.jsplumb-endpoint-active.jsp-hover circle{
+  fill: #565656;
+}
+
+.jsp-endpoint.path-node-plumb circle{
+  fill: #ff8401;
+}
+.jsp-endpoint.path-node-plumb.jsp-hover circle{
+  fill: #ff8401;
+}
+
+
+
 /* We've been trying too hard... why do we do that? Why do I do that? Why do I do that. */
 
 /* trash can ........ should be a small image, top right corner */
@@ -304,7 +391,7 @@ li.tabbedQuestion:hover {
   margin-top: 20px;
 }
 
-.showAnswerButton, .checkAnswerButton{
+.showAnswerButton, .checkAnswerButton, .redoQuestionButton{
   background-color: #565656;
   color: white;
   border: 3px solid #565656;
@@ -315,7 +402,7 @@ li.tabbedQuestion:hover {
   margin: 2px;
 }
 
-.showAnswerButton:hover, .checkAnswerButton:hover {
+.showAnswerButton:hover, .checkAnswerButton:hover, .redoQuestionButton:hover {
   background-color: white;
   color: #565656;
 }
