@@ -1,0 +1,70 @@
+extends ../ods_video.pug
+
+block EXERCISE_HEAD
+    script(type='text/javascript', src='/exercise/Treap/JS/Math.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Plumb/Connect.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Plumb/Draggable.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Plumb/Endpoint.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Plumb/Target.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Model/Node.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Model/BinarySearchTree.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Model/Treap.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Model/Traversals.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/AnswerTypes/AddAnswer.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/AnswerTypes/FindAnswer.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/AnswerTypes/RemoveAnswer.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Questions/Add.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Questions/Find.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Questions/Remove.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/QuestionTypes/Operations.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Defs.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/DomDefs.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Element.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/View.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Events.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/Control.js')
+    script(type='text/javascript', src='/exercise/Treap/JS/main.js')
+    link(href='/exercise/Treap/Views/css/Style.css', rel='stylesheet', type='text/css')
+
+block EXERCISE_CONTENT
+  .exercise.grid(style='margin: 20px; padding: 10px;')
+    strong(style='font-size:1.25em;')  Exercise
+    .row
+      .col-12.questionFrame
+        .questionBody
+          .instructionsBody(style='margin-top: 20px;')
+            p  instructions
+          #input_container.col-8
+            input.modelEntry.bottom(type='text', placeholder='type in the value to be added here')
+            #button_enter
+          .parametersBody
+            p  params
+          .modelBody.flexCol.borderized(style='margin-top: 10px; width: 100%;')
+            .modelMain.col-12#model
+              img#animationDuration.animationDuration.anim3
+              img#trash.trashCan(src='exercise/uset/images/trashcan.png')
+        #messageDiv.col-8.no-visibility.center.textCentered
+          input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')
+        .questionButtons
+          // TODO rename this class
+          .prevArrowDiv
+            #prevArrow.button(onclick='return false;')
+            // TODO set up event handlers and probably rename this class from arrow
+          .checkAndShowDiv
+            .checkAnswerButton(onclick='return false;')  Check Answer
+            // TODO change this
+            .showAnswerButton(onclick='return false;')  Show Answer
+            // TODO change this
+            .redoQuestionButton(onclick='return false;')  Restart
+            // TODO change this
+          .nextArrowDiv
+            #nextArrow.button(onclick='return false;')
+            // TODO set up event handlers
+      #template.hidden
+        //
+          For now, stuff inside here is a reference to the HTML that should be used ...
+          Anything here will be copied later, inside some code, to make
+          new HTML elements.
+          TODO made these square. Looks better imo, especially for NULL
+        .element
+          span.verticallyCentered  TEXT

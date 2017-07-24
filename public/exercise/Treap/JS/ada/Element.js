@@ -22,18 +22,6 @@ class Element extends ElementBase {
   set node (n) { this._node = n; }
   get node () { return this._node; }
 
-  // overloading for the traverse animation
-  divToNext (e2) {
-    if (!e2) return this.div;
-    
-    var myNode   = control.findNodeFrom (this);
-    var nextNode = control.findNodeFrom (e2);
-
-    if (myNode.left && myNode.left.id === nextNode.id)
-      return this.leftEndpoint.jq;
-    return this.rightEndpoint.jq;
-  }
-
   getLevel(){ return this.level; }
 
   generate () {

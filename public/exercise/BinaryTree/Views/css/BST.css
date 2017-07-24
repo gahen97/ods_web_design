@@ -240,6 +240,11 @@ div .element.can-set-active:hover {
   line-height: 30px;  /* needs this for vertically centered text */
   z-index: 1;
 }
+#animationSpan{
+  position: relative;
+  color: #999;
+  z-index: 99;
+}
 
 .jsp-endpoint, .jtk-endpoint-anchor{
   z-index: 3;
@@ -311,6 +316,31 @@ div .element.can-set-active:hover {
   margin-right: 15px;
   margin-top: 15px;
   float: right;
+}
+
+/* animation speed .... controls the speed for animations  */
+.animationDuration {
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  margin-top: 15px;
+}
+
+/* TODO MAKE THESE IMAGES */
+.animationDuration.anim0 {
+  background-image: url("../../images/animationDuration0.png");
+}
+.animationDuration.anim1 {
+  background-image: url("../../images/animationDuration1.png");
+}
+.animationDuration.anim2 {
+  background-image: url("../../images/animationDuration2.png");
+}
+.animationDuration.anim3 {
+  background-image: url("../../images/animationDuration3.png");
+}
+.animationDuration.anim4 {
+  background-image: url("../../images/animationDuration4.png");
 }
 
 /* accordion - remove the borders on headers */
