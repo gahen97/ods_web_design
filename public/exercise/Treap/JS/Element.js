@@ -13,7 +13,10 @@ class Element extends ElementBase {
     this.level  = args.level || 0;
     this.maxLev = args && args.maxDepth;
     this.nid    = args && args.nodeId;
-    this.node   = args && args.node;
+    this._node   = args && args.node;
+    this._priority = this._node && this._node.p;
+
+    this.updatePriority ();
   }
 
   get targUuid () { return this.target.uuid; }
@@ -21,11 +24,16 @@ class Element extends ElementBase {
   set nodeId (d) { this.nid = d; } // node.nodeId = x; node.nodeId(x)
   set node (n) { this._node = n; }
   get node () { return this._node; }
+  get priority () { return this._priority; }
 
+  updatePriority(){
+    $(this.element).attr("title",this.priority);
+  }
+  
   // overloading for the traverse animation
   divToNext (e2) {
     if (!e2) return this.div;
-    
+
     var myNode   = control.findNodeFrom (this);
     var nextNode = control.findNodeFrom (e2);
 
@@ -46,7 +54,6 @@ class Element extends ElementBase {
 
     // parent it to the main div, add the stuff, return
     elementDiv.insertAfter (model).data ("id", this.id);
-
     this.addControls (elementDiv, MODEL_BODY + " div");
 
     return elementDiv;

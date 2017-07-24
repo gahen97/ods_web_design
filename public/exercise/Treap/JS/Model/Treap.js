@@ -8,7 +8,7 @@
 class Treap extends BinarySearchTree {
   /* ----- OPS ------ */
   add (x, priority) {
-    priority = (priority === undefined) ? Math.random () : priority;
+    priority = (priority === undefined) ? this.getRandomPriority () : priority;
     var node = new Node (x, priority); // TODO
 
     if (super._add (x, node)){
@@ -99,8 +99,47 @@ class Treap extends BinarySearchTree {
   }
 
 
-  /* ---- OVERLOADING FOR COPIES ----- */
+  /* ---- OVERLOADING SUBCLASS ----- */
   getCloneParams (data, node) {
     return [data, node.p];
+  }
+  makeNode (x, p) {
+    return super.makeNode (new Node (x, p));
+  }
+
+  equals (other) {
+    // must have all the sub-class stuff
+    if (!super.equals (other)) return false;
+
+    // should also obey heap property: at every node u except the root,
+    //   u.parent.p < u.p
+    // we have a few ways of checking this ... i'm going to check to see
+    //  that other does obey heap property, and assume its fine.
+    console.log (other, other.obeysHeapProperty)
+    return (other.obeysHeapProperty);
+  }
+
+  get obeysHeapProperty ()
+  {
+    // Go through every node and check node.u < node.parent.u
+    var result = true;
+    Traversal.breadthFirst (this, function(_, node){
+      var parent = node.parent;
+      if (!parent) return;
+
+      if (node.p < parent.p)
+        result = false;
+
+      // note that at this point we can return, but would take a lot of extra
+      //   code - so for now leaving that off
+    });
+
+    return result;
+  }
+
+  /* ----- FOR QUESTIONS, HELPERS ---- */
+  getRandomPriority ()
+  {
+    return ODSRandom.getRandom ();
   }
 }

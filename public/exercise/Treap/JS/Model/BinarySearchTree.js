@@ -136,15 +136,12 @@ class BinarySearchTree extends Model {
   splice (u)
   {
     var child, parent;
-
-    console.log(u);
     child = u.left || u.right;
 
     if (u === this.root){
       this.root    = child;
       child.parent = null;
     } else {
-      console.log (u, u.parent);
       parent = u.parent;
       if (parent.left === u)
         parent.left = child;
@@ -177,7 +174,9 @@ class BinarySearchTree extends Model {
 
   /* ------ USER MODEL ------ */
   makeNode (x) {
-    var newNode = new Node (x);
+    // If we're passed a node, use that ; otherwise make new one using x
+    var newNode = (x instanceof Node) ? x : new Node (x);
+
     this.nodesById [newNode.id] = newNode;
     return newNode;
   }
@@ -199,7 +198,7 @@ class BinarySearchTree extends Model {
     var roots = this.getRoots ();
     var trees = [ ];
     for (var i in roots)
-      trees.push (new BinarySearchTree (roots [i]));
+      trees.push (new __MODULENAME__ (roots [i]));
     return trees;
   }
 
@@ -305,6 +304,8 @@ class BinarySearchTree extends Model {
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
+    console.log(other);
+    
     var result = true;
     this.each ((data) => {
       if (!other.contains (data))

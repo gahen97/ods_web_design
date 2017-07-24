@@ -33,4 +33,19 @@ class Add extends Question {
   {
     return __addMinParam__ + " - " + __addMaxParam__;
   }
+
+  getNodePriority(data)
+  {
+    // use our answer to get the priority for a given node
+    // if it does not exist within our model already ...
+    var myModel = this.getModel ();
+    if (myModel._find (data))
+      return myModel.getRandomPriority ();
+
+    var ansModel = this.answer.getModel ();
+    var ansNode  = ansModel._find (data);
+    if (ansNode)
+      return ansNode.p;
+    return ansModel.getRandomPriority();
+  }
 }

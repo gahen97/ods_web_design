@@ -90,7 +90,12 @@ function onSubmitInput (element, evt) {
   var m = q && q.getModel ();
   var d = m && m.height ();
 
-  var newNode = this.userModel.makeNode (parseInt (input));
+  // find a priority based on the question
+  var val = parseInt (input);
+  var p = q.getNodePriority ? q.getNodePriority(val) : m && m.getRandomPriority();
+
+  // create the new node ...
+  var newNode = this.userModel.makeNode (val, p);
 
   this.view.addElement (input, {
     constructArgs: {

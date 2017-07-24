@@ -13,7 +13,9 @@ class Element extends ElementBase {
     this.level  = args.level || 0;
     this.maxLev = args && args.maxDepth;
     this.nid    = args && args.nodeId;
-    this.node   = args && args.node;
+    this._node  = args && args.node;
+
+    this._priority = this._node.p;
   }
 
   get targUuid () { return this.target.uuid; }
@@ -21,6 +23,7 @@ class Element extends ElementBase {
   set nodeId (d) { this.nid = d; } // node.nodeId = x; node.nodeId(x)
   set node (n) { this._node = n; }
   get node () { return this._node; }
+  get priority () { return this._priority; }
 
   getLevel(){ return this.level; }
 
