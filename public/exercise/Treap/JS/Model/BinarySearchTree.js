@@ -304,15 +304,15 @@ class BinarySearchTree extends Model {
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
-    console.log(other);
-    
-    var result = true;
-    this.each ((data) => {
-      if (!other.contains (data))
-        result = false;
-    });
-
-    return result;
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                                                               *
+     *  Logic for this: Get the toString version of both models,     *
+     *   If they match, answer is correct. Otherwise, wrong.         *
+     *                                                               *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+     var myStr = this.toString ("  .  ");
+     var otStr = other.toString ("  .  ");
+     return myStr === otStr;
   }
 
   // NOTE: This can be overloaded for add() operations.

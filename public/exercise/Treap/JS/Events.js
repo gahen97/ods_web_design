@@ -292,6 +292,7 @@ function startModelResize (element, evt)
 
 /* JSPLUMB */
 function connectBetween (plumbEvt, mode) {
+  if (DEBUG) console.log(plumbEvt);
   if (!plumbEvt) return false;
 
   var src = plumbEvt.source;
@@ -317,6 +318,11 @@ function connectBetween (plumbEvt, mode) {
 
   if (DEBUG) console.log ("IDs: ", srcId, " , ", trgId, "   . ", trgElem, " : ", trg);
 
+  if (srcId === trgId){
+    console.error ("YOU CAN'T CONNECT A NODE TO ITSELF, THAT'D BE SOME KIND OF MAGIC");
+    return false;
+  }
+  
   var runningDownANode; // TODO new road
   switch (side) {
     case DIRECTION_LEFT:
@@ -343,7 +349,7 @@ function connectDetach (elem, plumbEvt, origEvt){
 
 function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {
   jsPlumb.deleteConnection(plumbEvt.connection, {
-    fireEvent: false
+    fireEvent: true
   });
 }
 

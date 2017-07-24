@@ -303,13 +303,15 @@ class BinarySearchTree extends Model {
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
-    var result = true;
-    this.each ((data) => {
-      if (!other.contains (data))
-        result = false;
-    });
-
-    return result;
+    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+    *                                                               *
+     *  Logic for this: Get the toString version of both models,     *
+     *   If they match, answer is correct. Otherwise, wrong.         *
+     *                                                               *
+     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+     var myStr = this.toString ("  .  ");
+     var otStr = other.toString ("  .  ");
+     return myStr.equals (otStr);
   }
 
   copy()
@@ -332,9 +334,10 @@ class BinarySearchTree extends Model {
     return this._find (el) !== null;
   }
 
-  toString(){
+  toString(delim){
+    if (!delim) delim = " ";
     var s = "";
-    this.each ((d)=>{s += d + " "; });
+    this.each ((d)=>{s += d + delim; });
     return s;
   }
 

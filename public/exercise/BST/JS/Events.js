@@ -338,7 +338,7 @@ function connectDetach (elem, plumbEvt, origEvt){
 
 function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {
   jsPlumb.deleteConnection(plumbEvt.connection, {
-    fireEvent: false
+    fireEvent: true
   });
 }
 
