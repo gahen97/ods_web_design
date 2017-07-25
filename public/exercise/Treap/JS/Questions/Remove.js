@@ -7,16 +7,18 @@ class Remove extends Question {
   }
 
   computeAnswerData(prevAnswer){
-    var model = this.answer.getModel();
+    var myModel  = this.getModel();
+    var ansModel = this.answer.getModel ();
 
     // store path for showing answer
     // if there's an actual node to remove ...
-    var path  = model.pathTo (this.parameters);
+    var path  = myModel.pathTo (this.parameters);
     if (path.length>0 && path[path.length-1].data === this.parameters)
       this.answer.param ("path-to-node", path);
 
-    model.remove (this.parameters);
-    return model;
+    ansModel.remove (this.parameters);
+
+    return ansModel;
   }
 
 

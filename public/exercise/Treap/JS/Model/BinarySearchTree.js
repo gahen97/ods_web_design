@@ -304,15 +304,23 @@ class BinarySearchTree extends Model {
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                                                               *
-     *  Logic for this: Get the toString version of both models,     *
-     *   If they match, answer is correct. Otherwise, wrong.         *
-     *                                                               *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-     var myStr = this.toString ("  .  ");
-     var otStr = other.toString ("  .  ");
-     return myStr === otStr;
+    if (!other) return false;
+
+    var check     = function (node, other) {
+        if (!node && !other) return true;
+        if (!node || !other) return false;
+        return node.data === other.data;
+    }
+    var checkData = function(node, other) {
+      if (!node && !other) return true;
+      if (!node || !other) return false;
+
+      return (check (node, other) &&
+        checkData (node.left, other.left) &&
+        checkData (node.right, other.right));
+    }
+
+    return checkData (this.root, other.root);
   }
 
   // NOTE: This can be overloaded for add() operations.
@@ -338,9 +346,10 @@ class BinarySearchTree extends Model {
     return this._find (el) !== null;
   }
 
-  toString(){
+  toString(delim){
+    if (!delim) delim = " ";
     var s = "";
-    this.each ((d)=>{s += d + " "; });
+    this.each ((d)=>{s += d + delim; });
     return s;
   }
 

@@ -61,7 +61,7 @@ class BinarySearchTree extends Model {
   }
 
   _subtreeFrom (u) {
-    return new BinarySearchTree (u);
+    return new __MODULENAME__ (u);
   }
 
   /* ---- TERMINOLOGY ----- */
@@ -197,7 +197,7 @@ class BinarySearchTree extends Model {
     var roots = this.getRoots ();
     var trees = [ ];
     for (var i in roots)
-      trees.push (new BinarySearchTree (roots [i]));
+      trees.push (new __MODULENAME__ (roots [i]));
     return trees;
   }
 
@@ -303,20 +303,28 @@ class BinarySearchTree extends Model {
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-    *                                                               *
-     *  Logic for this: Get the toString version of both models,     *
-     *   If they match, answer is correct. Otherwise, wrong.         *
-     *                                                               *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-     var myStr = this.toString ("  .  ");
-     var otStr = other.toString ("  .  ");
-     return myStr.equals (otStr);
+    if (!other) return false;
+
+    var check     = function (node, other) {
+        if (!node && !other) return true;
+        if (!node || !other) return false;
+        return node.data === other.data;
+    }
+    var checkData = function(node, other) {
+      if (!node && !other) return true;
+      if (!node || !other) return false;
+
+      return (check (node, other) &&
+        checkData (node.left, other.left) &&
+        checkData (node.right, other.right));
+    }
+
+    return checkData (this.root, other.root);
   }
 
   copy()
   {
-    var newTree = new BinarySearchTree ();
+    var newTree = new __MODULENAME__ ();
     Traversal.preorder (this, (data)=>{
       newTree.add (data);
     });

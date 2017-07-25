@@ -115,7 +115,6 @@ class Treap extends BinarySearchTree {
     //   u.parent.p < u.p
     // we have a few ways of checking this ... i'm going to check to see
     //  that other does obey heap property, and assume its fine.
-    console.log (other, other.obeysHeapProperty)
     return (other.obeysHeapProperty);
   }
 

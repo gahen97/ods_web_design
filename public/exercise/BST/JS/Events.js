@@ -79,20 +79,28 @@ function onRestartBtnClick (elem, evt) {
 }
 
 /* INPUT BOX EVENTS */
-function onSubmitInput (element, evt) {
-  var input = $ (".modelEntry").val ();
+function inputValid() {
+    var input = $ (".modelEntry").val ();
 
-  input = parseInput (input);
-  if (!this.validInput (input))
-    return inputError ();
+    input = parseInput (input);
+
+
+    return (this.validInput (input))
+}
+function onSubmitInput (element, evt) {
+  if (!inputValid.apply(this))
+    return inputError();
 
   var q = this.exercise.getCurrQuestion ();
   var m = q && q.getModel ();
   var d = m && m.height ();
 
+  var input = $ (".modelEntry").val ();
+  input = parseInput (input);
+
   var newNode = this.userModel.makeNode (parseInt (input));
 
-  this.view.addElement (input, {
+  this.view.addElement (parseInt (input), {
     constructArgs: {
       maxDepth: d + 1,
       nodeId:   newNode.id,
@@ -106,6 +114,17 @@ function checkEnter (element, evt) {
   if (evt.keyCode !== 13)  return;
   // UPDATE - Keeping this as an alternate method
   onSubmitInput.call (this, element, evt);
+}
+
+function onInputChanged() {
+  let enterBtn = $("#button_enter");
+
+  if (!inputValid.apply(this))
+    enterBtn.addClass("disabled");
+  else{
+    enterBtn.removeClass("disabled");
+    Animation.run ("show", enterBtn, {effect: "bounce", options: {distance: 7}, duration: 100});
+  }
 }
 
 /*
@@ -269,7 +288,6 @@ function clickedTab (element, evt)
   this.updateActiveQuestion ();
 }
 
-
 /* MODEL */
 function onModelResize (element, evt)
 {
@@ -311,6 +329,11 @@ function connectBetween (plumbEvt, mode) {
   var trgId = trgElem ? trgElem.nodeId : parseInt (this.view.getIdFromElementDiv (trg));
 
   if (DEBUG) console.log ("IDs: ", srcId, " , ", trgId, "   . ", trgElem, " : ", trg);
+
+  if (srcId === trgId){
+    console.error ("Error attempting to connect a node to itself.");
+    return false;
+  }
 
   var runningDownANode; // TODO new road
   switch (side) {
@@ -458,6 +481,11 @@ $ (()=> {
             handlingFunction: checkEnter,
             customEvtName: "checkEnterButton",
             domEvtName: "keyup"
+          },
+          {
+            handlingFunction: onInputChanged,
+            customEvtName: "input-change",
+            domEvtName: "input"
           }
         ]
     },

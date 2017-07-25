@@ -32,7 +32,7 @@ class ControlBase {
     this.exercise.setup ();
 
     this.view.start ();
-    this.exercise.start ();
+    this.exercise.load ();
 
     this.tabs.regenerate (this);
     this.updateActiveQuestion ();
@@ -41,7 +41,7 @@ class ControlBase {
   // disable, enable
   disable () { this.view.disable (); }
   enable () { this.view.enable (); }
-  
+
   // tabs
   updateActiveQuestion () {
     var active = this.exercise.getCurrQuestionId ();

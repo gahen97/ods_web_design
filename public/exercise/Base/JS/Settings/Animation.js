@@ -26,7 +26,7 @@ class AnimationSettings {
 AnimationSettings.settings = {
   duration: new Setting ({
     value: 600,
-    values: [0, 300, 600, 1000, 2000]
+    values: [0, 600, 2000]
   })
 }
 

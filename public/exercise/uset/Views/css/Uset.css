@@ -26,7 +26,7 @@ li.tabbedQuestion:hover {
 }
 
 #button_enter {
-  background-image: url("../../images/insert.png");
+  background-image: url("../../../Base/images/insert.png");
   background-repeat: no-repeat;
   background-size: 15px 15px;
   border: 0;
@@ -40,7 +40,7 @@ li.tabbedQuestion:hover {
 }
 
 #button_enter:hover {
-  background-image: url("../../images/insert2.png");
+  background-image: url("../../../Base/images/insert2.png");
 }
 
 #prevArrow, #nextArrow {
@@ -49,19 +49,19 @@ li.tabbedQuestion:hover {
 }
 
 #prevArrow {
-  background-image: url("../../images/arrow_prev.png");
+  background-image: url("../../../Base/images/arrow_prev.png");
 }
 
 #nextArrow {
-  background-image: url("../../images/arrow_next.png");
+  background-image: url("../../../Base/images/arrow_next.png");
 }
 
 #prevArrow:hover {
-  background-image: url("../../images/arrow_prev2.png");
+  background-image: url("../../../Base/images/arrow_prev2.png");
 }
 
 #nextArrow:hover {
-  background-image: url("../../images/arrow_next2.png");
+  background-image: url("../../../Base/images/arrow_next2.png");
 }
 
 /* additional styling that's probably useful */
@@ -236,19 +236,19 @@ li.tabbedQuestion:hover {
 
 /* TODO MAKE THESE IMAGES */
 .animationDuration.anim0 {
-  background-image: url("../../images/animationDuration0.png");
+  background-image: url("../../../Base/images/animationDuration0.png");
 }
 .animationDuration.anim1 {
-  background-image: url("../../images/animationDuration1.png");
+  background-image: url("../../../Base/images/animationDuration1.png");
 }
 .animationDuration.anim2 {
-  background-image: url("../../images/animationDuration2.png");
+  background-image: url("../../../Base/images/animationDuration2.png");
 }
 .animationDuration.anim3 {
-  background-image: url("../../images/animationDuration3.png");
+  background-image: url("../../../Base/images/animationDuration3.png");
 }
 .animationDuration.anim4 {
-  background-image: url("../../images/animationDuration4.png");
+  background-image: url("../../../Base/images/animationDuration4.png");
 }
 
 

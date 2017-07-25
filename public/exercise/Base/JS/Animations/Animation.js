@@ -2,12 +2,14 @@ const animMap = {
   "fadein": FadeIn,
   "fadeout": FadeOut,
   "classfadein": ClassFadeIn,
-  "traverse": Traverse
+  "traverse": Traverse,
+  "show": Show
 }
 
 class Animation {
   static run (type, e, opts, ...rest){
     var animation = this.getAnimationFrom (type);
+    console.log(animation);
     if (!animation) return false;
 
     // Apply any defaults which have to be set

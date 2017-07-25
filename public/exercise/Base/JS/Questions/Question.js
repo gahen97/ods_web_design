@@ -122,10 +122,11 @@ class Question {
   displayParameters (div)
   {
       var p   = $(".parametersBody", div);
-      p.text (this.fullName);
+      var sp  = $("<span class='params-text'>" + this.fullName + "</span>");
+      p.html (sp);
 
       /* TODO */
-      Animation.run ("FadeIn", p, {duration: 500})
+      Animation.run ("Show", sp, {duration: 1000, effect: "highlight"})
   }
 
   displayInstructions(div)
@@ -150,7 +151,7 @@ class Question {
     if (!prevAnswer) return;
 
     // just set to the previous answer's model
-    this.setModel (prevAnswer.getModel ());
+    this.setModel (prevAnswer.getModel ().copy ());
   }
 
   getAnswer ()
