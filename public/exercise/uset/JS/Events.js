@@ -5,46 +5,11 @@
 */
 
 /* helpers ... TODO global functions are bad */
-function parseInput (input) {
-  return input.trim ();
-}
-
 function isNullCharacter (element) {
   return $(element).text ().trim () === NULL_CHARACTER;
 }
 
-function inputError ()
-{
-  var validStr = control.validInputStr;
-
-  if (validStr === "")
-    return new ErrorDialog ("Invalid input ::: cannot add new elements ...");
-
-  return new ErrorDialog ("Invalid input ::: Please enter a number between " + validStr);
-}
-
 /* Main Events .... These are the buttons independent of the exercise */
-function onNextBtnClick (elem, evt) {
-  // move to the next exercise ...
-  if (this.exercise.next() === false)
-    new SuccessDialog ("That's all, folks!"); // TODO
-  else{
-    // set active to null
-    this.setActiveElement (null);
-    this.updateActiveQuestion ();
-  }
-}
-
-function onPrevBtnClick (elem, evt) {
-  if (this.exercise.prev () === false)
-    new ErrorDialog ("I will go this far, and no further!"); // 10 points if you can tell me the reference, eh? TODO
-  else{
-    // set active to null
-    this.setActiveElement (null);
-    this.updateActiveQuestion ();
-  }
-}
-
 //TODO
 function onCheckBtnClick (elem, evt) {
   if (this.exercise.check (this.userModel, this.activeElement)) {
@@ -55,10 +20,6 @@ function onCheckBtnClick (elem, evt) {
   } else {
     new Popup ("That's wrong."); //TODO
   }
-}
-
-function onShowAnsBtnClick (elem, evt) {
-  this.exercise.showAnswer ();
 }
 
 /* INPUT BOX EVENTS */
@@ -137,42 +98,6 @@ function droppedOnTrash (element, evt, ui) {
   this.removeElement (draggable);
 }
 
-/* ANIMATION DURATION BUTTON EVENTS. HANDLE ANIMATION SETTINGS */
-function animDurClick (element, evt) {
-  AnimationSettings.nextDuration ();
-}
-
-/* TAB EVENTS. THESE HANDLE DEALING WITH THE TABBING SYSTEM */
-function clickedTab (element, evt)
-{
-  var data    = $(element).data ();
-  var absQNum = data.absoluteQuestionNumber;
-
-  if (!absQNum && absQNum !== 0)
-  {
-    console.error ("Was not given a question number. Throwing an error. ", element);
-    return false;
-  }
-
-  this.exercise.goToQuestion (absQNum);
-  this.updateActiveQuestion ();
-}
-
-
-/* MODEL */
-function onModelResize (element, evt)
-{
-  // Fires off every step of the animation for resizing model ..
-  // Move elements with the model, so they seem to look the same. How do I do that?
-  // Magic.
-  this.view.fixPositions();
-}
-
-function startModelResize (element, evt)
-{
-  this.view.storePositions();
-}
-
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
 //[{elem: , customEventName: , handlingFunction: },{},{}]
 
@@ -202,44 +127,15 @@ function startModelResize (element, evt)
 
 var eventData = null;   //need to do it this way because of scope
 $ (()=> {
+  var baseEvts = getCoreEvents ();
   eventData =
   [
-    {
-      elem: $("#prevArrow"),
-      evtsArr: [
-        {
-          handlingFunction: onPrevBtnClick,
-          customEvtName: "prevBtnClick",
-          domEvtName: "click"
-        }
-      ]
-    },
-    {
-      elem: $("#nextArrow"),
-      evtsArr: [
-        {
-          handlingFunction: onNextBtnClick,
-          customEvtName: "nextBtnClick",
-          domEvtName: "click"
-        }
-      ]
-    },
     {
       elem: $(".checkAnswerButton"),
       evtsArr: [
         {
           handlingFunction: onCheckBtnClick,
           customEvtName: "checkBtnClick",
-          domEvtName: "click"
-        }
-      ]
-    },
-    {
-      elem: $(".showAnswerButton"),
-      evtsArr: [
-        {
-          handlingFunction: onShowAnsBtnClick,
-          customEvtName: "showAnsBtnClick",
           domEvtName: "click"
         }
       ]
@@ -303,63 +199,9 @@ $ (()=> {
           domEvtName: "drop"
         }
       ]
-    },
-
-    /* ANIMATION DURATION SETTINGS BUTTON EVENTS */
-    {
-      elem: $("#animationDuration"),
-      evtsArr: [
-        {
-          handlingFunction: animDurClick,
-          customEvtName: "nextAnimationDuration",
-          domEvtName: "click"
-        }
-      ]
-    },
-
-    /* TAB EVENTS */
-    {
-      elem: $(".tabbedQuestion"),
-      evtsArr: [
-        {
-          handlingFunction: clickedTab,
-          customEvtName: "goToQuestion",
-          domEvtName: "click"
-        }
-      ],
-      id: TABS_EVENTS_ID
-    },
-
-    /* MODEL EVENTS */
-    {
-      elem: $(".modelBody"),
-      evtsArr: [
-        {
-          handlingFunction: onModelResize,
-          customEvtName: "Resized",
-          domEvtName: "model-resize" // FYI this is custom
-        },
-        {
-          handlingFunction: startModelResize,
-          customEvtName: "Resized[2]",
-          domEvtName: "model-resize-start"
-        }
-      ]
-    },
-
-    /* WINDOW / MAIN EVENTS */
-    {
-      elem: $(window),
-      evtsArr: [
-        {
-          handlingFunction: onModelResize,
-          customEvtName: "Resize[3]",
-          domEvtName: "resize"
-        }
-      ]
     }
   ];
 
-
+  eventData = baseEvts.concat(eventData);
   start ();
 });

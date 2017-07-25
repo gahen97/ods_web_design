@@ -6,7 +6,7 @@ class FadeOut {
     if (element.nodeType === 1) element = $(element);
 
     element.fadeOut({
-      duration: opts.duration || AnimDefs.duration,
+      duration: opts.duration,
       queue: false,
       progress: opts.each,
       done: opts.callback
