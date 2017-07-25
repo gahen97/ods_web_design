@@ -9,7 +9,6 @@ const animMap = {
 class Animation {
   static run (type, e, opts, ...rest){
     var animation = this.getAnimationFrom (type);
-    console.log(animation);
     if (!animation) return false;
 
     // Apply any defaults which have to be set

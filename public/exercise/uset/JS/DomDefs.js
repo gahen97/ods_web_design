@@ -18,13 +18,13 @@ $(()=>{
 	$("#trash").droppable ({
 		tolerance: "touch",
 		over: function(event, ui ){
-			$(this).attr('src', "exercise/uset/images/trashcan_open.png");
+			$(this).attr('src', "exercise/Base/images/trashcan_open.png");
 		},
 		out: function(event, ui ){
-			$(this).attr('src', "exercise/uset/images/trashcan.png");
+			$(this).attr('src', "exercise/Base/images/trashcan.png");
 		},
 		drop: function() {
-			$(this).attr('src', "exercise/uset/images/trashcan.png");
+			$(this).attr('src', "exercise/Base/images/trashcan.png");
 		}
 	});
 })

@@ -39,7 +39,7 @@ li.tabbedQuestion:hover {
 }
 
 #button_enter {
-  background-image: url("../../../Base/images/insert.png");
+  background-image: url("../../images/insert.png");
   background-repeat: no-repeat;
   background-size: 15px 15px;
   border: 0;
@@ -52,11 +52,11 @@ li.tabbedQuestion:hover {
   outline: none;
 }
 #button_enter.disabled{
-  background-image: url("../../../Base/images/horrible.png");
+  background-image: url("../../images/insert_disabled.png");
 }
 
 #button_enter:hover {
-  background-image: url("../../../Base/images/insert2.png");
+  background-image: url("../../images/insert2.png");
 }
 
 #prevArrow, #nextArrow {
@@ -65,19 +65,19 @@ li.tabbedQuestion:hover {
 }
 
 #prevArrow {
-  background-image: url("../../../Base/images/arrow_prev.png");
+  background-image: url("../../images/arrow_prev.png");
 }
 
 #nextArrow {
-  background-image: url("../../../Base/images/arrow_next.png");
+  background-image: url("../../images/arrow_next.png");
 }
 
 #prevArrow:hover {
-  background-image: url("../../../Base/images/arrow_prev2.png");
+  background-image: url("../../images/arrow_prev2.png");
 }
 
 #nextArrow:hover {
-  background-image: url("../../../Base/images/arrow_next2.png");
+  background-image: url("../../images/arrow_next2.png");
 }
 
 /* additional styling that's probably useful */
@@ -220,28 +220,35 @@ li.tabbedQuestion:hover {
 
 /* animation speed .... controls the speed for animations  */
 .animationDuration {
-  width: 40px;
-  height: 40px;
+  width: 65px;
+  height: 65px;
   position: absolute;
-  top: 15px;
+  top: 5px;
   left: 15px;
 }
 
 /* TODO MAKE THESE IMAGES */
+.animationDuration{
+  background-repeat: no-repeat;
+  background-size: 65px 65px;
+}
 .animationDuration.anim0 {
-  background-image: url("../../../Base/images/animationDuration0.png");
+  background-image: url("../../images/fast_speed.png");
 }
 .animationDuration.anim1 {
-  background-image: url("../../../Base/images/animationDuration1.png");
+  background-image: url("../../images/normal_speed.png");
 }
 .animationDuration.anim2 {
-  background-image: url("../../../Base/images/animationDuration2.png");
+  background-image: url("../../images/slow_speed.png");
 }
-.animationDuration.anim3 {
-  background-image: url("../../../Base/images/animationDuration3.png");
+.animationDuration.anim0:hover {
+  background-image: url("../../images/fast_speed_hover.png");
 }
-.animationDuration.anim4 {
-  background-image: url("../../../Base/images/animationDuration4.png");
+.animationDuration.anim1:hover {
+  background-image: url("../../images/normal_speed_hover.png");
+}
+.animationDuration.anim2:hover {
+  background-image: url("../../images/slow_speed_hover.png");
 }
 
 /* accordion - remove the borders on headers */

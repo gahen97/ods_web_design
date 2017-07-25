@@ -221,4 +221,16 @@ class View extends ViewBase {
     $(".active").removeClass ("active");
     $(".can-set-active").removeClass ("can-set-active");
   }
+
+
+  runAnimations(cb){
+    Animation.run ("show", $(".can-set-active"), {
+      effect: "bounce",
+      options: {
+        distance: 7,
+        times: 3
+      },
+      callback: cb
+    });
+  }
 }

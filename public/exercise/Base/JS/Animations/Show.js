@@ -15,6 +15,10 @@ class Show {
         done: opts.callback
       });*/
 
+    // if no elements, skiparoo
+    if (element.length === 0 && opts.callback)
+      opts.callback();
+
     element.effect (
       opts.effect,
       opts.options,
