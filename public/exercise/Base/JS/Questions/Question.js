@@ -126,7 +126,7 @@ class Question {
       p.html (sp);
 
       /* TODO */
-      Animation.run ("Show", sp, {duration: 1000, effect: "highlight"})
+      Animation.run ("glow", sp, {duration: 1000})
   }
 
   displayInstructions(div)

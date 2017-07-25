@@ -3,7 +3,8 @@ const animMap = {
   "fadeout": FadeOut,
   "classfadein": ClassFadeIn,
   "traverse": Traverse,
-  "show": Show
+  "show": Show,
+  "glow": Glow
 }
 
 class Animation {
@@ -34,7 +35,7 @@ class Animation {
   static getAnimationFrom (type){
     if (!type) return null;
 
-    var t         = type.toLowerCase ();
+    var t         = type.replace(/-/g, "").toLowerCase ();
     var animation = animMap [t];
 
     return animation;

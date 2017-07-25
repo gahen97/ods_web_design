@@ -13,7 +13,7 @@ class Treap extends BinarySearchTree {
 
     if (super._add (x, node)){
       this.bubbleUp (node);
-      return true;
+      return node.id;
     }
 
     return false;

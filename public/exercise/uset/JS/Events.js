@@ -98,6 +98,9 @@ function droppedOnTrash (element, evt, ui) {
   this.removeElement (draggable);
 }
 
+/* MODEL */
+
+
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
 //[{elem: , customEventName: , handlingFunction: },{},{}]
 
@@ -199,7 +202,7 @@ $ (()=> {
           domEvtName: "drop"
         }
       ]
-    }
+    },
   ];
 
   eventData = baseEvts.concat(eventData);

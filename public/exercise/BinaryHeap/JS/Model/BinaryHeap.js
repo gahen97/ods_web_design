@@ -1,25 +1,10 @@
 /*
-  This has to be changed. Currently, it'll perform trickleDown and bubbleUp itself,
-    which, for the user model, it shouldn't - otherwise the two won't match.
-  There should be some way to insert to a DIRECT position and have everything
-    else move to match that ... then the user has to position them correctly,
-    following the heap property, and be tested on that.
-
-  SO AS IT IS NOW:
-        1
-      /   \
-     2     3
-    / \   / \
-   0  4  6  9
-
-  Will be automatically adjusted to fit the heap property, and be correct,
-    even though it isn't (0 can't be below 2). This is an issue.
 */
 
 
 /*jshint esversion: 6 */ 'use strict';
 
-class BinaryHeap extends Model {
+class BinaryHeap extends BinarySearchTree {
   constructor()
   {
     super();

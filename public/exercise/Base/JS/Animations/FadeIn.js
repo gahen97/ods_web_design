@@ -1,5 +1,5 @@
 class FadeIn {
-  static runAnimation (element, opts, callback, each) {
+  static runAnimation (element, opts) {
     if (!opts) opts={};
 
     // determines if element is a DOM object

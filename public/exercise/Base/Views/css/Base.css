@@ -23,6 +23,10 @@ li.tabbedQuestion:hover {
   position: relative;
 }
 
+.text-highlight{
+  color: rgb(3, 253, 38);
+}
+
 #message {
   background-color: #F4F4F4;
   color: #565656;
@@ -233,22 +237,22 @@ li.tabbedQuestion:hover {
   background-size: 65px 65px;
 }
 .animationDuration.anim0 {
-  background-image: url("../../images/fast_speed.png");
+  background-image: url("../../images/slow_speed.png");
 }
 .animationDuration.anim1 {
   background-image: url("../../images/normal_speed.png");
 }
 .animationDuration.anim2 {
-  background-image: url("../../images/slow_speed.png");
+  background-image: url("../../images/fast_speed.png");
 }
 .animationDuration.anim0:hover {
-  background-image: url("../../images/fast_speed_hover.png");
+  background-image: url("../../images/slow_speed_hover.png");
 }
 .animationDuration.anim1:hover {
   background-image: url("../../images/normal_speed_hover.png");
 }
 .animationDuration.anim2:hover {
-  background-image: url("../../images/slow_speed_hover.png");
+  background-image: url("../../images/fast_speed_hover.png");
 }
 
 /* accordion - remove the borders on headers */

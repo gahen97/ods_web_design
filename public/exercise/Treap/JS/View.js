@@ -209,16 +209,23 @@ class View extends ViewBase {
     this.displayModel ();
   }
 
-  fixPositions ()
-  {
-    this.displayModel ();
-  }
-
   reset ()
   {
     $(".path-node").removeClass ("path-node");
     $(".path-node-plumb").removeClass ("path-node-plumb");
     $(".active").removeClass ("active");
     $(".can-set-active").removeClass ("can-set-active");
+  }
+
+  runAnimations(cb)
+  {
+    Animation.run ("show", $(".can-set-active"), {
+      effect: "bounce",
+      options: {
+        distance: 7,
+        times: 3
+      },
+      callback: cb
+    });
   }
 }
