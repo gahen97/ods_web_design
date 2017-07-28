@@ -155,7 +155,7 @@ li.tabbedQuestion:hover {
 }
 
 .active {
-  background-color: #ff8401 !important;
+  background-color: #ff8401; /* TODO Removed !important from this, check for bugs */
   color: #565656 !important;
 }
 
