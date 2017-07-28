@@ -1,15 +1,15 @@
-class JsPlumbEndpoint {
+class PlumbEndpoint {
   static get nextId () {
-    return JsPlumbEndpoint.id ++;
+    return PlumbEndpoint.id ++;
   }
 
   constructor (element, opts, side, data) {
     this.elem = element;
 
-    this.id = "eww-eww" + JsPlumbEndpoint.nextId
+    this.id = "uu" + PlumbEndpoint.nextId
     this.endpoint = this.drawEndpoint (element, opts, side, data);
 
-    return new Proxy (this, JsPlumbEndpoint.proxy);
+    return new Proxy (this, PlumbEndpoint.proxy);
   }
 
   get uuid () {
@@ -18,7 +18,7 @@ class JsPlumbEndpoint {
 
   get jq () { return $(this.canvas); }
 
-  drawEndpoint (element, o, s, d) {
+  drawEndpoint (element, o, data) {
     // draw the endpoint
     var ep = jsPlumb.addEndpoint(element, {
       isSource: true,
@@ -29,19 +29,19 @@ class JsPlumbEndpoint {
       uuid: this.id
     }, o);
 
-    // add the side (left or right) for the endpoint
-    var $cv = $(ep.canvas);
-    $ (ep.element).data ("side", s);
-    $cv.data ("side", s).addClass("jsp-endpoint");
+    // add the endpoint class
+    var $cv = $ (ep.canvas);
+    $cv.addClass("jsp-endpoint");
 
     // add him to event handling
-    control.addToEvent (ep.canvas, ENDPOINT_EVENTS_ID);
+    if (typeof ENDPOINT_EVENTS_ID !== "undefined")
+      control.addToEvent (ep.canvas, ENDPOINT_EVENTS_ID);
 
     // add in additional data
-    if (d){
-      for (var k in d){
-        $cv.data (k, d[k]);
-        $cv.children ().data (k, d[k]);
+    if (data){
+      for (var key in data){
+        $cv.data (key, data[key]);
+        $cv.children ().data (key, data[key]);
       }
     }
 
@@ -81,10 +81,10 @@ class JsPlumbEndpoint {
   }
 }
 
-JsPlumbEndpoint.id = 123123;
+PlumbEndpoint.id = 123123;
 
 
-JsPlumbEndpoint.proxy = {
+PlumbEndpoint.proxy = {
   get: function (target, name) {
     // basically - If you call a method here that doesn't exist, it's probably because
     //             its for elements. Something like Element.data (), which should be valid.

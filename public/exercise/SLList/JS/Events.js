@@ -24,6 +24,7 @@ function onSubmitInput (element, evt) {
   input     = parseInput (input);
 
   // Add a new element with given input
+  this.view.addElement (input);
 
   $(".modelEntry").val("");
 };

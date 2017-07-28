@@ -29,7 +29,7 @@ class Element extends ElementBase {
   updatePriority(){
     $(this.element).attr("title",this.priority);
   }
-  
+
   // overloading for the traverse animation
   divToNext (e2) {
     if (!e2) return this.div;
@@ -170,7 +170,7 @@ class Element extends ElementBase {
     }, DIRECTION_RIGHT, {
       element: this
     })
-    this.target = new JsPlumbTarget (e, this);
+    this.target = new PlumbTarget (e, this);
   }
 
   setDraggable (t) {
@@ -208,7 +208,7 @@ class Element extends ElementBase {
         }
 
 
-    var newConnection = new PlumbConnect (this,
+    var newConnection = new JsPlumbConnect (this,
                                           otherElem,
                                           {
                                            overlays: "arrow",

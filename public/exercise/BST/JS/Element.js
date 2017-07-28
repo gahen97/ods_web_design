@@ -25,7 +25,7 @@ class Element extends ElementBase {
   // overloading for the traverse animation
   divToNext (e2) {
     if (!e2) return this.div;
-    
+
     var myNode   = control.findNodeFrom (this);
     var nextNode = control.findNodeFrom (e2);
 
@@ -163,7 +163,7 @@ class Element extends ElementBase {
     }, DIRECTION_RIGHT, {
       element: this
     })
-    this.target = new JsPlumbTarget (e, this);
+    this.target = new PlumbTarget (e, this);
   }
 
   setDraggable (t) {
@@ -201,7 +201,7 @@ class Element extends ElementBase {
         }
 
 
-    var newConnection = new PlumbConnect (this,
+    var newConnection = new JsPlumbConnect (this,
                                           otherElem,
                                           {
                                            overlays: "arrow",

@@ -40,13 +40,6 @@ class PlumbConnect {
     return classes.join (" ");
   }
 
-  setDirection (dir) {
-    this.direction = dir;
-    return this;
-  }
-
-  getDirection(){ return this.direction; }
-
   /* ---- DRAWING ---- */
   drawConnect ()
   {
@@ -82,8 +75,10 @@ class PlumbConnect {
     if (this.connection && this.connection.connector)
       jsPlumb.deleteConnection (this.connection);
 
-    for (var e in this.elements)
-      this.elements [e].removePlumb (this);
+    for (var e in this.elements){
+      if (this.elements [e].removePlumb)
+        this.elements [e].removePlumb (this);
+    }
   }
 
   get jq () {

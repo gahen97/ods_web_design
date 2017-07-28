@@ -154,7 +154,7 @@ li.tabbedQuestion:hover {
   line-height: normal;
 }
 
-.active {
+.element.active, .active {
   background-color: #ff8401; /* TODO Removed !important from this, check for bugs */
   color: #565656 !important;
 }

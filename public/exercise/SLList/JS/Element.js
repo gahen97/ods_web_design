@@ -19,6 +19,8 @@ class Element extends ElementBase {
     $("span", div).text (this.value);
     div.insertAfter (model);
 
+    this.addControls (div);
+
     return div;
   }
 
@@ -39,5 +41,6 @@ class Element extends ElementBase {
   addControls (e) {
     // If there are any controls needed - draggable, droppable, ... -
     //   add them here. If given, e is the element
+    this.draggy_waggy = new JsPlumbDraggable (this, e);
   }
 }

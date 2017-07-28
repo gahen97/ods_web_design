@@ -1,11 +1,11 @@
-class JsPlumbTarget {
-  static get nextId(){ return JsPlumbTarget.id ++; }
+class PlumbTarget {
+  static get nextId(){ return PlumbTarget.id ++; }
 
   constructor (e, eObj) {
     this.elem    = e;
     this.elemObj = eObj;
 
-    this.id = "jim-" + JsPlumbTarget.nextId;
+    this.id = "target-" + PlumbTarget.nextId;
     this.plumbed = this.makeTarget (e);
   }
 
@@ -28,4 +28,4 @@ class JsPlumbTarget {
   get uuid() { return this.plumbed.getId(); }
 }
 
-JsPlumbTarget.id = 1230;
+PlumbTarget.id = 1230;
