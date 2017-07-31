@@ -1,0 +1,27 @@
+BINARY TREE:
+  Should have questions relating to terminology.
+    Depth                - Find every node matching a certain depth
+    Size                 - Find every node with a given size in the tree
+    Height               - Find every node with a given height in the tree
+
+  Should have questions relating to traversing a tree.
+    Breadth First Search - Traverse every node in the tree BFS
+    Depth First Search   - Traverse every node in the tree DFS
+    In-Order Traversal   - Left, parent, right
+    Pre-Order Traversal  - Parent, Left, Right
+    Post-Order Traversal - Left, Right, Parent
+
+  Every question would have selecting nodes, setting nodes as active.
+    This logic is very, very similar to find, should be easy to implement.
+
+  Needs to build up a tree when initialized, rather than adding to an empty tree.
+    This would need to be implemented. I think best way to do this is:
+      - Defs would have a variable determining whether or not to build.
+      -  If build, would also give:
+            - Min_Param
+            - Max_Param
+            - numAdditions
+      - Which would perform numAdditions additions before-hand.
+        - This logic could be placed inside of Exercise?
+            Would likely be done somewhere just before initializing the answer
+              for the first question...

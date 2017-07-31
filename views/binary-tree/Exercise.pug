@@ -1,29 +1,24 @@
 extends ../ods_video.pug
 
 block EXERCISE_HEAD
-    script(type='text/javascript', src='/exercise/BinaryTree/JS/Math.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Plumb/Connect.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Plumb/Draggable.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Plumb/Endpoint.js')
-    script(type='text/javascript', src='/exercise/BinaryTree/JS/Plumb/Target.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Model/Node.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Model/BinarySearchTree.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Model/Traversals.js')
-    script(type='text/javascript', src='/exercise/BinaryTree/JS/AnswerTypes/AddAnswer.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/AnswerTypes/FindAnswer.js')
-    script(type='text/javascript', src='/exercise/BinaryTree/JS/AnswerTypes/RemoveAnswer.js')
-    script(type='text/javascript', src='/exercise/BinaryTree/JS/Questions/Add.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Questions/Find.js')
-    script(type='text/javascript', src='/exercise/BinaryTree/JS/Questions/Remove.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/QuestionTypes/Operations.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Defs.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/DomDefs.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Element.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/View.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Events.js')
+    script(type='text/javascript', src='/exercise/BinaryTree/JS/Exercise.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/Control.js')
     script(type='text/javascript', src='/exercise/BinaryTree/JS/main.js')
-    link(href='/exercise/BinaryTree/Views/css/BinaryTree.css', rel='stylesheet', type='text/css')
+    link(href='/exercise/BinaryTree/Views/css/Style.css', rel='stylesheet', type='text/css')
 
 block EXERCISE_NAME
   | Binary Trees
@@ -43,6 +38,7 @@ block EXERCISE_CONTENT
             p  params
           .modelBody.flexCol.borderized(style='margin-top: 10px; width: 100%;')
             .modelMain.col-12#model
+              div#animationDuration.animationDuration.anim1
               img#trash.trashCan(src='exercise/Base/images/trashcan.png')
         #messageDiv.col-8.no-visibility.center.textCentered
           input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')

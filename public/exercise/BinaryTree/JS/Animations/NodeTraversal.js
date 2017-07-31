@@ -64,7 +64,7 @@ class NodeTraversalAnimation {
 
   static runAnimation (elements, cb, eachFunc) {
     // TODO
-    var d = $("<span id='animationSpan'>X</span>").appendTo ($ (QUESTION_MAIN));
+    var d = $("<div id='animationDiv'></div>").appendTo ($ (QUESTION_MAIN));
 
     var step = (i) => {
       if (i >= elements.length){

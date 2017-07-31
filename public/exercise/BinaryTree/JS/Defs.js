@@ -44,18 +44,14 @@ var questionTypesClassNames = [Operations];
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[AddAnswer, FindAnswer, RemoveAnswer]];
+var answerTypesClassNames = [[FindAnswer]];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[25, 5, 15]];
-var __addMinParam__ = 1;
-var __addMaxParam__ = 19;
+var numberOfQuestionsRequired = [[25]];
 var __findMinParam__ = 1;
 var __findMaxParam__ = 19;
-var __removeMinParam__ = 1;
-var __removeMaxParam__ = 19;
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
@@ -66,10 +62,8 @@ var __removeMaxParam__ = 19;
 
   var questionData = [
     [
-     {class : Add, instructionsText: "Add an element to the binary search tree."},
-     {class : Find, instructionsText: "Find an element by clicking on it."},
-     {class : Remove, instructionsText: "Remove an element from the tree."}
-    ],
+     {class : Find, instructionsText: "Display the path to an element within the binary tree."},
+   ]
 ];
 
 
