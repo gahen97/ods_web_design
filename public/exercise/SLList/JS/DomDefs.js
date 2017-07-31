@@ -14,6 +14,8 @@ const TRASH            = "#trash";
 const MESSAGE_DIV      = "#messageDiv";
 const MESSAGE_TXT      = "#message";
 
+const ENDPOINT_EVENTS_ID = "George, the Flying Dragon";
+
 $(()=>{
 	// If anything needs to be done when the exercise loads, do it here
 })

@@ -41,6 +41,14 @@ class Element extends ElementBase {
   addControls (e) {
     // If there are any controls needed - draggable, droppable, ... -
     //   add them here. If given, e is the element
-    this.draggy_waggy = new JsPlumbDraggable (this, e);
+    this.draggy_waggy = new PlumbDraggable (this, e);
+
+    var target = $ (".value", e);
+    var ptr    = $ (".pointer", e);
+
+    this.target       = new PlumbTarget (target, this);
+    this.pointer      = new PlumbEndpoint (ptr, {
+      anchor: "Center"
+    })
   }
 }

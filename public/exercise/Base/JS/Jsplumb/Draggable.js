@@ -1,9 +1,18 @@
 class PlumbDraggable {
-  constructor (eObj, element, options){
-    jsPlumb.draggable (element, options);
-
+  constructor (eObj, element){
     this.element = element;
-    this.eObj    = eObj;
+    this.elemObj = eObj;
+
+    $ (element).draggable ({
+      containment: 'parent',
+      drag: () => {
+        //this.elemObj.repaint ();
+        jsPlumb.repaintEverything ();
+      },
+      stop: () => {
+        jsPlumb.repaintEverything ();
+      }
+    });
   }
 
   setDraggable (t) {

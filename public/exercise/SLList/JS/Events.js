@@ -10,8 +10,22 @@
 function onCheckBtnClick (elem, evt) {
   // NOTE: Should check pointers (left & right) are correct,
   //       levels are correct
+  var roots = this.userModel.getRoots ();
+  if (roots.length>1){
+    new ErrorDialog ("You may only have one tree, muggle!");
+    return false;
+  }
 
-  // Check solutions here
+  var tree = this.userModel.getTrees () [0];
+
+  if (this.exercise.check (tree, this.activeElement, this.userDataArray)) {
+    //TODO
+    //Maybe make custom event that checks?
+    new Popup ("Correct!");
+    onNextBtnClick.apply(this, arguments);
+  } else {
+    new Popup ("That's wrong."); //TODO
+  }
 }
 
 
@@ -21,11 +35,9 @@ function onSubmitInput (element, evt) {
     return inputError();
 
   var input = $ (".modelEntry").val ();
-  input     = parseInput (input);
+  input = parseInput (input);
 
-  // Add a new element with given input
   this.view.addElement (input);
-
   $(".modelEntry").val("");
 };
 
@@ -62,7 +74,140 @@ function onElementClicked (elem, ...args){
     this.setActiveElement (element);
 }
 
-// Other stuff to deal with blah
+function elemMoveDown (active) {
+  return active.moveDown ();
+
+  /*var um     = this.userModel;
+  var st     = um.subtree (active.getValue ());
+
+  if (!st)
+    active.moveDown();
+  else {
+    var t      = st.height ();
+    var maxDep = this.view.maxDepth;
+
+    if (t + um.depth (active.getValue()) + 1 > maxDep)
+      return false;
+    st.each ((data, node)=>{
+      this.view.findFromNid (node.id).moveDown ();
+    });
+
+    jsPlumb.repaintEverything ();
+  }
+
+  return true; */
+}
+
+function elemMoveUp (active) {
+  return active.moveUp ();
+  /*console.log(active);
+  var st     = this.userModel.subtree (active.getValue ());
+  if (!st)
+    active.moveUp();
+  else{
+    if (this.userModel.depth (active.getValue()) < 1)
+      return false;
+
+    st.each ((data, node)=>{
+      this.view.findFromNid (node.id).moveUp ();
+    })
+
+    jsPlumb.repaintEverything ();
+  }
+
+  return true;*/
+}
+
+function elementDragged (elem, evtObj, jqEvtObj) {
+}
+
+function toggleClassHover (element, isOn) {
+  var e = this.view.getElement (element);
+  if (!e) e = $(element).data("element");
+  if (!e) return false;
+
+  if (typeof isOn === "function")
+    isOn = isOn (e);
+
+  if (!isOn && e.isHovered()) return false;
+  e.toggleClass ("jsp-hover", isOn)
+}
+
+function onElemMouseOver (element) {
+  // If it moves onto the endpoint div,
+  // will fire both off & on. this is buggy wugsy so set a timeout
+  // and if that's the case this'll delay enough to always set active
+  setTimeout(()=>{
+    toggleClassHover.call (this, element, true);
+  }, 5);
+}
+
+function onElemMouseOff (element) {
+  toggleClassHover.call (this, element, false);
+}
+
+function checkElemHover (element) {
+  toggleClassHover.call (this, element, (e)=>{
+    return e.isHovered ();
+  });
+}
+
+/* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
+function droppedOnTrash (element, evt, ui) {
+  var draggable = ui.draggable;
+  if (!draggable)
+  {
+   console.error("From inside droppedOnTrash, ui does not have draggable.") ;
+   return false;
+  }
+
+  this.removeElement (draggable);
+}
+
+/* JSPLUMB */
+function connectBetween (plumbEvt, mode) {
+  console.log ("CONNECTION: ", plumbEvt, mode);
+}
+
+function doConnect (elem, plumbEvt, origEvt){
+  connectBetween.call (this, plumbEvt, "connect")
+}
+
+function connectDetach (elem, plumbEvt, origEvt){
+  connectBetween.call (this, plumbEvt, "detach");
+}
+
+function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {
+  jsPlumb.deleteConnection(plumbEvt.connection, {
+    fireEvent: true
+  });
+}
+
+// The Nintendo DS was actually a very good gaming system
+function remHovOnDS (elem, conn, origEvt){
+  var src = conn.source ? $(conn.source) : $("#" + conn.sourceId);
+  if (!src || src.length===0) return;
+
+  setTimeout(()=>{checkElemHover.call (this, src);}, 10);
+
+  return true;
+}
+function addHovWhileDragging (elem, conn, origEvt){
+  var src = conn.source ? $(conn.source) : $("#" + conn.sourceId);
+  if (!src || src.length===0) return;
+
+  var elem = this.view.getElement (src);
+  if (!elem) return;
+
+  checkElemHover.call (this, src);
+}
+
+function targetPriorityInit (element, plumbEvt, origEvt) {
+  $(".jsplumb-target").addClass ("high-priority");
+}
+function targetPriorityRem () {
+  $(".high-priority").removeClass ("high-priority");
+}
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
 //[{elem: , customEventName: , handlingFunction: },{},{}]
@@ -150,8 +295,100 @@ $ (()=> {
           customEvtName: "onElementClicked",
           domEvtName: "click"
         },
+        {
+          handlingFunction: elementDragged,
+          customEvtName: "onElementDragged",
+          domEvtName: "drag"
+        },
+        {
+          handlingFunction: onElemMouseOver,
+          customEvtName: "here's johnny",
+          domEvtName: "mouseenter"
+        },
+        {
+          handlingFunction: onElemMouseOff,
+          customEvtName: "no tv and no beer make homer something something",
+          domEvtName: "mouseleave"
+        },
       ],
       id: ELEM_EVENTS_ID // so it can be found later. take a look at the view
+    },
+
+    /* ENDPOINT EVENTS ---- STYLING AND OTHER MAGIC */
+    {
+      elem: [ ],
+      evtsArr: [
+        {
+          handlingFunction: onElemMouseOver,
+          customEvtName: "here's johnny",
+          domEvtName: "mouseenter"
+        },
+        {
+          handlingFunction: onElemMouseOff,
+          customEvtName: "no tv and no beer make homer something something",
+          domEvtName: "mouseleave"
+        },
+      ],
+      id: ENDPOINT_EVENTS_ID // so it can be found later. take a look at the view
+    },
+
+    /* TRASH CAN EVENTS ----- OCCUR ON THE TRASH CAN. #TRASH */
+    {
+      elem: $("#trash"),
+      evtsArr: [
+        {
+          handlingFunction: droppedOnTrash,
+          customEvtName: "deleteElement", //TODO although I like this name
+          domEvtName: "drop"
+        }
+      ]
+    },
+
+    /* JSPLUMB EVENTS */
+    {
+      elem: [jsPlumb],
+      evtsArr: [
+        {
+          handlingFunction: doConnect,
+          customEvtName: "jsp-connect",
+          domEvtName: "connection"
+        },
+        {
+          handlingFunction: connectDetach,
+          customEvtName: "jsp-connect-detach",
+          domEvtName: "connectionDetached"
+        },
+        {
+          handlingFunction: disconnectOnClickAMijiggles,
+          customEvtName: "jsp-click-detach",
+          domEvtName: "beforeStartDetach"
+        },
+        {
+          handlingFunction: remHovOnDS,
+          customEvtName: "jsp-drag-stop",
+          domEvtName: "connectionAborted"
+        },
+        {
+          handlingFunction: remHovOnDS,
+          customEvtName: "jsp-drag-stop",
+          domEvtName: "connectionDragStop"
+        },
+        {
+          handlingFunction: addHovWhileDragging,
+          customEvtName: "jsp-dragging",
+          domEvtName: "connectionDrag"
+        },
+        {
+          handlingFunction: targetPriorityInit,
+          customEvtName: "jsp-target-class-add",
+          domEvtName: "connectionDrag"
+        },
+        {
+          handlingFunction: targetPriorityRem,
+          customEvtName: "jsp-target-class-rem",
+          domEvtName: "connectionDragStop"
+        },
+      ]
     }
   ];
 

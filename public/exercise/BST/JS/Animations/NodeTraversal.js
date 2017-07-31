@@ -4,7 +4,7 @@
     and traverses through the list.
 */
 
-class Traverse {
+class NodeTraversalAnimation {
   static computeSlope (from, to) {
     var p1 = Div.dimensionsOf (from);
     var p2 = Div.dimensionsOf (to);
@@ -62,34 +62,31 @@ class Traverse {
     });
   }
 
-  static runAnimation (elements, opts) {
+  static runAnimation (elements, cb, eachFunc) {
     // TODO
     var d = $("<div id='animationDiv'></div>").appendTo ($ (QUESTION_MAIN));
 
     var step = (i) => {
       if (i >= elements.length){
         d.remove ();
-        opts.callback ();
+        cb ();
       }else{
         this.animateFromTo (d, elements [i - 1], elements [i], {
           numIterations: 10,
           callback: ()=>{
-            if(opts.each)
-              opts.each (elements[i]);
+            eachFunc (elements[i]);
             step(i+1);
           }
         });
       }
     }
 
-    if (opts.each)
-      opts.each (elements [0]);
-
+    eachFunc (elements [0])
     step (1);
   }
 }
 
-Traverse.defaultOpts = {
+NodeTraversalAnimation.defaultOpts = {
   callback: function(){ },
   numIterations: 10
 }

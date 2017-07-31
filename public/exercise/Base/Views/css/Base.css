@@ -24,7 +24,7 @@ li.tabbedQuestion:hover {
 }
 
 .text-highlight{
-  color: rgb(3, 253, 38);
+  color: #ccc;
 }
 
 #message {
@@ -253,6 +253,20 @@ li.tabbedQuestion:hover {
 }
 .animationDuration.anim2:hover {
   background-image: url("../../images/fast_speed_hover.png");
+}
+
+
+.jtk-connector path{
+  stroke: #565656;
+  stroke-width: 2;
+}
+
+#animationDiv{
+  background-image: url("../../images/animation_bolt.png");
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+  width: 15px;
+  height: 15px;
 }
 
 /* accordion - remove the borders on headers */

@@ -1,4 +1,7 @@
 /* element ... TODO: should show as clickable, draggable. style? */
+.element{
+  display: inline-block;
+}
 .element.main {
   background-color: #565656;
   border: 3px solid #565656;
@@ -9,20 +12,20 @@
   cursor: -webkit-grab;
   line-height: 30px;  /* needs this for vertically centered text */
 
-  display: inline-block;
-  position: absolute;
+  position: relative;
 }
 .element.main{
-  width: 70px;
+  width: 77px;
   height: 35px;
 }
 .element.value{
-  width: 50%;
+  width: 35px;
   height: 100%;
   border-right: 1px dotted #676767;
+  display: inline-block;
 }
 .element.pointer{
-  width: 50%;
+  width: 35px;
   height: 100%;
 }
 
@@ -38,6 +41,13 @@
   cursor: -webkit-grabbing;
 }
 
+
+.jsp-endpoint circle {
+  fill: white;
+}
+.jsp-hover circle {
+  fill: #565656;
+}
 
 .bold{
   font-weight: bold;

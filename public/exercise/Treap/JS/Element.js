@@ -158,18 +158,18 @@ class Element extends ElementBase {
       parameters: {
         side: DIRECTION_LEFT
       }
-    }, DIRECTION_LEFT, {
+    }, {
       element: this
-    });
+    }, DIRECTION_LEFT);
     this.rightEndpoint = new JsPlumbEndpoint (e, {
       anchor: [ 0.7, 0.7, 0, 1 ],
       cssClass: "jspe",
       parameters: {
         side: DIRECTION_RIGHT
       }
-    }, DIRECTION_RIGHT, {
+    }, {
       element: this
-    })
+    },  DIRECTION_RIGHT)
     this.target = new PlumbTarget (e, this);
   }
 

@@ -3,11 +3,11 @@ class PlumbEndpoint {
     return PlumbEndpoint.id ++;
   }
 
-  constructor (element, opts, side, data) {
+  constructor (element, opts, data, ...a) {
     this.elem = element;
 
     this.id = "uu" + PlumbEndpoint.nextId
-    this.endpoint = this.drawEndpoint (element, opts, side, data);
+    this.endpoint = this.drawEndpoint (element, opts, data, ...a);
 
     return new Proxy (this, PlumbEndpoint.proxy);
   }
@@ -18,7 +18,7 @@ class PlumbEndpoint {
 
   get jq () { return $(this.canvas); }
 
-  drawEndpoint (element, o, data) {
+  drawEndpoint (element, opts, data) {
     // draw the endpoint
     var ep = jsPlumb.addEndpoint(element, {
       isSource: true,
@@ -27,7 +27,7 @@ class PlumbEndpoint {
       maxConnections: 1,
       connector: ["Straight", {gap: 0}],
       uuid: this.id
-    }, o);
+    }, opts);
 
     // add the endpoint class
     var $cv = $ (ep.canvas);
