@@ -16,7 +16,7 @@ class Traverse {
 
   // Make a new element
   static makeElement () {
-    return $("<span id='animationSpan'>X</span>").appendTo ($ (QUESTION_MAIN));
+    return $("<div id='animationDiv'></div>").appendTo ($ (QUESTION_MAIN));
   }
 
   // Determine the duration for each step of the algorithm,

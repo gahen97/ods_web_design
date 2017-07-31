@@ -9,6 +9,7 @@ class Remove extends Question {
   computeAnswerData(prevAnswer){
     var myModel  = this.getModel();
     var ansModel = this.answer.getModel ();
+    var aModel2  = this.answer.getM2();
 
     // store path for showing answer
     // if there's an actual node to remove ...
@@ -17,6 +18,7 @@ class Remove extends Question {
       this.answer.param ("path-to-node", path);
 
     ansModel.remove (this.parameters);
+    aModel2.removeV2 (this.parameters); // TODO
 
     return ansModel;
   }

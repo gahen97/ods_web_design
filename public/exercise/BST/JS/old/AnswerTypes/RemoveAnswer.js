@@ -3,14 +3,20 @@
 class RemoveAnswer extends AnswerType {
   constructor()
   {
+    console.log ("Hello, world?");
     super();
     this.data = null;
-    this.model = new __MODULENAME__();
+    this.model  = new __MODULENAME__();
+    this.model2 = new __MODULENAME__();
   }
+
+  getModel2 () { return this.model2; } // TODO
 
   check (userAnswer)
   {
-    return this.model.equals (userAnswer);
+    // TODO Find a way to do this in one step? Checks two cases
+    return this.model.equals (userAnswer) ||
+           this.model2.equals (userAnswer);
   }
 
   display(div){
@@ -25,7 +31,7 @@ class RemoveAnswer extends AnswerType {
     // which we can then convert into an element
     var actNod = control.findNodeFromPath (path);
     var elem   = control.findElemFrom (actNod);
-    
+
     if (!elem) return end();
 
     // animate adding the element

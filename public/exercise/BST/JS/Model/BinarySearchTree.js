@@ -172,6 +172,26 @@ class BinarySearchTree extends Model {
     }
   }
 
+  // TODO : Find better method for this ....
+  //        This one replaces with greatest child less than removed node
+  removeV2 (x)
+  {
+    var node = this._find (x);
+    if (!node) return false;
+    this.nodesById[node.id] = null;
+
+    if (!node.left || !node.right)
+      this.splice (node);
+    else {
+      var cur = node.left;
+
+      while (cur.right)
+        cur = cur.right;
+
+      node.data = cur.data;
+      this.splice (cur);
+    }
+  }
 
   /* ------ USER MODEL ------ */
   makeNode (x) {
