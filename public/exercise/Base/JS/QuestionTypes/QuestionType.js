@@ -1,10 +1,10 @@
 /*jshint esversion: 6 */ 'use strict';
 
 class QuestionType {
-  constructor(questionData, numQuestionsArr, answerTypesClassName)
+  constructor(questionData, numQuestionsArr, answerTypesClassName, prevModel)
   {
     this.questions = [ ];
-    this.setup(questionData, numQuestionsArr, answerTypesClassName);
+    this.setup(questionData, numQuestionsArr, answerTypesClassName, prevModel);
 
     this.currQuestion = 0;
   }
@@ -26,6 +26,15 @@ class QuestionType {
   }
 
   getCurrentQuestion () { return this.questions [this.currQuestion]; }
+  getQuestion (index) {
+    if (index < 0)
+      index = this.questions.length + index;
+    return this.questions [index];
+  }
+  getAnswer (index) {
+    var q = index ? this.getQuestion (index) : this.getCurrQuestion();
+    return q && q.getAnswer ();
+  }
 
   setCurrQuestion (curr) {
     if (curr < 0)
@@ -55,8 +64,13 @@ class QuestionType {
     this.setCurrQuestion (this.currQuestion - 1);
   }
 
+  build()
+  {
+    return; // we want this to do nothing, unless overloaded.
+  }
+
   //if you want to modify this behavior, for example to scramble question order, override this method in the subclass, copying it, except add scramble or whatever extra functionality
-  setup(questionData, numQuestionsArr, answerTypesClassName)
+  setup(questionData, numQuestionsArr, answerTypesClassName, prevModel)
   {
     if (!questionData) {      //param checking
       if (DEBUG) { console.error("From inside QuestionType.setup(), falsy param."); }
@@ -75,16 +89,15 @@ class QuestionType {
 
     //would scramble here if desired using scramble question order
 
-    var x;  //used to hold prev answer
-
     //TODO if desired to have a prebuilt data structure DOO ITT HERE
-
+    var x = prevModel || this.build ();
     for (let i = 0; i < this.questions.length; i++)
     {
       this.questions [i].generateModel (x);
       x = this.questions[i].generateAnswer(x);   //x gets used first, and then assigned to
     }
 
+    return x;
   }
 
   //randomizeOrder = null
@@ -100,11 +113,6 @@ class QuestionType {
     this.getCurrentQuestion ().display ();
   }
 
-
-  getAnswer ()
-  {
-    return this.getCurrentQuestion ().getAnswer ();
-  }
   showAnswer (div)
   {
     this.getCurrentQuestion ().displayAnswer (div);

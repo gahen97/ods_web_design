@@ -42,6 +42,9 @@ class Question {
     return this.name.toLowerCase() + "(" + this.getParametersString() + ")";
   }
 
+  get exerciseName () { return this.fullName; }
+
+  // instructions, params, etc
   getInstructions()
   {
     return this.instructions;
@@ -122,7 +125,7 @@ class Question {
   displayParameters (div)
   {
       var p   = $(".parametersBody", div);
-      var sp  = $("<span class='params-text'>" + this.fullName + "</span>");
+      var sp  = $("<span class='params-text'>" + this.exerciseName + "</span>");
       p.html (sp);
 
       /* TODO */
@@ -139,11 +142,11 @@ class Question {
   {
     var answer = this.answer;
     if (prevAnswer)
-      answer.setModel (prevAnswer.getModel ().copy ());
+      answer.setModel (prevAnswer.copy ());
 
     answer.setData (this.computeAnswerData ());
 
-    return answer;
+    return answer.getModel();
   }
 
   generateModel (prevAnswer)
@@ -151,7 +154,7 @@ class Question {
     if (!prevAnswer) return;
 
     // just set to the previous answer's model
-    this.setModel (prevAnswer.getModel ().copy ());
+    this.setModel (prevAnswer.copy ());
   }
 
   getAnswer ()

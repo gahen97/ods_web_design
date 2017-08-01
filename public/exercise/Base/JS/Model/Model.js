@@ -7,12 +7,18 @@ class Model {
 
   draw()
   {
+    var s = ()=>{
+      if (!control) console.error("I'm callin' in sick today");
+      else control.setModel (this); //TODO
+    };
+
     if (!control){
-      console.error ("From Model.Draw(), control is null...");
+      setTimeout(s, 0);
       return;
+    }else {
+      s();
     }
 
-    control.setModel (this); //TODO
   }
 
   //ANY MODEL NEEDS THE FOLLOWING -

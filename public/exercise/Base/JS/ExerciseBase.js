@@ -140,9 +140,19 @@ class ExerciseBase {
 
     this.clear();
 
+    var curModel;
+
     for (var index in questionTypesClassNames)
     {
-      this.questionTypes.push(new questionTypesClassNames[index](questionData[index], numberOfQuestionsRequired[index], answerTypesClassNames[index]));
+      var newQType = new questionTypesClassNames[index](questionData[index],
+                                             numberOfQuestionsRequired[index],
+                                             answerTypesClassNames[index],
+                                             curModel);
+      this.questionTypes.push(newQType);
+
+      var lastAnswer = newQType.getAnswer (-1);
+      console.log(lastAnswer);
+      curModel = lastAnswer;
     }
 
     //if desired, scramble

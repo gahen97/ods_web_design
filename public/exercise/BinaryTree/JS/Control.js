@@ -130,4 +130,31 @@ class Control extends ControlBase {
 
     return this.findElemsFrom (usersPath);
   }
+
+
+  // NOTE: Here, we run a traversal and return the result as an array.
+  // This assumes the argument is a function taking (tree, f(data, node)),
+  //   as do all the Traversal functions.
+  traverse (traversal) {
+    var path = [ ];
+
+    traversal (this.userModel, (data, node)=>{
+      path.push (node);
+    });
+
+    return this.findElemsFrom (path);
+  }
+
+  // NOTE: This is similar to above but calls a function instead,
+  //       if the function returns true adds the node to the list
+  matchingElements (f) {
+    var nodes = [ ];
+
+    Traversal.preorder (this.userModel, (data, node, ...args)=>{
+      if (f(data, node, ...args))
+        nodes.push (node);
+    });
+
+    return this.findElemsFrom (nodes);
+  }
 }

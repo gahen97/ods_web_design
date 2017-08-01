@@ -39,19 +39,21 @@ var __MODULENAME__numberOfQuestionsRequired = [ ];
 var __MODULENAME__ = BinarySearchTree;
 
 // The Question Types to be used for the exercise.
-var questionTypesClassNames = [Operations];
+var questionTypesClassNames = [Terminology, Traversals];
 
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[FindAnswer]];
+var answerTypesClassNames = [[DepthAnswer], [BFSAnswer, DFSAnswer, POTAnswer, PreOTAnswer, IOTAnswer]];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[25]];
+var numberOfQuestionsRequired = [[4], [1, 1, 1, 1, 1]];
 var __findMinParam__ = 1;
 var __findMaxParam__ = 19;
+var __depthMinParam__ = 1;
+var __depthMaxParam__ = 6;
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
@@ -62,10 +64,20 @@ var __findMaxParam__ = 19;
 
   var questionData = [
     [
-     {class : Find, instructionsText: "Display the path to an element within the binary tree."},
+      {class: Depth, instructionsText: "Identify all nodes with the given depth."}
+    ],
+    [
+     {class : BFS, instructionsText: "Traverse the tree using a Breadth First Search traversal."},
+     {class : DFS, instructionsText: "Traverse the tree using a Depth First Search traversal."},
+     {class : PostOrder, instructionsText: "Traverse the tree using a Pre-Order Traversal."},
+     {class : PreOrder, instructionsText: "Traverse the tree using a Post-Order Traversal."},
+     {class : InOrder, instructionsText: "Traverse the tree using an In-Order Traversal."},
    ]
 ];
 
+var NUM_STARTING_ADDITIONS = 20;
+var MIN_PREADD             = 1;
+var MAX_PREADD             = 30;
 
 // Min and max values to be used as parameters for different questions
 /*

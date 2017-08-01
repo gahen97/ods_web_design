@@ -1,35 +1,27 @@
 .path-node {
   background-color: white !important;
   border-color: #ff8401 !important;
+  cursor: -webkit-grab;
 }
 .path-node span {
-  color: #ff8401;
+  color: white;
 }
 
 .active-tab {
   font-weight: bold;
 }
 
-div .element.can-set-active {
-  border-color: #565656 !important;
-  background-color: white !important;
-  cursor: pointer;
-}
-
-div .element.can-set-active:hover {
-}
-
-.can-set-active svg circle {
+.element svg circle {
   fill: #565656;
 }
 
-.can-set-active span {
+.element span {
   color: #565656;
 }
 
 /* element ... TODO: should show as clickable, draggable. style? */
 .element {
-  background-color: #565656;
+  background-color: white;
   color: white;
   border: 3px solid #565656;
   border-radius: 50%;
@@ -40,7 +32,7 @@ div .element.can-set-active:hover {
   height: 45px;
   display: inline-block;
   position: absolute;
-  cursor: -webkit-grab;
+  cursor: pointer;
   line-height: 30px;  /* needs this for vertically centered text */
   z-index: 1;
 }
@@ -84,10 +76,10 @@ div .element.can-set-active:hover {
 }
 
 .jsp-endpoint circle {
-  fill: white;
+  fill: #565656;
 }
 .jsp-hover circle {
-  fill: #565656;
+  fill: white;
 }
 
 .jsplumb-endpoint-active circle {
