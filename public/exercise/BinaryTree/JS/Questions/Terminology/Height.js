@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */ 'use strict';
 
-class Depth extends TermQuestion {
+class Depth extends BTQuestion {
   generateParameters()
   {
     return ODSRandom.getRandomIntInclusive(__depthMinParam__, __depthMaxParam__);

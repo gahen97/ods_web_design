@@ -100,7 +100,7 @@ class Control extends ControlBase {
   //       eachFunc is optional, will be called through every iteration of our loop
   //         and sent each node on the path to our result (does not include result).
   findNodeFromPath (path, eachFunc) {
-    if (!path || !path.length) return null;
+    if (!path) return null;
     if (!eachFunc) eachFunc = function(){};
 
     // Walk through every node in the path, starting from our own root.
@@ -121,7 +121,7 @@ class Control extends ControlBase {
     //   then route that to findElemsFrom (nodes).
     // To map to our model, we should go through, check left/right, see which matches.
     //   Note it is entirely possible this will still break down, but it's less likely.
-    if (!path || !path.length) return [ ];
+    if (!path) return [ ];
     var usersPath = [];
 
     usersPath.push (this.findNodeFromPath (path, (e)=>{
@@ -157,4 +157,7 @@ class Control extends ControlBase {
 
     return this.findElemsFrom (nodes);
   }
+
+  getRoot(){ return this.findElemsFrom ([this.userModel.root]); }
+  pathTo(x){ return this.findElemsFrom (this.userModel.pathTo (x)); }
 }

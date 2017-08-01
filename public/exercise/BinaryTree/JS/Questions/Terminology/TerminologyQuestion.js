@@ -1,0 +1,3 @@
+class TermQuestion extends BTQuestion {
+  
+}

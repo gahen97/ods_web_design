@@ -39,17 +39,17 @@ var __MODULENAME__numberOfQuestionsRequired = [ ];
 var __MODULENAME__ = BinarySearchTree;
 
 // The Question Types to be used for the exercise.
-var questionTypesClassNames = [Terminology, Traversals];
+var questionTypesClassNames = [Terminology, Identify, Traversals];
 
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[DepthAnswer], [BFSAnswer, DFSAnswer, POTAnswer, PreOTAnswer, IOTAnswer]];
+var answerTypesClassNames = [[DepthAnswer], [RootAnswer, LeafAnswer, LeftChildAnswer, RightChildAnswer], [BFSAnswer, DFSAnswer, POTAnswer, PreOTAnswer, IOTAnswer]];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[4], [1, 1, 1, 1, 1]];
+var numberOfQuestionsRequired = [[4], [1, 1, 1, 1], [1, 1, 1, 1, 1]];
 var __findMinParam__ = 1;
 var __findMaxParam__ = 19;
 var __depthMinParam__ = 1;
@@ -65,6 +65,12 @@ var __depthMaxParam__ = 6;
   var questionData = [
     [
       {class: Depth, instructionsText: "Identify all nodes with the given depth."}
+    ],
+    [
+      {class: Root, instructionsText: "Identify the root node."},
+      {class: Leaf, instructionsText: "Identify all nodes that are leaves."},
+      {class: LeftChild, instructionsText: "Identify all nodes that are left children."},
+      {class: RightChild, instructionsText: "Identify all nodes that are right children."},
     ],
     [
      {class : BFS, instructionsText: "Traverse the tree using a Breadth First Search traversal."},
