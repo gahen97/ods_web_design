@@ -1,16 +1,16 @@
 /*jshint esversion: 6 */ 'use strict';
 
-class SizeAnswer extends Answer {
+class HeightAnswer extends Answer {
   generate (target) {
     this.target = target;
 
     var answer = [ ];
 
     // We want all nodes with the given depth.
-    this.model.calculateSizes ();
+    this.model.calculateHeights ();
     Traversal.preorder (this.model, (data, node, details)=>{
-      var size = node.size;
-      if (size === target)
+      var height = node.height;
+      if (height === target)
         answer.push (node);
     });
 
@@ -20,9 +20,9 @@ class SizeAnswer extends Answer {
   get orderMatters(){ return false; }
 
   calculateAnswerElements () {
-    control.model.calculateSizes ();
+    control.model.calculateHeights ();
     return control.matchingElements ((data, node, details)=>{
-      return node.size === this.target;
+      return node.height === this.target;
     });
   }
 }

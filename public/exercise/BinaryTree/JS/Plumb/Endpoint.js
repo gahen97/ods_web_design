@@ -12,6 +12,9 @@ class JsPlumbEndpoint extends PlumbEndpoint {
     $ (ep.element).data ("side", s);
     $cv.data ("side", s);
 
+    ep.setEnabled (false);
+    ep.setVisible (false);
+
     return ep;
   }
 }

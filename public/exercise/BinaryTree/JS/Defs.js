@@ -44,16 +44,24 @@ var questionTypesClassNames = [Terminology, Identify, Traversals];
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[DepthAnswer], [RootAnswer, LeafAnswer, LeftChildAnswer, RightChildAnswer], [BFSAnswer, DFSAnswer, POTAnswer, PreOTAnswer, IOTAnswer]];
+var answerTypesClassNames = [
+  [DepthAnswer, HeightAnswer, SizeAnswer],
+  [RootAnswer, LeafAnswer, LeftChildAnswer, RightChildAnswer],
+  [BFSAnswer, DFSAnswer, POTAnswer, PreOTAnswer, IOTAnswer]
+];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[4], [1, 1, 1, 1], [1, 1, 1, 1, 1]];
+var numberOfQuestionsRequired = [[4, 4, 4], [1, 1, 1, 1], [1, 1, 1, 1, 1]];
 var __findMinParam__ = 1;
 var __findMaxParam__ = 19;
 var __depthMinParam__ = 1;
 var __depthMaxParam__ = 6;
+var __heightMinParam__ = 1;
+var __heightMaxParam__ = 6;
+var __sizeMinParam__ = 1;
+var __sizeMaxParam__ = 8;
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
@@ -64,7 +72,9 @@ var __depthMaxParam__ = 6;
 
   var questionData = [
     [
-      {class: Depth, instructionsText: "Identify all nodes with the given depth."}
+      {class: Depth, instructionsText: "Identify all nodes with the given depth."},
+      {class: Height, instructionsText: "Identify all nodes with the given height."},
+      {class: Size, instructionsText: "Identify all nodes with the given size."}
     ],
     [
       {class: Root, instructionsText: "Identify the root node."},
@@ -83,7 +93,7 @@ var __depthMaxParam__ = 6;
 
 var NUM_STARTING_ADDITIONS = 20;
 var MIN_PREADD             = 1;
-var MAX_PREADD             = 30;
+var MAX_PREADD             = 35;
 
 // Min and max values to be used as parameters for different questions
 /*

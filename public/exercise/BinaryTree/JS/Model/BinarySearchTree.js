@@ -320,6 +320,33 @@ class BinarySearchTree extends Model {
     return nodes;
   }
 
+  /* ----- PRE-CALCULATIONS ------ */
+  calculateSizes () {
+    var calc = (node)=>{
+      if (!node) return 0;
+      // calculate & store
+      var size = calc(node.left) + calc(node.right) + 1;
+      node.size = size;
+      // return
+      return size;
+    }
+
+    return calc(this.root);
+  }
+
+  calculateHeights () {
+    var calc = (node)=>{
+      if (!node) return -1;
+
+      var height = 1 + Math.max (calc (node.left), calc (node.right));
+      node.height = height;
+
+      return height;
+    }
+
+    return calc (this.root);
+  }
+
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {

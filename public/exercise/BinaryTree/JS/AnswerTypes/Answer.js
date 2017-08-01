@@ -17,6 +17,7 @@ class Answer extends AnswerType {
   check (userAnswer) {
     // if not given an answer, is wrong.
     if (!userAnswer) return false;
+    console.log(userAnswer, this.data);
 
     // if not enough / too many nodes in answer, is wrong.
     if (userAnswer.length !== this.data.length) return false;

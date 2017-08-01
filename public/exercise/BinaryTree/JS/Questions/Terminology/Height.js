@@ -1,12 +1,8 @@
 /*jshint esversion: 6 */ 'use strict';
 
-class Depth extends BTQuestion {
+class Height extends TermQuestion {
   generateParameters()
   {
-    return ODSRandom.getRandomIntInclusive(__depthMinParam__, __depthMaxParam__);
-  }
-
-  get fullName () {
-    return this.name.toLowerCase() + " = " + this.getParametersString();
+    return ODSRandom.getRandomIntInclusive(__heightMinParam__, __heightMaxParam__);
   }
 }

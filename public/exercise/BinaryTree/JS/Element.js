@@ -24,14 +24,7 @@ class Element extends ElementBase {
 
   // overloading for the traverse animation
   divToNext (e2) {
-    if (!e2) return this.div;
-
-    var myNode   = control.findNodeFrom (this);
-    var nextNode = control.findNodeFrom (e2);
-
-    if (myNode.left && myNode.left.id === nextNode.id)
-      return this.leftEndpoint.jq;
-    return this.rightEndpoint.jq;
+    return this.div;
   }
 
   getLevel(){ return this.level; }
@@ -42,7 +35,7 @@ class Element extends ElementBase {
     var span       = $("span", elementDiv);
 
     // set the text ...
-    span.text (this.value).data ("id", this.id);
+    span.text ("").data ("id", this.id);
 
     // parent it to the main div, add the stuff, return
     elementDiv.insertAfter (model).data ("id", this.id);

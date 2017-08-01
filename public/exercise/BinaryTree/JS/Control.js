@@ -19,6 +19,8 @@ class Control extends ControlBase {
     //this.userModel = this.exercise.getCurrQuestion ().getModel ().copy ();
   }
 
+  get model () { return this.userModel; }
+
   removeElement (e) {
     // remove from the user model
     var id    = this.view.getIdFromElementDiv (e);
@@ -130,7 +132,6 @@ class Control extends ControlBase {
 
     return this.findElemsFrom (usersPath);
   }
-
 
   // NOTE: Here, we run a traversal and return the result as an array.
   // This assumes the argument is a function taking (tree, f(data, node)),

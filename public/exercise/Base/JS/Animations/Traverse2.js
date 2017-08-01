@@ -44,7 +44,7 @@ class Traverse {
         // Calculate the path we have to take
         var positionData = this.calcPath (d1, d2);
 
-        if (currentIndex === 1)
+        if (currentIndex <= 1)
           $(myElem).offset (positionData.startPosition);
 
         // Take the path

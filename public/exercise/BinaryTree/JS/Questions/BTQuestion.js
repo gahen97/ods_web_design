@@ -21,7 +21,6 @@ class BTQuestion extends Question {
     //   1) The models should be the same
     //   2) The return values should match.
     // That is, should find the element without messing with the set.
-    if (!activeElem) return false;
     if (!this.answer.getModel ().equals (userModel))
       return false;
 
