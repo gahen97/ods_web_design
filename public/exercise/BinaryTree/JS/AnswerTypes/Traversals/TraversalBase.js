@@ -13,12 +13,16 @@ class TraversalBase extends Answer {
   }
 
   get orderMatters(){ return this.sort; }
-  
+
   calculateAnswerElements () {
     return control.traverse(this.traversalMethod);
   }
 
   get traversalMethod(){
     return function(){ return null; }
+  }
+
+  anim_each (element, index) {
+  //  element.text = index.toString();
   }
 }

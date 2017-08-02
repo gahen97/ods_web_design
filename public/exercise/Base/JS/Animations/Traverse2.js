@@ -7,7 +7,7 @@ class Traverse {
 
     options.duration = duration;
 
-    if (options.each) options.each (elements [0]);
+    if (options.each) options.each (elements [0], 0);
 
     var clean = ()=>{ myElement.remove (); }
     this.animationCtrl (myElement, elements, options, 1).then (options.callback)
@@ -52,7 +52,7 @@ class Traverse {
           duration: options.duration,
           callback: ()=>{
             if (options.each)
-              options.each (elements [currentIndex]);
+              options.each (elements [currentIndex], currentIndex);
 
             return this.animationCtrl (myElem, elements,
                                        options, currentIndex + 1)

@@ -1,6 +1,0 @@
-- Find should find from the root, proceed left or right, etc., through the tree.
-  - Find answer should run the same way, taking a second (give or take) between steps.
-
-- Drag and drop
-  - Endpoint should react differently than elements
-- Connector styling

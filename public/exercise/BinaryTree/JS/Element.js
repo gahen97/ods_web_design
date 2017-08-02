@@ -21,6 +21,7 @@ class Element extends ElementBase {
   set nodeId (d) { this.nid = d; } // node.nodeId = x; node.nodeId(x)
   set node (n) { this._node = n; }
   get node () { return this._node; }
+  set text (t) { this.element.text (t); }
 
   // overloading for the traverse animation
   divToNext (e2) {

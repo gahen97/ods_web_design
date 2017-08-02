@@ -151,7 +151,6 @@ class ExerciseBase {
       this.questionTypes.push(newQType);
 
       var lastAnswer = newQType.getAnswer (-1);
-      console.log(lastAnswer);
       curModel = lastAnswer;
     }
 

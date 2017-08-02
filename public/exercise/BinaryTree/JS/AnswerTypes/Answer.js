@@ -17,8 +17,7 @@ class Answer extends AnswerType {
   check (userAnswer) {
     // if not given an answer, is wrong.
     if (!userAnswer) return false;
-    console.log(userAnswer, this.data);
-
+    
     // if not enough / too many nodes in answer, is wrong.
     if (userAnswer.length !== this.data.length) return false;
 
@@ -68,11 +67,15 @@ class Answer extends AnswerType {
     control.reset ();
 
     var elements = this.calculateAnswerElements();
-    console.log ("ANIMATING TRAVERSAL OF ", elements);
     this.animate (elements,
-      ()=>{ control.enable(); },
-      (elem)=>{
+      () => { // CALLBACK
+        control.enable ();
+      },
+      (elem, index) => { // EACH
         control.setActiveElement (elem);
+
+        if (this.anim_each)
+          this.anim_each (elem, index);
       }
     );
   }
