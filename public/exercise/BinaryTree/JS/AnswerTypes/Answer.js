@@ -17,7 +17,7 @@ class Answer extends AnswerType {
   check (userAnswer) {
     // if not given an answer, is wrong.
     if (!userAnswer) return false;
-    
+
     // if not enough / too many nodes in answer, is wrong.
     if (userAnswer.length !== this.data.length) return false;
 
@@ -72,6 +72,8 @@ class Answer extends AnswerType {
         control.enable ();
       },
       (elem, index) => { // EACH
+        if (!control.disabled) return;
+        
         control.setActiveElement (elem);
 
         if (this.anim_each)

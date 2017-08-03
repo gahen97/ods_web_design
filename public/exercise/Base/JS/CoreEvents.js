@@ -96,6 +96,7 @@ function clickedTab (element, evt)
 
   this.exercise.goToQuestion (absQNum);
   this.updateActiveQuestion ();
+  this.reset ();
   this.enable ();
 }
 

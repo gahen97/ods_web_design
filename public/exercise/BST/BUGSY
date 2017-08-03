@@ -18,13 +18,5 @@
     - Path should be only what's in the path-node list:
       3 - 12 - 7 in the example
 
-- FIX:
-  We probably need to perform some more checking when switching questions.
-  We could:
-    A) Not allow it;
-    B) Have the animation check if its still running, or if the question was switched;
-          if question was switched, shouldn't set element active
-    C) Wait a few ms after switching tabs to reset (bad!);
-    D) Check the path differently (Lots of work!)
-
-  Option B is probably the best option here. Would have to think of some way to implement
+  Update:
+    Should be fixed.

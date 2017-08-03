@@ -39,6 +39,7 @@ class FindAnswer extends AnswerType {
         control.enable ();
       },
       each: (elem)=>{
+        if (!control.disabled) return;
         control.setActiveElement (elem);
       }
     });

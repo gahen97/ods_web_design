@@ -138,7 +138,7 @@ var sidebar_width = function() {
 }
 
 var dynamic_height = function() {
-  var height = $("#actual_video").width() * 540/960;
+  var height = $("#actual_video").width() * 0.644193894 // seems to be better for H5P
   $("#actual_video").css('height', height);
 }
 
