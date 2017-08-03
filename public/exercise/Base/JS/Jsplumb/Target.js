@@ -17,7 +17,7 @@ class PlumbTarget {
     return jsPlumb.makeTarget (element, {
       isSource: false,
       isTarget: true,
-      maxConnections: 1,
+      maxConnections: options.maxConnections || 1,
       endpoint: [ "Dot", {radius:5} ],
       cssClass: "jsplumb-target no-visibility",
       anchor: options.anchor || [0.5, 0.5, 0, 0],
@@ -25,6 +25,10 @@ class PlumbTarget {
       id: this.id
     })
   }
+
+  setEnabled (t) { jsPlumb.setTargetEnabled (this.elem, t); }
+  disable(){ this.setEnabled (false); }
+  enable(){ this.setEnabled (true); }
 
   get uuid() { return this.plumbed.getId(); }
 }

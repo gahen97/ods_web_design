@@ -53,6 +53,15 @@ class Element extends ElementBase {
         element.removeClass ("active");
   }
 
+  // DISABLE
+  setEnabled(t) {
+    this.toggleClass ("disabled", !t);
+    this.pointer.setEnabled(t);
+    this.target.setEnabled(t);
+  }
+  disable () { this.setEnabled(false); }
+  enable(){ this.setEnabled(true); }
+
   isHovered(){
     return this.jq.is(":hover") ||
            this.pointer.isHovered();
@@ -74,7 +83,8 @@ class Element extends ElementBase {
     // make target
     if (args.target !== false)
       this.target       = new PlumbTarget (target, this, {
-        anchor: [0, 0.5, 0, 0]
+        anchor: [0, 0.5, 0, 0],
+        maxConnections: 2
       }, {element: this});
 
     // make next pointer

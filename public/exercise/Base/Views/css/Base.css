@@ -113,6 +113,10 @@ li.tabbedQuestion:hover {
   color: #1fa000;
 }
 
+.disabled{
+  opacity: 0.5;
+}
+
 .hidden {
   display: none;
 }

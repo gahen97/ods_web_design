@@ -51,6 +51,11 @@ class PlumbEndpoint {
   get canvas () { return this.endpoint.canvas; }
   get uuid(){ return this.endpoint.getUuid(); }
   getEndpoint () { return this.endpoint; }
+
+  setEnabled(t){ this.endpoint.setEnabled(t); }
+  disable(){ this.setEnabled (false); }
+  enable(){ this.setEnabled (true); }
+  
   remove () {
     jsPlumb.deleteEndpoint (this.endpoint);
   }

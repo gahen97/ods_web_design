@@ -10,15 +10,7 @@
 function onCheckBtnClick (elem, evt) {
   // NOTE: Should check pointers (left & right) are correct,
   //       levels are correct
-  var roots = this.userModel.getRoots ();
-  if (roots.length>1){
-    new ErrorDialog ("You may only have one tree, muggle!");
-    return false;
-  }
-
-  var tree = this.userModel.getTrees () [0];
-
-  if (this.exercise.check (tree, this.activeElement, this.userDataArray)) {
+  if (this.exercise.check (this.userModel, this.activeElement, this.userDataArray)) {
     //TODO
     //Maybe make custom event that checks?
     new Popup ("Correct!");
@@ -190,6 +182,7 @@ function connectBetween (plumbEvt, mode) {
 
   this.connect (node1, node2);
   setTimeout(()=>{
+    control.update ();
     jsPlumb.repaintEverything(); // TODO
   }, 10)
 }

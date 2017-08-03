@@ -8,6 +8,14 @@ class View extends ViewBase {
     super(...arguments);
 
     // Anything else the view needs to do on construct
+    this.elementsByNodeId = { };
+  }
+
+  addElement (...args) {
+    var e = super.addElement (...args);
+
+    this.elementsByNodeId [e.nodeId] = e;
+    return e;
   }
 
   // start up a new view
@@ -47,12 +55,24 @@ class View extends ViewBase {
 
   // Display ...
   displayModel (m) {
-    // This draws out the model to the screen,
-    //   replacing the old one.
+    var head = m.makeHeadNode ();
+    this.addElement ("H", {
+      constructArgs: {
+        nodeId: head
+      }
+    });
+
+    var tail = m.makeTailNode ();
+    this.addElement ("T", {
+      constructArgs: {
+        nodeId: tail
+      }
+    })
   }
 
 
   // Getters ...
   getElem (e) { return $(e).data ("element") || this.getElement (e); }
   getNodeId (e) { return e.nodeId; }
+  getElementFromNodeId (id) { return this.elementsByNodeId [id]; }
 }
