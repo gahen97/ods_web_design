@@ -45,8 +45,14 @@ class View extends ViewBase {
     element.moveTo (pos);
   }
 
+  // Display ...
   displayModel (m) {
     // This draws out the model to the screen,
     //   replacing the old one.
   }
+
+
+  // Getters ...
+  getElem (e) { return $(e).data ("element") || this.getElement (e); }
+  getNodeId (e) { return e.nodeId; }
 }

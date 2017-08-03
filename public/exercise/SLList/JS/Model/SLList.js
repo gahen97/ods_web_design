@@ -9,11 +9,20 @@ class SinglyLinkedList extends Model {
     this.head = null;
     this.tail = null;
     this.n    = 0;
+
+    this.nodes = { };
+  }
+
+  /* ---- PRIVATE ---- */
+  _create (value, next) {
+      var newNode = new Node (value, next);
+      this.nodes [newNode.id] = newNode;
+      return newNode;
   }
 
   /* ---- OPERATIONS ----- */
   push (data) {
-    var newNode = new Node (data, this.head);
+    var newNode = this._create (data, this.head)
     this.head   = newNode;
 
     if (!this.n)
@@ -40,7 +49,7 @@ class SinglyLinkedList extends Model {
   }
 
   add (data) {
-    var newNode = new Node (data);
+    var newNode = this._create (data);
 
     if (!this.n)
       this.head = newNode;
@@ -53,7 +62,20 @@ class SinglyLinkedList extends Model {
     return data;
   }
 
+  /* ---- USER MODEL ---- */
+  _findById(id) { return this.nodes [id] || null; }
 
+  connect (sourceId, targetId) {
+    var n1 = this._findById (sourceId);
+    var n2 = this._findById (targetId);
+
+    if (!n1) return;
+    n1.next = n2;
+  }
+
+  create (value){ return this._create(value); }
+
+  /* ------ HELPERS ------ */
   each (f) {
     var curNode = this.head;
     while (curNode) {

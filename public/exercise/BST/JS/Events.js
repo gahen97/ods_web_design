@@ -215,7 +215,7 @@ function connectBetween (plumbEvt, mode) {
   if (!srcElem) return false;
 
   if (trgElem && srcElem.getLevel() !== trgElem.getLevel() - 1)
-    jsPlumb.deleteConnection (plumbEvt.connection);
+    return jsPlumb.deleteConnection (plumbEvt.connection);
 
   var srcId = srcElem ? srcElem.nodeId : parseInt (this.view.getIdFromElementDiv (src));
   var trgId = trgElem ? trgElem.nodeId : parseInt (this.view.getIdFromElementDiv (trg));

@@ -18,4 +18,16 @@ const ENDPOINT_EVENTS_ID = "George, the Flying Dragon";
 
 $(()=>{
 	// If anything needs to be done when the exercise loads, do it here
+	$("#trash").droppable ({
+		tolerance: "touch",
+		over: function(event, ui ){
+			$(this).attr('src', "exercise/Base/images/trashcan_open.png");
+		},
+		out: function(event, ui ){
+			$(this).attr('src', "exercise/Base/images/trashcan.png");
+		},
+		drop: function() {
+			$(this).attr('src', "exercise/Base/images/trashcan.png");
+		}
+	});
 })

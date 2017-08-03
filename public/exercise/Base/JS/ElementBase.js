@@ -17,11 +17,11 @@ class ElementBase {
     return ElementBase.currentId ++;
   }
 
-  constructor (value) {
+  constructor (value, ...args) {
     this.value = value;
     this.id = ElementBase.nextId ();
 
-    this.element = this.generate ();
+    this.element = this.generate (...args);
     this.$elem   = $(this.element);
 
     // NOTE: This sets up the Proxy that points any DOM methods called on the element

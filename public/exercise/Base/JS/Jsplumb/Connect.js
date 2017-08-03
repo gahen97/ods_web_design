@@ -2,6 +2,11 @@ const PLUMB_OVERLAY_OPTIONS = {
   arrow: [ "Arrow", { width: 10, length: 12, location: 1, id: "arrow"} ]
 };
 
+// this is more for outside usage ....
+const OVERLAY = {
+  ARROW: PLUMB_OVERLAY_OPTIONS.arrow
+};
+
 class PlumbConnect {
   constructor(e1, e2, opts){
     if (!opts) opts={};

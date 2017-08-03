@@ -37,7 +37,13 @@ function onSubmitInput (element, evt) {
   var input = $ (".modelEntry").val ();
   input = parseInput (input);
 
-  this.view.addElement (input);
+  var newId = this.addNode (input);
+  this.view.addElement (input, {
+    constructArgs: {
+      nodeId: newId
+    }
+  });
+
   $(".modelEntry").val("");
 };
 
@@ -166,15 +172,34 @@ function droppedOnTrash (element, evt, ui) {
 
 /* JSPLUMB */
 function connectBetween (plumbEvt, mode) {
-  console.log ("CONNECTION: ", plumbEvt, mode);
+  var src = plumbEvt.source;
+  var trg = plumbEvt.target;
+
+  var e1  = this.view.getElem (src);
+  var e2  = this.view.getElem (trg);
+
+  if (!e1 || (!e2 && mode === "connect")) return false;
+
+  var node1 = this.view.getNodeId (e1);
+  var node2 = (mode === "connect") ? this.view.getNodeId (e2) : null;
+
+  if (node1 === node2){
+    jsPlumb.deleteConnection (plumbEvt.connection);
+    return false;
+  }
+
+  this.connect (node1, node2);
+  setTimeout(()=>{
+    jsPlumb.repaintEverything(); // TODO
+  }, 10)
 }
 
 function doConnect (elem, plumbEvt, origEvt){
-  connectBetween.call (this, plumbEvt, "connect")
+  return connectBetween.call (this, plumbEvt, "connect")
 }
 
 function connectDetach (elem, plumbEvt, origEvt){
-  connectBetween.call (this, plumbEvt, "detach");
+  return connectBetween.call (this, plumbEvt, "detach");
 }
 
 function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {

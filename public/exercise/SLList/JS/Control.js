@@ -6,4 +6,10 @@ class Control extends ControlBase {
   }
 
   // overload base stuff here, add more stuff, whatevers
+  connect (sourceNode, targetNode) {
+    this.userModel.connect (sourceNode, targetNode);
+  }
+  addNode (data) {
+    return this.userModel.create (parseInt (data)).id;
+  }
 }

@@ -7,29 +7,38 @@
   border: 3px solid #565656;
   color: white;
 
-  border-radius: 5px;
-
   cursor: -webkit-grab;
   line-height: 30px;  /* needs this for vertically centered text */
 
-  position: relative;
+  display: inline-block;
+  position: absolute;
 }
 .element.main{
-  width: 77px;
-  height: 35px;
+  width: 64px;
+  height: 32px;
+  border-radius: 5px;
+}
+.element.value, .element.pointer{
+  width: 31px;
+  height: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: baseline;
+  margin: 0;
+}
+.jsp-hover > .element.value{
+  border-color: #565656;
 }
 .element.value{
-  width: 35px;
-  height: 100%;
-  border-right: 1px dotted #676767;
-  display: inline-block;
+  border-right: 2px solid white;
+  float: left;
+  z-index: 99;
 }
 .element.pointer{
-  width: 35px;
-  height: 100%;
+  float: right;
 }
 
-.element:hover{
+.element.jsp-hover{
   background-color: white;
   color: #565656;
 }
@@ -44,6 +53,7 @@
 
 .jsp-endpoint circle {
   fill: white;
+  cursor: pointer;
 }
 .jsp-hover circle {
   fill: #565656;

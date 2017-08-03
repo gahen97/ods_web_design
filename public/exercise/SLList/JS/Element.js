@@ -4,25 +4,45 @@
 */
 
 class Element extends ElementBase {
-  constructor(){
+  constructor(value, args){
     super (...arguments);
 
     // Anything else that needs to be done for Elements
+    this.nodeId = args.nodeId;
   }
 
-  generate () {
+  generate (args) {
     // Create a new div to represent the element,
     //   returning the new div
     var div        = $(ELEMENT_TEMPLATE).clone ();
     var model      = $(MODEL_DISPLAY);
 
-    $("span", div).text (this.value);
-    div.insertAfter (model);
+    $("span", div).text (this.value)
 
-    this.addControls (div);
+    // give the element ID
+    div.find("*").data("id", this.id);
+    div.data ("id", this.id);
+
+    div.insertAfter (model);
+    this.addControls (div, args);
 
     return div;
   }
+
+  remove () {
+    this.pointer.remove ();
+    jsPlumb.remove (this.element);
+  }
+
+  toggleClass (className, active) {
+    $(this.element).toggleClass (className, active);
+    this.pointer.toggleClass (className, active);
+
+    return this;
+  }
+
+  addClass (className) { return this.toggleClass (className, true); }
+  removeClass (className){ return this.toggleClass (className, false); }
 
   setActive (isActive) {
     // Activate this element. Adds a class to represent being active
@@ -33,22 +53,35 @@ class Element extends ElementBase {
         element.removeClass ("active");
   }
 
+  isHovered(){
+    return this.jq.is(":hover") ||
+           this.pointer.isHovered();
+  }
+
   moveTo (offset) {
     // Move to some given position
     $ (this.element).offset (offset);
   }
 
-  addControls (e) {
-    // If there are any controls needed - draggable, droppable, ... -
-    //   add them here. If given, e is the element
-    this.draggy_waggy = new PlumbDraggable (this, e);
-
-    var target = $ (".value", e);
+  addControls (e, args) {
+    var target = e;
     var ptr    = $ (".pointer", e);
 
-    this.target       = new PlumbTarget (target, this);
-    this.pointer      = new PlumbEndpoint (ptr, {
-      anchor: "Center"
-    })
+    // make draggable
+    if (args.draggable !== false)
+      this.draggy_waggy = new PlumbDraggable (this, e);
+
+    // make target
+    if (args.target !== false)
+      this.target       = new PlumbTarget (target, this, {
+        anchor: [0, 0.5, 0, 0]
+      }, {element: this});
+
+    // make next pointer
+    if (args.pointer !== false)
+      this.pointer      = new PlumbEndpoint (ptr, {
+        anchor: [0.6, 0.55, 0, 0],
+        connectorOverlays: [OVERLAY.ARROW]
+      }, {element: this})
   }
 }

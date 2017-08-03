@@ -1,15 +1,16 @@
 class PlumbTarget {
   static get nextId(){ return PlumbTarget.id ++; }
 
-  constructor (e, eObj) {
+  constructor (e, eObj, opts) {
     this.elem    = e;
     this.elemObj = eObj;
 
     this.id = "target-" + PlumbTarget.nextId;
-    this.plumbed = this.makeTarget (e);
+    this.plumbed = this.makeTarget (e, opts);
   }
 
-  makeTarget (element) {
+  makeTarget (element, options) {
+    if (!options) options={};
     if (!element) element = this.elem;
     if (!element) return false;
 
@@ -19,7 +20,7 @@ class PlumbTarget {
       maxConnections: 1,
       endpoint: [ "Dot", {radius:5} ],
       cssClass: "jsplumb-target no-visibility",
-      anchor: [0.5, 0.5, 0, 0],
+      anchor: options.anchor || [0.5, 0.5, 0, 0],
 
       id: this.id
     })
