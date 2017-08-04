@@ -88,7 +88,14 @@ class View extends ViewBase {
     }
   }
 
+  setup (model) {
+    var prevNode = null;
+    var x        = 0;
+  }
+
   displayModel (m) {
+    this.clear ();
+
     // make the head & tail nodes
     var head = (this.head) ? this.head : this.addElementNode ("H", m.makeHeadNode(), {draggable: false});
     var tail = (this.tail) ? this.tail : this.addElementNode ("T", m.makeTailNode(), {draggable: false});
@@ -100,11 +107,8 @@ class View extends ViewBase {
     head.moveTo (this.modelDivHelper.fromOffset({top: 100, left: 50}));
     tail.moveTo (this.modelDivHelper.fromOffset({top: 150, left: 50}));
 
-    // everything we should be updated ....
-    this.fixElementNodes (this.currentModel, m);
-
     // TODO: SHOULD SET UP HERE
-
+    this.setup (m);
 
     // save our stuff
     this.head = head;
