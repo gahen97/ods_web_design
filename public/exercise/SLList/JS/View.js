@@ -64,6 +64,10 @@ class View extends ViewBase {
   }
 
   // Display ...
+  updateNodesById (fromId, toId) {
+    this.elementsByNodeId [toId] = this.elementsByNodeId [fromId];
+    this.elementsByNodeId [fromId] = null;
+  }
   fixElementNodes (fromModel, toModel) {
     // note: we can only do this if the two models are the same ....
     if (!fromModel) return false;
@@ -77,8 +81,10 @@ class View extends ViewBase {
     for (var e in this.elements) {
       var elem  = this.elements [e];
       var newId = nodesMap [elem.nodeId];
-      if (newId)
+      if (newId){
+        this.updateNodesById (elem.nodeId, newId);
         elem.nodeId = newId;
+      }
     }
   }
 
@@ -87,13 +93,20 @@ class View extends ViewBase {
     var head = (this.head) ? this.head : this.addElementNode ("H", m.makeHeadNode(), {draggable: false});
     var tail = (this.tail) ? this.tail : this.addElementNode ("T", m.makeTailNode(), {draggable: false});
 
+    head.disableTarget();
+    tail.disableTarget();
+
     // add everything from the list
     head.moveTo (this.modelDivHelper.fromOffset({top: 100, left: 50}));
     tail.moveTo (this.modelDivHelper.fromOffset({top: 150, left: 50}));
 
-    // our elements are perfect, but will have nodeIds off. we have to fix that ...
+    // everything we should be updated ....
     this.fixElementNodes (this.currentModel, m);
 
+    // TODO: SHOULD SET UP HERE
+
+
+    // save our stuff
     this.head = head;
     this.tail = tail;
     this.currentModel = m;

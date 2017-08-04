@@ -61,10 +61,13 @@ class Element extends ElementBase {
   }
 
   // DISABLE
+  disableTarget(){
+    if (this.target) this.target.disable();
+  }
   setEnabled(t) {
     this.toggleClass ("disabled", !t);
-    this.pointer.setEnabled(t);
-    this.target.setEnabled(t);
+    if (this.pointer) this.pointer.setEnabled(t);
+    if (this.target) this.target.setEnabled(t);
   }
   disable () { this.setEnabled(false); }
   enable(){ this.setEnabled(true); }
@@ -88,11 +91,11 @@ class Element extends ElementBase {
       this.draggy_waggy = new PlumbDraggable (this, e);
 
     // make target
-    if (args.target !== false)
-      this.target       = new PlumbTarget (target, this, {
-        anchor: [0, 0.5, 0, 0],
-        maxConnections: 2
-      }, {element: this});
+    this.target       = new PlumbTarget (target, this, {
+      anchor: [0, 0.5, 0, 0],
+      maxConnections: 3,
+      canEnable: args.target !== false
+    }, {element: this});
 
     // make next pointer
     if (args.pointer !== false)

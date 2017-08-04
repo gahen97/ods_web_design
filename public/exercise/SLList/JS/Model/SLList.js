@@ -143,10 +143,30 @@ class SinglyLinkedList extends Model {
     return results;
   }
 
+  accessibleFrom (node) {
+    var path = [ ];
+    var cur  = node;
+
+    while (cur) {
+      // is this stuck in an infinite looperino?
+      if (path.indexOf(cur) !== -1) break;
+
+      path.push (cur);
+      cur = cur.next;
+    }
+
+    return path;
+  }
+
   /* ------ HELPERS ------ */
   each (f) {
+    var passed  = [ ];
     var curNode = this.head;
     while (curNode) {
+      if (passed.indexOf(curNode) !== -1)
+        break;
+      passed.push (curNode);
+      
       var r = f (curNode.data, curNode);
 
       if (r === false) return;
@@ -168,7 +188,7 @@ class SinglyLinkedList extends Model {
     // make sure the two tails match ...
     if (!checkNode (this.tail, other.tail))
       return false;
-    
+
     // compare every node, in order, to ensure they're the same
     var equal = true;
     var n2 = other.head;
