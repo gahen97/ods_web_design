@@ -9,6 +9,7 @@ class View extends ViewBase {
 
     // Anything else the view needs to do on construct
     this.elementsByNodeId = { };
+    this.currentModel     = null;
   }
 
   addElement (...args) {
@@ -53,21 +54,51 @@ class View extends ViewBase {
     element.moveTo (pos);
   }
 
-  // Display ...
-  displayModel (m) {
-    var head = m.makeHeadNode ();
-    this.addElement ("H", {
-      constructArgs: {
-        nodeId: head
-      }
-    });
+  addElementNode (value, nodeId, opts) {
+    if (!opts) opts={};
+    if (nodeId || nodeId === 0) opts.nodeId = nodeId;
 
-    var tail = m.makeTailNode ();
-    this.addElement ("T", {
-      constructArgs: {
-        nodeId: tail
-      }
-    })
+    return this.addElement (value, {
+      constructArgs: opts
+    });
+  }
+
+  // Display ...
+  fixElementNodes (fromModel, toModel) {
+    // note: we can only do this if the two models are the same ....
+    if (!fromModel) return false;
+    if (!fromModel.equals (toModel)) return false;
+
+    // so if we want to adjust node ids, we can basically build up a dictionary ...
+    // of {old: new}.. then go through each element and adjust to new
+    //  (i'm learning to fly)
+    var nodesMap = fromModel.mapTo (toModel);
+
+    for (var e in this.elements) {
+      var elem  = this.elements [e];
+      var newId = nodesMap [elem.nodeId];
+      if (newId)
+        elem.nodeId = newId;
+    }
+  }
+
+  displayModel (m) {
+    // make the head & tail nodes
+    var head = (this.head) ? this.head : this.addElementNode ("H", m.makeHeadNode(), {draggable: false});
+    var tail = (this.tail) ? this.tail : this.addElementNode ("T", m.makeTailNode(), {draggable: false});
+
+    // add everything from the list
+    head.moveTo (this.modelDivHelper.fromOffset({top: 100, left: 50}));
+    tail.moveTo (this.modelDivHelper.fromOffset({top: 150, left: 50}));
+
+    // our elements are perfect, but will have nodeIds off. we have to fix that ...
+    this.fixElementNodes (this.currentModel, m);
+
+    this.head = head;
+    this.tail = tail;
+    this.currentModel = m;
+
+    jsPlumb.repaintEverything();
   }
 
 

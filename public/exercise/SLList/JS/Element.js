@@ -9,6 +9,8 @@ class Element extends ElementBase {
 
     // Anything else that needs to be done for Elements
     this.nodeId = args.nodeId;
+
+    this.addClasses (args);
   }
 
   generate (args) {
@@ -43,6 +45,11 @@ class Element extends ElementBase {
 
   addClass (className) { return this.toggleClass (className, true); }
   removeClass (className){ return this.toggleClass (className, false); }
+
+  addClasses (args) {
+    if (args.draggable !== false)
+      this.addClass ("draggable");
+  }
 
   setActive (isActive) {
     // Activate this element. Adds a class to represent being active

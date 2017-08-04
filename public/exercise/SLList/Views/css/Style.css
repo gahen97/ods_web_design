@@ -7,7 +7,6 @@
   border: 3px solid #565656;
   color: white;
 
-  cursor: -webkit-grab;
   line-height: 30px;  /* needs this for vertically centered text */
 
   display: inline-block;
@@ -18,6 +17,9 @@
   height: 32px;
   border-radius: 5px;
 }
+.element.main.draggable{
+  cursor: -webkit-grab;
+}
 .element.value, .element.pointer{
   width: 31px;
   height: 100%;
@@ -26,7 +28,7 @@
   vertical-align: baseline;
   margin: 0;
 }
-.jsp-hover > .element.value{
+.jsp-hover.draggable > .element.value{
   border-color: #565656;
 }
 .element.value{
@@ -38,16 +40,16 @@
   float: right;
 }
 
-.element.jsp-hover{
+.element.draggable.jsp-hover,
+.element.draggable.jsp-hover > * {
   background-color: white;
   color: #565656;
 }
 
-.element.main:active {
+.element.main.draggable:active {
   background-color: white;
   color: #565656;
   box-shadow: 1px 1px 1px 1px #aaa;
-  cursor: -webkit-grabbing;
 }
 
 
@@ -55,7 +57,7 @@
   fill: white;
   cursor: pointer;
 }
-.jsp-hover circle {
+.jsp-hover.draggable circle {
   fill: #565656;
 }
 

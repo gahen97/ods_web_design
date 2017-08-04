@@ -100,6 +100,24 @@ class SinglyLinkedList extends Model {
   makeHeadNode(){ return HEAD_NODE_ID; }
   makeTailNode(){ return TAIL_NODE_ID; }
 
+  // map nodes from this sllist to another sllist
+  mapTo (newList) {
+    var cur = newList.head;
+    var results = { };
+
+    this.each ((data,node)=>{
+      if (!cur){
+        results = null;
+        return false;
+      }
+
+      results [node.id] = cur.id;
+      cur = cur.next;
+    });
+
+    return results;
+  }
+
   // path exists to nodes
   nodesInList () {
     var results = [ ];
@@ -147,6 +165,10 @@ class SinglyLinkedList extends Model {
       return n1.data === n2.data;
     }
 
+    // make sure the two tails match ...
+    if (!checkNode (this.tail, other.tail))
+      return false;
+    
     // compare every node, in order, to ensure they're the same
     var equal = true;
     var n2 = other.head;
