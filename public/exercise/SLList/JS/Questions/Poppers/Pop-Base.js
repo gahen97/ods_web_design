@@ -10,8 +10,9 @@ class PopBase extends Question {
   {
   }
 
-  get fullName () { return this.name + "()"; }
-
+  get fullName () { return this.name; }
+  get exerciseName () { return this.name + "()"; }
+  
   // input -> valid if between __addMinParam__, __addMaxParam__
   isValidInput (input)
   {
@@ -26,7 +27,7 @@ class PopBase extends Question {
   displayAnswer (div)
   {
     this.displayModel (div);
-    
+
     var node = this.ansNode;
     var elem = node && control.find (node.id);
 
