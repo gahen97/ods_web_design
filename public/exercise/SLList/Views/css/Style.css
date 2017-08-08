@@ -52,6 +52,15 @@
   box-shadow: 1px 1px 1px 1px #aaa;
 }
 
+.element.main.jsp-active {
+}
+.element.main.jsp-active > * {
+  border-color: #565656;
+}
+
+.jsp-endpoint.jsp-active circle {
+  fill: #565656;
+}
 
 .jsp-endpoint circle {
   fill: white;

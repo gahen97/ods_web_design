@@ -10,7 +10,7 @@ class Element extends ElementBase {
     // Anything else that needs to be done for Elements
     this.nodeId = args.nodeId;
 
-    this.addClasses (args);
+    this.initClasses (args);
   }
 
   get targUuid () { return this.target.uuid; }
@@ -74,18 +74,15 @@ class Element extends ElementBase {
   addClass (className) { return this.toggleClass (className, true); }
   removeClass (className){ return this.toggleClass (className, false); }
 
-  addClasses (args) {
+  initClasses (args) {
     if (args.draggable !== false)
       this.addClass ("draggable");
   }
 
   setActive (isActive) {
     // Activate this element. Adds a class to represent being active
-      var element = $(this.element);
-      if (isActive)
-        element.addClass ("active");
-      else
-        element.removeClass ("active");
+    this.toggleClass ("jsp-active", isActive);
+    $ (this.element).children().toggleClass ("active", isActive);
   }
 
   // DISABLE
