@@ -71,16 +71,13 @@ class SinglyLinkedList extends Model {
 
   /* ---- USER MODEL ---- */
   _findById(id) { return this.nodes [id] || null; }
+  find (id) { return this._findById (id); }
 
   connect (sourceId, targetId) {
-    console.log(sourceId);
-
     var n1 = this._findById (sourceId);
     var n2 = this._findById (targetId);
 
     if (!n1 && !this._specialId (sourceId)) return;
-
-    console.log ("oh, hey");
 
     // We have three cases here: Head node, Tail node, or an actual node ...
     switch (sourceId) {
@@ -134,13 +131,7 @@ class SinglyLinkedList extends Model {
   // path does not exist to nodes
   nodesOut () {
     var nodesIn = this.nodesInList ();
-    var results = [ ];
-
-    for (var i in this.nodes)
-      if (nodesIn.indexOf (this.nodes [i]) === -1)
-        results.push (this.nodes [i]);
-
-    return results;
+    return this.excluding (nodesIn);
   }
 
   accessibleFrom (node) {
@@ -166,13 +157,22 @@ class SinglyLinkedList extends Model {
       if (passed.indexOf(curNode) !== -1)
         break;
       passed.push (curNode);
-      
+
       var r = f (curNode.data, curNode);
 
       if (r === false) return;
 
       curNode = curNode.next;
     }
+  }
+
+  excluding (nodes) {
+    // return every node that isn't in nodes
+    var results = [ ];
+    for (var i in this.nodes)
+      if (nodes.indexOf (this.nodes [i]) === -1)
+        results.push (this.nodes [i]);
+    return results;
   }
 
   /* REQUIRED BY MODEL */

@@ -34,12 +34,12 @@ var questionTypesClassNames = [Operations];
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[AddAnswer]];
+var answerTypesClassNames = [[AddAnswer, PushAnswer]];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[5]];
+var numberOfQuestionsRequired = [[5, 5]];
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
@@ -49,7 +49,9 @@ var numberOfQuestionsRequired = [[5]];
 //     instructionsText: Some instructions to be shown for the question
 
   var questionData = [
-    [{class : Add, instructionsText: "Display the evolution of the list by adding to the back."}]
+    [{class : Add, instructionsText: "Display the evolution of the list by adding to the back."},
+     {class : Push, instructionsText : "Display the evolution of the list by adding to the front."}
+    ]
                       ];
 
 // Min and max values to be used as parameters for different questions

@@ -32,8 +32,8 @@ class View extends ViewBase {
     if (!opts) opts = { };
 
     // Implement opts.checkFunc here
-
     super.clear (opts);
+    this.elementsByNodeId = { };
   }
 
   // remove an element from the view
@@ -90,30 +90,51 @@ class View extends ViewBase {
 
   setup (model) {
     var prevNode = null;
-    var x        = 0;
+    var xSplit   = ELEMENT_SEP_X;
+    var x        = xSplit;
+
+    var prevNode = this.head;
+
+    model.each ((data, node)=>{
+      var newNode = this.addElementNode (data, node.id);
+      newNode.moveTo (this.modelDivHelper.fromOffset ({
+        top: ELEMENT_Y,
+        left: x
+      }));
+
+      if (prevNode)
+        prevNode.connectTo (newNode);
+      prevNode = newNode;
+
+      x += xSplit;
+    });
+
+    // connect the tail
+    if (prevNode && prevNode !== this.head)
+      this.tail.connectTo (prevNode, {connector: ["Bezier"]});
   }
 
   displayModel (m) {
     this.clear ();
 
     // make the head & tail nodes
-    var head = (this.head) ? this.head : this.addElementNode ("H", m.makeHeadNode(), {draggable: false});
-    var tail = (this.tail) ? this.tail : this.addElementNode ("T", m.makeTailNode(), {draggable: false});
+    var head = this.addElementNode ("H", m.makeHeadNode(), {draggable: false});
+    var tail = this.addElementNode ("T", m.makeTailNode(), {draggable: false, connector: ["Bezier"]});
 
     head.disableTarget();
     tail.disableTarget();
 
     // add everything from the list
-    head.moveTo (this.modelDivHelper.fromOffset({top: 100, left: 50}));
-    tail.moveTo (this.modelDivHelper.fromOffset({top: 150, left: 50}));
-
-    // TODO: SHOULD SET UP HERE
-    this.setup (m);
+    head.moveTo (this.modelDivHelper.fromOffset({top: 100, left: 0}));
+    tail.moveTo (this.modelDivHelper.fromOffset({top: 150, left: 0}));
 
     // save our stuff
     this.head = head;
     this.tail = tail;
     this.currentModel = m;
+
+    // TODO: SHOULD SET UP HERE
+    this.setup (m);
 
     jsPlumb.repaintEverything();
   }

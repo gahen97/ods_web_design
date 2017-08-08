@@ -13,6 +13,8 @@ class Element extends ElementBase {
     this.addClasses (args);
   }
 
+  get targUuid () { return this.target.uuid; }
+
   generate (args) {
     // Create a new div to represent the element,
     //   returning the new div
@@ -29,6 +31,32 @@ class Element extends ElementBase {
     this.addControls (div, args);
 
     return div;
+  }
+
+  connectTo (otherElem, opts) {
+    if (!otherElem) return false;
+    if (!opts) opts = { };
+
+    var endpoint = this.pointer;
+    var myUuid   = endpoint.uuid;
+    var trgUuid  = otherElem.targUuid;
+
+    if (endpoint){
+      endpoint = endpoint.canvas;
+    }
+
+    var newConnection = new PlumbConnect (
+      this,
+      otherElem,
+      {
+       overlays: "arrow",
+       classes: ["jsplumb-connection", "plumba-wumba"],
+       parameters: {
+          srcElement: this
+       },
+       uuid: [myUuid, trgUuid],
+       connector: opts.connector
+     });
   }
 
   remove () {
@@ -101,7 +129,8 @@ class Element extends ElementBase {
     if (args.pointer !== false)
       this.pointer      = new PlumbEndpoint (ptr, {
         anchor: [0.6, 0.55, 0, 0],
-        connectorOverlays: [OVERLAY.ARROW]
+        connectorOverlays: [OVERLAY.ARROW],
+        connector: args.connector
       }, {element: this})
   }
 }

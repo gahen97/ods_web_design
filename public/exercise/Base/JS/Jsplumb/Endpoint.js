@@ -25,7 +25,7 @@ class PlumbEndpoint {
       isTarget: false,
       endpoint: [ "Dot", {radius:5} ],
       maxConnections: 1,
-      connector: ["Straight", {gap: 0}],
+      connector: opts.connector || ["Straight", {gap: 0}],
       uuid: this.id
     }, opts);
 
@@ -55,7 +55,7 @@ class PlumbEndpoint {
   setEnabled(t){ this.endpoint.setEnabled(t); }
   disable(){ this.setEnabled (false); }
   enable(){ this.setEnabled (true); }
-  
+
   remove () {
     jsPlumb.deleteEndpoint (this.endpoint);
   }

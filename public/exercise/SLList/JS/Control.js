@@ -6,6 +6,14 @@ class Control extends ControlBase {
     this.newestNode = null;
   }
 
+  setActiveElement(...args){
+    super.setActiveElement (...args);
+    this.update ();
+  }
+
+  get tail(){ return this.userModel.tail; }
+  get head(){ return this.userModel.head; }
+
   // overload base stuff here, add more stuff, whatevers
   connect (sourceNode, targetNode) {
     this.userModel.connect (sourceNode, targetNode);
@@ -16,20 +24,45 @@ class Control extends ControlBase {
     return n.id;
   }
 
+  find(nid){
+    return this.view.getElementFromNodeId (nid);
+  }
+  nodeFromElem (element) {
+    var nodeId = element && element.nodeId;
+    var node   = this.userModel.find (nodeId);
+    return node;
+  }
 
   update(){
-    // find every element that cannot be accessed
-    // and add 'disabled' to it ...
-    var inactive = this.userModel.nodesOut ();
-    var include  = this.userModel.accessibleFrom (this.newestNode);
-    for (var index in inactive) {
-      var node = inactive [index];
-      if (include.indexOf(node) !== -1) continue;
+    // helper ...
+    var each = (from, f) => {
+      for (var index in from) {
+        var node = from [index];
+        var e    = node && this.view.getElementFromNodeId (node.id);
+        if (!e) continue;
 
-      var e    = node && this.view.getElementFromNodeId (node.id);
-      if (!e || node===this.newestNode) continue;
-
-      e.disable ();
+        f (e, node);
+      }
     }
+
+    // active nodes:
+    //    1) head & tail are always active
+    //    2) newest node is always active
+    //    3) active node & active node's next
+    var activeNode = this.nodeFromElem (this.activeElement);
+    var nextActive1;
+    if (activeNode) nextActive1 = activeNode.next;
+
+    var active = [
+      this.head,
+      this.tail,
+      activeNode,
+      nextActive1,
+      this.newestNode
+    ];
+
+    var inactive = this.userModel.excluding (active);
+    each (inactive, (e)=>e.disable());
+    each (active, (e)=>e.enable ());
   }
 }

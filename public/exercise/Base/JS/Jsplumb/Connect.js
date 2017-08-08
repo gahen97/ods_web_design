@@ -23,7 +23,7 @@ class PlumbConnect {
 
     this.detachable = true;
     this.classes = opts.classes ? this.classesFrom (opts.classes) : DEF_PLUMB_CLASS;
-    this.connection = this.drawConnect();
+    this.connection = this.drawConnect(opts);
   }
 
   /* ---- CONSTRUCTOR - OPTION HELPERS ----- */
@@ -46,7 +46,7 @@ class PlumbConnect {
   }
 
   /* ---- DRAWING ---- */
-  drawConnect ()
+  drawConnect (opts)
   {
     var conn;
 
@@ -59,7 +59,7 @@ class PlumbConnect {
     		cssClass: this.classes,
     	  detachable: this.detachable,
 
-        connector: [ "Straight" ],
+        connector: opts.connector || [ "Straight" ],
         endpoint: ["Dot", {cssClass: "no-visibility"}],
         anchors: [
           [ "Perimeter", { shape:"Rectangle" } ]
