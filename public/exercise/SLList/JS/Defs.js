@@ -34,12 +34,12 @@ var questionTypesClassNames = [Operations];
 // Answers to be used for each Question Type.
 // Note this is a 2D Array, where the first dimensions maps it to a Question Type,
 //   which is then an array of different kinds of questions for that QType.
-var answerTypesClassNames = [[AddAnswer, PushAnswer]];
+var answerTypesClassNames = [[AddAnswer, RemoveAnswer, PushAnswer, PopAnswer]];
 
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[5, 5]];
+var numberOfQuestionsRequired = [[5, 5, 5, 5]];
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
@@ -50,7 +50,9 @@ var numberOfQuestionsRequired = [[5, 5]];
 
   var questionData = [
     [{class : Add, instructionsText: "Display the evolution of the list by adding to the back."},
-     {class : Push, instructionsText : "Display the evolution of the list by adding to the front."}
+     {class : Remove, instructionsText: "Display the evolution of the list by applying the Queue's remove operation."},
+     {class : Push, instructionsText : "Display the evolution of the list by adding to the front."},
+      {class : Pop, instructionsText: "Display the evolution of the list by applying the Stack's pop operation."},
     ]
                       ];
 

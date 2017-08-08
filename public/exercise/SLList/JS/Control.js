@@ -24,6 +24,15 @@ class Control extends ControlBase {
     return n.id;
   }
 
+  // remove node
+  removeElement (e) {
+    var nodeId = this.view.getNodeFromElement (e);
+    this.userModel.deleteNode (nodeId);
+
+    super.removeElement (e);
+  }
+
+  // find a node
   find(nid){
     return this.view.getElementFromNodeId (nid);
   }

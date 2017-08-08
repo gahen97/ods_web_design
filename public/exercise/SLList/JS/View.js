@@ -142,6 +142,20 @@ class View extends ViewBase {
 
   // Getters ...
   getElem (e) { return $(e).data ("element") || this.getElement (e); }
-  getNodeId (e) { return e.nodeId; }
+  getNodeId (e) { return e && e.nodeId; }
   getElementFromNodeId (id) { return this.elementsByNodeId [id]; }
+  getNodeFromElement (e) {
+    var elem = this.getElem (e);
+    return this.getNodeId (elem);
+  }
+
+  // Remove element
+  removeElementById (id) {
+    var element = this.elements [id];
+    if (!element) return false;
+
+    delete this.elementsByNodeId [element.nodeId];
+
+    return super.removeElementById (id);
+  }
 }

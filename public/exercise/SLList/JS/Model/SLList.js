@@ -97,6 +97,19 @@ class SinglyLinkedList extends Model {
   makeHeadNode(){ return HEAD_NODE_ID; }
   makeTailNode(){ return TAIL_NODE_ID; }
 
+  deleteNode (id) {
+    var node = this._findById (id);
+    if (!node) return false;
+
+    node.next = null;
+    delete this.nodes [id];
+
+    // remove all references to it ...
+    for (var index in this.nodes)
+      if (this.nodes [index].next === node)
+        this.nodes [index].next = null;
+  }
+
   // map nodes from this sllist to another sllist
   mapTo (newList) {
     var cur = newList.head;
