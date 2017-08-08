@@ -6,8 +6,14 @@ class Control extends ControlBase {
     this.newestNode = null;
   }
 
-  setActiveElement(...args){
-    super.setActiveElement (...args);
+  setActiveElement(e){
+    console.log (e);
+    var node = this.nodeFromElem (e);
+    console.log (node, this.activeElements);
+    if (this.activeElements.indexOf (node) === -1)
+      return false;
+
+    super.setActiveElement (...arguments);
     this.update ();
   }
 
@@ -42,6 +48,24 @@ class Control extends ControlBase {
     return node;
   }
 
+  get activeElements () {
+    // active nodes:
+    //    1) head & tail are always active
+    //    2) newest node is always active
+    //    3) active node & active node's next
+    var activeNode = this.nodeFromElem (this.activeElement);
+    var nextActive1;
+    if (activeNode) nextActive1 = activeNode.next;
+
+    return [
+      this.head,
+      this.tail,
+      activeNode,
+      nextActive1,
+      this.newestNode
+    ];
+  }
+
   update(){
     // helper ...
     var each = (from, f) => {
@@ -54,21 +78,7 @@ class Control extends ControlBase {
       }
     }
 
-    // active nodes:
-    //    1) head & tail are always active
-    //    2) newest node is always active
-    //    3) active node & active node's next
-    var activeNode = this.nodeFromElem (this.activeElement);
-    var nextActive1;
-    if (activeNode) nextActive1 = activeNode.next;
-
-    var active = [
-      this.head,
-      this.tail,
-      activeNode,
-      nextActive1,
-      this.newestNode
-    ];
+    var active = this.activeElements;
 
     var inactive = this.userModel.excluding (active);
     each (inactive, (e)=>e.disable());

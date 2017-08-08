@@ -39,7 +39,7 @@ var answerTypesClassNames = [[AddAnswer, RemoveAnswer, PushAnswer, PopAnswer]];
 // Number of questions required for different questions.
 // Note this follows the same structure as answer types
 
-var numberOfQuestionsRequired = [[5, 5, 5, 5]];
+var numberOfQuestionsRequired = [[6, 6, 6, 6]];
 
 // questionData. Should be a 2D array of objects, where:
 //   First dimension maps to a Question Type
