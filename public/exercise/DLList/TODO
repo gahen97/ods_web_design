@@ -1,0 +1,14 @@
+TODO:
+
+  1. Active nodes does not work:
+      All nodes are always active ...
+  2. Connections do not work.
+      cannot connect next / prev
+      needs to check based on side
+  3. View needs to set up a display
+      needs to be built up somehow ...
+      best is probably to keep previous positions while changing model
+      will need some way to determine which nodes go with which
+        mapTo ()
+      and keeping the old nodes in the same position, pointing to new nodes
+      then updating that model to reflect the change

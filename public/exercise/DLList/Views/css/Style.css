@@ -1,0 +1,80 @@
+/* element ... TODO: should show as clickable, draggable. style? */
+.element{
+  display: inline-block;
+}
+.element.main {
+  background-color: #565656;
+  border: 3px solid #565656;
+  color: white;
+
+  line-height: 30px;  /* needs this for vertically centered text */
+
+  display: inline-block;
+  position: absolute;
+}
+.element.main{
+  width: 96px;
+  height: 32px;
+  border-radius: 5px;
+}
+.element.main.draggable{
+  cursor: -webkit-grab;
+}
+.element.value, .element.pointer{
+  width: 31px;
+  height: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: baseline;
+  margin: 0;
+}
+.jsp-hover.draggable > .element.value{
+  border-color: #565656;
+}
+.element.value{
+  border-right: 2px solid white;
+  border-left: 2px solid white;
+  z-index: 99;
+}
+
+.element.draggable.jsp-hover,
+.element.draggable.jsp-hover > * {
+  background-color: white;
+  color: #565656;
+}
+
+.element.main.draggable:active {
+  background-color: white;
+  color: #565656;
+  box-shadow: 1px 1px 1px 1px #aaa;
+}
+
+.element.main.jsp-active {
+}
+.element.main.jsp-active > * {
+  border-color: #565656;
+}
+
+.jsp-endpoint.jsp-active circle {
+  fill: #565656;
+}
+
+.jsp-endpoint circle {
+  fill: white;
+  cursor: pointer;
+}
+.jsp-hover.draggable circle {
+  fill: #565656;
+}
+
+.jsp-endpoint{
+}
+.bold{
+  font-weight: bold;
+}
+.courier{
+  font-family: courier;
+}
+.text-centered{
+  text-align: center;
+}
