@@ -7,13 +7,13 @@ class BinaryHeap extends Model {
   }
 
   generate (other) {
-    if (other instanceof BinaryHeap){
+    if (other instanceof __MODULENAME__){
       this.generate (other.array);
       this.generate (other.tree);
     } else if (other instanceof __ARRAYMODULENAME__)
-      this.array.generate (other);
-    else if (other instanceof __TREEMODULENAME__)
       this.tree.generate (other);
+    else if (other instanceof __TREEMODULENAME__)
+      this.array.generate (other);
     else
       console.error ("UNKNOWN TYPE TO GENERATE: ", other);
   }
