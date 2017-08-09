@@ -140,6 +140,12 @@ class View extends ViewBase {
   }
 
 
+  canSetActive (element){
+    return element !== this.head && element !== this.tail;
+  }
+
+
+
   // Getters ...
   getElem (e) { return $(e).data ("element") || this.getElement (e); }
   getNodeId (e) { return e && e.nodeId; }

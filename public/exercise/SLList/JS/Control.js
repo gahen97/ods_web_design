@@ -7,7 +7,14 @@ class Control extends ControlBase {
     this.userDataArray = [ ];
   }
 
+  canSetActive (element)
+  {
+    if (!this.view.canSetActive (element)) return false;
+    return super.canSetActive (element);
+  }
   setActiveElement(e){
+    if (!this.canSetActive (e)) return false;
+
     // grab the previous node ... this will be for later
     var prevElem = this.activeElement;
     var prevNode = this.nodeFromElem (prevElem);
