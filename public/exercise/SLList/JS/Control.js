@@ -4,17 +4,30 @@ class Control extends ControlBase {
 
     // other control stuff
     this.newestNode = null;
+    this.userDataArray = [ ];
   }
 
   setActiveElement(e){
-    console.log (e);
+    // grab the previous node ... this will be for later
+    var prevElem = this.activeElement;
+    var prevNode = this.nodeFromElem (prevElem);
+
+    // set the new active node
     var node = this.nodeFromElem (e);
-    console.log (node, this.activeElements);
     if (this.activeElements.indexOf (node) === -1)
       return false;
 
     super.setActiveElement (...arguments);
     this.update ();
+
+
+    // update user data. this uses the previous node above ^
+    var uda = this.userDataArray;
+    if (!prevNode || prevNode.next !== node)
+      uda = this.userDataArray = [ ];
+
+    if (uda.indexOf (node) === -1)
+      uda.push (node);
   }
 
   get tail(){ return this.userModel.tail; }
@@ -36,6 +49,23 @@ class Control extends ControlBase {
     this.userModel.deleteNode (nodeId);
 
     super.removeElement (e);
+  }
+
+  elementsFromNodes (nodes) {
+    var e = [ ];
+
+    for (var i in nodes) {
+      var elem = this.view.getElementFromNodeId (nodes [i].id);
+      if (elem)
+        e.push (elem);
+    }
+
+    return e;
+  }
+
+  getElementsForRoute (index) {
+    var nodes = this.userModel.pathTo (index);
+    return this.elementsFromNodes (nodes);
   }
 
   // find a node

@@ -70,6 +70,23 @@ class SinglyLinkedList extends Model {
   }
 
   /* ---- USER MODEL ---- */
+  at (index) {
+    // special case: if its the tail, just return it
+    if (index === this.n - 1)
+      return this.tail;
+
+    // if not, we have to walk through the list
+    var curNode = this.head;
+    var cur     = 0;
+
+    while (curNode && cur < index) {
+      cur ++;
+      curNode = curNode.next;
+    }
+
+    return curNode;
+  }
+
   _findById(id) { return this.nodes [id] || null; }
   find (id) { return this._findById (id); }
 
@@ -157,6 +174,25 @@ class SinglyLinkedList extends Model {
 
       path.push (cur);
       cur = cur.next;
+    }
+
+    return path;
+  }
+
+  pathTo (index) {
+    // special case: if its the tail, just return [ tail ]
+    if (index === this.n - 1)
+      return [ this.tail ];
+    
+    var cur  = 0;
+    var node = this.head;
+
+    var path  = [ ];
+    while (cur <= index) {
+      path.push (node);
+
+      cur ++;
+      node = node.next;
     }
 
     return path;

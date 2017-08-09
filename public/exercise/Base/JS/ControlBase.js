@@ -49,6 +49,15 @@ class ControlBase {
     this.reset ();
   }
 
+  restartExercise (){
+    if (this.exercise.restart() === false)
+      return false;
+
+    // set active to null
+    this.restart ();
+    return true;
+  }
+
   // disable, enable
   disable () { this.view.disable (); this.disabled = true; }
   enable () { this.view.enable (); this.disabled = false; }
