@@ -6,6 +6,18 @@ class BinaryHeap extends Model {
     this.tree  = new __TREEMODULENAME__ ();
   }
 
+  generate (other) {
+    if (other instanceof BinaryHeap){
+      this.generate (other.array);
+      this.generate (other.tree);
+    } else if (other instanceof __ARRAYMODULENAME__)
+      this.array.generate (other);
+    else if (other instanceof __TREEMODULENAME__)
+      this.tree.generate (other);
+    else
+      console.error ("UNKNOWN TYPE TO GENERATE: ", other);
+  }
+
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
