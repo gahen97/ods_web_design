@@ -6,6 +6,15 @@ class BinaryHeap extends Model {
     this.tree  = new __TREEMODULENAME__ ();
   }
 
+  build() {
+    for (var i = 0; i < 30; i++)
+      this.array.add (i);
+
+    this.tree.generate (this.array);
+
+    return this;
+
+  }
   generate (other) {
     if (other instanceof __MODULENAME__){
       this.generate (other.array);
@@ -29,7 +38,7 @@ class BinaryHeap extends Model {
   {
     var newHeap   = new __MODULENAME__ ();
     newHeap.array = this.array.copy ();
-    newHeap.tree  = this.tree.copy ();
+    newHeap.tree  = this.tree.copy (this.array);
     return newHeap;
   }
 

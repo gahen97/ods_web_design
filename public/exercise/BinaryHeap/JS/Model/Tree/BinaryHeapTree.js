@@ -21,8 +21,8 @@
 */
 
 class BinaryHeapTree extends BHeapTree {
-  generate (array) {
-    var newTree = new BinarySearchTree ();
+  generate (beepArray) {
+    var array   = beepArray.toArray ();
     var nodes   = [ ];
 
     for (var index in array) {
@@ -30,14 +30,14 @@ class BinaryHeapTree extends BHeapTree {
       var pIndex  = this.parent (index);
 
       // add it as a child of the parent
-      if (pIndex > 0 && nodes [pIndex])
-        if (this.isLeftChild (i))
+      if (pIndex >= 0 && nodes [pIndex])
+        if (this.isLeft (index))
           nodes [pIndex].left = newNode;
         else
           nodes [pIndex].right = newNode;
 
       // add it to our list of nodes
-      nodes [i] = newNode;
+      nodes [index] = newNode;
     }
 
     this.root = nodes [0];
@@ -62,12 +62,30 @@ class BinaryHeapTree extends BHeapTree {
 
     return result;
   }
-  
+
   /* ---- HELPERS ---- */
   // TODO WE NEED A COPY HERE BASED OFF OF AN ARRAY WHICH WILL BE PASSED IN
-  copy (array) {
-    var newTree = new __TREEMODULENAME__ ();
-    newTree.generate (array);
+  copy () {
+    var newTree  = new __TREEMODULENAME__ ();
+    var newNodes = [ ];
+
+    var index = 0;
+    Traversal.breadthFirst (this, (data, node)=>{
+      var newNode = new Node (data);
+      newNodes.push (newNode);
+
+      var pNode = newNodes [this.parent (index)];
+      if (index !== 0 && pNode) {
+          if (this.isLeft (index))
+            pNode.left = newNode;
+          else
+            pNode.right = newNode;
+      }
+
+      index ++;
+    });
+
+    newTree.root = newNodes [0];
     return newTree;
   }
 }

@@ -26,6 +26,17 @@ class BHeapTree extends Model {
     if (!u) return -1;
     return Math.max (this._height (u.left), this._height (u.right)) + 1;
   }
+  _depth (u) {
+    var result = 0;
+    var curIndex = 0;
+
+    while (u.parent){
+      u = u.parent;
+      result++;
+    }
+
+    return result;
+  }
 
   _findById (id) {
     return this.nodesById [id];
@@ -47,6 +58,10 @@ class BHeapTree extends Model {
   /* ---- OPERATIONS ----- */
   // NOTE: This is all removed as BinaryHeaps don't use them ...
   // And there wouldn't be a good way to do this without an array
+
+  height () {
+    return this._height (this.root);
+  }
 
   /* ------ USER MODEL ------ */
   makeNode (x) {
@@ -197,7 +212,7 @@ class BHeapTree extends Model {
     var array = [ ];
 
     this.each ((data)=>
-      array.push (data);
+      array.push (data)
     );
 
     return array;
