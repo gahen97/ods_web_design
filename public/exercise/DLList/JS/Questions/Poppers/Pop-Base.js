@@ -3,16 +3,13 @@
 class PopBase extends Question {
   generateParameters()
   {
-    return null;
+    return ODSRandom.getRandomIntInclusive (__removeMinIndex__, __removeMaxIndex__);
   }
 
   computeAnswerData()
   {
   }
 
-  get fullName () { return this.name; }
-  get exerciseName () { return this.name + "()"; }
-  
   // input -> valid if between __addMinParam__, __addMaxParam__
   isValidInput (input)
   {
@@ -40,5 +37,5 @@ class PopBase extends Question {
   canSetActive(){ return true; }
 
   // overload
-  get ansNode () { return control.head; }
+  get ansNode () { return control.get (this.parameters); }
 }

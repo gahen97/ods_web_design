@@ -6,3 +6,11 @@ TODO:
   4. Questions are off and need to be updated and fixarooed.
   5. Add indices for elements?
         See original dllist
+
+  We need a way to determine the current size of the model for a given question.
+    This would be needed for index where the index can be 0 <= i <= n, but
+      n is changing - so we can't set it to be a constant.
+
+ISSUES
+  Dummy commonId is off for the first question.
+    This has been patched, but in a terrible fashion. See Add-Base.js.

@@ -3,7 +3,25 @@
 class AddBase extends Question {
   generateParameters()
   {
-    return ODSRandom.getRandomIntInclusive(__addMinParam__, __addMaxParam__);
+    return {
+      index: ODSRandom.getRandomIntInclusive(__addMinIndex__, __addMaxIndex__),
+      value: ODSRandom.getRandomIntInclusive(__addMinValue__, __addMaxValue__)
+    };
+  }
+
+  generateModel(prev){
+    super.generateModel (prev);
+
+    // NOTE: We can do this because the answer isn't generated yet ....
+    // This is TERRIBLE. TODO
+    //   (this fixes the issue that the first question's dummy cid is off)
+    if (!prev)
+      this.setModel (this.answer.getModel ().copy ());
+  }
+
+  getParametersString()       //must overload if parameters is an object
+  {
+    return this.parameters.index + ", " + this.parameters.value;
   }
 
   computeAnswerData()
@@ -19,12 +37,12 @@ class AddBase extends Question {
     var int = Number (input); // NOTE: Can't use parseInt, because "3 X" is valid.
     if (!int && int !== 0) return false;
 
-    return (int >= __addMinParam__ && int <= __addMaxParam__);
+    return (int >= __addMinValue__ && int <= __addMaxValue__);
   }
 
   get validInputStr ()
   {
-    return __addMinParam__ + " - " + __addMaxParam__;
+    return __addMinValue__ + " - " + __addMaxValue__;
   }
 
   displayAnswer (div)
@@ -39,7 +57,7 @@ class AddBase extends Question {
   }
 
   canSetActive(){ return true; }
-  
+
   // overload
   get ansNode(){ }
 }

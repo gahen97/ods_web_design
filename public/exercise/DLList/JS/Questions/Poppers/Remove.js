@@ -3,6 +3,6 @@
 class Remove extends PopBase {
   computeAnswerData()
   {
-    return this.answer.getModel().remove();
+    return this.answer.getModel().remove(this.parameters);
   }
 }

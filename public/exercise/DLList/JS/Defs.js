@@ -55,9 +55,9 @@ var numberOfQuestionsRequired = [[6, 5, 6]];
 //     instructionsText: Some instructions to be shown for the question
 
   var questionData = [
-    [{class : Add, instructionsText: "Display the evolution of the list by adding to the back."},
+    [{class : Add, instructionsText: "Display the evolution of the list by adding an element at a given index."},
      {class : Get, instructionsText: "Find an element at the given index of the list."},
-     {class : Remove, instructionsText: "Display the evolution of the list by applying the Queue's remove operation."}
+     {class : Remove, instructionsText: "Display the evolution of the list by removing an element at a given index."}
     ]
                       ];
 
@@ -66,10 +66,14 @@ var numberOfQuestionsRequired = [[6, 5, 6]];
 var __templateMinParam__ = 1;
 var __templateMaxParam__ = 10;
 */
-var __addMinParam__ = 1;
-var __addMaxParam__ = 10;
+var __addMinValue__ = 1;
+var __addMaxValue__ = 9;
+var __addMinIndex__ = 0;
+var __addMaxIndex__ = 0;
 var __getMinIndexParam__ = 0;
 var __getMaxIndexParam__ = 5;
+var __removeMinIndex__ = 0;
+var __removeMaxIndex__ = 0;
 
 /*load order:
 MUST BE LOADED AFTER QUESTIONS AND QUESTIONTYPES AND RANDOM

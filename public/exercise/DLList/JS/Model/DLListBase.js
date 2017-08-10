@@ -1,8 +1,9 @@
 class DLListBase extends Model {
-  constructor(){
+  constructor(opts){
+    if (!opts)opts={};
     super ();
 
-    var dummy = new Node (DUMMY_NODE_TEXT, undefined);
+    var dummy = new Node (DUMMY_NODE_TEXT, undefined, undefined, DUMMY_NODE_ID, opts.dcid);
     dummy.next = dummy;
     dummy.prev = dummy;
 
@@ -41,8 +42,9 @@ class DLListBase extends Model {
     return w;
   }
 
-  _addBefore (w, x) {
-    var newNode = new Node (x);
+  _addBefore (w, x, o) {
+    if (!o)o={};
+    var newNode = new Node (x, undefined, undefined, undefined, o.commonId);
     newNode.prev      = w.prev;
     newNode.next      = w;
     newNode.prev.next = newNode;
@@ -67,14 +69,14 @@ class DLListBase extends Model {
     return prev;
   }
 
-  add (i, x) {
+  add (i, x, o) {
     if (!x){
       x = i;
       i = this.n;
     }
 
     if (i < 0 || i > this.n) return false;
-    this._addBefore (this._getNode (i), x);
+    this._addBefore (this._getNode (i), x, o);
     return true;
   }
 

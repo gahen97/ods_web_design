@@ -3,8 +3,8 @@
 class Add extends AddBase {
   computeAnswerData()
   {
-    return this.answer.getModel().add(this.parameters);
+    return this.answer.getModel().add(this.parameters.index, this.parameters.value);
   }
 
-  get ansNode () { return control.tail; }
+  get ansNode () { return control.get (this.parameters.index); }
 }

@@ -7,6 +7,10 @@ class Control extends ControlBase {
     this.userDataArray = [ ];
   }
 
+  get(index){
+    return this.userModel.at (index);
+  }
+  
   reset(){ this.update(); }
 
   setActiveElement(e){

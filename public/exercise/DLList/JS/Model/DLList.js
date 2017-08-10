@@ -3,11 +3,12 @@
 */
 
 class DoublyLinkedList extends DLListBase {
-  constructor(){
-    super ();
+  constructor(...args){
+    super (...args);
 
     this.n     = 0;
     this.nodes = { };
+    this.nodesByCommon = { };
 
     this._addToNodes (this.dummy);
   }
@@ -19,11 +20,15 @@ class DoublyLinkedList extends DLListBase {
   }
 
   /* ---- PRIVATE ---- */
+  _getFromCommon (cid) {
+    return this.nodesByCommon [cid];
+  }
+
   _addToNodes (node) {
     if (!node) return false;
     this.nodes [node.id] = node;
+    this.nodesByCommon [node.common] = node;
   }
-
   _create (value, next) {
       var newNode = new Node (value, next);
       this.nodes [newNode.id] = newNode;
@@ -125,17 +130,14 @@ class DoublyLinkedList extends DLListBase {
   mapTo (newList) {
     if (!newList || !newList.dummy) return { };
 
-    var cur = newList.dummy;
     var results = { };
 
     results [DUMMY_NODE_ID] = -1;
     this.each ((data,node)=>{
-      if (!cur) return false;
-      if (cur === newList.dummy && node !== this.dummy) return false;
-      if (node === this.dummy && cur !== newList.dummy) return false;
+      var other = newList._getFromCommon (node.common);
+      if (!other) return;
 
-      results [node.id] = cur.id;
-      cur = cur.next;
+      results [node.id] = other.id;
     });
 
     return results;
@@ -232,11 +234,13 @@ class DoublyLinkedList extends DLListBase {
 
   copy()
   {
-    var newList = new DoublyLinkedList ();
+    var newList = new DoublyLinkedList ({dcid: this.dummy.common});
 
     this.each ((d, node) => {
       if (d && node !== this.dummy)
-        newList.add (d);
+        newList.add (d, undefined, {
+          commonId: node.common
+        });
     });
 
     return newList;
