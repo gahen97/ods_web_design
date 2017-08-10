@@ -2,8 +2,6 @@
   Doubly Linked List ...
 */
 
-const DUMMY_NODE_ID = -1;
-
 class DoublyLinkedList extends DLListBase {
   constructor(){
     super ();
@@ -118,15 +116,17 @@ class DoublyLinkedList extends DLListBase {
   }
 
   // map nodes from this sllist to another sllist
-  mapTo (newList, dir) {
+  mapTo (newList) {
+    if (!newList || !newList.dummy) return { };
+
     var cur = newList.dummy;
     var results = { };
 
+    results [DUMMY_NODE_ID] = -1;
     this.each ((data,node)=>{
-      if (!cur){
-        results = null;
-        return false;
-      }
+      if (!cur) return false;
+      if (cur === newList.dummy && node !== this.dummy) return false;
+      if (node === this.dummy && cur !== newList.dummy) return false;1
 
       results [node.id] = cur.id;
       cur = cur.next;
@@ -227,8 +227,8 @@ class DoublyLinkedList extends DLListBase {
   {
     var newList = new DoublyLinkedList ();
 
-    this.each ((d) => {
-      if (d)
+    this.each ((d, node) => {
+      if (d && node !== this.dummy)
         newList.add (d);
     });
 

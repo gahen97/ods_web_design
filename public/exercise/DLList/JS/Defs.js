@@ -6,6 +6,7 @@
 
 /* Constants go here */
 const DUMMY_NODE_TEXT = "D";
+const DUMMY_NODE_ID = -1;
 
 const SIDE_NEXT = "next";
 const SIDE_PREV = "prev";

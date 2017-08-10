@@ -88,53 +88,85 @@ class View extends ViewBase {
     }
   }
 
-  setup (model) {
-    var prevNode = null;
-    var xSplit   = ELEMENT_SEP_X;
-    var x        = xSplit;
+  drawConnections (model) {
+    var prevNode;
 
-    var prevNode = this.dummy;
+    var _connect = (prev, cur)=>{
+      if (!prev || !cur) return;
+      prev.connectNext (cur);
+      cur.connectPrev (prev);
+    }
 
-    model.each ((data, node)=>{
-      if (!data) return;
+    model.each ((data, node) => {
+      var curNode = this.getElementFromNodeId (node.id);
+      if (!curNode) return;
 
-      var newNode = this.addElementNode (data, node.id);
-      newNode.moveTo (this.modelDivHelper.fromOffset ({
-        top: ELEMENT_Y,
-        left: x
-      }));
+      if (prevNode)
+        _connect (prevNode, curNode);
 
-      if (prevNode) {
-        prevNode.connectNext (newNode);
-        newNode.connectPrev (prevNode);
-      }
-
-      prevNode = newNode;
-
-      x += xSplit;
+      prevNode = curNode;
     });
 
-    if (prevNode !== this.dummy){
-      this.dummy.connectPrev (prevNode);
-      prevNode.connectNext (this.dummy);
-    }
+    if (prevNode)
+      _connect (prevNode, this.dummy);
+  }
+
+  _calculatePositions (model) {
+    var positions = { };
+    if (!model) return positions;
+
+    model.each((data,node)=>{
+      var elem = this.getElementFromNodeId (node.id);
+      if (elem)
+        positions [node.id] = elem.offset ();
+    });
+
+    return positions;
+  }
+
+  _calcNewPosition () {
+    return this.modelDivHelper.randomPosition ();
+  }
+
+  positionElements (model, prevModel) {
+    if (!model) return false;
+    if (!prevModel) prevModel = this.currentModel;
+
+    // We need some way to access the old elements from our new model ...
+    //   this will be our map for that
+    var map         = model.mapTo (prevModel);
+
+    // We want to store our positions so we can add elements
+    //   without worrying about removing the old model
+    var oldPositions = this._calculatePositions (prevModel);
+    this.clear ();
+
+    // THIS IS A BIT TRICKY
+    //   1. Given a node id, map it to the old model
+    //   2. Given old model's id, find it in the old positions
+    var _posFrom = (nodeId)=>oldPositions [map [nodeId]];
+
+    // Make the new model
+    model.each ((data, node) => {
+      var newElement = this.addElementNode (data, node.id);
+      var oldPos     = _posFrom (node.id);
+
+
+      var position = oldPos ? oldPos : this._calcNewPosition();
+      newElement.moveTo (position);
+
+      if (node === model.dummy)
+        this.dummy = newElement;
+    });
+
+    // we're good here
   }
 
   displayModel (m) {
-    this.clear ();
+    this.positionElements (m);
+    this.drawConnections (m);
 
-    // make the head & tail nodes
-    var dummy = this.addElementNode (DUMMY_NODE_TEXT, m.makeDummyNode());
-
-    // add everything from the list
-    dummy.moveTo (this.modelDivHelper.fromOffset({top: 100, left: 100}));
-
-    // save our stuff
-    this.dummy = dummy;
     this.currentModel = m;
-
-    // TODO: SHOULD SET UP HERE
-    this.setup (m);
 
     jsPlumb.repaintEverything();
     setTimeout(()=>jsPlumb.repaintEverything(), 50);

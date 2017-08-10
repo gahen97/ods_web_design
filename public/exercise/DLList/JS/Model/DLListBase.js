@@ -2,7 +2,7 @@ class DLListBase extends Model {
   constructor(){
     super ();
 
-    var dummy = new Node ();
+    var dummy = new Node (DUMMY_NODE_TEXT, undefined);
     dummy.next = dummy;
     dummy.prev = dummy;
 

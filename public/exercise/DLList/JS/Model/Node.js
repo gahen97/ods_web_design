@@ -1,10 +1,10 @@
 class Node {
   static getNextId () { return Node.id ++; }
 
-  constructor(data, next){
+  constructor(data, next, id){
     this.x        = data;
     this.nextNode = next || null;
-    this.id       = Node.getNextId();
+    this.id       = id || Node.getNextId();
   }
 
   get next () { return this.nextNode; }
