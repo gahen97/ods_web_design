@@ -10,7 +10,7 @@ class Control extends ControlBase {
   get(index){
     return this.userModel.at (index);
   }
-  
+
   reset(){ this.update(); }
 
   setActiveElement(e){
@@ -63,6 +63,8 @@ class Control extends ControlBase {
   // remove node
   removeElement (e) {
     var nodeId = this.view.getNodeFromElement (e);
+    if (nodeId === DUMMY_NODE_ID) return false;
+
     this.userModel.deleteNode (nodeId);
 
     super.removeElement (e);

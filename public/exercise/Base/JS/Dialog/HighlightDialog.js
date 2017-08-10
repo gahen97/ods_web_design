@@ -7,7 +7,7 @@ class HighlightDialog extends Popup {
     if (!opts) opts = { };
 
     if (!opts.classes) opts.classes = "";
-    opts.classes += " border-color-highlight";
+    opts.classes += " color-highlight";
 
     super (text, opts, ...rest);
   }

@@ -101,16 +101,16 @@ li.tabbedQuestion:hover {
   border: 5px solid darkgray;
 }
 
-.border-colour-error, .border-color-error {
-  color: red;
+.colour-error, .color-error {
+  color: red !important;
 }
 
-.border-colour-highlight, .border-color-highlight {
-  border-color: #e6ac00;
+.colour-highlight, .color-highlight {
+  color: #e6ac00 !important;
 }
 
-.border-colour-success, .border-color-success {
-  color: #1fa000;
+.colour-success, .color-success {
+  color: #1fa000 !important;
 }
 
 .disabled{

@@ -115,7 +115,9 @@ function droppedOnTrash (element, evt, ui) {
    return false;
   }
 
-  this.removeElement (draggable);
+  var ret = this.removeElement (draggable);
+  if (ret === false)
+    new ErrorDialog ("Cannot delete dummy node! That would be dumb!");
 }
 
 /* JSPLUMB */
