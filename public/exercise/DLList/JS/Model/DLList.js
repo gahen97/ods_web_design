@@ -164,9 +164,9 @@ class DoublyLinkedList extends DLListBase {
     var p = this.dummy;
     var c;
 
-    if (index < this.n/2) {
+    if (index >= this.n/2) {
       c = this.n;
-      return this._walk (p, 0, ()=>{
+      return this._walk (p, 1, ()=>{
         return c-- !== index;
       })
     } else {
@@ -201,12 +201,13 @@ class DoublyLinkedList extends DLListBase {
       if (!n1 && n2) return false;
       if (!n2 && n1) return false;
       if (!n1 && !n2) return true;
+
       return n1.data === n2.data;
     }
 
     // compare every node, in order, to ensure they're the same
     var equal = true;
-    var n2 = other.dummy.next;
+    var n2 = other.dummy;
     this.each ((d1, n1)=>{
       if (!checkNode (n1, n2)){
         equal = false;
@@ -215,7 +216,7 @@ class DoublyLinkedList extends DLListBase {
       n2 = n2.next;
     })
 
-    n2 = other.dummy.prev;
+    n2 = other.dummy;
     this.eachBack ((d1, n1)=>{
       if (!checkNode(n1, n2)){
         equal = false;
@@ -226,7 +227,7 @@ class DoublyLinkedList extends DLListBase {
 
     // only true if we didn't find a difference in the nodes
     //  & there's no more elements in other (after going through self)
-    return equal && !n2;
+    return equal;
   }
 
   copy()
