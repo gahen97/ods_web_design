@@ -1,14 +1,8 @@
 TODO:
 
-  1.
+  1. Active is broken again. Dummy can be set active, but others will not update.
   2.
-  3. View needs to set up a display
-      needs to be built up somehow ...
-      best is probably to keep previous positions while changing model
-      will need some way to determine which nodes go with which
-        mapTo ()
-      and keeping the old nodes in the same position, pointing to new nodes
-      then updating that model to reflect the change
+  3.
   4. Questions are off and need to be updated and fixarooed.
   5. Add indices for elements?
         See original dllist
