@@ -7,13 +7,18 @@ class Control extends ControlBase {
     this.userDataArray = [ ];
   }
 
+  reset(){ this.update(); }
+
   setActiveElement(e){
+    console.log (e, this.activeElements);
+
     // grab the previous node ... this will be for later
     var prevElem = this.activeElement;
     var prevNode = this.nodeFromElem (prevElem);
 
     // set the new active node
     var node = this.nodeFromElem (e);
+    console.log (node);
     if (this.activeElements.indexOf (node) === -1)
       return false;
 
@@ -83,13 +88,17 @@ class Control extends ControlBase {
     //    2) newest node is always active
     //    3) active node & active node's next
     var activeNode = this.nodeFromElem (this.activeElement);
-    var nextActive1;
-    if (activeNode) nextActive1 = activeNode.next;
+    var nextActive, prevActive;
+    if (activeNode){
+      nextActive = activeNode.next;
+      prevActive = activeNode.prev;
+    }
 
     return [
       this.dummy,
       activeNode,
-      nextActive1,
+      nextActive,
+      prevActive,
       this.newestNode
     ];
   }

@@ -29,7 +29,7 @@ function inputValid() {
 }
 
 /* Main Events .... These are the buttons independent of the exercise */
-// Move to next question
+// Move to next question. NOTE, I'm a stupid head and this name cannot be changed
 function onNextBtnClick (elem, evt) {
   if (this.exercise.next() === false)
     new SuccessDialog ("That's all, folks!"); // TODO

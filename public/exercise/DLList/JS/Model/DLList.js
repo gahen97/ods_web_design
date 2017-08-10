@@ -12,6 +12,13 @@ class DoublyLinkedList extends DLListBase {
     this.nodes = { };
   }
 
+  /* --- OVERLOADING BASE --- */
+  _addBefore (...args){
+    var newNode = super._addBefore (...args);
+    if (newNode)
+      this.nodes [newNode.id] = newNode;
+  }
+
   /* ---- PRIVATE ---- */
   _create (value, next) {
       var newNode = new Node (value, next);
@@ -68,7 +75,10 @@ class DoublyLinkedList extends DLListBase {
     this._walk (this.dummy, dir, f);
   }
 
-  _findById(id) { return this.nodes [id] || null; }
+  _findById(id) {
+    if (id === DUMMY_NODE_ID) return this.dummy;
+    return this.nodes [id] || null; 
+  }
 
   /* ---- USER MODEL ---- */
   at (index) {
