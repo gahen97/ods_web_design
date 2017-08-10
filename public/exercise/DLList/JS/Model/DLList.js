@@ -8,16 +8,22 @@ class DoublyLinkedList extends DLListBase {
 
     this.n     = 0;
     this.nodes = { };
+
+    this._addToNodes (this.dummy);
   }
 
   /* --- OVERLOADING BASE --- */
   _addBefore (...args){
     var newNode = super._addBefore (...args);
-    if (newNode)
-      this.nodes [newNode.id] = newNode;
+    this._addToNodes (newNode);
   }
 
   /* ---- PRIVATE ---- */
+  _addToNodes (node) {
+    if (!node) return false;
+    this.nodes [node.id] = node;
+  }
+
   _create (value, next) {
       var newNode = new Node (value, next);
       this.nodes [newNode.id] = newNode;
@@ -126,7 +132,7 @@ class DoublyLinkedList extends DLListBase {
     this.each ((data,node)=>{
       if (!cur) return false;
       if (cur === newList.dummy && node !== this.dummy) return false;
-      if (node === this.dummy && cur !== newList.dummy) return false;1
+      if (node === this.dummy && cur !== newList.dummy) return false;
 
       results [node.id] = cur.id;
       cur = cur.next;

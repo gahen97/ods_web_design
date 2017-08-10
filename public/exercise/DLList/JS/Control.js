@@ -25,7 +25,7 @@ class Control extends ControlBase {
 
     // update user data. this uses the previous node above ^
     var uda = this.userDataArray;
-    if (!prevNode || prevNode.next !== node)
+    if (!prevNode || (prevNode.next !== node && prevNode.prev !== node))
       uda = this.userDataArray = [ ];
 
     if (uda.indexOf (node) === -1)
@@ -47,7 +47,7 @@ class Control extends ControlBase {
         console.error ("UNKNOWN SIDE ARGUMENT: ", side);
         return false;
     }
-    
+
     return true;
   }
   addNode (data) {
@@ -97,6 +97,7 @@ class Control extends ControlBase {
     //    2) newest node is always active
     //    3) active node & active node's next
     var activeNode = this.nodeFromElem (this.activeElement);
+
     var nextActive, prevActive;
     if (activeNode){
       nextActive = activeNode.next;
@@ -125,8 +126,8 @@ class Control extends ControlBase {
     }
 
     var active = this.activeElements;
-
     var inactive = this.userModel.excluding (active);
+
     each (inactive, (e)=>e.disable());
     each (active, (e)=>e.enable ());
   }
