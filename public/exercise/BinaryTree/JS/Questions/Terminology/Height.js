@@ -3,6 +3,6 @@
 class Height extends TermQuestion {
   generateParameters()
   {
-    return ODSRandom.getRandomIntInclusive(__heightMinParam__, __heightMaxParam__);
+    return ODSRandom.getRandomIntInclusive(0, this.model.height());
   }
 }

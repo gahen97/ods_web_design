@@ -3,6 +3,6 @@
 class Depth extends TermQuestion {
   generateParameters()
   {
-    return ODSRandom.getRandomIntInclusive(__depthMinParam__, __depthMaxParam__);
+    return ODSRandom.getRandomIntInclusive(0, this.model.height());
   }
 }
