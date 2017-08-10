@@ -16,7 +16,7 @@ class Question {
   constructor(questionData, answerTypesClassName)
   {
     questionData = questionData || { };
-    this.parameters = this.generateParameters();
+    this.parameters = null;
     this.instructions = !!questionData.instructionsText ? new Instructions(questionData.instructionsText) : null;     //!! converts truthy to true
     this.id = questionData.id || Question.nextId++;
     this.div = null;
@@ -94,6 +94,18 @@ class Question {
   {
     console.error("From inside question's generateParameters, generate parameters was not overloaded from this question subclass.");
     return false;
+  }
+
+  generate (prevModel) {
+    // generate model
+    this.generateModel (prevModel);
+
+    // generate parameters !!! do this after so we have
+    //  access to the model
+    this.parameters = this.generateParameters();
+
+    // generate & return answer
+    return this.generateAnswer(prevModel);
   }
 
 
