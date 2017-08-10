@@ -3,7 +3,7 @@
 class PopBase extends Question {
   generateParameters()
   {
-    return ODSRandom.getRandomIntInclusive (__removeMinIndex__, __removeMaxIndex__);
+    return ODSRandom.getRandomIntInclusive (0, this.model.size() - 1);
   }
 
   computeAnswerData()

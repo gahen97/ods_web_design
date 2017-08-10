@@ -3,14 +3,24 @@ TODO:
   1.
   2.
   3.
-  4. Questions are off and need to be updated and fixarooed.
+  4.
   5. Add indices for elements?
         See original dllist
 
   We need a way to determine the current size of the model for a given question.
     This would be needed for index where the index can be 0 <= i <= n, but
       n is changing - so we can't set it to be a constant.
+    UPDATE: By changing order of generation this works.
 
 ISSUES
   Dummy commonId is off for the first question.
     This has been patched, but in a terrible fashion. See Add-Base.js.
+  If a node is added manually, when the view updates, it does not include that node.
+    This is because commonId will be different ....... but it shouldn't be.
+    What logic can we use for this?
+
+
+CHANGES
+  Parameters are generated AFTER the model.
+  This SEEMS to be working but NEEDS more testing.
+  CAPS are fun.

@@ -4,7 +4,7 @@ class AddBase extends Question {
   generateParameters()
   {
     return {
-      index: ODSRandom.getRandomIntInclusive(__addMinIndex__, __addMaxIndex__),
+      index: ODSRandom.getRandomIntInclusive(0, this.model.size() - 1),
       value: ODSRandom.getRandomIntInclusive(__addMinValue__, __addMaxValue__)
     };
   }
@@ -15,8 +15,8 @@ class AddBase extends Question {
     // NOTE: We can do this because the answer isn't generated yet ....
     // This is TERRIBLE. TODO
     //   (this fixes the issue that the first question's dummy cid is off)
-    if (!prev)
-      this.setModel (this.answer.getModel ().copy ());
+  //  if (!prev)
+  //    this.setModel (this.answer.getModel ().copy ());
   }
 
   getParametersString()       //must overload if parameters is an object

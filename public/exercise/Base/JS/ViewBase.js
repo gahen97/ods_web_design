@@ -227,7 +227,7 @@ class ViewBase {
   /* ----- ANIMS ----- */
   runAnimations(){
   };
-  
+
   /* ---- MODELS ------ */
   displayModel (m) {
     return null;

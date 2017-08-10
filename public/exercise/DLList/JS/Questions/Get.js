@@ -3,7 +3,7 @@
 class Get extends Question {
   generateParameters()
   {
-    return ODSRandom.getRandomIntInclusive(__getMinIndexParam__, __getMaxIndexParam__);
+    return ODSRandom.getRandomIntInclusive(0, this.model.size() - 1);
   }
 
   computeAnswerData()

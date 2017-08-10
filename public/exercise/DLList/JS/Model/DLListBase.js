@@ -84,4 +84,6 @@ class DLListBase extends Model {
     if (i < 0 || i >= this.n) return false;
     return this._removeNode (this._getNode (i)).data;
   }
+
+  size(){ return this.n; }
 }
