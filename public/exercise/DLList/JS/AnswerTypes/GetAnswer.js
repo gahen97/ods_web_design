@@ -28,7 +28,7 @@ class GetAnswer extends AnswerType {
   {
     control.disable ();
     control.restartExercise ();
-    
+
     var elements = control.getElementsForRoute (this.index); // TODO implement
     if (!elements) return false;
 
