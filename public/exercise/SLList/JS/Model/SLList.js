@@ -69,6 +69,8 @@ class SinglyLinkedList extends Model {
     return data;
   }
 
+  size () { return this.n; }
+  
   /* ---- USER MODEL ---- */
   at (index) {
     // special case: if its the tail, just return it
@@ -183,7 +185,7 @@ class SinglyLinkedList extends Model {
     // special case: if its the tail, just return [ tail ]
     if (index === this.n - 1)
       return [ this.tail ];
-    
+
     var cur  = 0;
     var node = this.head;
 

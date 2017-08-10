@@ -64,8 +64,6 @@ var __templateMaxParam__ = 10;
 */
 var __addMinParam__ = 1;
 var __addMaxParam__ = 10;
-var __getMinIndexParam__ = 0;
-var __getMaxIndexParam__ = 5;
 
 /*load order:
 MUST BE LOADED AFTER QUESTIONS AND QUESTIONTYPES AND RANDOM
