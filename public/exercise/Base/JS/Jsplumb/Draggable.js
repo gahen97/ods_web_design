@@ -7,7 +7,6 @@ class PlumbDraggable {
       containment: 'parent',
       drag: () => {
         //this.elemObj.repaint ();
-        console.log("hi");
         jsPlumb.repaintEverything ();
       },
       stop: () => {

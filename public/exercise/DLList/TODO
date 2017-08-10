@@ -1,10 +1,7 @@
 TODO:
 
-  1. Active nodes does not work:
-      All nodes are always active ...
-  2. Connections do not work.
-      cannot connect next / prev
-      needs to check based on side
+  1.
+  2. 
   3. View needs to set up a display
       needs to be built up somehow ...
       best is probably to keep previous positions while changing model

@@ -131,8 +131,8 @@ class Element extends ElementBase {
 
     // make next pointer
     if (args.pointer !== false){
-      this.nextPointer = this.makeEndpoint (nextptr, args, "next");
-      this.prevPointer = this.makeEndpoint (prevptr, args, "previous");
+      this.nextPointer = this.makeEndpoint (nextptr, args, SIDE_NEXT);
+      this.prevPointer = this.makeEndpoint (prevptr, args, SIDE_PREV);
     }
   }
 

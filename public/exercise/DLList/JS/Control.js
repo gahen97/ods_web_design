@@ -10,15 +10,12 @@ class Control extends ControlBase {
   reset(){ this.update(); }
 
   setActiveElement(e){
-    console.log (e, this.activeElements);
-
     // grab the previous node ... this will be for later
     var prevElem = this.activeElement;
     var prevNode = this.nodeFromElem (prevElem);
 
     // set the new active node
     var node = this.nodeFromElem (e);
-    console.log (node);
     if (this.activeElements.indexOf (node) === -1)
       return false;
 
@@ -38,8 +35,20 @@ class Control extends ControlBase {
   get dummy(){ return this.userModel.dummy; }
 
   // overload base stuff here, add more stuff, whatevers
-  connect (sourceNode, targetNode) {
-    this.userModel.connect (sourceNode, targetNode);
+  connect (sourceNode, targetNode, side) {
+    switch (side) {
+      case SIDE_NEXT:
+        this.userModel.connectNext (sourceNode, targetNode);
+        break;
+      case SIDE_PREV:
+        this.userModel.connectPrev (sourceNode, targetNode);
+        break;
+      default:
+        console.error ("UNKNOWN SIDE ARGUMENT: ", side);
+        return false;
+    }
+    
+    return true;
   }
   addNode (data) {
     var n = this.userModel.create (parseInt (data));

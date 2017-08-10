@@ -36,7 +36,10 @@ class DoublyLinkedList extends DLListBase {
 
     if (!n1 && !this._specialId (sourceId)) return;
 
-    this._dir (node, direction, ()=>n1.next=n2, ()=>n1.prev=n2);
+    // Based on our direction, we want to connect ...
+    //   if direction is SIDE_NEXT, we want next
+    //   otherwise we want prev
+    this._dir (n1, dir, ()=>n1.next=n2, ()=>n1.prev=n2);
   }
 
   _dir (node, direction, f1, f2){
@@ -77,7 +80,7 @@ class DoublyLinkedList extends DLListBase {
 
   _findById(id) {
     if (id === DUMMY_NODE_ID) return this.dummy;
-    return this.nodes [id] || null; 
+    return this.nodes [id] || null;
   }
 
   /* ---- USER MODEL ---- */

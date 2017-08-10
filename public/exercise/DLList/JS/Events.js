@@ -72,50 +72,6 @@ function onElementClicked (elem, ...args){
     this.setActiveElement (element);
 }
 
-function elemMoveDown (active) {
-  return active.moveDown ();
-
-  /*var um     = this.userModel;
-  var st     = um.subtree (active.getValue ());
-
-  if (!st)
-    active.moveDown();
-  else {
-    var t      = st.height ();
-    var maxDep = this.view.maxDepth;
-
-    if (t + um.depth (active.getValue()) + 1 > maxDep)
-      return false;
-    st.each ((data, node)=>{
-      this.view.findFromNid (node.id).moveDown ();
-    });
-
-    jsPlumb.repaintEverything ();
-  }
-
-  return true; */
-}
-
-function elemMoveUp (active) {
-  return active.moveUp ();
-  /*console.log(active);
-  var st     = this.userModel.subtree (active.getValue ());
-  if (!st)
-    active.moveUp();
-  else{
-    if (this.userModel.depth (active.getValue()) < 1)
-      return false;
-
-    st.each ((data, node)=>{
-      this.view.findFromNid (node.id).moveUp ();
-    })
-
-    jsPlumb.repaintEverything ();
-  }
-
-  return true;*/
-}
-
 function elementDragged (elem, evtObj, jqEvtObj) {
 }
 
@@ -164,7 +120,7 @@ function droppedOnTrash (element, evt, ui) {
 
 /* JSPLUMB */
 function connectBetween (plumbEvt, mode) {
-/*  var src = plumbEvt.source;
+  var src = plumbEvt.source;
   var trg = plumbEvt.target;
 
   var e1  = this.view.getElem (src);
@@ -175,16 +131,20 @@ function connectBetween (plumbEvt, mode) {
   var node1 = this.view.getNodeId (e1);
   var node2 = (mode === "connect") ? this.view.getNodeId (e2) : null;
 
+  // determine the side ...
+  var side = $(src).data ("side");
+
   if (node1 === node2){
     jsPlumb.deleteConnection (plumbEvt.connection);
     return false;
   }
 
-  this.connect (node1, node2);
+  // connecty
+  this.connect (node1, node2, side);
   setTimeout(()=>{
     control.update ();
     jsPlumb.repaintEverything(); // TODO
-  }, 10)*/
+  }, 10)
 }
 
 function doConnect (elem, plumbEvt, origEvt){

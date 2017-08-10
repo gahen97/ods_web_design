@@ -7,6 +7,9 @@
 /* Constants go here */
 const DUMMY_NODE_TEXT = "D";
 
+const SIDE_NEXT = "next";
+const SIDE_PREV = "prev";
+
 const ELEM_EVENTS_ID = "elementEvents";
 const TABS_EVENTS_ID = "tabbedEvents";
 
