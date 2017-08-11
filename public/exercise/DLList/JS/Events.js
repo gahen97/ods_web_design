@@ -135,8 +135,6 @@ function connectBetween (plumbEvt, mode) {
 
   // determine the side ...
   var side = $(src).data ("side");
-
-  console.log (node1, node2, side);
   
   if (node1 === node2){
     jsPlumb.deleteConnection (plumbEvt.connection);

@@ -135,8 +135,6 @@ class ControlBase {
 
   /* --- MODELS ---- */
   setModel (m) {
-    console.log (m);
-    
     // add everything to the userModel
     var c = m.copy ();
     this.userModel = c;
