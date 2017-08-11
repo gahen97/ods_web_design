@@ -7,7 +7,7 @@ class BinaryHeap extends Model {
   }
 
   build() {
-    for (var i = 0; i < 30; i++)
+    for (var i = 0; i < 10; i++)
       this.array.add (i);
 
     this.tree.generate (this.array);

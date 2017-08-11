@@ -1,5 +1,7 @@
-class Stack extends Model {
+class ArrayStackImplementation extends Model {
   constructor(){
+    super();
+
     this.arr = [ ];
     this.l   = 0;
   }
@@ -20,14 +22,23 @@ class Stack extends Model {
 
   add (i, x) {
     if (this.arr.length + 1 > this.l) this.resize();
+    if (!x && x !== 0){
+      x = i;
+      i = this.arr.length;
+    }
+
     this.arr.splice (i, 0, x);
   }
 
   remove (i) {
+    var element = this.arr [i];
+
     this.arr.splice (i, 1);
 
     if (this.l >= 3 * this.arr.length)
       this.resize ();
+
+    return element;
   }
 
   resize () {

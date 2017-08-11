@@ -97,8 +97,6 @@ class Question {
   }
 
   generate (prevModel) {
-    console.log(prevModel);
-
     // generate model
     this.generateModel (prevModel);
 
