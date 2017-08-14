@@ -1,3 +1,141 @@
+ /*
+    Base code for the View. This handles displaying models, dealing with
+      elements, and anything UI-related.
+
+    Documentation:
+      constructor ()
+        Takes no arguments.
+
+      start ()
+        Purpose: Loads the model.
+
+      disable ()
+        Disables interactions with the exercise.
+      enable ()
+        Enables interactions with the exercise.
+      clear (opts : Object)
+        Purpose: Clears the view, removing all elements.
+        Arguments:
+          opts  Object  Options. See ClearOptions below
+        Returns: None
+      register (eventHandler : CustomEventHandler)
+        Purpose: Registers a CustomEventHandler to be called in response to DOM
+                  events.
+        Arguments:
+          eventHandler  CustomEventHandler  An Event Handler to be triggered for
+                                              each event. See DomEventHandler
+        Returns: None
+      addDOMEvent (event : EventData)
+        Purpose: Adds handling of the given event and routing to the
+                  CustomEventHandler.
+        Arguments:
+          event  EventData  Data for the event(s) to react to on given elements
+        Returns: None
+      getEventHandler (id : string)
+        Gets the event handler with the given id.
+      addToEventHandler (element : DOMObject, id : string)
+        Purpose: Adds a given element as a trigger for the given event.
+        Arguments:
+          element  DOMObject  Element to use as a new trigger for the event
+          id       string     ID of the event to add the element to
+        Returns: None
+
+      addElement (value : Any, options : Object)
+        Purpose: Adds an element to the webpage.
+        Arguments:
+          value    Any     The value of the element to add
+          options  Object  The options for the method. See below.
+        Returns: The new element
+      removeElementById (id : int) : Element
+        Purpose: Removes an element, given its id.
+        Arguments:
+          id  int  The ID of the element to remove
+        Returns: The element which was removed.
+      removeElement (element : DOMObject) : Element
+        Purpose: Removes an element, given its DOM Object.
+        Arguments:
+          element  DOMObject  The DOM Object representing the element to remove.
+        Returns: The Element which was removed.
+      removeElements (elements : Array of Element, checkFunc : function)
+        Purpose: Removes every element in the elements array.
+        Arguments:
+          elements   Array of Element  The elements to remove
+          checkFunc  function          A function to use to check if element
+                                        should be removed. Will remove if
+                                        returns true.
+        Returns: None
+      getElementById (id : int) : Element
+        Returns the element matching the given ID.
+      getElement (element : DOMObject) : Element
+        Returns the element from the element's DOM Object.
+      getValueFromElementDiv (element : DOMObject) : Element
+        Returns the value of the element from the element's DOM Object.
+      findByValue (value : Any) : Array of Element
+        Returns all elements with the given value.
+      findOneWithValue (value : Any) : Element
+        Returns a single element with the given value.
+      contains (value : Any) : boolean
+        Returns true if any element with the given value exists.
+      checkAnyInSet (elements : Array of Element) : boolean
+        Returns true if any element from the array is within the model.
+      valueInSet (value : Any) : boolean
+        Returns true if any element with the given value is within the model.
+      isElementOverModel (element : DOMObject) : boolean
+        Returns true if the element is within the model.
+      drawWithinModel (element : Element)
+        Purpose: Moves the given element into the model's display.
+        Arguments:
+          element  Element  The element to move within the model's display
+        Returns: None
+      setActive (element : Element)
+        Purpose: Sets a given element as active.
+        Arguments:
+          element  Element  The element to set active
+        Returns: None
+      runAnimations ()
+        Purpose: Controls running any constant animations.
+      displayModel (m : Model)
+        Purpose: Draws the model to the screen, replacing any old one.
+        Arguments:
+          m  Model  The model to display
+        Returns: None
+      resizeModel ()
+        Purpose: Fixes the height of the model.
+      storePositions ()
+        Purpose: Stores every element's position within the model,
+                   so that the model can be resized.
+      storePositionOf (element : DOMObject)
+        Purpose: Stores the position of the given element within the model.
+        Arguments:
+          element  DOMObject  The element to store the position of
+        Returns: None
+      fixPositions ()
+        Purpose: Fixes the position of every element based on their stored
+                   positions.
+
+    Options:
+      clear ()
+        checkFunc  function  A function to call for each element. If result
+                               is truthy, element will be removed.
+                             [ OPTIONAL ] Defaults to all elements.
+      addElement ()
+
+    Types:
+      EventData
+        Array of EventObjects
+      EventObject
+        An Object containing two key-value pairs:
+          elem    Variant (see DOMEventHandler)   Elements to use for triggering
+                                                    the event
+          evtsArr Array of EventFunctionData      Array of data for each event
+          id      string [ OPTIONAL ]             ID to store the event under.
+      EventFunctionData
+        An Object containing three key-value pairs:
+          handlingFunction  function  Function to be called for the event
+          customEvtName     string    Custom event to be triggered on DOM Event
+          domEvtName        string    DOM Event to react to
+
+*/
 
 /*jshint esversion: 6 */ 'use strict';
 const VIEW_CODE_ALL = "View.Code.All";
@@ -106,7 +244,7 @@ class ViewBase {
   // remove an element
   removeElementById (id) {
     var element = this.elements [id];
-    if (!element) return false;
+    if (!element) return null;
 
     //delete this.elementsByValue [element.getValue()];
     delete this.elements[id];
@@ -183,7 +321,7 @@ class ViewBase {
   }
 
   // check if an element is in the set
-  checkInSet (elements) {
+  checkAnyInSet (elements) {
     var result = false;
 
     $ (elements).each ((i, e) => {
@@ -198,7 +336,7 @@ class ViewBase {
 
   valueInSet (value){
     var elements = this.findByValue (value);
-    return this.checkInSet (elements);
+    return this.checkAnyInSet (elements);
   }
 
   drawWithinModel (element) {

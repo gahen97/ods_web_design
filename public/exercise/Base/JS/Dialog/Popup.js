@@ -1,8 +1,18 @@
 /*
-  This basically deals with sending out little messages to users.
-    When a new Popup is created, it sets the text of the little dialog box,
-    shows the popup (optionally adding classes), and hides it after a few seconds.
+  This controls displaying a message to the user.
+
+  Documentation:
+    constructor (text : string, opts : Options)
+      Displays the message to the user with the given options.
+      Arguments:
+        text  string   The message to display
+        opts  Options  Options for displaying the message. See Options below
+
+    Options
+      classes  string  Classes to add for the message, space-separated.
+      length   number  The length of time for the message to display.
 */
+
 const HID_CLASS = 'no-visibility'; /// whatever the class is for hidden ..
 
 class Popup {

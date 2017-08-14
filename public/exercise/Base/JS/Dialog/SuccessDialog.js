@@ -1,5 +1,5 @@
 /*
-  Success: Adds a border-color-success border.
+  Success: Adds a color-success class.
 */
 
 class SuccessDialog extends Popup {

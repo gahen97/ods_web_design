@@ -1,5 +1,10 @@
 /*
-  Events that aren't exercise-specific, exist for all exercises ...
+  Events that are constant regardless of the exercise.
+
+  Documentation
+    -- TODO --
+
+  
 */
 
 // TODO Global Functions be bad
