@@ -48,9 +48,6 @@ class QuestionTabbify {
 
   /* ---- CONSTRUCT ---- */
   constructor (control, evtid) {
-    if (!options)
-      options = { };
-
     this.mainHeader = QuestionTabbify.mainFrom ($("#questions_display"));
     this.eventId    = evtid;
 

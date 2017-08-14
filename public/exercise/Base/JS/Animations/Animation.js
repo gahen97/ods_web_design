@@ -39,12 +39,12 @@ const animMap = {
 
 class Animation {
   static run (type, e, opts, ...rest){
-    var animation = this.getAnimationFrom (type);
+    var animation = this._getAnimationFrom (type);
     if (!animation) return false;
 
     // Apply any defaults which have to be set
     // Returns the result here
-    opts = this.applyDefaults (opts);
+    opts = this._applyDefaults (opts);
 
     // Run the animation
     var args = [e, opts].concat (rest);
@@ -63,7 +63,7 @@ class Animation {
     return opts;
   }
 
-  static getAnimationFrom (type){
+  static _getAnimationFrom (type){
     if (!type) return null;
 
     var t         = type.replace(/-/g, "").toLowerCase ();
