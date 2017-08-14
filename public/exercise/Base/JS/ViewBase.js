@@ -224,6 +224,9 @@ class ViewBase {
     if (element) element.setActive (true);
   }
 
+  /* ----- ANIMS ----- */
+  runAnimations(){
+  };
 
   /* ---- MODELS ------ */
   displayModel (m) {

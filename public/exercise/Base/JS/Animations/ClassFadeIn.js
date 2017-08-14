@@ -10,7 +10,7 @@ class ClassFadeIn {
       (opts.remClass || "",
       opts.class,
        {
-         duration: opts.duration || AnimDefs.duration,
+         duration: opts.duration,
          complete: opts.callback,
          queue: false
        });

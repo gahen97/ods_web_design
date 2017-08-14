@@ -21,9 +21,16 @@ block EXERCISE_HEAD
     script(type='text/javascript', src='/exercise/BST/JS/Element.js')
     script(type='text/javascript', src='/exercise/BST/JS/View.js')
     script(type='text/javascript', src='/exercise/BST/JS/Events.js')
+    script(type='text/javascript', src='/exercise/BST/JS/Exercise.js')
     script(type='text/javascript', src='/exercise/BST/JS/Control.js')
     script(type='text/javascript', src='/exercise/BST/JS/main.js')
     link(href='/exercise/BST/Views/css/BST.css', rel='stylesheet', type='text/css')
+
+block EXERCISE_NAME
+  | Binary Search Trees
+
+block VIDEO_FRAME
+  iframe#videoFrame(src='http://192.168.123.173/bst', scrolling="no", allowfullscreen="true", webkitallowfullscreen="true", mozallowfullscreen="true")
 
 block EXERCISE_CONTENT
   .exercise.grid(style='margin: 20px; padding: 10px;')
@@ -40,7 +47,8 @@ block EXERCISE_CONTENT
             p  params
           .modelBody.flexCol.borderized(style='margin-top: 10px; width: 100%;')
             .modelMain.col-12#model
-              img#trash.trashCan(src='exercise/uset/images/trashcan.png')
+              div#animationDuration.animationDuration.anim1
+              img#trash.trashCan(src='exercise/Base/images/trashcan.png')
         #messageDiv.col-8.no-visibility.center.textCentered
           input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')
         .questionButtons

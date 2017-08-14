@@ -1,0 +1,24 @@
+BINARY TREE:
+  Should have questions relating to terminology.
+    Depth                - Find every node matching a certain depth
+    Size                 - Find every node with a given size in the tree
+    Height               - Find every node with a given height in the tree
+
+    C'est finito.
+    
+  Should have questions relating to traversing a tree.
+    Breadth First Search - Traverse every node in the tree BFS
+    Depth First Search   - Traverse every node in the tree DFS
+    In-Order Traversal   - Left, parent, right
+    Pre-Order Traversal  - Parent, Left, Right
+    Post-Order Traversal - Left, Right, Parent
+
+    Done.
+
+  Every question would have selecting nodes, setting nodes as active.
+    This logic is very, very similar to find, should be easy to implement.
+    DONE
+
+  Needs to build up a tree when initialized, rather than adding to an empty tree.
+    Update: This is done. Inside of Operations.js this builds up a tree.
+      Constants are defined inside of defs.

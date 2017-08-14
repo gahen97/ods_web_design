@@ -40,6 +40,8 @@ class Find extends Question {
 
 
   start (){
-    control.setRootActive ();
+    setTimeout (()=>{
+      control.setRootActive ();
+    }, 1);
   }
 }

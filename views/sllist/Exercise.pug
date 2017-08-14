@@ -1,0 +1,80 @@
+extends ../ods_video.pug
+
+block EXERCISE_HEAD
+    script(type='text/javascript', src='/exercise/SLList/JS/Plumb/Connect.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Plumb/Draggable.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Plumb/Endpoint.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Plumb/Target.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Model/Node.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Model/SLList.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/AnswerTypes/AddAnswer.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/AnswerTypes/PushAnswer.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/AnswerTypes/PopAnswer.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/AnswerTypes/RemoveAnswer.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/AnswerTypes/GetAnswer.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Questions/Adders/Add-Base.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Questions/Adders/Add.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Questions/Adders/Push.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Questions/Poppers/Pop-Base.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Questions/Poppers/Pop.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Questions/Poppers/Remove.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Questions/Get.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/QuestionTypes/Operations.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Defs.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/DomDefs.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Element.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/View.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Events.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Exercise.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/Control.js')
+    script(type='text/javascript', src='/exercise/SLList/JS/main.js')
+    link(href='/exercise/SLList/Views/css/Style.css', rel='stylesheet', type='text/css')
+
+block EXERCISE_NAME
+  | The SLList: A Singly Linked List
+
+block VIDEO_FRAME
+  iframe#videoFrame(src='http://192.168.123.173/sllist', scrolling="no", allowfullscreen="true", webkitallowfullscreen="true", mozallowfullscreen="true")
+
+block EXERCISE_CONTENT
+  .exercise.grid(style='margin: 20px; padding: 10px;')
+    strong(style='font-size:1.25em;')  Exercise
+    .row
+      .col-12.questionFrame
+        .questionBody
+          .instructionsBody(style='margin-top: 20px;')
+            p  instructions
+          #input_container.col-8
+            input.modelEntry.bottom(type='text', placeholder='type in the value to be added here')
+            #button_enter
+          .parametersBody
+          .modelBody.flexCol.borderized(style='margin-top: 10px; width: 100%;')
+            .modelMain.col-12#model
+              div#animationDuration.animationDuration.anim1
+              img#trash.trashCan(src='exercise/Base/images/trashcan.png')
+        #messageDiv.col-8.no-visibility.center.textCentered
+          input#message.col-12.bottom.border-mid(type='text', value='I heard you like Mudkipz', readonly='')
+        .questionButtons
+          .prevArrowDiv
+            #prevArrow.button(onclick='return false;')
+            // TODO set up event handlers and probably rename this class from arrow
+          .checkAndShowDiv
+            .checkAnswerButton(onclick='return false;')  Check Answer
+            // TODO change this
+            .showAnswerButton(onclick='return false;')  Show Answer
+            // TODO change this
+            .redoQuestionButton(onclick='return false;')  Restart
+            // TODO change this
+          .nextArrowDiv
+            #nextArrow.button(onclick='return false;')
+            // TODO set up event handlers
+      #template.hidden
+        //
+          For now, stuff inside here is a reference to the HTML that should be used ...
+          Anything here will be copied later, inside some code, to make
+          new HTML elements.
+          TODO made these square. Looks better imo, especially for NULL
+        .element.bold.courier.main
+          .element.value
+            span.verticallyCentered  TEXT
+          .element.pointer

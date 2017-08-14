@@ -52,7 +52,7 @@ a {
   margin-top: 5%;
   display: inline-block;
   position: absolute;
-  right: 46px;
+  right: 0px;
 }
 
 #content {
@@ -153,9 +153,14 @@ a {
 }
 
 #actual_video {
-  background-color: grey;
   max-width: 95%;
   margin: 0 auto;
+}
+
+#videoFrame{
+	height: 100%;
+	width: 100%;
+  border-width: 0;
 }
 
 #exercise {

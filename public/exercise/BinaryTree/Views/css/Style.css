@@ -1,0 +1,97 @@
+.path-node {
+  background-color: #ccc !important;
+  border-color: #ff8401 !important;
+  cursor: -webkit-grab;
+}
+.path-node span {
+  color: white;
+}
+
+.active-tab {
+  font-weight: bold;
+}
+
+.element svg circle {
+  fill: #565656;
+}
+
+.element span {
+  color: #565656;
+}
+
+/* element ... TODO: should show as clickable, draggable. style? */
+.element {
+  background-color: white;
+  color: white;
+  border: 3px solid #565656;
+  border-radius: 50%;
+  font-weight: bold;
+  font-family: courier;
+  text-align: center;
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  position: absolute;
+  cursor: pointer;
+  line-height: 30px;  /* needs this for vertically centered text */
+  z-index: 1;
+}
+
+.jsp-endpoint, .jtk-endpoint-anchor{
+  z-index: 3;
+}
+
+.jsp-hover{
+  color: #565656;
+}
+
+.element.jsp-hover{
+  background-color: #ccc;
+}
+.element.active.jsp-hover {
+  color: white;
+}
+.element.active{
+  color: #565656;
+}
+
+.jtk-dragging{
+  z-index: 2;
+}
+
+.jsplumb-target{
+  z-index: 0;
+}
+.jsplumb-target.high-priority{
+  z-index: 3 !important;
+}
+
+.element:active {
+  background-color: white;
+  color: #565656;
+  width: 47px;
+  height: 47px;
+  box-shadow: 1px 1px 1px 1px #aaa;
+  cursor: -webkit-grabbing;
+}
+
+.jsp-endpoint circle {
+  fill: #565656;
+}
+.jsp-hover circle {
+  fill: white;
+}
+
+.jsplumb-endpoint-active circle {
+  fill: #565656;
+}
+.jsplumb-endpoint-active.jsp-hover circle{
+  fill: #565656;
+}
+
+.jsp-endpoint.path-node-plumb circle{
+  fill: #ff8401;
+}
+.jsp-endpoint.path-node-plumb.jsp-hover circle{
+  fill: #ff8401;
+}

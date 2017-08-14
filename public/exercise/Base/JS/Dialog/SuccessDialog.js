@@ -7,7 +7,7 @@ class SuccessDialog extends Popup {
       if (!opts) opts = { };
 
       if (!opts.classes) opts.classes = "";
-      opts.classes += " border-color-success";
+      opts.classes += " color-success";
 
       super (text, opts, ...rest);
     }

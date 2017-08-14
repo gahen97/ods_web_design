@@ -2,13 +2,9 @@ const animMap = {
   "fadein": FadeIn,
   "fadeout": FadeOut,
   "classfadein": ClassFadeIn,
-  "traverse": Traverse
-}
-
-var animationDefaults = {
-  duration: 600,
-  callback: ()=>{},
-  each: ()=>{}
+  "traverse": Traverse,
+  "show": Show,
+  "glow": Glow
 }
 
 class Animation {
@@ -28,6 +24,7 @@ class Animation {
   static applyDefaults (opts){
     if (!opts) opts = { };
 
+    var animationDefaults = AnimationSettings.defaults;
     for (var option in animationDefaults)
       if (!opts [option] && opts [option] !== 0)
         opts [option] = animationDefaults [option];
@@ -38,7 +35,7 @@ class Animation {
   static getAnimationFrom (type){
     if (!type) return null;
 
-    var t         = type.toLowerCase ();
+    var t         = type.replace(/-/g, "").toLowerCase ();
     var animation = animMap [t];
 
     return animation;

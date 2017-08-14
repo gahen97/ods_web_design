@@ -8,6 +8,7 @@ class Remove extends Question {
 
   computeAnswerData(prevAnswer){
     var model = this.answer.getModel();
+    var m2    = this.answer.getModel2();
 
     // store path for showing answer
     // if there's an actual node to remove ...
@@ -16,6 +17,8 @@ class Remove extends Question {
       this.answer.param ("path-to-node", path);
 
     model.remove (this.parameters);
+    m2.removeV2 (this.parameters); // TODO This checks greatest less than case
+
     return model;
   }
 

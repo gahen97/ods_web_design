@@ -1,0 +1,22 @@
+- BUG:
+  1. Play the traversal animation (for find answer)
+  2. While still animating, switch to a different find answer
+  3. Run through the question normally (without show answer button)
+
+  If done with correct timing:
+    Root will have orange endpoints, black border & text
+      Ends up having both path-node & can-set-active class.
+      This actually breaks A LOT of other stuff, too.
+    Answer will be incorrect:
+      Some elements (root +) will be in the list twice.
+
+    Ex. One iteration of 3-12-7 was:
+      3 - 12 - 3 - 12 - 7
+
+  Expected Results:
+    - Every node in the path should be orange endpoints, orange border, orange text.
+    - Path should be only what's in the path-node list:
+      3 - 12 - 7 in the example
+
+  Update:
+    Should be fixed.

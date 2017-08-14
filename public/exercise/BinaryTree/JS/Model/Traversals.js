@@ -34,36 +34,42 @@ class Traversal{
   }
 
 
-  static inorderTraversal (curNode, func, leftPar, rightPar) {
+  static inorderTraversal (curNode, func, leftPar, rightPar, depth) {
     if (!curNode) return false;
+    if (!depth) depth = 0;
 
-    Traversal.inorderTraversal (curNode.left, func, leftPar, curNode);
+    Traversal.inorderTraversal (curNode.left, func, leftPar, curNode, depth+1);
     func (curNode.data, curNode, {
       leftParent: leftPar,
-      rightParent: rightPar
+      rightParent: rightPar,
+      depth: depth
     });
-    Traversal.inorderTraversal (curNode.right, func, curNode, rightPar);
+    Traversal.inorderTraversal (curNode.right, func, curNode, rightPar, depth+1);
   }
 
-  static preorderTraversal (curNode, func, leftPar, rightPar) {
+  static preorderTraversal (curNode, func, leftPar, rightPar, depth) {
     if (!curNode) return false;
+    if (!depth) depth = 0;
 
     func (curNode.data, curNode, {
       leftParent: leftPar,
-      rightParent: rightPar
+      rightParent: rightPar,
+      depth: depth
     });
-    Traversal.preorderTraversal (curNode.left, func, leftPar, curNode);
-    Traversal.preorderTraversal (curNode.right, func, curNode, rightPar);
+    Traversal.preorderTraversal (curNode.left, func, leftPar, curNode, depth+1);
+    Traversal.preorderTraversal (curNode.right, func, curNode, rightPar, depth+1);
   }
 
-  static postorderTraversal (curNode, func, leftPar, rightPar) {
+  static postorderTraversal (curNode, func, leftPar, rightPar, depth) {
     if (!curNode) return false;
+    if (!depth) depth = 0;
 
-    Traversal.postorderTraversal (curNode.left, func, leftPar, curNode);
-    Traversal.postorderTraversal (curNode.right, func, curNode, rightPar);
+    Traversal.postorderTraversal (curNode.left, func, leftPar, curNode, depth+1);
+    Traversal.postorderTraversal (curNode.right, func, curNode, rightPar, depth+1);
     func (curNode.data, curNode, {
       leftParent: leftPar,
-      rightParent: rightPar
+      rightParent: rightPar,
+      depth: depth
     });
   }
 

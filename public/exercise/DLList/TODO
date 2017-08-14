@@ -1,0 +1,24 @@
+TODO:
+
+  1.
+  2.
+  3.
+  4.
+  5. Add indices for elements?
+        See original dllist
+
+ISSUES
+  If a node is added manually, when the view updates, it does not include that node.
+    This is because commonId will be different ....... but it shouldn't be.
+    What logic can we use for this?
+  Restart button will randomly place every node afterwards.
+    This is kind of odd and I'm not sure why.
+    Also, strangely, it doesn't do this every time -
+      and when hunting for it it isn't happening. :/.
+    Apparently it can also happen on show answer ... again, I don't know why.
+    This'll have to be tested & figured out later.
+
+CHANGES
+  Parameters are generated AFTER the model.
+  This SEEMS to be working but NEEDS more testing.
+  CAPS are fun.

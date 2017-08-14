@@ -17,11 +17,11 @@ class ElementBase {
     return ElementBase.currentId ++;
   }
 
-  constructor (value) {
+  constructor (value, ...args) {
     this.value = value;
     this.id = ElementBase.nextId ();
 
-    this.element = this.generate ();
+    this.element = this.generate (...args);
     this.$elem   = $(this.element);
 
     // NOTE: This sets up the Proxy that points any DOM methods called on the element
@@ -30,6 +30,12 @@ class ElementBase {
   }
 
   getElementDiv () { return this.element; }
+  get div () { return this.getElementDiv(); }
+
+  // this is used by the traverse animation. it will jump to the given div's position
+  // when the next step is to move to d2.
+  divToNext (d2){ return this.element; }
+
 
   // default - do nothing
   addControls (e, s) {

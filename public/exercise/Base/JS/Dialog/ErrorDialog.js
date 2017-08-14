@@ -7,7 +7,7 @@ class ErrorDialog extends Popup {
     if (!opts) opts = { };
 
     if (!opts.classes) opts.classes = "";
-    opts.classes += " border-color-error";
+    opts.classes += " color-error";
 
     super (text, opts, ...rest);
   }

@@ -20,8 +20,14 @@ html
 
     // exercise stuff
     script(type='text/javascript', src='/exercise/Base/JS/lib/jsplumb.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Settings/Setting.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Settings/Animation.js')
     script(type='text/javascript', src='/exercise/Base/JS/Array.js')
     script(type='text/javascript', src='/exercise/Base/JS/Random.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Jsplumb/Connect.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Jsplumb/Draggable.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Jsplumb/Endpoint.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Jsplumb/Target.js')
     script(type='text/javascript', src='/exercise/Base/JS/Dialog/Popup.js')
     script(type='text/javascript', src='/exercise/Base/JS/Dialog/ErrorDialog.js')
     script(type='text/javascript', src='/exercise/Base/JS/Dialog/SuccessDialog.js')
@@ -29,7 +35,9 @@ html
     script(type='text/javascript', src='/exercise/Base/JS/Animations/ClassFadeIn.js')
     script(type='text/javascript', src='/exercise/Base/JS/Animations/FadeIn.js')
     script(type='text/javascript', src='/exercise/Base/JS/Animations/FadeOut.js')
-    script(type='text/javascript', src='/exercise/Base/JS/Animations/Traverse.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Animations/Show.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Animations/Glow.js')
+    script(type='text/javascript', src='/exercise/Base/JS/Animations/Traverse2.js')
     script(type='text/javascript', src='/exercise/Base/JS/Animations/Animation.js')
     script(type='text/javascript', src='/exercise/Base/JS/Div.js')
     script(type='text/javascript', src='/exercise/Base/JS/Overlay.js')
@@ -40,11 +48,14 @@ html
     script(type='text/javascript', src='/exercise/Base/JS/QuestionTypes/QuestionType.js')
     script(type='text/javascript', src='/exercise/Base/JS/DOMEventHandler.js')
     script(type='text/javascript', src='/exercise/Base/JS/CustomEventHandler.js')
-    script(type='text/javascript', src='/exercise/Base/JS/Exercise.js')
+    script(type='text/javascript', src='/exercise/Base/JS/ExerciseBase.js')
     script(type='text/javascript', src='/exercise/Base/JS/ElementBase.js')
+    script(type='text/javascript', src='/exercise/Base/JS/CoreEvents.js')
     script(type='text/javascript', src='/exercise/Base/JS/ControlBase.js')
     script(type='text/javascript', src='/exercise/Base/JS/ViewBase.js')
     script(type='text/javascript', src='/exercise/Base/JS/QuestionTabbify.js')
+
+    link(href='/exercise/Base/Views/css/Base.css', rel='stylesheet', type='text/css')
     block EXERCISE_HEAD
   body
     #total_content
@@ -76,9 +87,10 @@ html
             div
         #main
           #main_top
-            | The USet Interface: Unordered Sets
+            block EXERCISE_NAME
             img#sidebar_toggle(src='ods_video_website/img/menubutton.png', onmouseover="this.src='ods_video_website/img/menubuttonhover.png';", onmouseout="this.src='ods_video_website/img/menubutton.png';")
           #video_frame
             #actual_video
+              block VIDEO_FRAME
           #exercise
             block EXERCISE_CONTENT

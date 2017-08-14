@@ -61,7 +61,7 @@ class BinarySearchTree extends Model {
   }
 
   _subtreeFrom (u) {
-    return new BinarySearchTree (u);
+    return new __MODULENAME__ (u);
   }
 
   /* ---- TERMINOLOGY ----- */
@@ -172,6 +172,26 @@ class BinarySearchTree extends Model {
     }
   }
 
+  // TODO : Find better method for this ....
+  //        This one replaces with greatest child less than removed node
+  removeV2 (x)
+  {
+    var node = this._find (x);
+    if (!node) return false;
+    this.nodesById[node.id] = null;
+
+    if (!node.left || !node.right)
+      this.splice (node);
+    else {
+      var cur = node.left;
+
+      while (cur.right)
+        cur = cur.right;
+
+      node.data = cur.data;
+      this.splice (cur);
+    }
+  }
 
   /* ------ USER MODEL ------ */
   makeNode (x) {
@@ -197,7 +217,7 @@ class BinarySearchTree extends Model {
     var roots = this.getRoots ();
     var trees = [ ];
     for (var i in roots)
-      trees.push (new BinarySearchTree (roots [i]));
+      trees.push (new __MODULENAME__ (roots [i]));
     return trees;
   }
 
@@ -303,18 +323,28 @@ class BinarySearchTree extends Model {
   /* ------ EXERCISE STUFF ------ */
   equals(other)
   {
-    var result = true;
-    this.each ((data) => {
-      if (!other.contains (data))
-        result = false;
-    });
+    if (!other) return false;
 
-    return result;
+    var check     = function (node, other) {
+        if (!node && !other) return true;
+        if (!node || !other) return false;
+        return node.data === other.data;
+    }
+    var checkData = function(node, other) {
+      if (!node && !other) return true;
+      if (!node || !other) return false;
+
+      return (check (node, other) &&
+        checkData (node.left, other.left) &&
+        checkData (node.right, other.right));
+    }
+
+    return checkData (this.root, other.root);
   }
 
   copy()
   {
-    var newTree = new BinarySearchTree ();
+    var newTree = new __MODULENAME__ ();
     Traversal.preorder (this, (data)=>{
       newTree.add (data);
     });
@@ -332,9 +362,10 @@ class BinarySearchTree extends Model {
     return this._find (el) !== null;
   }
 
-  toString(){
+  toString(delim){
+    if (!delim) delim = " ";
     var s = "";
-    this.each ((d)=>{s += d + " "; });
+    this.each ((d)=>{s += d + delim; });
     return s;
   }
 

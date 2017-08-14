@@ -19,6 +19,8 @@ class Control extends ControlBase {
     //this.userModel = this.exercise.getCurrQuestion ().getModel ().copy ();
   }
 
+  get model () { return this.userModel; }
+
   removeElement (e) {
     // remove from the user model
     var id    = this.view.getIdFromElementDiv (e);
@@ -100,7 +102,7 @@ class Control extends ControlBase {
   //       eachFunc is optional, will be called through every iteration of our loop
   //         and sent each node on the path to our result (does not include result).
   findNodeFromPath (path, eachFunc) {
-    if (!path || !path.length) return null;
+    if (!path) return null;
     if (!eachFunc) eachFunc = function(){};
 
     // Walk through every node in the path, starting from our own root.
@@ -121,7 +123,7 @@ class Control extends ControlBase {
     //   then route that to findElemsFrom (nodes).
     // To map to our model, we should go through, check left/right, see which matches.
     //   Note it is entirely possible this will still break down, but it's less likely.
-    if (!path || !path.length) return [ ];
+    if (!path) return [ ];
     var usersPath = [];
 
     usersPath.push (this.findNodeFromPath (path, (e)=>{
@@ -130,4 +132,33 @@ class Control extends ControlBase {
 
     return this.findElemsFrom (usersPath);
   }
+
+  // NOTE: Here, we run a traversal and return the result as an array.
+  // This assumes the argument is a function taking (tree, f(data, node)),
+  //   as do all the Traversal functions.
+  traverse (traversal) {
+    var path = [ ];
+
+    traversal (this.userModel, (data, node)=>{
+      path.push (node);
+    });
+
+    return this.findElemsFrom (path);
+  }
+
+  // NOTE: This is similar to above but calls a function instead,
+  //       if the function returns true adds the node to the list
+  matchingElements (f) {
+    var nodes = [ ];
+
+    Traversal.preorder (this.userModel, (data, node, ...args)=>{
+      if (f(data, node, ...args))
+        nodes.push (node);
+    });
+
+    return this.findElemsFrom (nodes);
+  }
+
+  getRoot(){ return this.findElemsFrom ([this.userModel.root]); }
+  pathTo(x){ return this.findElemsFrom (this.userModel.pathTo (x)); }
 }

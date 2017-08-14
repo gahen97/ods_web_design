@@ -16,7 +16,7 @@ class Question {
   constructor(questionData, answerTypesClassName)
   {
     questionData = questionData || { };
-    this.parameters = this.generateParameters();
+    this.parameters = null;
     this.instructions = !!questionData.instructionsText ? new Instructions(questionData.instructionsText) : null;     //!! converts truthy to true
     this.id = questionData.id || Question.nextId++;
     this.div = null;
@@ -42,6 +42,9 @@ class Question {
     return this.name.toLowerCase() + "(" + this.getParametersString() + ")";
   }
 
+  get exerciseName () { return this.fullName; }
+
+  // instructions, params, etc
   getInstructions()
   {
     return this.instructions;
@@ -93,6 +96,18 @@ class Question {
     return false;
   }
 
+  generate (prevModel) {
+    // generate model
+    this.generateModel (prevModel);
+
+    // generate parameters !!! do this after so we have
+    //  access to the model
+    this.parameters = this.generateParameters();
+
+    // generate & return answer
+    return this.generateAnswer(prevModel);
+  }
+
 
   display(div)
   {
@@ -122,10 +137,11 @@ class Question {
   displayParameters (div)
   {
       var p   = $(".parametersBody", div);
-      p.text (this.fullName);
+      var sp  = $("<span class='params-text'>" + this.exerciseName + "</span>");
+      p.html (sp);
 
       /* TODO */
-      Animation.run ("FadeIn", p)
+      Animation.run ("glow", sp, {duration: 1000})
   }
 
   displayInstructions(div)
@@ -138,11 +154,11 @@ class Question {
   {
     var answer = this.answer;
     if (prevAnswer)
-      answer.setModel (prevAnswer.getModel ().copy ());
+      answer.setModel (prevAnswer.copy ());
 
     answer.setData (this.computeAnswerData ());
 
-    return answer;
+    return answer.getModel();
   }
 
   generateModel (prevAnswer)
@@ -150,7 +166,7 @@ class Question {
     if (!prevAnswer) return;
 
     // just set to the previous answer's model
-    this.setModel (prevAnswer.getModel ());
+    this.setModel (prevAnswer.copy ());
   }
 
   getAnswer ()

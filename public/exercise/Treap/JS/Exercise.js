@@ -1,0 +1,3 @@
+class Exercise extends ExerciseBase{
+
+}

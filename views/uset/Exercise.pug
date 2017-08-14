@@ -1,6 +1,6 @@
 extends ../ods_video.pug
 
-block EXERCISE_HEAD    
+block EXERCISE_HEAD
     script(type='text/javascript', src='/exercise/uset/JS/Model/Uset.js')
     script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/AddAnswer.js')
     script(type='text/javascript', src='/exercise/uset/JS/AnswerTypes/FindAnswer.js')
@@ -14,9 +14,16 @@ block EXERCISE_HEAD
     script(type='text/javascript', src='/exercise/uset/JS/Element.js')
     script(type='text/javascript', src='/exercise/uset/JS/View.js')
     script(type='text/javascript', src='/exercise/uset/JS/Events.js')
+    script(type='text/javascript', src='/exercise/uset/JS/Exercise.js')
     script(type='text/javascript', src='/exercise/uset/JS/Control.js')
     script(type='text/javascript', src='/exercise/uset/JS/main.js')
     link(href='/exercise/uset/Views/css/Uset.css', rel='stylesheet', type='text/css')
+
+block EXERCISE_NAME
+  | The USet Interface: Unordered Sets
+
+block VIDEO_FRAME
+  iframe#videoFrame(src='http://192.168.123.173/uset', scrolling="no", allowfullscreen="true", webkitallowfullscreen="true", mozallowfullscreen="true")
 
 block EXERCISE_CONTENT
   .exercise.grid(style='margin: 20px; padding: 10px;')
@@ -33,6 +40,7 @@ block EXERCISE_CONTENT
             p  params
           .modelBody.flexCol.borderized(style='margin-top: 10px;')
             .modelMain.col-12
+              div#animationDuration.animationDuration.anim1
               img#trash.trashCan(src='exercise/Base/images/trashcan.png')
               #model.modelDisplay.col-6.round
         #messageDiv.col-8.no-visibility.center.textCentered

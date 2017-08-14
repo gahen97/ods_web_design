@@ -94,12 +94,33 @@ class QuestionTabbify {
       var curHeader = parent;
 
       data.questionTypeId = key;
+
+      this.calculateHeaderNames (qTypes [key]);
       this.addQuestions (qTypes [key], curHeader, data, opts);
 
       //this.headers.push ($ (curHeader) [0]); // DOM, not jQuery
     }
 
     return this;
+  }
+
+  calculateHeaderNames (questionType) {
+    var questions  = questionType.getQuestions ();
+    var headerType = 1;
+
+    // calculate if we have more than one of any question in the question type
+    // if we do, we should label them by the question's name, not the question type's
+    for (var q = 1; q < questions.length; q++)
+      if (questions [q-1].name === questions[q].name){
+        headerType = 2;
+        break;
+      }
+
+    // give the questions their names based on headerType
+    for (var q in questions) {
+      var question = questions [q];
+      question.headerName = (headerType === 1) ? questionType.name : question.name;
+    }
   }
 
   addQuestions (questionType, mainHeader, data, opts) {
@@ -114,7 +135,7 @@ class QuestionTabbify {
     for (var key in questions) {
       var q = questions [key];
 
-      var name = q.name;
+      var name = q.headerName;
       if (name !== curName){
         curName = name;
         header  = QuestionTabbify.addHeader (name, mainHeader);

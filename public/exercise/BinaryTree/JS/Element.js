@@ -21,6 +21,12 @@ class Element extends ElementBase {
   set nodeId (d) { this.nid = d; } // node.nodeId = x; node.nodeId(x)
   set node (n) { this._node = n; }
   get node () { return this._node; }
+  set text (t) { this.element.text (t); }
+
+  // overloading for the traverse animation
+  divToNext (e2) {
+    return this.div;
+  }
 
   getLevel(){ return this.level; }
 
@@ -30,7 +36,7 @@ class Element extends ElementBase {
     var span       = $("span", elementDiv);
 
     // set the text ...
-    span.text (this.value).data ("id", this.id);
+    span.text ("").data ("id", this.id);
 
     // parent it to the main div, add the stuff, return
     elementDiv.insertAfter (model).data ("id", this.id);
@@ -87,7 +93,7 @@ class Element extends ElementBase {
   }
 
   canSetActive () {
-    return (this.hasClass ("can-set-active"));
+    return !this.hasClass("active") && !this.hasClass("path-node");
   }
 
   setCSA (c) {
@@ -139,19 +145,19 @@ class Element extends ElementBase {
       parameters: {
         side: DIRECTION_LEFT
       }
-    }, DIRECTION_LEFT, {
+    }, {
       element: this
-    });
+    }, DIRECTION_LEFT);
     this.rightEndpoint = new JsPlumbEndpoint (e, {
       anchor: [ 0.7, 0.7, 0, 1 ],
       cssClass: "jspe",
       parameters: {
         side: DIRECTION_RIGHT
       }
-    }, DIRECTION_RIGHT, {
+    }, {
       element: this
-    })
-    this.target = new JsPlumbTarget (e, this);
+    },  DIRECTION_RIGHT)
+    this.target = new PlumbTarget (e, this);
   }
 
   setDraggable (t) {
@@ -189,7 +195,7 @@ class Element extends ElementBase {
         }
 
 
-    var newConnection = new PlumbConnect (this,
+    var newConnection = new JsPlumbConnect (this,
                                           otherElem,
                                           {
                                            overlays: "arrow",

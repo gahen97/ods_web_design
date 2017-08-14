@@ -67,9 +67,9 @@ var __removeMaxParam__ = 19;
   var questionData = [
     [
      {class : Add, instructionsText: "Add an element to the binary search tree."},
-     {class : Find, instructionsText: "Find an element by clicking on it."},
-     {class : Remove, instructionsText: "Remove an element from the tree."}
-    ],
+     {class : Find, instructionsText: "Display the path to an element within the binary search tree."},
+     {class : Remove, instructionsText: "Remove an element from the binary search tree."}
+   ]
 ];
 
 

@@ -24,6 +24,8 @@ class ControlBase {
       eventId: TABS_EVENTS_ID
     });
     this.updateActiveQuestion();
+
+    this.animationLoop ();
   }
 
   regenerate ()
@@ -32,16 +34,34 @@ class ControlBase {
     this.exercise.setup ();
 
     this.view.start ();
-    this.exercise.start ();
+    this.exercise.load ();
 
     this.tabs.regenerate (this);
     this.updateActiveQuestion ();
   }
 
+  reset(){
+
+  }
+
+  restart(){
+    this.updateActiveQuestion();
+    this.reset ();
+  }
+
+  restartExercise (){
+    if (this.exercise.restart() === false)
+      return false;
+
+    // set active to null
+    this.restart ();
+    return true;
+  }
+
   // disable, enable
-  disable () { this.view.disable (); }
-  enable () { this.view.enable (); }
-  
+  disable () { this.view.disable (); this.disabled = true; }
+  enable () { this.view.enable (); this.disabled = false; }
+
   // tabs
   updateActiveQuestion () {
     var active = this.exercise.getCurrQuestionId ();
@@ -120,5 +140,27 @@ class ControlBase {
     this.userModel = c;
 
     this.view.displayModel (c);
+  }
+
+
+  animationLoop(){
+    var callback = () => {
+      setTimeout (() => {
+        this.animationLoop.call (this);
+      }, 3000);
+    }
+
+    if (!this.view) return callback();
+
+    if (this.disabled)
+      return callback();
+
+    self.loopTimeout=false;
+    this.view.runAnimations(()=>{
+      if (self.loopTimeout) return;
+      self.loopTimeout=true;
+
+      callback ();
+    });
   }
 }
