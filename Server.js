@@ -4,8 +4,20 @@ var promise = require ("promise");
 var express = require ("express");
 var app     = express ();
 
+const INDEX_HTML = "public/index.html";
+const TABLE_OF_CONTENTS = "public/video_index.html";
+
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+
+app.get("/", function (req, res){
+	res.sendFile (path.join (__dirname, INDEX_HTML));
+});
+
+app.get("/toc", function(req, res){
+	console.log (path.join (__dirname, TABLE_OF_CONTENTS));
+	res.sendFile (path.join (__dirname, TABLE_OF_CONTENTS));
+});
 
 app.get ("/:exerciseName", function (req, res){
 	res.render(req.params.exerciseName + "/Exercise", function(err, html) {

@@ -18,7 +18,7 @@
 Orange:
 	#EF8043
 	rgb(239, 128, 67)
-	
+
 Blue:
 	#8FCDB8
 	rgb(143, 205, 184)
@@ -28,7 +28,7 @@ Blue:
 			$("#bigblock").css('cursor', 'auto');
 			$("#innerblock").stop().animate({
 				'left': '72.5%'
-			}, { 
+			}, {
 				duration: 1000,
 				easing: 'easeInOutQuad'
 			});
@@ -55,10 +55,10 @@ Blue:
 		}, function() {
 			$("#dropdown").css('display', 'none');
 		});
-		
+
 	});
 	</script>
-	
+
 	<script>
 
 	var mousein = false;
@@ -67,16 +67,16 @@ Blue:
 
 	var drawinblock = function(p) {
 		var coef = 0;
-		
+
 		//Math.floor(Math.random() * (160 - 100)) + 100;
-	
+
 		p.setup = function() {
 			p.createCanvas(300, 300);
 		}
-	
+
 		p.draw = function() {
   			p.background(244);
-	
+
 
 			if(((p.mouseX/p.width) <= 0.7) && ((p.mouseX/p.width) >= 0))
 				coef = p.mouseX/p.width;
@@ -86,7 +86,7 @@ Blue:
 			p.translate(p.width/2, p.height);
 			p.tree(100, 6);
 		}
-		
+
 		p.mouseClicked = function() {
 			p.noLoop();
 		}
@@ -97,7 +97,7 @@ Blue:
 
 			if(steps > 0) {
 				var bcoef = 0.4;
-	
+
 				p.push();
 				p.rotate(bcoef);
 				p.tree(length*coef, steps-1);
@@ -111,8 +111,8 @@ Blue:
 		}
 	}
 
-//<img src="tree1.png" style="float:left"/> 
-	
+//<img src="tree1.png" style="float:left"/>
+
 	var draw = new p5(drawinblock, "block");
 	</script>
 
@@ -120,9 +120,9 @@ Blue:
 
 
 <body>
-<div id="topbar"> <a> home </a> | <a> about </a> | <a href="http://cglab.ca/~morin/"> author </a> | 
-	<span id="menu_dropdown"> related projects 
-		<div id="dropdown"> 
+<div id="topbar"> <a> home </a> | <a> about </a> | <a href="http://cglab.ca/~morin/"> author </a> |
+	<span id="menu_dropdown"> related projects
+		<div id="dropdown">
 			<a href="https://en.wikipedia.org/wiki/Book:Fundamental_Data_Structures"> fundamental data structures (cc-by-sa) </a> <br />
 			<a href="https://en.wikipedia.org/wiki/Book:Data_structures"> data structures (cc-by-sa) </a> <br />
 			<a href="https://en.wikibooks.org/wiki/Data_Structures"> data structures {fundamental tools} (cc-by-sa) </a> <br />
@@ -144,28 +144,28 @@ Blue:
 	<div id="innerblock">
 		<div id="block"> </div>
 		<div id="links">
-			<div id="linkcol1"> <strong class="subheading"> Videos </strong> <br /> <a> click here to watch interactive educational videos </a>  <br /> </div>
+			<div id="linkcol1"> <strong class="subheading"> Videos </strong> <br /> <a href="/toc"> click here to watch interactive educational videos </a>  <br /> </div>
 			<div id="linkcol2"> <strong class="subheading"> Translations </strong> <br /> <a> Slovenian </a> <br /> <a> Turkish </a> <br /> </div>
 			<div id="linkcol3"> <strong class="subheading"> Books </strong> <br />
 				<span class="sp"> <span class="span">
 					<a href="http://opendatastructures.org/ods-python/">html</a> .
 					<a href="http://opendatastructures.org/ods-python.pdf">pdf</a> .
 					<a href="http://opendatastructures.org/ods-python.tgz">python sources</a> .
-					<a href="http://opendatastructures.org/ods-python-screen.pdf">screen pdf</a> | 
+					<a href="http://opendatastructures.org/ods-python-screen.pdf">screen pdf</a> |
 				</span> Psuedocode </span> <br />
 
 				<span class="sp"> <span class="span">
 					<a href="http://opendatastructures.org/ods-java/">html</a> .
 					<a href="http://opendatastructures.org/ods-java.pdf">pdf</a> .
 					<a href="http://opendatastructures.org/ods-java.tgz">java sources</a> .
-					<a href="http://opendatastructures.org/ods-java-screen.pdf">screen pdf</a> | 
+					<a href="http://opendatastructures.org/ods-java-screen.pdf">screen pdf</a> |
 				</span> Java </span> <br />
 
 				<span class="sp"> <span class="span">
 					<a href="http://opendatastructures.org/ods-cpp/">html</a> .
 					<a href="http://opendatastructures.org/ods-cpp.pdf">pdf</a> .
 					<a href="http://opendatastructures.org/ods-cpp.tgz">c++ sources</a> .
-					<a href="http://opendatastructures.org/ods-cpp-screen.pdf">screen pdf</a> | 
+					<a href="http://opendatastructures.org/ods-cpp-screen.pdf">screen pdf</a> |
 				</span> C++ </span> <br />
 			</div>
 
