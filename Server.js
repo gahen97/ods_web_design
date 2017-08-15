@@ -1,8 +1,22 @@
+/*
+	Main server code.
+
+	Paths supported:
+		/						 Index
+		/contents	   Table of Contents
+		/:exercise   Sends back the exercise for the given name (views>exercise>Exercise.pug)
+
+	Server is a static server from the public directory.
+*/
+
 var path    = require ("path");
 var fs      = require ("fs");
 var promise = require ("promise");
 var express = require ("express");
 var app     = express ();
+
+const PORT = 2402;
+const PATH = "localhost";
 
 const INDEX_HTML = "public/index.html";
 const TABLE_OF_CONTENTS = "public/video_index.html";
@@ -14,8 +28,7 @@ app.get("/", function (req, res){
 	res.sendFile (path.join (__dirname, INDEX_HTML));
 });
 
-app.get("/toc", function(req, res){
-	console.log (path.join (__dirname, TABLE_OF_CONTENTS));
+app.get("/contents", function(req, res){
 	res.sendFile (path.join (__dirname, TABLE_OF_CONTENTS));
 });
 
@@ -33,8 +46,6 @@ app.get ("/:exerciseName", function (req, res){
 
 app.use (express.static ("./public"));
 app.use (express.static ("./jquery-ui"));
-
-var PORT = 2402;
 
 app.listen (PORT, function(){
   console.log ("Templated server running from port", PORT + ".");
