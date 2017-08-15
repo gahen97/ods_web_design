@@ -26,3 +26,9 @@ To load an exercise:
 Go to http://localhost:2402/EXERCISE_NAME
 
 Where EXERCISE_NAME is the name of the exercise (matching the directory under Views/)
+
+
+
+ArrayStack exercise is over-simplified and works more as a SortedSet ;
+  should not use.
+BinaryHeap is not done.
