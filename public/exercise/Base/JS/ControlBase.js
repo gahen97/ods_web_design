@@ -24,12 +24,18 @@
   restartExercise ()
     Purpose: Restarts current question while also calling the exercise to reset.
 
+  next ()
+    Purpose: Moves to the next question.
+
   disable()
     Purpose: Disables all user interaction with the exercise.
 
   enable()
     Purpose: Re-enables all user interaction with the exercise.
 
+  check ()
+    Purpose: Checks & reacts to the answer given by the user.
+  
   updateActiveQuestion ()
     Purpose: Updates the currently highlighted question within the tabbing system.
 
@@ -166,6 +172,16 @@ class ControlBase {
     return true;
   }
 
+  // move to next question
+  next () {
+    if (this.exercise.next() === false)
+      new SuccessDialog ("That's all, folks!"); // TODO
+    else{
+      // set active to null
+      this.restart ();
+    }
+  }
+
   // disable, enable
   disable () { this.view.disable (); this.disabled = true; }
   enable () { this.view.enable (); this.disabled = false; }
@@ -187,6 +203,15 @@ class ControlBase {
     return this.exercise.validInputStr;
   }
 
+  // check answer
+  check(){
+    if (this.exercise.check (this.userModel, this.activeElement)) {
+      new Popup ("Correct!");
+      this.next ();
+    } else {
+      new Popup ("That's wrong."); //TODO
+    }
+  }
   // event handling
   addCustomEvent (name, handling)
   {

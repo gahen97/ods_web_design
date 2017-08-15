@@ -3,6 +3,11 @@
     are overloaded to work for the needs of any given exercise.
 
   Documentation:
+    NOTE: MUST OVERLOAD:
+      get valueSpan () : DOMObject { };
+        Returns the value span from the element. eg., $("span", elementDiv);
+
+
     constructor (value : Any, ...)
       Arguments:
         value  Any  Whatever value the element should have for the exercise.
@@ -107,16 +112,29 @@ class ElementBase {
 
   // set active ... adds/removes class
   setActive (isActive) {
-    return null;
+    this.jq.toggleClass ("active", isActive);
   }
 
   // Draw the element into the DOM
   generate () {
-    return null;
+    var elementDiv = $(ELEMENT_TEMPLATE).clone ();
+    var model      = $(MODEL_DISPLAY);
+    var span       = this.span ();
+
+    // set the text ...
+    span.text (this.value).data ("id", this.id);
+
+    // parent it to the main div, add the stuff, return
+    elementDiv.insertAfter (model).data ("id", this.id);
+
+    this.addControls (elementDiv);
+
+    return elementDiv;
   }
 
   moveTo (os) {
-    return false;
+    $ (this.element).offset (offset);
+    return true;
   }
 
   // Remove the element from the DOM
@@ -125,6 +143,7 @@ class ElementBase {
   }
 
   get jq () { return $(this.getElementDiv()); }
+
   // getters
   getId () { return this.id; }
   getValue () { return this.value; }

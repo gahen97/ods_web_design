@@ -1,19 +1,41 @@
+/*
+  This is the template for creating AnswerTypes.
+
+  Documentation:
+    constructor()
+      Initializes the answer. Should set data, model.
+    check (userAnswer : Model, active : Element, userDataArray : Array of Element) : boolean
+      Purpose: Checks if user's answer is correct against the actual answer.
+      Arguments:
+        userAnswer     Model             The current state of the user's model
+        active         Element           The currently active element
+        userDataArray  Array of Element  An array of every element which
+                                          the user set as active, in order.
+      Returns: Boolean. True if the given answer is correct.
+
+  CAN OPTIONALLY OVERRIDE:
+    display ()
+      Purpose: Displays the answer. Should have an animation of some sort.
+      Arguments: None
+      Returns: None
+    -- Any other methods from AnswerType --
+*/
 /*jshint esversion: 6 */ 'use strict';
 
-class RemoveAnswer extends AnswerType {
+class AnswerTemplate extends AnswerType {
   constructor()
   {
     super();
-
-    // other stuff
+    this.data = false;
+    this.model = new __MODULENAME__();
   }
 
-  check (userAnswer)
+  check (userAnswer, activeElement, userData)
   {
-    // some way to check against userAnswer
+    // Performs a check here to make sure answer is correct ...
+    return true;
   }
 
-  display(div){
-    // display, preferably with an animation
-  }
+  // display () { }
+
 }

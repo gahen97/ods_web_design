@@ -1,36 +1,31 @@
 /*
-  This has to be changed for different exercises.
-  Mainly the DOM Related parts - dealing with the model display
+  This is the main View class which will be used for dealing with all UI elements.
+
+  Documentation:
+    constructor ()
+      Constructs a new View object.
+    isElementOverModel (element : DOMObject) : boolean
+      Purpose: Determines if an element is within the model's view.
+      Arguments:
+        element  DOMObject  The DOM Object to check
+      Returns: Boolean. True if the element is within the model.
+    drawWithinModel (element : Element)
+      Purpose: Draws an element within the model's view.
+      Arguments:
+        element  Element  The element to draw within the model.
+      Returns: None
+    displayModel (m : Model)
+      Purpose: Draws the model to the screen.
+      Arguments:
+        m  Model  The model to display
+      Returns: None
+
+  See ViewBase for further documentation
 */
 
 class View extends ViewBase {
   constructor(){
     super(...arguments);
-
-    // Anything else the view needs to do on construct
-  }
-
-  // start up a new view
-  start () {
-    // Draw the starting point for the view with no elements
-  }
-
-  // clear the view
-  clear (opts) {
-    // Clear the view. This can call the super clear with a checkFunc
-    // [ opts.checkFunc ]. If checkFunc returns true, an element will be deleted;
-    // otherwise element will be bypassed
-    if (!opts) opts = { };
-
-    // Implement opts.checkFunc here
-
-    super.clear (opts);
-  }
-
-  // remove an element from the view
-  removeElements (elems, checkFunc) {
-    // checkFunc returns true if an element is to be deleted
-    super.removeElements (elems, checkFunc);
   }
 
   // Is an element in the model
@@ -46,7 +41,5 @@ class View extends ViewBase {
   }
 
   displayModel (m) {
-    // This draws out the model to the screen,
-    //   replacing the old one.
   }
 }

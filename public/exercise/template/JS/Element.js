@@ -1,36 +1,38 @@
 /*
-  Everything for Elements that'd likely change between exercises.
-  DOM Related stuff
+  This is the main Element class. It deals with creating & using Elements.
+
+  Documentation:
+    constructor()
+      Constructs a new Element.
+
+    get valueSpan () : DOMObject
+      Returns the span used to represent the text of the Element.
+
+    addControls (element : DOMObject, stack : Selector)
+      Purpose: Add any other controls that the Element may need to have
+                 (eg. Draggable, Sortable, JsPlumb connections)
+      Arguments:
+        element  DOMObject  The element div. If not given, assume this is .div
+        stack    Selector   This is a JQueryUI selector that can optionally be used
+                              for the stack argument. See http://api.jqueryui.com/draggable/#option-stack
+      Returns: None.
+
+  Should overload/add anything else that the Elements need to do..
 */
 
 class Element extends ElementBase {
   constructor(){
     super (...arguments);
-
-    // Anything else that needs to be done for Elements
   }
 
-  generate () {
-    // Create a new div to represent the element,
-    //   returning the new div
+  get span () {
+
   }
 
-  setActive (isActive) {
-    // Activate this element. Adds a class to represent being active
-      var element = $(this.element);
-      if (isActive)
-        element.addClass ("active");
-      else
-        element.removeClass ("active");
-  }
+  // add draggable ...
+  addControls (e, stack) { //make draggable
+    if (!e) e = this.element;
 
-  moveTo (offset) {
-    // Move to some given position
-    $ (this.element).offset (offset);
-  }
-
-  addControls (e) {
-    // If there are any controls needed - draggable, droppable, ... -
-    //   add them here. If given, e is the element
+    // add any controls the element may need
   }
 }
