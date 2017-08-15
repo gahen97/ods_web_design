@@ -1,3 +1,73 @@
+/*
+  This is the base object for a Question Type. This is usually a grouping of
+    questions, such as Operations for add, remove, and find questions.
+
+  Documentation:
+    constructor (questionData : Array of QuestionData,
+                 numQuestionsArr : Array of int,
+                 answerType : Array of AnswerType,
+                 [prevModel : Model])
+      Initializes the QuestionType, including initializing all of its questions.
+      Arguments:
+        questionData     Array of QuestionData  The QuestionData to pass into each
+                                                  Question
+        numQuestionsArr  Array of int           The number of each question to
+                                                  initialize
+        answerType       Array of AnswerType    The answer type to use for each
+                                                  question
+        prevModel        Model                  The model used by the previous
+                                                  QuestionType [ OPTIONAL ]
+    moveToNext ()
+      Moves to the next question, if possible.
+      Returns false if there are no more questions.
+    moveToPrev ()
+      Moves to the previous question, if possible.
+      Returns false if it cannot move back any further.
+    build () : Model
+      Purpose: Builds a starting model to use for the QuestionType, if one was not
+                 passed in.
+      Arguments: None
+      Returns: The new Model which was built
+    setup (questionData : Array of QuestionData,
+                 numQuestionsArr : Array of int,
+                 answerType : Array of AnswerType,
+                 [prevModel : Model]) : Model
+      Purpose: Performs initial setup of the QuestionType, including setting up
+                 all Questions.
+      Arguments: These are all the same as provided to the constructor.
+      Returns: The final state of the model. This is the last question's answer.
+    scrambleQuestionOrder ()
+      Purpose: Scrambles the order of all questions so that they are randomized.
+      Arguments: None
+      Returns: None
+    containsQuestionNum (qNum) : boolean
+      Returns true if this QuestionType has qNum questions (and qNum is accessible);
+        otherwise returns false.
+    draw ()
+      Draws the current Question to the screen.
+    showAnswer (div : DOMObject)
+      Purpose: Draws the current Question's answer to the given div.
+      Arguments:
+        div  DOMObject  The DOM Object to display the answer inside of
+      Returns: None
+    check (...) : boolean
+      Purpose: Checks if the given answer is correct.
+      Arguments: All arguments are passed straight through to the Question.
+                 See Question for documentation ...
+      Returns: Boolean. True if the given answer is correct.
+    isInputValid (input : string) : boolean
+      Returns true if the given input is valid for the current question.
+    canSetActive ()
+      Returns true if the current question allows elements to be set as active.
+
+  READ-ONLY PROPERTIES:
+    name  string  The name of the QuestionType
+
+  QuestionData
+    See Question.js for QuestionData documentation.
+
+*/
+
 /*jshint esversion: 6 */ 'use strict';
 
 class QuestionType {
@@ -56,17 +126,17 @@ class QuestionType {
 
   moveToNext ()
   {
-    this.setCurrQuestion (this.currQuestion + 1);
+    return this.setCurrQuestion (this.currQuestion + 1);
   }
 
   moveToPrev ()
   {
-    this.setCurrQuestion (this.currQuestion - 1);
+    return this.setCurrQuestion (this.currQuestion - 1);
   }
 
   build()
   {
-    return; // we want this to do nothing, unless overloaded.
+    return null; // we want this to do nothing, unless overloaded.
   }
 
   //if you want to modify this behavior, for example to scramble question order, override this method in the subclass, copying it, except add scramble or whatever extra functionality
