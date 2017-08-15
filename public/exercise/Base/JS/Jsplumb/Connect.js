@@ -54,7 +54,7 @@ class PlumbConnect {
 
     this.detachable = true;
     this.classes = opts.classes ? this._classesFrom (opts.classes) : DEF_PLUMB_CLASS;
-    this.connection = this._drawConnect(opts);
+    this.connection = this.drawConnect(opts);
   }
 
   /* ---- CONSTRUCTOR - OPTION HELPERS ----- */

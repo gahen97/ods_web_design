@@ -87,7 +87,7 @@ class AnimationSettings {
     var f = s && s [func];
 
     if (!s || !f) return false;
-    f (amnt);
+    f.call (s, amnt);
 
     return true;
   }

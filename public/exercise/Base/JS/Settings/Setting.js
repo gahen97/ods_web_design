@@ -28,7 +28,7 @@ class Setting {
     this.value   = data.value;
     this.values  = data.values;
     this.ctr     = data.ctr || this.detectCtr ();
-    this.cb      = data.cb || ()=>{};
+    this.cb      = data.cb || function(){};
     this.elem    = data.element || null;
   }
 
