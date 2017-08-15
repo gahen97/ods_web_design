@@ -16,7 +16,7 @@ var express = require ("express");
 var app     = express ();
 
 const PORT = 2402;
-const PATH = "localhost";
+const HOST = "127.0.0.1";
 
 const INDEX_HTML = "public/index.html";
 const TABLE_OF_CONTENTS = "public/video_index.html";
@@ -25,6 +25,7 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 app.get("/", function (req, res){
+	console.log(req);
 	res.sendFile (path.join (__dirname, INDEX_HTML));
 });
 
@@ -47,6 +48,6 @@ app.get ("/:exerciseName", function (req, res){
 app.use (express.static ("./public"));
 app.use (express.static ("./jquery-ui"));
 
-app.listen (PORT, function(){
+app.listen (PORT, HOST, function(){
   console.log ("Templated server running from port", PORT + ".");
 });
