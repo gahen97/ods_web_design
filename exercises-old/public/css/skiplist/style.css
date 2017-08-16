@@ -6,7 +6,7 @@
       }
       div.titleblock {
         /* background-color: #abcdd9; */
-        background-color: rgb(204,0,51); /* CU red */ 
+        background-color: rgb(204,0,51); /* CU red */
         padding: 4ex 4ex 4ex 4ex;
         color: white;
       }
@@ -22,8 +22,8 @@
       }
       a.button {
         padding: 3pt 6pt 3pt 6pt;
-        border: 2px solid rgb(204,0,51); /* CU red llist*/ 
-        color: rgb(204,0,51); /* CU red */ 
+        border: 2px solid rgb(204,0,51); /* CU red llist*/
+        color: rgb(204,0,51); /* CU red */
         margin-left: 9px;
       }
       a.button.default {
@@ -51,7 +51,7 @@
       }
       a {
           text-decoration: none;
-          color: rgb(204,0,51); /* CU red */ 
+          color: rgb(204,0,51); /* CU red */
       }
       .hidden {
         visibility: hidden;
@@ -126,6 +126,13 @@
         -ms-user-select: none;
         user-select: none;
       }
+      #questionPlaceholder{
+        width: 95%;
+        height: 800px;
+        border: 1px solid black;
+        box-shadow: 10px 10px 5px #888888;
+        visibility: hidden;
+      }
       .textin {
           letter-spacing: 1em;
       }
@@ -139,7 +146,7 @@
 	        margin: 0;
           padding-left: 3px;
 	        margin-left: 20px;
-          border: 2px solid rgb(204,0,51); /* CU red */ 
+          border: 2px solid rgb(204,0,51); /* CU red */
           width: 150px;
           height: 15px;
           display: inline-block;
@@ -222,7 +229,7 @@
         padding-top: 2px;
       }
       div.row{
-        width: 100%; 
+        width: 100%;
         height: 30px;
         position: absolute;
       }
@@ -233,11 +240,11 @@
 	display: inline-block;
 	position: relative;
 	font-size: 14px;
-	color: rgba(31, 117, 107, 0.55); 
+	color: rgba(31, 117, 107, 0.55);
       }
       div.index{
 	display: inline-block;
 	position: absolute;
 	font-size: 14px;
-	color: rgb(0, 27, 249); 
+	color: rgb(0, 27, 249);
       }

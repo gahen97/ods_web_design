@@ -12,6 +12,7 @@
 var path    = require ("path");
 var fs      = require ("fs");
 var promise = require ("promise");
+var fork = require('child_process').fork;
 var express = require ("express");
 var app     = express ();
 
@@ -33,6 +34,12 @@ const EXERCISE_PORT = config_ex.port;
 
 const INDEX_HTML = "public/index.html";
 const TABLE_OF_CONTENTS = "public/video_index.html";
+
+
+// Start our other servers up ...
+var old_exercises = require('./exercises-old/server.js');
+var h5pServer     = require('./h5p_server/lib/h5p-server.js');
+new h5pServer ().start ();
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -73,5 +80,4 @@ app.use (express.static ("./jquery-ui"));
 app.listen (PORT, HOST, function(){
   console.log ("Main server running from http://%s:%s/", HOST, PORT);
   console.log ("H5P server running from http://%s", H5P_URL);
-  console.log ("Exercise server running from http://%s:%s/", EXERCISE_HOST, EXERCISE_PORT);
 });

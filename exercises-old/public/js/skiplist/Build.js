@@ -103,10 +103,10 @@ Build.prototype.addRow = function (rows, rowNum){
 	var height = this.getRowHeight (rowNum, rows.length);
 	var n = new NodesArray ();
 	this.nodes.set (rowNum, n);
-	
+
 	// make a sentinel node
 	var p = this.makeSentinel (rowNum, rows[rowNum].length, height);
-	
+
 	return {row: n, sentinel: p};
 }
 
@@ -127,7 +127,7 @@ Build.prototype.getPosition = function (height, i, n){
 		top: height,
 		left: this.getElPosition (i, n)
 	};
-	
+
 	return position;
 }
 
@@ -138,10 +138,10 @@ Build.prototype.positionNode = function (node, height, i, n){
 Build.prototype.reposition = function (){
 	var len = this.nodes.size ();
 	var bld = this;
-	
+
 	var rowLength = this.nodes.get(0).size ();
 	var indices = this.nodes.get(0).toDict (function (n, i){ return n; }, function (n, i){ return i; });
-	
+
 	// offset the towers by the number of hidden nodes.
 	// this isn't really used until -iiia, but is useful to have for the other ones ....
 	// if a tower is hidden, then it'll increase the offset - effectively hiding the tower.
@@ -163,14 +163,14 @@ Build.prototype.reposition = function (){
 
 Build.prototype.makeNode = function(data, i, n, height, rowNum){
 	var question = DOM.question ();
-	
+
 	// give it a position
 	var pos = this.getPosition (height, i, n);
 
 	// add the new node
 	var nodesData = rowNum > 0 ? true : data;
 	var node = new Node (undefined, nodesData, {parent: question, enabled: true, height:rowNum, position: pos});
-	
+
 	// push it into places
 	this.towers.get (i + 1, data).push (node);
 	Nodes.push (node);
@@ -181,7 +181,7 @@ Build.prototype.makeNode = function(data, i, n, height, rowNum){
 
 	if (rowNum === 0 && i>=0)
 		this.elems.push (node);
-	
+
 	return node;
 }
 
@@ -195,7 +195,7 @@ Build.prototype.addEmptyRow = function (cb) {
 	// by giving every value false, makes the row without any elements
 	for (var i = 0; i < bottomRow.length; i++)
 		row.push (false);
-	
+
 	// add the sentinel
 	myRows.push (row);
 	return this.buildRow (n, myRows, {timeout: 0}, cb);
@@ -267,10 +267,10 @@ Build.prototype.add = function (data, index, opts){
 Build.prototype.buildRow = function (rowNum, rows, opts, cb){
 	var height = this.getRowHeight (rowNum, rows.length);
 	var row = rows[rowNum];
-		
+
 	var r = this.addRow (rows, rowNum);
 	var prevNode = r.sentinel;
-		
+
 	for (var i = 0; i < row.length; i++){
 		if (!row[i] && row[i] !== 0) continue;
 
@@ -278,7 +278,7 @@ Build.prototype.buildRow = function (rowNum, rows, opts, cb){
 
 		if (prevNode)
 			prevNode.connectTo (n);
-			
+
 		prevNode = n;
 	}
 
@@ -319,13 +319,13 @@ Build.prototype.build = function (rows, cb){
 	this.elems  = new NodesArray ();
 
 	var prevNode;
-	
+
 	this.nodes = new Nodes2D();
 
 	var my = this;
 	my.buildRows (rows, 0, function(){
 		my.numRows = rows.length;
-	
+
 		// getting some issues with the top sentinel not repainting
 		// waiting 1 ms fixes the issues, so doing this for now
 		setTimeout (function(){
@@ -390,5 +390,5 @@ Build.prototype.totalWidth = function (){
 
 Build.prototype.resize = function (){
 	var width = this.totalWidth ();
-	DOM.resize (DOM.question(), width);
+	//DOM.resize (DOM.question(), width);
 }

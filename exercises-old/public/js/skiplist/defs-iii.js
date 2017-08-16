@@ -9,7 +9,10 @@ operations = [
 		}
 	},
 	{
-		name: "add"
+		name: "add",
+		checkValid: function(){
+			return build && build.rowSize() < 7;
+		}
 	}
 ];
 modes = [

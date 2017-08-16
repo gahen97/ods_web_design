@@ -70,6 +70,4 @@ function shiftToNext(elements, index){
 }
 
 function resize(){
-	if (parent && parent.resizeIframe)
-		parent.resizeIframe ();
 }

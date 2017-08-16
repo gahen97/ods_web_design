@@ -10,7 +10,7 @@ modes = [
 	{
 		name: "searchPath",
 		setup: function(){ initSearchPath(); }
-	}, 
+	},
 	{
 		name: "addRemove",
 		setup: function(){ initAddRemove(); }
@@ -19,7 +19,10 @@ modes = [
 
 var operations = [
 	{
-		name: "add"
+		name: "add",
+		checkValid: function(){
+			return build && build.rowSize() < 7;
+		}
 	},
 	{
 		name: "remove",
@@ -37,4 +40,3 @@ function isRem () { return op.get() === "remove"; }
 function isAdd () { return op.get() === "add"; }
 function isSP () { return mode.get() === "searchPath"; }
 function isAR () { return mode.get() === "addRemove"; }
-

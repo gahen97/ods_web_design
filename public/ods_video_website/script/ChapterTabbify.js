@@ -17,22 +17,22 @@
 var chapters = {
   "Interfaces": [{
     text: "List",
-    href: ""
+    href: "/list"
   }, {
     text: "Uset",
     href: "/uset"
   }, {
     text: "Sset",
-    href: ""
+    href: "/sset"
   }],
   "Array Lists": [
     {
       text: "ArrayStack",
-      href: ""
+      href: "/array-stack"
     },
     {
       text: "ArrayStack-ii",
-      href: ""
+      href: "/array-stack-ii"
     }
   ],
   "Linked Lists": [
@@ -47,16 +47,16 @@ var chapters = {
   ],
   "Skiplists": [
     {
-      text: "Def'n",
-      href: ""
+      text: "Definition",
+      href: "/skiplist"
     },
     {
       text: "Search",
-      href: ""
+      href: "/skiplist-ii"
     },
     {
       text: "Analysis",
-      href: ""
+      href: "/skiplist-iii"
     }
   ],
   "Binary Trees": [

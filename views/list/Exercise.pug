@@ -1,0 +1,13 @@
+extends ../ods_video.pug
+
+block EXERCISE_HEAD
+    script(type='text/javascript', src='/iframes/iframe-resizer/js/iframeResizer.min.js')
+    script(type='text/javascript', src='iframes/iframe-resize-setup.js')
+
+block EXERCISE_NAME
+  | The List Interface
+
+block VIDEO_FRAME
+  iframe#videoFrame(src='http://' + h5pUrl + '/list', scrolling="no", allowfullscreen="true", webkitallowfullscreen="true", mozallowfullscreen="true")
+
+block EXERCISE_CONTENT

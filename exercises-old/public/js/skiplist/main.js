@@ -21,6 +21,4 @@ function setSearchingFor (d){
 }
 
 function resize(){
-	if (parent && parent.resizeIframe)
-		parent.resizeIframe ();
 }

@@ -8,7 +8,8 @@ var cookieParser = require("cookie-parser");
 var cookie = require("./modules/cookie.js");
 
 var app = express();
-const ROOT = "./public";
+const ME   = "./exercises-old"
+const ROOT = ME+"/public";
 
 app.set('view engine', 'pug');
 
@@ -16,7 +17,7 @@ app.use(cookieParser())
 
 app.get("/:type/exercise", function(req,res){
 	var exercise = require("./modules/" + req.params.type + ".js");
-	var render   = pug.compileFile("./views/" + req.params.type + "/render.pug");
+	var render   = pug.compileFile(ME+"/views/" + req.params.type + "/render.pug");
 
 	// ook!
 	var cookieName = cookie.getName (req.params.type);
@@ -33,7 +34,7 @@ app.get("/:type/exercise", function(req,res){
 });
 
 app.get("/:type/reset", function(req, res){
-	var exercise = require("./modules/" + req.params.type + ".js");
+	var exercise = require(ME+"/modules/" + req.params.type + ".js");
 	var cookieName = cookie.getName (req.params.type);
 	var ook = req.cookies[cookieName];
 
@@ -43,6 +44,7 @@ app.get("/:type/reset", function(req, res){
 	res.sendStatus(200);
 })
 
+console.log(ROOT);
 app.use(express.static(ROOT));
 
 app.listen(data.port, data.host,function(){
