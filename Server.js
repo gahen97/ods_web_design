@@ -18,6 +18,8 @@ var app     = express ();
 const PORT = 2402;
 const HOST = "127.0.0.1";
 
+const H5P_URL = "192.168.123.173";
+
 const INDEX_HTML = "public/index.html";
 const TABLE_OF_CONTENTS = "public/video_index.html";
 
@@ -33,7 +35,7 @@ app.get("/contents", function(req, res){
 });
 
 app.get ("/:exerciseName", function (req, res){
-	res.render(req.params.exerciseName + "/Exercise", function(err, html) {
+	res.render(req.params.exerciseName + "/Exercise", {h5pUrl: H5P_URL}, function(err, html) {
 	  if (err) {
 	    if (err.message.indexOf('Failed to lookup view') !== -1) {
 	      return res.sendStatus (404);
