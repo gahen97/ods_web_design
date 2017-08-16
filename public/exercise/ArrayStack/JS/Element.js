@@ -9,13 +9,12 @@ class Element extends ElementBase {
   }
 
   generate () {
-    // TODO HARDCODING IS BAD. MAYBE MOVE SELECTORS TO DEFS?
     var elementDiv = $(ELEMENT_TEMPLATE).clone ();
     var model      = $(ARRAY_BODY);
     var span       = $("span", elementDiv);
 
     // set the text ...
-    span.text (this.value).data ("id", this.id); // TODO There's gotta be a better way to do this
+    span.text (this.value).data ("id", this.id);
 
     // parent it to the main div, add the stuff, return
     elementDiv.appendTo (model).data ("id", this.id);

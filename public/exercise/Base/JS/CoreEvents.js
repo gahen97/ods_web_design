@@ -57,7 +57,7 @@ function onShowAnsBtnClick (elem, evt) {
 // Restart button
 function onRestartBtnClick (elem, evt) {
   if (!this.restartExercise ())
-    new ErrorDialog ("You have broken the space time continuum"); // TODO
+    new ErrorDialog ("Could not restart exercise"); // TODO
 }
 
 /* INPUT. THIS CONTROLS THE BOUNCING + ICON */
