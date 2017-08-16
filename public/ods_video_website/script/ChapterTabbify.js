@@ -15,13 +15,71 @@
 */
 
 var chapters = {
-  "Chapter 1": ["mod 1", "mod 2"],
-  "Chapter 2": ["mod 3", "mod 4"]
+  "Interfaces": [{
+    text: "List",
+    href: ""
+  }, {
+    text: "Uset",
+    href: "/uset"
+  }, {
+    text: "Sset",
+    href: ""
+  }],
+  "Array Lists": [
+    {
+      text: "ArrayStack",
+      href: ""
+    },
+    {
+      text: "ArrayStack-ii",
+      href: ""
+    }
+  ],
+  "Linked Lists": [
+    {
+      text: "SLList",
+      href: "/sllist"
+    },
+    {
+      text: "DLList",
+      href: "/dllist"
+    }
+  ],
+  "Skiplists": [
+    {
+      text: "Def'n",
+      href: ""
+    },
+    {
+      text: "Search",
+      href: ""
+    },
+    {
+      text: "Analysis",
+      href: ""
+    }
+  ],
+  "Binary Trees": [
+    {
+      text: "Binary Tree",
+      href: "/binary-tree"
+    },
+    {
+      text: "BST",
+      href: "/bst"
+    }
+  ],
+  "RBST": [
+    {
+      text: "Treap",
+      href: "/treap"
+    }
+  ]
 }
 
 class ChapterTabbify {
   static addHeader (text, parent) {
-    return $("<h3>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
+    return $("<h3 class='chapter-heading text-mid'>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
   }
 
   static subFrom (header) {
@@ -34,7 +92,8 @@ class ChapterTabbify {
 
   static addToHeader (text, header, data) {
     var parent     = ChapterTabbify.subFrom (header);
-    var newElement = $("<div class='question-tab'>" + text + "</div>").appendTo (parent);
+    console.log (text.href);
+    var newElement = $("<div class='question-tab'><a href='" + text.href + "'>" + text.text + "</a></div>").appendTo (parent);
 
     for (var e in data)
       newElement.data (e, data [e]);
@@ -125,8 +184,6 @@ class ChapterTabbify {
 
     for (var key in questions) {
       var q = questions [key];
-
-      var name = q;
 
       data.questionId = key;
 

@@ -5,6 +5,7 @@ body {
 a {
   text-decoration: none;
   color:#565656;
+  cursor: pointer;
 }
 
 a:hover {
