@@ -1,0 +1,14 @@
+{
+  "h5p": {
+    "host": "192.168.123.173",
+    "port": 81
+  },
+  "exercises_old": {
+    "host": "192.168.123.173",
+    "port": 8080
+  },
+  "main": {
+    "host": "localhost",
+    "port": 2406
+  }
+}
