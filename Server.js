@@ -15,9 +15,11 @@ var promise = require ("promise");
 var express = require ("express");
 var app     = express ();
 
+// Port & Hostname to use for this server
 const PORT = 2402;
 const HOST = "127.0.0.1";
 
+// URL (Host + Port) for the H5P Server
 const H5P_URL = "192.168.123.173";
 
 const INDEX_HTML = "public/index.html";
