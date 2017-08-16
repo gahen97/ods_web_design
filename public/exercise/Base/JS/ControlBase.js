@@ -35,7 +35,7 @@
 
   check ()
     Purpose: Checks & reacts to the answer given by the user.
-  
+
   updateActiveQuestion ()
     Purpose: Updates the currently highlighted question within the tabbing system.
 
@@ -134,9 +134,7 @@ class ControlBase {
     this.exercise.load ();
 
     // add tabbing
-    this.tabs = new QuestionTabbify (this, {
-      eventId: TABS_EVENTS_ID
-    });
+    this.tabs = new QuestionTabbify (this, TABS_EVENTS_ID);
     this.updateActiveQuestion();
 
     this.animationLoop ();

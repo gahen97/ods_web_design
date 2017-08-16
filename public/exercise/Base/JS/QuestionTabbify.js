@@ -48,6 +48,8 @@ class QuestionTabbify {
 
   /* ---- CONSTRUCT ---- */
   constructor (control, evtid) {
+    console.trace ();
+    console.log (evtid);
     this.mainHeader = QuestionTabbify.mainFrom ($("#questions_display"));
     this.eventId    = evtid;
 
@@ -159,8 +161,10 @@ class QuestionTabbify {
 
   _addEventHandling (control, evtId) {
     var e = control.getDomEventHandler (evtId);
+    console.log (e, evtId);
     if (!e) return false;
 
+    console.log (this.items);
     e.pushArray (this.items);
 
     return this;

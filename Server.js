@@ -25,7 +25,6 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 app.get("/", function (req, res){
-	console.log(req);
 	res.sendFile (path.join (__dirname, INDEX_HTML));
 });
 
@@ -43,6 +42,8 @@ app.get ("/:exerciseName", function (req, res){
 	  }
 	  res.send(html);
 	});
+
+	// going to need a proxy here to load exercises from the other server
 });
 
 app.use (express.static ("./public"));
