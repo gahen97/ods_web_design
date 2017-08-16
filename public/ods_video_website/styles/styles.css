@@ -163,6 +163,11 @@ a {
 		width: 100%;
 	}
 
+#exerciseFrame{
+  width: 100%;
+  border: none;
+}
+
 #exercise {
   color: #565656;
   margin-top: 20px;

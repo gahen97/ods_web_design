@@ -92,7 +92,6 @@ class ChapterTabbify {
 
   static addToHeader (text, header, data) {
     var parent     = ChapterTabbify.subFrom (header);
-    console.log (text.href);
     var newElement = $("<div class='question-tab'><a href='" + text.href + "'>" + text.text + "</a></div>").appendTo (parent);
 
     for (var e in data)

@@ -15,12 +15,21 @@ var promise = require ("promise");
 var express = require ("express");
 var app     = express ();
 
+const config      = require ("./config");
+const config_self = config.main;
+const config_ex   = config.exercises_old;
+const config_h5p  = config.h5p;
+
 // Port & Hostname to use for this server
-const PORT = 2402;
-const HOST = "127.0.0.1";
+const PORT = config_self.port;
+const HOST = config_self.host;
 
 // URL (Host + Port) for the H5P Server
-const H5P_URL = "192.168.123.173";
+const H5P_URL = config_h5p.host + ":" + config_h5p.port;
+
+// Exercise server Host & Port
+const EXERCISE_HOST = config_ex.host;
+const EXERCISE_PORT = config_ex.port;
 
 const INDEX_HTML = "public/index.html";
 const TABLE_OF_CONTENTS = "public/video_index.html";
@@ -37,7 +46,15 @@ app.get("/contents", function(req, res){
 });
 
 app.get ("/:exerciseName", function (req, res){
-	res.render(req.params.exerciseName + "/Exercise", {h5pUrl: H5P_URL}, function(err, html) {
+	res.render(req.params.exerciseName + "/Exercise",
+	{
+		h5pUrl: H5P_URL,
+	  exercise: {
+		 host: EXERCISE_HOST,
+		 port: EXERCISE_PORT
+		}
+	},
+	function(err, html) {
 	  if (err) {
 	    if (err.message.indexOf('Failed to lookup view') !== -1) {
 	      return res.sendStatus (404);
@@ -54,5 +71,7 @@ app.use (express.static ("./public"));
 app.use (express.static ("./jquery-ui"));
 
 app.listen (PORT, HOST, function(){
-  console.log ("Templated server running from port", PORT + ".");
+  console.log ("Main server running from http://%s:%s/", HOST, PORT);
+  console.log ("H5P server running from http://%s", H5P_URL);
+  console.log ("Exercise server running from http://%s:%s/", EXERCISE_HOST, EXERCISE_PORT);
 });
