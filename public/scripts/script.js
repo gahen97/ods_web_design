@@ -12,20 +12,26 @@ rgb(143, 205, 184)
 */
 
 var width = '72.5%';
-if ($(window).width() || $("#test").width() < 1450) {
+if ($(window).width() || $("#content").width() < 1450) {
 	width = '70%';
 }
 
-if ($(window).width() || $("#test").width() < 1290) {
+if ($(window).width() || $("#content").width() < 1290) {
 	width = '65%';
 }
 
-if ($(window).width()  || $("#test").width() < 1070) {
+if ($(window).width()  || $("#content").width() < 1070) {
 	width = '60%';
 }
 
 $(document).ready(function() {
-	$("#bigblock").click(function() {
+
+	$("#title").hover(function(){
+		$("#title").css('color', '#969696');
+	}, function() {
+		$("#title").css('color', '#565656');
+	});
+	$("#title").click(function() {
 		$("#bigblock").css('cursor', 'auto');
 		$("#innerblock").stop().animate({
 			'left': width
@@ -57,8 +63,8 @@ $(document).ready(function() {
 	});
 
 	$("#menu_dropdown").hover(function() {
-		$("#dropdown").show();
+		$("#dropdown").stop().slideDown('slow');
 	}, function() {
-		$("#dropdown").css('display', 'none');
+		$("#dropdown").stop().slideUp('slow');
 	});
 });
