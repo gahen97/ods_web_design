@@ -1,0 +1,45 @@
+.element.active {
+  background-color: #ff8401;
+}
+
+/* using on the model body. defines the main div */
+.modelBody {
+  width: 95%;
+  height: 60vh;
+  min-height: 300px;
+  max-height: 400px;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
+}
+
+/* element ... TODO: should show as clickable, draggable. style? */
+.element {
+  background-color: #565656;
+  color: white;
+  border: 3px solid #565656;
+  border-radius: 5px;
+  font-weight: bold;
+  font-family: courier;
+  text-align: center;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  position: absolute;
+  cursor: -webkit-grab;
+  line-height: 30px;  /* needs this for vertically centered text */
+}
+
+.element:hover{
+  background-color: white;
+  color: #565656;
+}
+
+.element:active {
+  background-color: white;
+  color: #565656;
+  width: 37px;
+  height: 37px;
+  box-shadow: 1px 1px 1px 1px #aaa;
+  cursor: -webkit-grabbing;
+}

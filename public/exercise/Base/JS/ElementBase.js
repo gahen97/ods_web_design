@@ -4,7 +4,7 @@
 
   Documentation:
     NOTE: MUST OVERLOAD:
-      get valueSpan () : DOMObject { };
+      get span () : DOMObject { };
         Returns the value span from the element. eg., $("span", elementDiv);
 
 
@@ -119,7 +119,7 @@ class ElementBase {
   generate () {
     var elementDiv = $(ELEMENT_TEMPLATE).clone ();
     var model      = $(MODEL_DISPLAY);
-    var span       = this.span ();
+    var span       = this.span;
 
     // set the text ...
     span.text (this.value).data ("id", this.id);
