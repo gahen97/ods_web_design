@@ -73,7 +73,7 @@ class SkiplistSSet extends Model {
 
   _pickHeight ()
   {
-    let randNum = ODSRandom.getRandom ();
+    let randNum = ODSRandom.getRandomInt ();
     let height  = 0;
     let m       = 1;
 
@@ -82,6 +82,7 @@ class SkiplistSSet extends Model {
       m <<= 1;
     }
 
+    console.log (height);
     return height;
   }
 
@@ -112,13 +113,14 @@ class SkiplistSSet extends Model {
 
     // Create the node & update our height, if needed
     let newNode = new Node (x, this._pickHeight ());
-    for (let row = this.height; row < newNode.height; row++)
+    var height = newNode.height;
+    for (let row = this.height; row <= height; row++)
       stack [row] = this.sentinel;
 
     // Add the node in
-    for (let i = 0; i < newNode.height; i++) {
-      newNode.next [i]   = stack [i].next [i];
-      stack [i].next [i] = newNode;
+    for (let i = 0; i <= height; i++) {
+      newNode.setNext (i, stack [i].next [i]);
+      stack [i].setNext (i, newNode);
     }
 
     this.n ++;

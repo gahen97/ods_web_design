@@ -1,40 +1,10 @@
 /*
-  Main definitions.
-
-  MUST Overload:
-    questionTypesClassNames    Array of QuestionType     Various Question Types to use for the exercise
-    answerTypesClassNames      2D Array of AnswerType    Answers to each question within a given QuestionType
-    questionData               2D Array of QuestionData  Question Data for each question within a given QuestionType
-    numberOfQuestionsRequired  2D Array of int           Number of questions required for each question within given QuestionType
-
-  2D Array Definitions:
-    The first dimension corresponds to the QuestionType.
-    The second dimension corresponds to a given Question within the QuestionType.
-
-  QuestionData:
-    Should be an object with two key-value pairs:
-      className         Question  The class to use for the question
-      instructionsText  string    Instructions to use for the question
-
-  FOR EXAMPLE:
-    If QuestionType is Operations & Questions are Add, Remove, Find:
-      questionTypesClassNames = [Operations]
-      answerTypesClassNames   = [[AddAnswer, FindAnswer, RemoveAnswer]]
-      questionData            = [[
-        {className: Add, instructionsText: "Demonstrate adding an element:"},
-        {className: Find, instructionsText: "Demonstrate finding an element:"},
-        {className: Remove, instructionsText: "Demonstrate removing an element:"}
-      ]]
-      numberOfQuestionsRequired = [
-        [numAddQuestions, numFindQuestions, numRemoveQuestions]
-      ]
-
-  Note that other definitions that do not deal with the DOM should be defined
-    here. Also, if any parameters are needed for questions, they should be
-    defined here and used inside the Question classes.
+  Main definitions
 */
 
 /*jshint esversion: 6 */ 'use strict';
+
+/* Constants go here */
 const ELEM_EVENTS_ID = "elementEvents";
 const TABS_EVENTS_ID = "tabbedEvents";
 
@@ -44,28 +14,53 @@ var DEBUG = true;
 var instructionsId = "instructions";
 var questionId = "questions";
 
-// MODEL
-var __MODULENAME__ = SkiplistSSet;
-const SENTINEL_VALUE = 'S';
+const SENTINEL_VALUE = ">";
 
-// QUESTION TYPES
+/*
+
+var __MODULENAME__questionTypesClassNames = [];
+
+  var __MODULENAME__questionData = [ {className : questionClassName, instructionsText : "do this" , parameters : {} } , ]
+  //model
+  var __MODULENAME__ = "";
+
+var __MODULENAME__numberOfQuestionsRequired = [ ];
+*/
+
+/* MODULENAME represents the working Model. This'll be used to create new models. */
+var __MODULENAME__ = SkiplistSSet;
+
+// The Question Types to be used for the exercise.
 var questionTypesClassNames = [Operations];
 
-// ANSWERS
+// Answers to be used for each Question Type.
+// Note this is a 2D Array, where the first dimensions maps it to a Question Type,
+//   which is then an array of different kinds of questions for that QType.
 var answerTypesClassNames = [[FindAnswer]];
 
-// QUESTIONS
-var numQuestions = 10;
-var numberOfQuestionsRequired = [[5]];
+// Number of questions required for different questions.
+// Note this follows the same structure as answer types
 
-var questionData = [
-    [
-      {class : Find, instructionsText : "Display the path to the given element in the SkipList:"}
-    ]
-];
+var numberOfQuestionsRequired = [[6]];
 
-// PARAMETERS
-var __param__ = null;
+// questionData. Should be a 2D array of objects, where:
+//   First dimension maps to a Question Type
+//   Second dimension maps to a Question
+//   Object contains:
+//     class: The class for the Question
+//     instructionsText: Some instructions to be shown for the question
+
+  var questionData = [
+    [{class: Find, instructionsText: "Display the path to an element in the SkipList:"}]
+                      ];
+
+// Min and max values to be used as parameters for different questions
+/*
+var __templateMinParam__ = 1;
+var __templateMaxParam__ = 10;
+*/
+var __addMinParam__ = 1;
+var __addMaxParam__ = 10;
 
 /*load order:
 MUST BE LOADED AFTER QUESTIONS AND QUESTIONTYPES AND RANDOM

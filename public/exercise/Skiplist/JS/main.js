@@ -1,17 +1,6 @@
-/*
-	This is the main code. Deals with global helper functions & creating the
-	  control object.
-*/
-
 /*jshint esversion: 6 */ 'use strict';
 
-/* This is a helper function to add context to a function.
-	Arguments:
-		t  Object    The context to give the function
-		f  function  The function to add context to
-	Returns: A new function which can be called. Will call the original function
-	           in the given context.
-*/
+// TODO find a better place for this?
 function contextualize (t, f)
 {
 	return (function () {
@@ -19,9 +8,14 @@ function contextualize (t, f)
 	});
 }
 
-// Code to start up the exercise
+/*
+	Code to start up the stuff ....
+*/
+
 var control;
 function start ()
 {
 	control = new Control ();
 }
+
+model_height = function(){}

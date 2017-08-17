@@ -26,6 +26,8 @@
 class View extends ViewBase {
   constructor(){
     super(...arguments);
+
+    this.nodes = [ ];
   }
 
   // Is an element in the model
@@ -41,5 +43,38 @@ class View extends ViewBase {
   }
 
   displayModel (m) {
+    var x      = ELEMENT_X_START;
+    var height = m.height;
+    m.each ((data,node, index)=>{
+      this.nodes [node.id] = [ ];
+      for (var row = 0; row < node.height; row++){
+        var e = this.addElement (data, {
+          constructArgs: {
+            nodeId:   node.id,
+            rowIndex: row
+          }
+        });
+
+        e.moveTo (this.modelDivHelper.fromOffset ({
+          top: ELEMENT_SEP_Y * (height - row),
+          left: x
+        }));
+
+        if (row > 0)
+          e.hideValue ();
+
+        var prevNode = node.getPrev (row);
+            prevNode = prevNode && prevNode.id;
+        var element  = this.nodes [prevNode] && this.nodes [prevNode] [row];
+
+        console.log (this.nodes [prevNode], row);
+
+        if (element)
+          element.connectTo (e);
+        this.nodes [node.id] [row] = e;
+      }
+
+      x += ELEMENT_SEP_X;
+    });
   }
 }

@@ -93,7 +93,7 @@ class Element extends ElementBase {
   }
 
   canSetActive () {
-    return !this.hasClass("active") && !this.hasClass("path-node");
+    return !this.hasClass("path-node");
   }
 
   setCSA (c) {

@@ -28,6 +28,12 @@ Go to http://localhost:2402/EXERCISE_NAME
 Where EXERCISE_NAME is the name of the exercise (matching the directory under Views/)
 
 
+TO CHANGE SERVER HOSTS:
+
+Under config.json, there are three servers (ports & host).  
+H5P controls the videos;  
+Exercises_Old controls the older exercise server;  
+main controls the main server to host the videos, exercises, index, and Table of Contents pages.
 
 ArrayStack exercise is over-simplified and works more as a SortedSet ;
   should not use.

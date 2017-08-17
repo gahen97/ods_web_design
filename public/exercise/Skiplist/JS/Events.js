@@ -1,97 +1,153 @@
-/*
-  This is the main handler for all events that may occur. Any event handling
-    should be done in here.
-
-  To add an event:
-    Add a new event object into the eventData array, containing:
-      {
-        elem: [DOM Elements],
-        evtsArr: [
-          {
-            handlingFunction: FUNCTION NAME,
-            customEvtName: "SOME CUSTOM EVENT NAME",
-            domEventName: "DOM EVENT NAME"
-          }
-        ],
-        id: "SOME ID"
-      }
-
-      Where:
-        elem              Object               Object to use as triggerer for the events
-        evtsArr           Array of EventData   Events that should be handled on
-                                                 given element(s)
-        handlingFunction  function             Function to use as the event handler
-        customEvtName     string               Name of the custom event
-        domEvtName        string               DOM Event to use as the trigger
-        id [ OPTIONAL ]   string               ID to use for the event
-
-    Any handling functions will be sent in 2+ arguments:
-      element  Object     The element which fired off the event
-      evt      eventData  The event data sent from JQuery for the event
-
-    Any extra arguments sent from the event will be passed through to the
-      event handler.
-
-  Documentation:
-    onCheckBtnClick ()
-      Purpose: Handles the check button to check the user's answer.
-    onSubmitInput ()
-      Purpose: Handles the insert button to insert input.
-    checkEnter ()
-      Purpose: Handles pressing the enter key to insert input.
-    onElementClicked (element : DOMObject)
-      Purpose: Handles clicking on an element to activate it.
-      Arguments:
-        element  DOMObject  The element which was clicked
-      Returns: None
-    droppedOnTrash (element : DOMObject, evt : EventData, ui : JsPlumbInfo)
-      Purpose: Handles dropping an element onto the trash bin.
-      Arguments:
-        element  DOMObject    The trash bin
-        evt      EventData    The JQuery Event Data
-        ui       JsPlumbInfo  The info sent from JsPlumb's event
-      Returns: None
-
-  Should edit, add other event handlers.
-*/
 /*jshint esversion: 6 */ 'use strict';
 
-function onCheckBtnClick () {
-  control.check ();
+/*
+  This handles all the event handling for the exercise.
+*/
+
+/* helpers ... TODO global functions are bad */
+
+//TODO
+function onCheckBtnClick (elem, evt) {
+  // NOTE: Should check pointers (left & right) are correct,
+  //       levels are correct
+  if (this.exercise.check (this.userModel, this.activeElement, this.userDataArray)) {
+    //TODO
+    //Maybe make custom event that checks?
+    new Popup ("Correct!");
+    onNextBtnClick.apply(this, arguments);
+  } else {
+    new Popup ("That's wrong."); //TODO
+  }
 }
 
+
 /* INPUT BOX EVENTS */
-function onSubmitInput () {
+function onSubmitInput (element, evt) {
+  if (!inputValid.apply(this))
+    return inputError();
+
   var input = $ (".modelEntry").val ();
-
   input = parseInput (input);
-  if (!this.validInput (input))
-    return inputError ();
 
-  this.view.addElement (input);
+  var newId = this.addNode (input);
+  this.view.addElement (input, {
+    constructArgs: {
+      nodeId: newId
+    }
+  });
+
   $(".modelEntry").val("");
 };
 
-function checkEnter () {
+function checkEnter (element, evt) {
   if (evt.keyCode !== 13)  return;
   // UPDATE - Keeping this as an alternate method
-  onSubmitInput.call (this, ...arguments);
+  onSubmitInput.call (this, element, evt);
 }
+
 
 /*
   ELEMENT EVENTS. These are specific to Element.js and will be added separately
    for every new Element div that gets created.
 */
-function onElementClicked (elem){
+function onDragStarted(...args)
+{
+}
+
+function onDragStopped (elem, evt, ui)
+{
+}
+
+function onElementClicked (elem, ...args){
   var element = this.view.getElement (elem);
   if (!element) return;
-  if (!this.canSetActive ())
+  if (!this.canSetActive (element))
   {
     if (DEBUG) console.log("From inside onElementClicked element cannot be set as active.");
     return;
   }
+  if (this.activeElement === element)
+    this.setActiveElement (null);
+  else
+    this.setActiveElement (element);
+}
 
-  this.setActiveElement (element);
+function elemMoveDown (active) {
+  return active.moveDown ();
+
+  /*var um     = this.userModel;
+  var st     = um.subtree (active.getValue ());
+
+  if (!st)
+    active.moveDown();
+  else {
+    var t      = st.height ();
+    var maxDep = this.view.maxDepth;
+
+    if (t + um.depth (active.getValue()) + 1 > maxDep)
+      return false;
+    st.each ((data, node)=>{
+      this.view.findFromNid (node.id).moveDown ();
+    });
+
+    jsPlumb.repaintEverything ();
+  }
+
+  return true; */
+}
+
+function elemMoveUp (active) {
+  return active.moveUp ();
+  /*console.log(active);
+  var st     = this.userModel.subtree (active.getValue ());
+  if (!st)
+    active.moveUp();
+  else{
+    if (this.userModel.depth (active.getValue()) < 1)
+      return false;
+
+    st.each ((data, node)=>{
+      this.view.findFromNid (node.id).moveUp ();
+    })
+
+    jsPlumb.repaintEverything ();
+  }
+
+  return true;*/
+}
+
+function elementDragged (elem, evtObj, jqEvtObj) {
+}
+
+function toggleClassHover (element, isOn) {
+  var e = this.view.getElement (element);
+  if (!e) e = $(element).data("element");
+  if (!e) return false;
+
+  if (typeof isOn === "function")
+    isOn = isOn (e);
+
+  if (!isOn && e.isHovered()) return false;
+  e.toggleClass ("jsp-hover", isOn)
+}
+
+function onElemMouseOver (element) {
+  // If it moves onto the endpoint div,
+  // will fire both off & on. this is buggy wugsy so set a timeout
+  // and if that's the case this'll delay enough to always set active
+  setTimeout(()=>{
+    toggleClassHover.call (this, element, true);
+  }, 5);
+}
+
+function onElemMouseOff (element) {
+  toggleClassHover.call (this, element, false);
+}
+
+function checkElemHover (element) {
+  toggleClassHover.call (this, element, (e)=>{
+    return e.isHovered ();
+  });
 }
 
 /* TRASH CAN EVENTS. THIS BASICALLY HANDLES DELETING ELEMENTS */
@@ -106,8 +162,70 @@ function droppedOnTrash (element, evt, ui) {
   this.removeElement (draggable);
 }
 
-/* MODEL */
+/* JSPLUMB */
+function connectBetween (plumbEvt, mode) {
+  var src = plumbEvt.source;
+  var trg = plumbEvt.target;
 
+  var e1  = this.view.getElem (src);
+  var e2  = this.view.getElem (trg);
+
+  if (!e1 || (!e2 && mode === "connect")) return false;
+
+  var node1 = this.view.getNodeId (e1);
+  var node2 = (mode === "connect") ? this.view.getNodeId (e2) : null;
+
+  if (node1 === node2){
+    jsPlumb.deleteConnection (plumbEvt.connection);
+    return false;
+  }
+
+  this.connect (node1, node2);
+  setTimeout(()=>{
+    control.update ();
+    jsPlumb.repaintEverything(); // TODO
+  }, 10)
+}
+
+function doConnect (elem, plumbEvt, origEvt){
+  return connectBetween.call (this, plumbEvt, "connect")
+}
+
+function connectDetach (elem, plumbEvt, origEvt){
+  return connectBetween.call (this, plumbEvt, "detach");
+}
+
+function disconnectOnClickAMijiggles (elem, plumbEvt, origEvt) {
+  jsPlumb.deleteConnection(plumbEvt.connection, {
+    fireEvent: true
+  });
+}
+
+// The Nintendo DS was actually a very good gaming system
+function remHovOnDS (elem, conn, origEvt){
+  var src = conn.source ? $(conn.source) : $("#" + conn.sourceId);
+  if (!src || src.length===0) return;
+
+  setTimeout(()=>{checkElemHover.call (this, src);}, 10);
+
+  return true;
+}
+function addHovWhileDragging (elem, conn, origEvt){
+  var src = conn.source ? $(conn.source) : $("#" + conn.sourceId);
+  if (!src || src.length===0) return;
+
+  var elem = this.view.getElement (src);
+  if (!elem) return;
+
+  checkElemHover.call (this, src);
+}
+
+function targetPriorityInit (element, plumbEvt, origEvt) {
+  $(".jsplumb-target").addClass ("high-priority");
+}
+function targetPriorityRem () {
+  $(".high-priority").removeClass ("high-priority");
+}
 
   //must be loaded after page body loads (this refers to eventData, not these handling functions above)
 //[{elem: , customEventName: , handlingFunction: },{},{}]
@@ -138,7 +256,7 @@ function droppedOnTrash (element, evt, ui) {
 
 var eventData = null;   //need to do it this way because of scope
 $ (()=> {
-  var baseEvts = getCoreEvents ();
+  var coreEvents = getCoreEvents ();
   eventData =
   [
     {
@@ -181,14 +299,56 @@ $ (()=> {
       elem: [ ],
       evtsArr: [
         {
+          handlingFunction: onDragStopped,
+          customEvtName: "onDragStopped",
+          domEvtName: "dragstop"
+        },
+        {
+          handlingFunction: onDragStarted,
+          customEvtName: "onDragStarted",
+          domEvtName: "dragstart"
+        },
+        {
           handlingFunction: onElementClicked,
           customEvtName: "onElementClicked",
           domEvtName: "click"
+        },
+        {
+          handlingFunction: elementDragged,
+          customEvtName: "onElementDragged",
+          domEvtName: "drag"
+        },
+        {
+          handlingFunction: onElemMouseOver,
+          customEvtName: "here's johnny",
+          domEvtName: "mouseenter"
+        },
+        {
+          handlingFunction: onElemMouseOff,
+          customEvtName: "no tv and no beer make homer something something",
+          domEvtName: "mouseleave"
         },
       ],
       id: ELEM_EVENTS_ID // so it can be found later. take a look at the view
     },
 
+    /* ENDPOINT EVENTS ---- STYLING AND OTHER MAGIC */
+    {
+      elem: [ ],
+      evtsArr: [
+        {
+          handlingFunction: onElemMouseOver,
+          customEvtName: "here's johnny",
+          domEvtName: "mouseenter"
+        },
+        {
+          handlingFunction: onElemMouseOff,
+          customEvtName: "no tv and no beer make homer something something",
+          domEvtName: "mouseleave"
+        },
+      ],
+      id: ENDPOINT_EVENTS_ID // so it can be found later. take a look at the view
+    },
 
     /* TRASH CAN EVENTS ----- OCCUR ON THE TRASH CAN. #TRASH */
     {
@@ -201,8 +361,55 @@ $ (()=> {
         }
       ]
     },
+
+    /* JSPLUMB EVENTS */
+    {
+      elem: [jsPlumb],
+      evtsArr: [
+        {
+          handlingFunction: doConnect,
+          customEvtName: "jsp-connect",
+          domEvtName: "connection"
+        },
+        {
+          handlingFunction: connectDetach,
+          customEvtName: "jsp-connect-detach",
+          domEvtName: "connectionDetached"
+        },
+        {
+          handlingFunction: disconnectOnClickAMijiggles,
+          customEvtName: "jsp-click-detach",
+          domEvtName: "beforeStartDetach"
+        },
+        {
+          handlingFunction: remHovOnDS,
+          customEvtName: "jsp-drag-stop",
+          domEvtName: "connectionAborted"
+        },
+        {
+          handlingFunction: remHovOnDS,
+          customEvtName: "jsp-drag-stop",
+          domEvtName: "connectionDragStop"
+        },
+        {
+          handlingFunction: addHovWhileDragging,
+          customEvtName: "jsp-dragging",
+          domEvtName: "connectionDrag"
+        },
+        {
+          handlingFunction: targetPriorityInit,
+          customEvtName: "jsp-target-class-add",
+          domEvtName: "connectionDrag"
+        },
+        {
+          handlingFunction: targetPriorityRem,
+          customEvtName: "jsp-target-class-rem",
+          domEvtName: "connectionDragStop"
+        },
+      ]
+    }
   ];
 
-  eventData = baseEvts.concat(eventData);
+  eventData = coreEvents.concat (eventData);
   start ();
 });

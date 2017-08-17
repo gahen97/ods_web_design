@@ -43,6 +43,8 @@ class ODSRandom {
 
   static getRandomMinMax (min, max)
   {
+    min = (min || min === 0) ? Math.ceil(min) : 0;
+    max = (max || max === 0) ? Math.floor(max) : ODSRandom.MAX;
     return (ODSRandom.getRandom () * (max - min)) + min;
   }
 
@@ -57,6 +59,8 @@ class ODSRandom {
 
   static getRandomArbitrary(min, max)
   {
+    min = (min || min === 0) ? Math.ceil(min) : 0;
+    max = (max || max === 0) ? Math.floor(max) : ODSRandom.MAX;
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
@@ -68,8 +72,8 @@ class ODSRandom {
   //inclusive min, exclusive max
   static getRandomInt(min, max)
   {
-    min = Math.ceil(min);
-    max = Math.floor(max);
+    min = (min || min === 0) ? Math.ceil(min) : 0;
+    max = (max || max === 0) ? Math.floor(max) : ODSRandom.MAX_INT;
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
@@ -82,8 +86,8 @@ class ODSRandom {
   //inclusive max
   static getRandomIntInclusive(min, max)
   {
-    min = Math.ceil(min);
-    max = Math.floor(max);
+    min = (min || min === 0) ? Math.ceil(min) : 0;
+    max = (max || max === 0) ? Math.floor(max) : ODSRandom.MAX_INT;
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -122,3 +126,5 @@ class ODSRandom {
     return i;
   }
 }
+
+ODSRandom.MAX_INT = Number.MAX_SAFE_INTEGER;

@@ -1,45 +1,81 @@
-.element.active {
-  background-color: #ff8401;
-}
-
-/* using on the model body. defines the main div */
-.modelBody {
-  width: 95%;
-  height: 60vh;
-  min-height: 300px;
-  max-height: 400px;
-  margin: auto;
-  margin-top: 20px;
-  position: relative;
-}
-
 /* element ... TODO: should show as clickable, draggable. style? */
-.element {
+.element{
+  display: inline-block;
+}
+.element.main {
   background-color: #565656;
-  color: white;
   border: 3px solid #565656;
-  border-radius: 5px;
-  font-weight: bold;
-  font-family: courier;
-  text-align: center;
-  width: 35px;
-  height: 35px;
+  color: white;
+
+  line-height: 30px;  /* needs this for vertically centered text */
+
   display: inline-block;
   position: absolute;
+}
+.element.main{
+  width: 64px;
+  height: 32px;
+  border-radius: 5px;
+}
+.element.main.draggable{
   cursor: -webkit-grab;
-  line-height: 30px;  /* needs this for vertically centered text */
+}
+.element.value, .element.pointer{
+  width: 31px;
+  height: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: baseline;
+  margin: 0;
+}
+.jsp-hover.draggable > .element.value{
+  border-color: #565656;
+}
+.element.value{
+  border-right: 2px solid white;
+  float: left;
+  z-index: 99;
+}
+.element.pointer{
+  float: right;
 }
 
-.element:hover{
+.element.draggable.jsp-hover,
+.element.draggable.jsp-hover > * {
   background-color: white;
   color: #565656;
 }
 
-.element:active {
+.element.main.draggable:active {
   background-color: white;
   color: #565656;
-  width: 37px;
-  height: 37px;
   box-shadow: 1px 1px 1px 1px #aaa;
-  cursor: -webkit-grabbing;
+}
+
+.element.main.jsp-active {
+}
+.element.main.jsp-active > * {
+  border-color: #565656;
+}
+
+.jsp-endpoint.jsp-active circle {
+  fill: #565656;
+}
+
+.jsp-endpoint circle {
+  fill: white;
+  cursor: pointer;
+}
+.jsp-hover.draggable circle {
+  fill: #565656;
+}
+
+.bold{
+  font-weight: bold;
+}
+.courier{
+  font-family: courier;
+}
+.text-centered{
+  text-align: center;
 }

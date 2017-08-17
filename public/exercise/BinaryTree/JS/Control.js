@@ -43,6 +43,14 @@ class Control extends ControlBase {
   }
 
   setActiveElement (element) {
+    console.log (this.activeElement, element, this.activeElement && element && this.activeElement.id === element.id);
+    if (this.activeElement && element && this.activeElement.id === element.id) {
+      element = null;
+      console.log (this.userDataArray);
+      this.userDataArray.pop ();
+      console.log (this.userDataArray);
+    }
+
     if (!element)
       return super.setActiveElement (element);
 

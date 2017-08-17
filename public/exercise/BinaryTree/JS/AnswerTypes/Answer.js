@@ -65,6 +65,7 @@ class Answer extends AnswerType {
 
     // TODO should be something better here maybe
     control.reset ();
+    control.setModel (this.model);
 
     var elements = this.calculateAnswerElements();
     this.animate (elements,
@@ -73,7 +74,7 @@ class Answer extends AnswerType {
       },
       (elem, index) => { // EACH
         if (!control.disabled) return;
-        
+
         control.setActiveElement (elem);
 
         if (this.anim_each)
