@@ -1,3 +1,53 @@
+/*
+  This class controls drawing JSPlumb Endpoints.
+
+  Documentation:
+    constructor (element : Element, opts : Options, data : Object, ...)
+      Draws an endpoint onto the given element.
+      Arguments:
+        element  Element  The element to add the endpoint to
+        opts     Options  Options for drawing the endpoint. See Options below
+        data     Object   A list of key-value pairs to add as data to the endpoint.
+                            Each will be added to the created DOM elements.
+
+    drawEndpoint (element : Element, opts : Options, data : Object) : Endpoint
+      Purpose: Draws & Returns a new endpoint for the element.
+      Arguments:
+        element  Element  The element to add the endpoint to
+        opts     Options  Options for drawing the endpoint. See Options below
+        data     Object   A list of key-value pairs to add as data to the endpoint.
+                            Each will be added to the created DOM elements.
+      Returns: The new endpoint
+
+    disable ()
+      Disables the endpoint so that no connections can be made.
+    enable ()
+      Enables the endpoint to allow creating connections.
+    toggleClass (className : string, active : boolean)
+      Purpose: Toggles a class onto the endpoint.
+      Arguments:
+        className  string   The class to toggle
+        active     boolean  Whether to add or remove the class. Adds if true
+      Returns: None
+    isHovered () : boolean
+      Returns: Boolean. True if the mouse is hovering over the element.
+    remove ()
+      Deletes the endpoint.
+
+    Options:
+      connector  Variant          Connector type to use. See JsPlumb documentation:
+                                    https://jsplumbtoolkit.com/community/doc/connectors.html
+      
+    Read-Only Properties:
+      .uuid    string        The ID of the endpoint
+      .jq      JQueryObject  JQuery Object representing the endpoint's canvas element
+      .canvas  DOMElement    The endpoint's canvas element
+
+    NOTE: JQuery methods can be called on this endpoint, which will be redirected
+            to the endpoint's canvas.
+*/
+/*jshint esversion: 6 */ 'use strict';
+
 class PlumbEndpoint {
   static get nextId () {
     return PlumbEndpoint.id ++;
@@ -10,10 +60,6 @@ class PlumbEndpoint {
     this.endpoint = this.drawEndpoint (element, opts, data, ...a);
 
     return new Proxy (this, PlumbEndpoint.proxy);
-  }
-
-  get uuid () {
-    return this.id;
   }
 
   get jq () { return $(this.canvas); }

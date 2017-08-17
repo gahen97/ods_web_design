@@ -266,9 +266,8 @@ li.tabbedQuestion:hover {
 }
 
 #animationDiv{
-  background-image: url("../../images/animation_bolt.png");
-  background-repeat: no-repeat;
-  background-size: 15px 15px;
+  background-color: #EF8043;
+  border-radius: 100px;
   width: 15px;
   height: 15px;
 }

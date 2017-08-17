@@ -2,14 +2,21 @@
 /*
   May want to change this but anyway
   Adds some static methods to the Array class:
-    scramble (arr)
-      Scrambles array arr so that the elements will be in some random order.
-        Does this by the ODSRandom class. Note this creates a new Array
-        with the scrambled elements
-    swap (arr, i, j)
-      Swaps array elements at i & j. Note it does this in the same array,
-      does not have a return value
+    scramble (arr : Array) : Array
+      Purpose: Scrambles the elements of the given array.
+      Arguments:
+        arr  Array  Array to scramble the elements of
+      Returns: New array containing all elements of arr in a random order.
+    swap (arr : Array, i : int, j : int)
+      Purpose: Swaps elements i & j within the array.
+      Arguments:
+        arr  Array  Array to swap elements of
+        i    int    First index
+        j    int    Second index
+      Returns: None. Will perform swap on the array itself.
 */
+
+/*jshint esversion: 6 */ 'use strict';
 
 Array.swap = function (arr, i, j) {
   var temp = arr [i];

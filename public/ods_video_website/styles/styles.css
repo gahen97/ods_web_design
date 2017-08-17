@@ -52,7 +52,7 @@ a {
   margin-top: 5%;
   display: inline-block;
   position: absolute;
-  right: 0px;
+  right: 46px;
 }
 
 #content {
@@ -153,14 +153,19 @@ a {
 }
 
 #actual_video {
+  background-color: grey;
   max-width: 95%;
   margin: 0 auto;
 }
 
-#videoFrame{
-	height: 100%;
-	width: 100%;
-  border-width: 0;
+	#videoFrame{
+		height: 100%;
+		width: 100%;
+	}
+
+#exerciseFrame{
+  width: 100%;
+  border: none;
 }
 
 #exercise {
@@ -195,4 +200,8 @@ a {
 
 .questions_hover {
   background-image: url("../img/questionmark2.png") !important;
+}
+
+.chapter-heading.text-mid{
+  font-size: 14px !important;
 }

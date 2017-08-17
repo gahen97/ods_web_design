@@ -1,3 +1,29 @@
+/*
+  This is the base class for an Answer, which corresponds to the correct answer
+    for a given question.
+
+  Documentation:
+    constructor ()
+      Takes no arguments.
+    param (name : string, prop : any) : any
+      Purpose: Sets a miscellaneous property on the answer that can be used as
+                 data from the question.
+      Arguments:
+        name  string  The name of the property to set
+        prop  any     The value of the property to set [ OPTIONAL ]
+      Returns: The value of the property.
+    display (element : DOMObject)
+      Purpose: Displays the answer within the given DOM Object.
+      Arguments:
+        element  DOMObject  The object to display the answer in
+      Returns: None
+    check (userAnswer : Any) : boolean
+      Purpose: Checks if the given user answer is correct.
+      Arguments:
+        userAnswer  Any  The answer to check against
+      Returns: Boolean. True if the answer is correct
+*/
+
 /*jshint esversion: 6 */ 'use strict';
 
 class AnswerType {
@@ -14,7 +40,7 @@ class AnswerType {
       return this.misc [name];
 
     this.misc [name] = prop;
-    return this;
+    return prop;
   }
 
   setData(data)

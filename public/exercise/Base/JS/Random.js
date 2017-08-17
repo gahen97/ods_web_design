@@ -1,3 +1,33 @@
+/*
+  Main object for dealing with Random numbers within the exercises.
+
+  Documentation:
+    constructor()
+      Takes no arguments. Can be used to store generated numbers
+        and pull from a pool of previous numbers.
+
+    CALLED ON EITHER STATIC OR INSTANCE
+      getRandom ()
+        Returns: Random number [0, 1)
+      getRandomMinMax (min : number, max : number)
+        Returns: Random number [min, max)
+      getRandomArbritrary (min : int, max : int)
+        Returns: Random integer [min, max)
+      getRandomInt (min : int, max : int)
+        Returns: Random integer [min, max)
+      getRandomIntInclusive (min : int, max : int)
+        Returns: Random integer [min, max]
+      getRandomFromArray (arr : Array)
+        Returns: Random element e from arr
+      scramble (arr : Array)
+        Returns: New array arr2 with all elements of arr in a random order.
+
+    IF CALLED ON INSTANCE ONLY
+      getRandomFromSaved ()
+        Returns: Random number chosen from previously generated random numbers
+
+*/
+
 /*jshint esversion: 6 */ 'use strict';
 
 class ODSRandom {

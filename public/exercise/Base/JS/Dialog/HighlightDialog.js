@@ -1,5 +1,5 @@
 /*
-  HIGHLIGHT: Adds a border-color-highlight border.
+  HIGHLIGHT: Adds a color-highlight class.
 */
 
 class HighlightDialog extends Popup {

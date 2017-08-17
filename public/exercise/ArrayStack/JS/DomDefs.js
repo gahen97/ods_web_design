@@ -39,7 +39,7 @@ $(()=>{
 		containment: ARRAY_CONTAINMENT,
 		axis: 'x',
 		distance: 5,
-		grid: [50, 0],
+		grid: [ELEMENT_X_SPACING, 0],
 		revert: true
 	});
 })

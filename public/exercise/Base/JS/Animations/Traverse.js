@@ -1,95 +1,131 @@
 /*
-  This is a static class that basically takes a series of elements
-    (note these must all be Element objects)
-    and traverses through the list.
+  This traverses a path of an array of elements, animating the path.
+
+  Documentation:
+    static runAnimation (element : DOMObject, opts : Options)
+      Purpose: Runs the animation
+      Arguments:
+        element  DOMObject  The element to run the animation on
+        opts     Options    Options for the animation. See Options below
+      Returns: None
+
+    Options
+      duration  number    The length of time for the animation to run
+      callback  function  The function to call after the animation ends
+      each      function  The function to call for each step of the animation
 */
 
+/*jshint esversion: 6 */ 'use strict';
+
 class Traverse {
-  static computeSlope (from, to) {
-    var p1 = Div.dimensionsOf (from);
-    var p2 = Div.dimensionsOf (to);
+  static runAnimation (elements, options){
+    if (!options) options = { };
 
-    var x1 = p1.xP;
-    var y1 = p1.yP;
-    var x2 = p2.xP + p2.width / 2 + 5;
-    var y2 = p2.yP + p2.height / 2 - 5;
+    var myElement = this.makeElement ();
+    var duration  = this.determineDuration (options.duration, elements.length);
 
-    return {
-      rise: (y2 - y1),
-      run: (x2 - x1),
-      startPos: {
-        left: p1.xP,
-        top:  p1.yP
-      }
-    }
+    options.duration = duration;
+
+    if (options.each) options.each (elements [0], 0);
+
+    var clean = ()=>{ myElement.remove (); }
+    this.animationCtrl (myElement, elements, options, 1).then (options.callback)
+        .then (clean, clean);
   }
 
-  static animateFromTo (div, eF, eT, opts) {
-    if (!opts) opts = this.defaultOpts;
+  // Make a new element
+  static makeElement () {
+    return $("<div id='animationDiv'></div>").appendTo ($ (QUESTION_MAIN));
+  }
 
-    var f1 = Div.dimensionsOf (eF);
-    var f2 = Div.dimensionsOf (eT);
+  // Determine the duration for each step of the algorithm,
+  //  to move between two adjacent elements.
+  static determineDuration (fromDur, numElements) {
+    // TODO find a better way to do this
+    return fromDur * 0.75;
+  }
 
-    var ep;
-    if (f1.xP > f2.xP)
-      ep = eF.leftEndpoint.canvas;
-    else
-      ep = eF.rightEndpoint.canvas;
-
-    ep = $(ep);
-
-    var slope = this.computeSlope (ep, eT);
-
-    slope.rise = slope.rise / opts.numIterations;
-    slope.run  = slope.run  / opts.numIterations;
-
-    var curPos = slope.startPos;
-
-    var iter = (i, cb) => {
-      if (i > opts.numIterations)
-        cb();
+  // Main controller for the animation. Directs the element through each
+  //   element in the array.
+  static animationCtrl (myElem, elements, options, currentIndex) {
+    return new Promise ((fulfill, reject) => {
+      if (currentIndex >= elements.length) fulfill ();
       else{
-        div.offset(curPos);
-        curPos.top  += slope.rise;
-        curPos.left += slope.run;
+        // Find the divs for each element
+        var e1 = elements [currentIndex - 1];
+        var e2 = elements [currentIndex];
 
-        setTimeout (iter, 50, i+1, cb);
-      }
-    }
+        if (!e1 || !e2) return reject();
 
-    iter(0, ()=>{
-      opts.callback ();
-    });
-  }
+        var d1 = e1.divToNext (e2)
+        var d2 = e2.div;
 
-  static runAnimation (elements, opts) {
-    // TODO
-    var d = $("<div id='animationDiv'></div>").appendTo ($ (QUESTION_MAIN));
+        // Calculate the path we have to take
+        var positionData = this.calcPath (d1, d2);
 
-    var step = (i) => {
-      if (i >= elements.length){
-        d.remove ();
-        opts.callback ();
-      }else{
-        this.animateFromTo (d, elements [i - 1], elements [i], {
-          numIterations: 10,
+        if (currentIndex <= 1)
+          $(myElem).offset (positionData.startPosition);
+
+        // Take the path
+        this.animateStep (myElem, positionData, {
+          duration: options.duration,
           callback: ()=>{
-            if(opts.each)
-              opts.each (elements[i]);
-            step(i+1);
+            if (options.each)
+              options.each (elements [currentIndex], currentIndex);
+
+            return this.animationCtrl (myElem, elements,
+                                       options, currentIndex + 1)
+                       .then(fulfill, reject);
           }
         });
       }
-    }
-
-    if (opts.each)
-      opts.each (elements [0]);
-
-    step (1);
+    });
   }
-}
 
-Traverse.defaultOpts = {
-  callback: function(){ },
-  numIterations: 10
+  // Animate moving between one object to another
+  static runStep (element, properties, data) {
+    var props = {
+      left: "+=" + (properties.endPosition.left - properties.startPosition.left) + "px",
+      top:  "+=" + (properties.endPosition.top  - properties.startPosition.top) + "px"
+    }
+    // hacky.
+    $ (element).animate (props,
+      {
+        duration: data.duration,
+        progress: data.each,
+        complete: data.callback
+      });
+  }
+
+  static animateStep (element, properties, data) {
+    // animate moving to the next start position
+    properties.startPosition = $(element).offset();
+    this.runStep (element, properties, data);
+  }
+
+  // Calculate the path to be taken to move from one element to another
+  static calcPath (fromDiv, toDiv)
+  {
+    // Compute dimensions, positions
+    var d1 = Div.dimensionsOf (fromDiv);
+    var d2 = Div.dimensionsOf (toDiv);
+
+    // Move between the center of each of these divs
+    var x1 = d1.xP + d1.width / 2;
+    var y1 = d1.yP + d1.height / 2;
+    var x2 = d2.xP + d2.width / 2;
+    var y2 = d2.yP + d2.height / 2;
+
+    // And now we have the start and end positions.
+    return {
+      startPosition: {
+        left: x1,
+        top:  y1
+      },
+      endPosition: {
+        left: x2,
+        top:  y2
+      }
+    }
+  }
 }

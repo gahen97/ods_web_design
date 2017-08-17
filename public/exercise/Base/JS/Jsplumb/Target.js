@@ -1,3 +1,32 @@
+/*
+  This handles setting an element as a target, so that connections can be made with
+    the element.
+
+  Documentation:
+    constructor (element : DOMObject, eObj : Element, opts : Options)
+      Sets the element to be a target for JsPlumb.
+      Arguments:
+        element  DOMObject  The element to make into a target
+        eObj     Element    The Element relating to the given element object
+        opts     Options    Options for the target. See Options, below
+    disable ()
+      Disables the element so that it cannot be connected to.
+    enable ()
+      Enables the element so that it can be connected to.
+
+    Options:
+      maxConnections  int     The maximum number of connections that can use this
+                                element as their target.
+      anchor          Anchor  The Anchor to use for the target. For more information, see:
+                                https://jsplumbtoolkit.com/community/doc/anchors.html
+
+    Properties:
+      .uuid  string  The ID of the endpoint
+
+*/
+
+/*jshint esversion: 6 */ 'use strict';
+
 class PlumbTarget {
   static get nextId(){ return PlumbTarget.id ++; }
 

@@ -1,3 +1,97 @@
+/*
+  The Base Class for all questions to be asked.
+  This controls:
+    - Instructions
+    - Question name, full name
+    - Question's starting model
+    - Answer
+
+  Documentation:
+    constructor (questionData : QuestionData, answerType : AnswerType)
+      Initializes a new Question from the given questionData & answerType.
+      Arguments:
+        questionData  QuestionData  See below (QuestionData) for documentation.
+        answerType    AnswerType    The answer type to initialize for this question's answer.
+    generateParameters ()
+      Purpose: Generates the parameters for the question.
+       NOTE: This is done after the model is initialized, so the model may be
+               used to help generate parameters.
+    generate (prevModel : Model) : Model
+      Purpose: Generates the question's data. This includes the question's model,
+                 parameters, and answer's model.
+      Arguments:
+        prevModel  Model  The previous question's answer's model. This is the
+                            starting model for the current question.
+      Returns: The new answer's model.
+    display (div : DOMObject)
+      Purpose: Displays the question in the given div, including instructions, parameters,
+                 and model.
+      Arguments:
+        div  DOMObject  The element to display the question in
+      Returns: None
+    displayAnswer (div : DOMObject)
+      Purpose: Displays the answer in the given element.
+      Arguments:
+        div  DOMObject  The element to display the answer in
+      Returns: None
+    displayModel (div : DOMObject)
+      Purpose: Displays the question's model in the given div.
+      Arguments:
+        div  DOMObject  The element to display the model in
+      Returns: None
+    displayParameters (div : DOMObject)
+      Purpose: Displays the question (ex. add (5)) in the given div.
+      Arguments:
+        div  DOMObject  The element to display the question inside of
+      Returns: None
+    displayInstructions (div : DOMObject)
+      Purpose: Displays the question's instructions in the given div.
+      Arguments:
+        div  DOMObject  The element to display the instructions inside of
+      Returns: None
+    generateAnswer (prevAnswer : Model) : Model
+      Purpose: Generates the question's answer given the previous question's answer.
+      Arguments:
+        prevAnswer  Model  The correct implementation of the model for the previous question
+      Returns: The newly generated answer's model
+    generateModel (prevModel : Model)
+      Purpose: Generates the model to be used as the starting point for the question,
+                 given the previous question's answer.
+      Arguments:
+        prevModel  Model  The correct implementation of the previous question.
+      Returns: None
+    getParametersString ()
+      Returns a stringified version of the question's parameters.
+      By default, this is just String (parameters), but this MUST be overloaded
+        to use with any object (will default to [ Object object ] otherwise).
+    check (userAnswer : Model) : boolean
+      Purpose: Checks if the given answer is correct.
+      Arguments:
+        userAnswer  Model  The user's answer for the question.
+      Returns: Boolean. True if the user's answer is correct ; false otherwise.
+    isValidInput (input : string) : boolean
+      Purpose: Checks if given input can be used for the question.
+      Arguments:
+        input  string  The input to check
+      Returns: Boolean. True if the input is valid.
+    canSetActive () : boolean
+      Returns a boolean determining if an element can be set active for the question.
+    start()
+      Purpose: Called at the start of the question ; initializes the question.
+
+    READ-ONLY PROPERTIES:
+      name          string  The short name for the question. For example, "add"
+      fullName      string  The long name for the question. For example, "add (5)"
+                              This is used for the tabbing system.
+      exerciseName  string  The name to display when running the question.
+      validInputStr string  The range of valid input for the question. For example,
+                              "0 - 10"
+
+    QuestionData:
+      instructionsText  string  The text to display as instructions for the question.
+      id                int     The ID to use for the question. [ OPTIONAL ]
+
+*/
 /*jshint esversion: 6 */ 'use strict';
 
 class Question {

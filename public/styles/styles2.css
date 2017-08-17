@@ -5,6 +5,7 @@ body {
 a {
   text-decoration: none;
   color:#565656;
+  cursor: pointer;
 }
 
 a:hover {
@@ -167,20 +168,26 @@ td a:hover{
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 10px;
+    word-wrap: break-word;
 }
 
 .col_1 {
   background-color: #8FCDB8;
   font-weight: bold;
+  font-size: 1.2em;
+  width: 20%;
 }
 
 .col_2 {
   background-color: #FAD60E;
+  width: 17%;
 }
 
 .col_3 {
   background-color: #EF8043;
+  width: 63%;
 }
+
 @media only screen and (max-width: 1160px) {
   #links {
     width: 200%;

@@ -1,5 +1,5 @@
 .path-node {
-  background-color: #ccc !important;
+  background-color: white !important;
   border-color: #ff8401 !important;
   cursor: -webkit-grab;
 }
@@ -46,7 +46,7 @@
 }
 
 .element.jsp-hover{
-  background-color: #ccc;
+  background-color: #f7a171;
 }
 .element.active.jsp-hover {
   color: white;

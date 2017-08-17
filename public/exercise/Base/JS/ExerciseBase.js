@@ -1,3 +1,78 @@
+/*
+  The main object controlling all aspects of the exercise,
+    mainly being QuestionTypes and Questions.
+
+  Documentation:
+    constructor ()
+      Takes no arguments.
+
+    -- (getters and setters are not documented. self explanatory ...) --
+
+    convertQuestionNumberTo2d (qN : int) : QuestionNumber2D
+      Purpose: Converts an absolute question index into a QuestionType -> Question
+                 index.
+      Arguments:
+        qN  int  Absolute question index. This is independent of QuestionType index.
+      Returns: QuestionNumber2D. The QuestionType & Question indices to be set to.
+
+    goToQuestion (questionNumber : int)
+      Purpose: Sets the current question to the given absolute question number.
+      Arguments:
+        questionNumber  int  Absolute question index. See above.
+      Returns: None
+
+    next ()
+      Moves the exercise to the next question.
+
+    prev ()
+      Moves the exercise to the previous question.
+
+    reset ()
+      Resets the question so as to reload everything.
+
+    restart ()
+      Refreshes the exercise and restarts the current question.
+
+    clear ()
+      Clears all Questions & Question Types.
+
+    setup ()
+      Sets up all questions and question types for the exercise.
+
+    isInputValid (input : string) : boolean
+      Purpose: Checks if a given input is valid for the current question.
+      Arguments:
+        input  string  The input to be checked
+      Returns: Boolean. True if the input is valid.
+
+    canSetActive () : boolean
+      Purpose: Checks if the current question allows setting elements as active.
+      Returns: Boolean. True if an element can be set as active.
+
+    getAnswer () : AnswerType
+      Returns the current question's answer.
+
+    showAnswer (div : DOMObject)
+      Displays the current question's answer inside the given DOM Object.
+
+    check () : boolean
+      Purpose: Checks if the provided answer is correct.
+      Arguments: ANY ... All arguments get passed through to the question.
+      Returns: Boolean. True if the answer is correct.
+
+    load ()
+      Purpose: Runs the Exercise.
+
+    refresh ()
+      Draws the question to the screen, replacing any past question.
+
+  TYPE DATA :
+    QuestionNumber2D
+      questionType  int  The number of the new QuestionType to be set to
+      question      int  The number of the new Question to be set to
+
+*/
+
 /*jshint esversion: 6 */ 'use strict';
 
 class ExerciseBase {
@@ -13,20 +88,20 @@ class ExerciseBase {
   getCurrQuestionId () { return this.getCurrQuestion ().getId (); }
   getCurrQuestionType () { return this.questionTypes [this.currQTypeIndex]; }
 
-  setCurrQuestionType(param)
+  setCurrQuestionType(qTypeNum)
   {
-    if (param < 0)
+    if (qTypeNum < 0)
     {
       console.error("From inside setCurrQuestionType, param is negative.");
       return false;
-    } else if (param >= this.questionTypes.length)
+    } else if (qTypeNum >= this.questionTypes.length)
     {
       console.error("From inside setCurrQuestionType, param is too high.");
       return false;
     }
 
     var temp = this.currQTypeIndex;
-    this.currQTypeIndex = param;
+    this.currQTypeIndex = qTypeNum;
     return temp;
   }
 
@@ -63,25 +138,28 @@ class ExerciseBase {
       return false;
     }
 
-    var toReturn = {"1d": -1, "2d": -1};
+    var toReturn = {
+      questionType : -1,
+      question     : -1
+    };
 
     for (var questionType in this.questionTypes)
     {
       if (this.questionTypes[questionType].containsQuestionNum(questionNumber) )
       {
-        toReturn["1d"] = parseInt(questionType);
+        toReturn.questionType = parseInt(questionType);
         break;
       }
       questionNumber = questionNumber - this.questionTypes[questionType].size();
     }
 
-    if (toReturn["1d"] === -1)
+    if (toReturn.questionType === -1)
     {
       console.error("From inside convertQuestionNumberTo2d, questionNumber is out of bounds (too high).");
       return false;
     }
 
-    toReturn["2d"] = parseInt(questionNumber);
+    toReturn.question = parseInt(questionNumber);
 
     return toReturn;
   }
@@ -98,9 +176,9 @@ class ExerciseBase {
       return false;
     }
 
-    this.setCurrQuestionType(questionNumber2d["1d"]);
+    this.setCurrQuestionType(questionNumber2d.questionType);
 
-    this.getCurrQuestionType().setCurrQuestion(questionNumber2d["2d"]);
+    this.getCurrQuestionType().setCurrQuestion(questionNumber2d.question);
 
     this.setAbsQNum (questionNumber);
 
@@ -186,7 +264,7 @@ class ExerciseBase {
     this.getCurrQuestionType ().showAnswer (div);
   }
 
-  check (user, active)
+  check ()
   {
     var qType = this.getCurrQuestionType ();
     return qType.check.apply (qType, arguments);

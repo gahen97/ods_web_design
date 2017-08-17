@@ -1,4 +1,4 @@
-.path-node {
+.element.path-node {
   background-color: white !important;
   border-color: #ff8401 !important;
 }
@@ -12,7 +12,7 @@
 
 div .element.can-set-active {
   border-color: #565656 !important;
-  background-color: white !important;
+  background-color: white;
   cursor: pointer;
 }
 
@@ -54,7 +54,7 @@ div .element.can-set-active:hover {
 }
 
 .element.jsp-hover{
-  background-color: #ccc;
+  background-color: #f7a171 !important;
 }
 .element.active.jsp-hover {
   color: white;

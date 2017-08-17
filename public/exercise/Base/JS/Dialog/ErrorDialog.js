@@ -1,5 +1,5 @@
 /*
-  ERROR: Adds a border-color-error border.
+  This displays a dialog with the color-error class.
 */
 
 class ErrorDialog extends Popup {

@@ -1,10 +1,29 @@
 /*
-  This file will basically handle converting QuestionTypes & Questions into tabs.
+  This deals with creating a tabbing system for the Exercise.
+  Basically, it handles this by:
+    - If a QuestionType is filled with groups of one question, they will be grouped
+        by the Question Type's name. (See Binary-Tree)
+    - If there are multiple of any Question within a QuestionType, they will
+        each be grouped by their Question's name.
 
-  Note that this likely will not change and should be fine ...
+  Documentation:
+    constructor (control : Control, evtId : string)
+      Arguments:
+        control  Control  The main Control object for the exercise
+        evtId    string   The event handler to add the created elements to
+
+    setActiveQuestion (id : int)
+      Purpose: Sets a given question as active, adding a special class.
+      Arguments:
+        id  int  The ID of the question to set as active.
+      Returns: None
+
 */
 
+/*jshint esversion: 6 */ 'use strict';
+
 class QuestionTabbify {
+  /* ---- STATIC MATIC --- */
   static addHeader (text, parent) {
     return $("<h3>" + text + "</h3><div class='accordion-sub'></div>").appendTo (parent);
   }
@@ -27,12 +46,10 @@ class QuestionTabbify {
     return newElement;
   }
 
-  constructor (control, options) {
-    if (!options)
-      options = { };
-
+  /* ---- CONSTRUCT ---- */
+  constructor (control, evtid) {
     this.mainHeader = QuestionTabbify.mainFrom ($("#questions_display"));
-    this.eventId    = options.eventId;
+    this.eventId    = evtid;
 
     // set up the accordion
     $ (this.mainHeader).accordion ({
@@ -46,45 +63,32 @@ class QuestionTabbify {
     });
 
     // add elements
-    this.regenerate (control, options);
+    this._regenerate (control);
 
     //updateSidebarHeadings ();
   }
 
-  regenerate (control, options) {
+  /* ---- PRIVATE ----- */
+  _regenerate (control) {
     this.mainHeader.empty ();
 
     this.headers = [ ];
     this.items   = { };
 
-    this.addQuestionTypes (control.exercise, options, this.mainHeader);
-    this.addEventHandling (control, this.eventId);
+    this._addQuestionTypes (control.exercise, this.mainHeader);
+    this._addEventHandling (control, this.eventId);
 
     this.mainHeader.accordion ("option", "active", false);
     this.mainHeader.accordion ("refresh");
   }
 
-  setActiveQuestion (id) {
-    var tab = this.items [id];
-    if (!tab) return false;
-
-    if (this.activeTab)
-      this.activeTab.removeClass ("active-tab");
-
-    this.activeTab = $(tab);
-    this.activeTab.addClass ("active-tab");
-
-    return this;
-  }
-
-  addQuestionTypes (exercise, opts, parent) {
+  _addQuestionTypes (exercise, parent) {
     // Take every question type as header
     // Take every question as text
     var qTypes = exercise.getQuestionTypes ();
     //var parent = Tabbify.subFrom ($("#questions_display"));
 
     var data   = { };
-    if (!opts) opts = { };
 
     data.absoluteQuestionNumber = 0;
 
@@ -95,8 +99,8 @@ class QuestionTabbify {
 
       data.questionTypeId = key;
 
-      this.calculateHeaderNames (qTypes [key]);
-      this.addQuestions (qTypes [key], curHeader, data, opts);
+      this._calculateHeaderNames (qTypes [key]);
+      this._addQuestions (qTypes [key], curHeader, data);
 
       //this.headers.push ($ (curHeader) [0]); // DOM, not jQuery
     }
@@ -104,7 +108,7 @@ class QuestionTabbify {
     return this;
   }
 
-  calculateHeaderNames (questionType) {
+  _calculateHeaderNames (questionType) {
     var questions  = questionType.getQuestions ();
     var headerType = 1;
 
@@ -123,9 +127,8 @@ class QuestionTabbify {
     }
   }
 
-  addQuestions (questionType, mainHeader, data, opts) {
+  _addQuestions (questionType, mainHeader, data) {
     if (!data) data = { };
-    if (!opts) opts = { };
 
     var questions = questionType.getQuestions ();
     var curName;
@@ -154,11 +157,26 @@ class QuestionTabbify {
     return this;
   }
 
-  addEventHandling (control, evtId) {
+  _addEventHandling (control, evtId) {
     var e = control.getDomEventHandler (evtId);
     if (!e) return false;
 
     e.pushArray (this.items);
+
+    return this;
+  }
+
+
+  /* ---- PUBLIC ----- */
+  setActiveQuestion (id) {
+    var tab = this.items [id];
+    if (!tab) return false;
+
+    if (this.activeTab)
+      this.activeTab.removeClass ("active-tab");
+
+    this.activeTab = $(tab);
+    this.activeTab.addClass ("active-tab");
 
     return this;
   }
