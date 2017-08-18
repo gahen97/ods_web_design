@@ -1,3 +1,13 @@
+## USAGE:
+  This server is automatically run by the main server at the host & port listed within the Config.json file.
+  To add a video to the server:
+    Insert the video folder into lib > h5p-content > InteractiveVideo
+  
+  To get a video from this server:
+    Any request made to /VIDEO_NAME will be served with that video.
+    For example, /list will be served with the List video.
+    This can be requested from an iframe to load the video into the webpage.
+
 ## Sean's edits:
 Exercises now work by path sent in the URL:
   ex. localhost:8080/sllist
