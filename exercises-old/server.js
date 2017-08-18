@@ -9,7 +9,7 @@ var cookie = require("./modules/cookie.js");
 
 var app = express();
 const ME   = "./exercises-old"
-const ROOT = ME+"/public";
+const ROOT = "/public";
 
 app.set('view engine', 'pug');
 
@@ -44,8 +44,8 @@ app.get("/:type/reset", function(req, res){
 	res.sendStatus(200);
 })
 
-console.log(ROOT);
-app.use(express.static(ROOT));
+app.use(express.static(__dirname + ROOT));
+console.log(__dirname);
 
 app.listen(data.port, data.host,function(){
 	console.log ("Exercise server listening on http://%s:%s", data.host, data.port);

@@ -35,6 +35,6 @@ H5P controls the videos;
 Exercises_Old controls the older exercise server;  
 main controls the main server to host the videos, exercises, index, and Table of Contents pages.
 
-ArrayStack exercise is over-simplified and works more as a SortedSet ;
-  should not use.
-BinaryHeap is not done.
+
+The ArrayStack works more as a SortedSet ..
+The BinaryHeap exercise is not done.
