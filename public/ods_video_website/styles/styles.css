@@ -153,7 +153,6 @@ a {
 }
 
 #actual_video {
-  background-color: grey;
   max-width: 95%;
   margin: 0 auto;
 }
@@ -161,6 +160,7 @@ a {
 	#videoFrame{
 		height: 100%;
 		width: 100%;
+    border: none;
 	}
 
 #exerciseFrame{
