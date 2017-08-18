@@ -40,11 +40,36 @@ class Control extends ControlBase {
     this.userDataArray = [ ];
   }
 
-  setActiveElement (element) {
-    if (!element)
-      return super.setActiveElement (element);
+  get _lastElement () {
+    var node = this.userDataArray [this.userDataArray.length - 1];
+    if (!node) return null;
 
-    if (!this.canSetActive (element)) return false;
+    return this.view.findFromNid (node.id);
+  }
+
+  setActiveElement (element, reset, lastElement) {
+    var reactivate = null;
+    if (reset && lastElement === this.activeElement) {
+      this.userDataArray.pop ();
+      reactivate = this._lastElement;
+
+      if (!reactivate)
+        lastElement.setCSA (true);
+    }
+
+    if (!element) {
+      var ret = super.setActiveElement (element);
+
+      if (reactivate){
+        reactivate.removeClass("path-node").removeClass("path-node-plumb");
+        this.setActiveElement(reactivate, true);
+        this.userDataArray.pop();
+      }
+
+      return ret;
+    }
+
+    if (!this.canSetActive (element, reset)) return false;
     if (!this.activeElement)
       this.setRootActive (false);
     else
@@ -61,7 +86,8 @@ class Control extends ControlBase {
     super.setActiveElement (element);
   }
 
-  canSetActive (element) {
+  canSetActive (element, forced) {
+    if (forced) return true;
     if (!element) return false;
     if (!element.canSetActive ()) return false;
     return super.canSetActive ();
