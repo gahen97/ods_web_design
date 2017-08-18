@@ -1,0 +1,10 @@
+There are a few links on the page which are not currently functional:
+  ods_video_page.pug:
+    About
+    Contact
+  Home Page:
+    Translations
+
+H5P Videos will sometimes bug and not show the bar at the bottom of the screen
+  (play button, video time, etc.)
+Not sure what causes this. Might be an H5P issue itself, not sure how to fix it ...
