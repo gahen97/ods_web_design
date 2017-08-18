@@ -1,10 +1,30 @@
 There are a few links on the page which are not currently functional:
   ods_video_page.pug:
     About
-    Contact
   Home Page:
     Translations
+    About
+  Video Index:
+    About
+
+The About on the Index page has filler text that should change for the actual
+  webpage.
+
 
 H5P Videos will sometimes bug and not show the bar at the bottom of the screen
   (play button, video time, etc.)
-Not sure what causes this. Might be an H5P issue itself, not sure how to fix it ...
+When scrolling, this will cause video bugs (it will replicate over where the controls
+   would normally be)..
+This appears to be fixed by scrolling down so that the video moves out of view,
+  then scrolling it back into view.
+
+
+There are no videos for:
+  Uset
+  Sset
+  Skiplist
+    Search (ii)
+    Analysis (iii)
+  BinaryTree
+  BinarySearchTree
+  Treap

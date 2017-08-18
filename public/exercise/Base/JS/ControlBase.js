@@ -256,7 +256,7 @@ class ControlBase {
   setActiveElement (element) {
     if (this.activeElement === element)
       element = null;
-    
+
     this.activeElement = element;
     this.view.setActive (element);
   }
