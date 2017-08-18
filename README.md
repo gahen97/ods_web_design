@@ -38,3 +38,15 @@ main controls the main server to host the videos, exercises, index, and Table of
 
 The ArrayStack works more as a SortedSet ..
 The BinaryHeap exercise is not done.
+
+
+
+TO ADD AN EXERCISE:
+Add the exercise to the Views. See Template.pug for more details on how to do this.
+Write the code for the exercise and link the Pug to your code.
+Add the video to the H5P Server (see h5p_server > readme.MD for details) and link to it from the Pug.
+
+Once this is complete, the exercise should be usable from:
+  host:port / EXERCISE
+
+Where host:port is the host & port defined inside of config.json as the main host and port.
