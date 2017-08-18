@@ -10,6 +10,12 @@ There are a few links on the page which are not currently functional:
 The About on the Index page has filler text that should change for the actual
   webpage.
 
+Config.json should be edited to have host & port names for all the servers.
+  This requires three server addresses:
+    Main server ;
+    H5P Server ;
+    Older exercise server
+  
 
 H5P Videos will sometimes bug and not show the bar at the bottom of the screen
   (play button, video time, etc.)
