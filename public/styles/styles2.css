@@ -31,6 +31,20 @@ a:hover {
   display:inline-block;
 }
 
+#about_dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+#aboutDropdownSub {
+    z-index: 3;
+    display:none;
+    right:-6%;
+    width:460%;
+    position:absolute;
+    font-size:0.8em;
+    background-color: #f4f4f4;
+}
 #dropdown {
   z-index: 3;
   display:none;

@@ -81,7 +81,7 @@ function onElementClicked (elem, ...args){
     return;
   }
   if (this.activeElement === element)
-    this.setActiveElement (null);
+    this.setActiveElement (null, true, element);
   else
     this.setActiveElement (element);
 }

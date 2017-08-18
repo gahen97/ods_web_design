@@ -10,6 +10,10 @@ li.tabbedQuestion:hover {
   color: silver;
 }
 
+.link:hover{
+  color: #c4c4c4 !important;
+}
+
 .overlay {
     background-color: rgba(1, 1, 1, 0);
     bottom: 0;

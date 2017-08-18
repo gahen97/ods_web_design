@@ -117,7 +117,7 @@ function droppedOnTrash (element, evt, ui) {
 
   var ret = this.removeElement (draggable);
   if (ret === false)
-    new ErrorDialog ("Cannot delete dummy node! That would be dumb!");
+    new ErrorDialog ("Cannot delete dummy node!");
 }
 
 /* JSPLUMB */
@@ -135,7 +135,7 @@ function connectBetween (plumbEvt, mode) {
 
   // determine the side ...
   var side = $(src).data ("side");
-  
+
   if (node1 === node2){
     jsPlumb.deleteConnection (plumbEvt.connection);
     return false;

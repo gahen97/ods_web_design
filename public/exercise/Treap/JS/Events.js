@@ -87,13 +87,13 @@ function onDragStopped (elem, evt, ui)
 function onElementClicked (elem, ...args){
   var element = this.view.getElement (elem);
   if (!element) return;
-  if (!this.canSetActive (element))
+  if (element!==this.activeElement && !this.canSetActive (element))
   {
     if (DEBUG) console.log("From inside onElementClicked element cannot be set as active.");
     return;
   }
   if (this.activeElement === element)
-    this.setActiveElement (null);
+    this.setActiveElement (null, true, this.activeElement);
   else
     this.setActiveElement (element);
 }

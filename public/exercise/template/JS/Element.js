@@ -5,7 +5,7 @@
     constructor()
       Constructs a new Element.
 
-    get valueSpan () : DOMObject
+    get span () : DOMObject
       Returns the span used to represent the text of the Element.
 
     addControls (element : DOMObject, stack : Selector)

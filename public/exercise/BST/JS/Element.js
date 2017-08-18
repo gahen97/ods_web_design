@@ -76,6 +76,10 @@ class Element extends ElementBase {
     return this.toggleClass (className, true);
   }
 
+  removeClass (className) {
+    return this.toggleClass (className, false);
+  }
+
   setActive (isActive) {
     // Activate this element. Adds a class to represent being active
       $(this.element).toggleClass ("active", isActive);

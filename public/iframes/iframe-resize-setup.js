@@ -1,3 +1,3 @@
 $(()=>{
-  iFrameResize({log:true}, '#exerciseFrame');
+  iFrameResize({log:false}, '#exerciseFrame');
 });
